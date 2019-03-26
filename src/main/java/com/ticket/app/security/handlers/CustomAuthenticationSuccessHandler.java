@@ -55,10 +55,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         Client user = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (authorities.contains(new Role("ADMIN"))) {
             logger.info(user.getEmail() + " has been logged in like ADMIN");
-            return "/client";
+            return "/lk";
         } else if (authorities.contains(new Role("USER"))) {
             logger.info(user.getEmail() + " has been logged in like USER");
-            return "/client";
+            return "/lk";
         } else {
             throw new IllegalStateException();
         }

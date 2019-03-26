@@ -26,10 +26,10 @@ public class RegistRestController {
 
     @PostMapping(value = "/register")
     public ResponseEntity addUser(@Valid @RequestBody Client user) {
-        if (user.isEnabled()) {
-            logger.warn("CRM been attempt of hacking");
-            return ResponseEntity.status(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS).build();
-        }
+//        if (user.isEnabled()) {
+//            logger.warn("CRM been attempt of hacking");
+//            return ResponseEntity.status(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS).build();
+//        }
         userService.addClient(user);
         logger.info("{} has register user: email {}", user.getFirstName(), user.getEmail());
         return ResponseEntity.ok(HttpStatus.OK);

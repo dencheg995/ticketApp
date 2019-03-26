@@ -1,5 +1,6 @@
 package com.ticket.app.module;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "client")
+@JsonIgnoreProperties
 public class Client implements UserDetails {
 
     @Id
@@ -37,7 +39,7 @@ public class Client implements UserDetails {
     private String password;
 
     @Column(name = "is_enabled") // включен, разрешен??? user-info.js, всегда false
-    private boolean isEnabled;
+    private boolean isEnabled = true;
 
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)

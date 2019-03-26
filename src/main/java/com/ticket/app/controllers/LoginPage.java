@@ -12,14 +12,14 @@ public class LoginPage {
         if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
             return "login";
         } else {
-            return "redirect:/client";
+            return "redirect:/lk";
         }
     }
 
 
 
-    @GetMapping(value = {"/accessDenied"})
-    public String accessDenied() {
-        return "login";
-    }
+//    @GetMapping(value = {"/accessDenied"})
+//    public String accessDenied() {
+//        return "login";
+//    }
 }

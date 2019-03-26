@@ -3,6 +3,9 @@ package com.ticket.app.module;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Роль (user, admin, mentor и тд)
@@ -19,11 +22,26 @@ public class Role implements GrantedAuthority {
 	@Column(name = "role_name", unique = true, nullable = false)
 	private String roleName;
 
+	@NotNull
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "permissions",
+			joinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))},
+			inverseJoinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))})
+	private List<Client> clients = new ArrayList<>();
+
 	public Role() {
 	}
 
 	public Role(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
 	}
 
 	public Long getId() {

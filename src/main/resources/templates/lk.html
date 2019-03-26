@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.js"></script>
 </head>
 <body>
 <div id="content">
@@ -32,46 +31,9 @@
                         <a class="nav-link active" href="#">Events table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#eventModal">
+                        <button class="nav-link" data-toggle="modal" data-target="#eventModal">
                             New event
-                        </a>
-                        <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="eventModalLabel">New event</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            x
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="name">название: </label>
-                                            <input id="name" class="form-control" name="name" type="text" placeholder="Polyland"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="address">название: </label>
-                                            <input id="address" class="form-control" name="address" type="text" placeholder="Polyland"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pocket">название: </label>
-                                            <input id="pocket" class="form-control" name="pocket" type="text" placeholder="Polyland"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nameTicket">название: </label>
-                                            <input id="nameTicket" class="form-control" name="nameTicket" type="text" placeholder="Polyland"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="priceTicket">название: </label>
-                                            <input id="priceTicket" class="form-control" name="priceTicket" type="text" placeholder="Polyland"/>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button onclick="addEvent()">Add event</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -100,6 +62,49 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="eventModalLabel">New event</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">название: </label>
+                    <input id="name" class="form-control" name="name" type="text" placeholder="Polyland"/>
+                </div>
+                <div class="form-group">
+                    <label for="address">название: </label>
+                    <input id="address" class="form-control" name="address" type="text" placeholder="Polyland"/>
+                </div>
+                <div class="form-group">
+                    <label for="pocket">название: </label>
+                    <input id="pocket" class="form-control" name="pocket" type="text" placeholder="Polyland"/>
+                </div>
+                <div class="form-group">
+                    <label for="nameTicket">название: </label>
+                    <input id="nameTicket" class="form-control" name="nameTicket" type="text" placeholder="Polyland"/>
+                </div>
+                <div class="form-group">
+                    <label for="priceTicket">название: </label>
+                    <input id="priceTicket" class="form-control" name="priceTicket" type="text" placeholder="Polyland"/>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="addEvent()">Add event</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" th:src="@{/js/lk.js}"></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
