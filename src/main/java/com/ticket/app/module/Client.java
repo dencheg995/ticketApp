@@ -30,8 +30,6 @@ public class Client implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "promoCode")
-    private String promoCode;
 
     @Column(name = "user_phone")
     private String phoneNumber;
@@ -78,14 +76,6 @@ public class Client implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPromoCode() {
-        return promoCode;
-    }
-
-    public void setPromoCode(String promoCode) {
-        this.promoCode = promoCode;
     }
 
     public String getPhoneNumber() {

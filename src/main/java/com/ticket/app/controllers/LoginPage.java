@@ -14,6 +14,7 @@ public class LoginPage {
         } else {
             return "redirect:/lk";
         }
+
     }
 
     @GetMapping(value = {"/accessDenied"})

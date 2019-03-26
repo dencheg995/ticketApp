@@ -18,13 +18,7 @@ public class Event {
     private String address;
 
     @Column(name = "event_pocket")
-    private String pocket;
-
-    @Column(name = "event_ticket_name")
-    private String nameTicket;
-
-    @Column(name = "event_ticket_price")
-    private int priceTicket;
+    private int pocket;
 
     public Event() {
     }
@@ -53,27 +47,11 @@ public class Event {
         this.address = address;
     }
 
-    public String getPocket() {
+    public int getPocket() {
         return pocket;
     }
 
-    public void setPocket(String pocket) {
+    public void setPocket(int pocket) {
         this.pocket = pocket;
-    }
-
-    public String getNameTicket() {
-        return nameTicket;
-    }
-
-    public void setNameTicket(String nameTicket) {
-        this.nameTicket = nameTicket;
-    }
-
-    public int getPriceTicket() {
-        return priceTicket;
-    }
-
-    public void setPriceTicket(int priceTicket) {
-        this.priceTicket = priceTicket;
     }
 }

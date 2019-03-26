@@ -11,7 +11,6 @@ function registerUser() {
         phoneNumber: $('#add-user-phone-number').val(),
         email: $('#add-user-email').val(),
         password: $('#add-user-password').val(),
-        promoCode : $('#add-user-promo').val() ,
         isEnabled: true,
         role: myRows
     };
