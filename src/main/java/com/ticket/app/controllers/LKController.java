@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/lk")
-public class EventController {
+public class LKController {
     private final EventServiceImpl eventService;
 
     @Autowired
-    public EventController(EventServiceImpl eventService) {
+    public LKController(EventServiceImpl eventService) {
         this.eventService = eventService;
     }
 
