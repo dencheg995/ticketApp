@@ -187,7 +187,7 @@ svg {
 	margin-top: 3px;
 	width: 300px;
 	display: block;
-	height: 100%;
+	height: calc(100% - 3px);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
 	z-index: 3;
 	font-size: 13.5px;
