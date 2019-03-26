@@ -16,21 +16,27 @@ function registerUser() {
         role: myRows
     };
 
-    $.ajax({
-        type: "POST",
-        url: url,
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(wrap),
-        beforeSend: function () {
-            var current = document.getElementById("message");
-            current.style.color = "darkorange";
-            current.textContent = "Загрузка...";
-        },
-        success: function (result) {
-            window.location.replace("/login")
-        },
-        error: function (e) {
-            alert('Пользователь не был зарегистрирован');
-        }
-    });
+    if ($("#add-user-first-name").val() == "" || $("#add-user-last-name").val() == "" || $('#add-user-phone-number').val() || $('#add-user-email').val() || $('#add-user-password').val()) {
+        alert('Заполните все поля');
+        $('#saveChanges').prop('disabled', true);
+        location.reload()
+    } else {
+        $.ajax({
+            type: "POST",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(wrap),
+            beforeSend: function () {
+                var current = document.getElementById("message");
+                current.style.color = "darkorange";
+                current.textContent = "Загрузка...";
+            },
+            success: function (result) {
+                window.location.replace("/login")
+            },
+            error: function (e) {
+                alert('Пользователь не был зарегистрирован');
+            }
+        });
+    }
 }
