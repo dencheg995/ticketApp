@@ -14,11 +14,4 @@ public class ClientController {
         ModelAndView modelAndView = new ModelAndView("user-registration");
         return modelAndView;
     }
-
-    @PostMapping(value = "/client")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-    public ModelAndView clientPage() {
-        ModelAndView modelAndView = new ModelAndView("client");
-        return modelAndView;
-    }
 }

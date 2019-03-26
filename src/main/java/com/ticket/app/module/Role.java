@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Роль (user, admin, mentor и тд)
+ * Роль (user, admin и тд)
  */
 @Entity
 @Table(name = "role")
