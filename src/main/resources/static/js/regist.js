@@ -16,10 +16,9 @@ function registerUser() {
         role: myRows
     };
 
-    if ($("#add-user-first-name").val() == "" || $("#add-user-last-name").val() == "" || $('#add-user-phone-number').val() || $('#add-user-email').val() || $('#add-user-password').val()) {
+    if ($("#add-user-first-name").val() == "" || $("#add-user-last-name").val() == "" ||
+        $('#add-user-phone-number').val() == "" || $('#add-user-email').val() == "" || $('#add-user-password').val() =="") {
         alert('Заполните все поля');
-        $('#saveChanges').prop('disabled', true);
-        location.reload()
     } else {
         $.ajax({
             type: "POST",
