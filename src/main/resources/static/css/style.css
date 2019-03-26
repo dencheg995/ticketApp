@@ -580,22 +580,22 @@ svg {
 }
 #SeatSelect {
 	top: 46px;
-	width: 100%;
+	width: calc(100% - 240px);
 	height: calc(100% - 46px);
 	position: absolute;
 	margin-left: 240px;
 }
 
 #registPage {
-	top: 46px;
-	width: 100%;
-	margin-top: 2px;
-	height: calc(100% - 46px);
+	top: 48px;
+	width: 60%;
+	height: calc(100% - 48px);
 	position: absolute;
 	margin-left: 40%;
 }
 
 .header{
+	width: 100%;
 	height: 46px;
 	position: relative;
 	color: #535353;

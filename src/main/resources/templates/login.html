@@ -22,12 +22,12 @@
                 <input type="hidden"
                        th:name="${_csrf.parameterName}"
                        th:value="${_csrf.token}" />
-                <h4 class="form-signin-heading topbar">Please sign in</h4>
-                <input class="form-control topbar" placeholder="Login" type="text" name="username"/>
-                <input class="form-control topbar" placeholder="Password" type="password" name="password"/>
+                <h4 class="form-signin-heading topbar">Пожалуйста, введите логин и пароль</h4>
+                <input class="form-control topbar" placeholder="Логин" type="text" name="username"/>
+                <input class="form-control topbar" placeholder="Пароль" type="password" name="password"/>
                 <br/>
-                <input class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Login"/>
-                <a href="/register" class="btn btn-lg btn-primary btn-block" id="registerUser">Registration</a>
+                <input class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Войти"/>
+                <a href="/register" class="btn btn-lg btn-primary btn-block" id="registerUser">Регистрация</a>
             </form>
 
         </div>
