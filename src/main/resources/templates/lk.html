@@ -28,11 +28,11 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs pull-xs-left">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Events table</a>
+                        <a class="nav-link active" href="#">Список мероприятий</a>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" data-toggle="modal" data-target="#eventModal">
-                            New event
+                            Новое мероприятие
                         </button>
                     </li>
                 </ul>
@@ -44,12 +44,11 @@
                             <table id = "teamTable" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Pocket</th>
-                                    <th scope="col">Ticket name</th>
-                                    <th scope="col">Ticket price</th>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Адрес</th>
+                                    <th scope="col">Кошелек</th>
+                                    <th scope="col">Тип билета</th>
+                                    <th scope="col">Цена</th>
                                 </tr>
                                 </thead>
                                 <tbody id = "teamBody">
@@ -67,7 +66,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="eventModalLabel">New event</h4>
+                <h4 class="modal-title" id="eventModalLabel">Новое мероприятие</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     x
                 </button>
@@ -78,23 +77,23 @@
                     <input id="name" class="form-control" name="name" type="text" placeholder="Polyland"/>
                 </div>
                 <div class="form-group">
-                    <label for="address">название: </label>
-                    <input id="address" class="form-control" name="address" type="text" placeholder="Polyland"/>
+                    <label for="address">адрес: </label>
+                    <input id="address" class="form-control" name="address" type="text" placeholder="Saint-Petersburg, Nevsky prospect, 1"/>
                 </div>
                 <div class="form-group">
-                    <label for="pocket">название: </label>
-                    <input id="pocket" class="form-control" name="pocket" type="text" placeholder="Polyland"/>
+                    <label for="pocket">кошелек: </label>
+                    <input id="pocket" class="form-control" name="pocket" type="text" placeholder="4100175017397"/>
                 </div>
                 <div class="form-group">
-                    <label for="nameTicket">название: </label>
-                    <input id="nameTicket" class="form-control" name="nameTicket" type="text" placeholder="Polyland"/>
+                    <label for="nameTicket">тип билета: </label>
+                    <input id="nameTicket" class="form-control" name="nameTicket" type="text" placeholder="Танцпол"/>
                 </div>
                 <div class="form-group">
-                    <label for="priceTicket">название: </label>
-                    <input id="priceTicket" class="form-control" name="priceTicket" type="text" placeholder="Polyland"/>
+                    <label for="priceTicket">цена: </label>
+                    <input id="priceTicket" class="form-control" name="priceTicket" type="text" placeholder="100"/>
                 </div>
-                <div class="modal-footer">
-                    <button onclick="addEvent()">Add event</button>
+                <div class="modalfooter">
+                    <button class="button btn-primary" onclick="addEvent()">Добавить мероприятие</button>
                 </div>
             </div>
         </div>
