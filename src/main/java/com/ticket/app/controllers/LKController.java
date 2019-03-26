@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/lk")
 public class LKController {
     private final EventServiceImpl eventService;
 
@@ -19,7 +20,7 @@ public class LKController {
         this.eventService = eventService;
     }
 
-    @RequestMapping("/regist")
+    @RequestMapping("/add-event")
     public Event registEvent(@RequestParam("name") String name,
                              @RequestParam("address") String address,
                              @RequestParam("pocket") String pocket,
@@ -35,7 +36,7 @@ public class LKController {
         return eventService.registEvent(event);
     }
 
-    @GetMapping("/lk")
+    @GetMapping
     public ModelAndView lkPage() {
         ModelAndView modelAndView = new ModelAndView("lk");
         return modelAndView;

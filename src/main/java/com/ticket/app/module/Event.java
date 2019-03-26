@@ -3,7 +3,7 @@ package com.ticket.app.module;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "event")
 public class Event {
 
     @Id
