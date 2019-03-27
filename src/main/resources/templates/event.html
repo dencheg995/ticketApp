@@ -9,15 +9,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-
-<div th:each = "event : ${event}">
+<div id="content">
+    <div class="header">
+        <div id="event"></div>
+        <div id="place"></div>
+    </div>
+</div>
+<div id="SeatSelect">
+    <div th:each = "event : ${event}">
     <p th:value="${event.getTicketList()}"></p>
     <div th:each="ticket : ${event.getTicketList()}">
         <p th:text = "${ticket.getTicketPrice()}"></p>
         <p th:text = "${ticket.getTicketType()}"></p>
         <button th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} +')'">купить</button>
     </div>
+    </div>
 </div>
+
 
 
 <script type="text/javascript" th:src="@{/js/event.js}"></script>

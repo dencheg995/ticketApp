@@ -36,6 +36,8 @@ public class Event {
             inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
     private List<Ticket> ticketList;
 
+
+
     public Event() {
     }
 

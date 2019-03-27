@@ -45,6 +45,9 @@ public class Client implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})
     private List<Role> role = new ArrayList<>();
 
+    @OneToMany
+
+
     public Long getId() {
         return id;
     }
