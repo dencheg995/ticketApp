@@ -30,7 +30,6 @@ public class Client implements UserDetails {
     @Column(name = "email")
     private String email;
 
-
     @Column(name = "user_phone")
     private String phoneNumber;
 

@@ -5,5 +5,4 @@ import com.ticket.app.service.interfaces.YandexMoneyService;
 
 public class YandexMoneyServiceImpl implements YandexMoneyService {
 
-
 }
