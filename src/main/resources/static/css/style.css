@@ -592,11 +592,19 @@ svg {
 }
 
 #TicketSelect {
-	top: 46px;
-	width: calc(100% - 240px);
-	height: calc(100% - 46px);
+	top: 100px;
+	width: 100%;
+	height: calc(100% - 100px);
 	position: absolute;
-	margin-left: 240px;
+	margin-left: 100px;
+	margin-right: calc(100% - 120px);
+}
+#Ticketselect {
+	top: 100px;
+	width: calc(100% - 520px);
+	height: calc(100% - 100px);
+	position: absolute;
+	margin-left: 500px;
 }
 
 #registPage {
