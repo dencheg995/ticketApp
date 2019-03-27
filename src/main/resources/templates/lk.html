@@ -36,7 +36,9 @@
                     <div class="card-body text-left">
                         <h5 class="card-title">События</h5>
                         <div class="card">
-                            <div class="card-header"></div>
+                            <div class="card-title" th:each="clientEventsInfo : ${clientEvents}">
+                                    <p th:text = "${clientEventsInfo.getName()}"></p>
+                            </div>
                         </div>
 
                     </div>
