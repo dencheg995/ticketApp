@@ -1,4 +1,4 @@
-function buyTicket(ticketPrice) {
+function buyTicket(ticketPrice, ticketId) {
 
     var url = "https://money.yandex.ru/transfer?receiver=410018098845268&sum="+ ticketPrice
     window.open(url);

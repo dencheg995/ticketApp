@@ -26,7 +26,6 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity buyTicket(@RequestParam int priceTicket) {
-
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }
