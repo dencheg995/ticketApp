@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
 public class ClientController {
 
     @GetMapping(value = "/register")
