@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/lk")
@@ -37,14 +38,17 @@ public class LKController {
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event){
         eventService.registEvent(event);
-        logger.info("{} has register user: email {}", event.getName());
+        logger.info("{} has register event: email {}", event.getName());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @RequestMapping("/add/ticket")
-    public ResponseEntity addTicket(@Valid @RequestBody Ticket ticket){
-        ticketService.addTicket(ticket);
-        logger.info("{} has add ticket", ticket.getTicketType());
+    public ResponseEntity addTicket(@Valid @RequestBody List<Ticket> tickets,
+                                    @RequestParam Long eventId){
+        Event event = eventService.getEvent(eventId);
+        event.setTicketList(tickets);
+        eventService.updateEvent(event);
+        logger.info("{} has add ticket to ", event.getName());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

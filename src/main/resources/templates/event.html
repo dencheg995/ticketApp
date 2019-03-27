@@ -9,14 +9,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<div id="content">
-    <div class="header">
-        <div id="event"></div>
-        <div id="place"></div>
+
+<div th:each = "event : ${event}">
+    <p th:value="${event.getTicketList()}"></p>
+    <div th:each="ticket : ${event.getTicketList()}">
+        <p th:text = "${ticket.getTicketPrice()}"></p>
+        <p th:text = "${ticket.getTicketType()}"></p>
+        <button th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} +')'">купить</button>
     </div>
 </div>
-<div th:replace="fragments/sidebar::sidebar"></div>
-
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script

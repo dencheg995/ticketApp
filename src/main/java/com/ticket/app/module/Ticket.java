@@ -17,6 +17,12 @@ public class Ticket {
     @Column(name = "ticketPrice")
     private int ticketPrice;
 
+    @ManyToOne
+    @JoinTable(name = "event_ticket",
+            joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
+            inverseJoinColumns = {@JoinColumn(name = "event_id", foreignKey = @ForeignKey(name = "FK_EVENT"))})
+    private Event event;
+
     public Ticket() {
     }
 
@@ -42,5 +48,13 @@ public class Ticket {
 
     public void setTicketPrice(int ticketPrice) {
         this.ticketPrice = ticketPrice;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

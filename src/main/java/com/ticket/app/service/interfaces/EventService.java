@@ -5,4 +5,8 @@ import com.ticket.app.module.Event;
 
 public interface EventService {
     Event registEvent(Event event);
+
+    Event getEvent(Long id);
+
+    Event updateEvent(Event event);
 }
