@@ -1,6 +1,8 @@
 package com.ticket.app.module;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "event")
@@ -12,13 +14,16 @@ public class Event {
     private Long id;
 
     @Column(name = "event_name")
+    @NotNull
     private String name;
 
     @Column(name = "event_address")
+    @NotNull
     private String address;
 
     @Column(name = "event_pocket")
-    private int pocket;
+    @NotNull
+    private BigInteger pocket;
 
     public Event() {
     }
@@ -47,11 +52,12 @@ public class Event {
         this.address = address;
     }
 
-    public int getPocket() {
+    public BigInteger getPocket() {
         return pocket;
     }
 
-    public void setPocket(int pocket) {
+    public void setPocket(BigInteger pocket) {
         this.pocket = pocket;
     }
+
 }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<th:block th:fragment="sidebar">
+    <div class="sidebar">
+        <div class="center">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action" id="list-home-event" data-toggle="list" href="#list-event" role="tab" aria-controls="home">Мои мероприятия</a>
+                <a class="list-group-item list-group-item-action" id="list-settings" data-toggle="list" href="#settings" role="tab">Настройки</a>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

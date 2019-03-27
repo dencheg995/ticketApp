@@ -2,7 +2,9 @@ package com.ticket.app.controllers;
 
 
 import com.ticket.app.module.Event;
+import com.ticket.app.module.Ticket;
 import com.ticket.app.service.impl.EventServiceImpl;
+import com.ticket.app.service.impl.TicketServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +23,28 @@ import javax.validation.Valid;
 public class LKController {
 
     private final EventServiceImpl eventService;
+    private final TicketServiceImpl ticketService;
 
     private static Logger logger = LoggerFactory.getLogger(LKController.class);
 
 
     @Autowired
-    public LKController(EventServiceImpl eventService) {
+    public LKController(EventServiceImpl eventService, TicketServiceImpl ticketService) {
         this.eventService = eventService;
+        this.ticketService = ticketService;
     }
 
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event){
         eventService.registEvent(event);
         logger.info("{} has register user: email {}", event.getName());
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @RequestMapping("/add/ticket")
+    public ResponseEntity addTicket(@Valid @RequestBody Ticket ticket){
+        ticketService.addTicket(ticket);
+        logger.info("{} has add ticket", ticket.getTicketType());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

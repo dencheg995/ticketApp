@@ -15,13 +15,7 @@
         <div id="place"></div>
     </div>
 </div>
-<div class="sidebar">
-    <div class="center">
-        <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action" id="list-home-event" data-toggle="list" href="#list-event" role="tab" aria-controls="home">Мои мероприятия</a>
-        </div>
-    </div>
-</div>
+<div th:replace="fragments/sidebar::sidebar"></div>
 <div id="SeatSelect">
     <div class="tab-pane fade show active" id="list-event" role="tabpanel" aria-labelledby="list-home-event">
         <div class="card card-default">
@@ -87,10 +81,9 @@
                     <label for="pocket">кошелек: </label>
                     <input id="pocket" class="form-control" name="pocket" type="number" placeholder="4100175017397"
                            data-error='Введите номер кошелька в допустимом формате (только цифры)'
-                           required="required"
-                           pattern="[0-9]*$"/>
+                           required="required"/>
                 </div>
-                <div class="modal-footer">
+                <div class="modalfooter">
                     <button class="button btn-primary" onclick="addEvent()">Добавить мероприятие</button>
                 </div>
             </div>
