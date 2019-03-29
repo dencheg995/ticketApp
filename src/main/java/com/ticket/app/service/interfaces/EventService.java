@@ -9,4 +9,6 @@ public interface EventService {
     Event getEvent(Long id);
 
     Event updateEvent(Event event);
+
+    Event getEventByTicketId(Long id);
 }

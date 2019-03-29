@@ -43,5 +43,8 @@ public class EventServiceImpl implements EventService {
         return eventRepository.saveAndFlush(event);
     }
 
-
+    @Override
+    public Event getEventByTicketId(Long id) {
+        return eventRepository.getEventByTicketListId(id);
+    }
 }
