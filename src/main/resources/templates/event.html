@@ -15,11 +15,13 @@
         <div id="place"></div>
     </div>
     <div id="Ticketselect">
-        <div th:each = "event : ${event}">
-            <p th:value="${event.getTicketList()}"></p>
-            <div class="row">
-                <div class="col-md-3">
-                    <div th:each="ticket : ${event.getTicketList()}">
+        <div th:each = "event : ${event}" th:value="${event.getTicketList()}">
+            <div th:each="ticket : ${event.getTicketList()}">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
                         <div class="card"  style="margin-top: 5px">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -35,38 +37,41 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modalstyle">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ticketModalLabel">Выберите количество билетов</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <span>Тип билета: </span>
+                                    <span th:text="${ticket.getTicketType()}"></span>
+                                    <p></p>
+                                    <span>Цена: </span>
+                                    <span th:text="${ticket.getTicketPrice()}"></span>
+                                    <p></p>
+                                    <span>Кол-во билетов</span>
+                                    <input style="margin-top: 10px" id="count" class="form-control" name="count" type="number" />
+                                </div>
+                                <div class="modalfooter">
+                                    <button class="btn btn-primary btn-lg">Купить билеты</button>
+                                    <!--<button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} +')'">купить</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
-<div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modalstyle">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ticketModalLabel">Выберите количество билетов</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span>Тип билета: </span>
-                    <span>VIP</span>
-                    <p></p>
-                    <span>Цена: </span>
-                    <span>1</span>
-                    <p></p>
-                    <span>Кол-во билетов</span>
-                    <input style="margin-top: 10px" id="count" class="form-control" name="count" type="number" />
-                </div>
-                <div class="modalfooter">
-                    <button class="btn btn-primary btn-lg">Купить билеты</button>
-                    <!--<button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} +')'">купить</button>-->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 <div class="rightbar">
     <div class="back" onclick="cart.sidebarPage('back');">назад</div>
     <div class="center">
