@@ -32,12 +32,12 @@
                                     <span>Цена: </span>
                                     <span th:text = "${ticket.getTicketPrice()}"></span>
                                 </div>
-                                <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" data-target="#ticketModal" role="button">Купить билеты</button>
+                                <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.getTicketId()}">Купить билеты</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+                <div class="modal fade" id="ticketModal" th:id="'ticketModal'+${ticket.getTicketId()}" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modalstyle">
                             <div class="modal-content">
