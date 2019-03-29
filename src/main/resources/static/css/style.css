@@ -180,6 +180,20 @@ svg {
 	overflow: hidden;
 	text-align: center;
 }
+.rightbar {
+    background: #fff;
+    position: absolute;
+    right: 0;
+    width: 230px;
+    display: block;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
+    z-index: 3;
+    font-size: 13.5px;
+    color: #636363;
+    overflow: hidden;
+    text-align: center;
+}
 .registbar {
 	background: #fff;
 	position: absolute;
@@ -295,13 +309,16 @@ svg {
 	text-transform: uppercase;
 }
 .sidebar .empty{
-	margin-top: 60%;
 	width: 100%;
 	text-align: center;
 	font-weight: 300;
+    height: calc(100% - 100px);
 	letter-spacing: .4px;
 	position: absolute;
 	transform: rotate(0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .sidebar .bottom {
 	position: absolute;
@@ -601,10 +618,10 @@ svg {
 }
 #Ticketselect {
 	top: 100px;
-	width: calc(100% - 520px);
+	width: calc(100% - 115px);
 	height: calc(100% - 100px);
 	position: absolute;
-	margin-left: 500px;
+	margin-left: 100px;
 }
 
 #registPage {
@@ -960,6 +977,16 @@ td:nth-child(3){
 }
 .info.count{
 	width: 6%;
+}
+.modalstyle{
+    margin-top: 150px;
+    -webkit-box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.75);
+    border-radius: 17px 17px 17px 17px;
+    -moz-border-radius: 17px 17px 17px 17px;
+    -webkit-border-radius: 17px 17px 17px 17px;
+    border: 0px solid #000000;
 }
 .price{
 	font-size: 20px;

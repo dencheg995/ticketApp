@@ -14,36 +14,135 @@
         <div id="event"></div>
         <div id="place"></div>
     </div>
-</div>
-<div id="TicketSelect">
-    <div th:each = "event : ${event}">
-        <p th:value="${event.getTicketList()}"></p>
-        <div class="row">
-            <div class="col-md-3">
-                <div th:each="ticket : ${event.getTicketList()}">
-                    <div class="card"  style="margin-top: 5px">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <span>Тип билета: </span>
-                                <span th:text = "${ticket.getTicketType()}"></span>
-                            </h5>
-                            <div class="card-text">
-                                <span>Цена: </span>
-                                <span th:text = "${ticket.getTicketPrice()}"></span>
+    <div id="Ticketselect">
+        <div th:each = "event : ${event}">
+            <p th:value="${event.getTicketList()}"></p>
+            <div class="row">
+                <div class="col-md-3">
+                    <div th:each="ticket : ${event.getTicketList()}">
+                        <div class="card"  style="margin-top: 5px">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span>Тип билета: </span>
+                                    <span th:text = "${ticket.getTicketType()}"></span>
+                                </h5>
+                                <div class="card-text">
+                                    <span>Цена: </span>
+                                    <span th:text = "${ticket.getTicketPrice()}"></span>
+                                </div>
+                                <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" data-target="#ticketModal" role="button">Купить билеты</button>
                             </div>
-                            <button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} +')'">купить</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-
-            </div>
-            <div class="col-md-3 sidebar">
-
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modalstyle">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ticketModalLabel">Выберите количество билетов</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span>Тип билета: </span>
+                    <span>VIP</span>
+                    <p></p>
+                    <span>Цена: </span>
+                    <span>1</span>
+                    <p></p>
+                    <span>Кол-во билетов</span>
+                    <input style="margin-top: 10px" id="count" class="form-control" name="count" type="number" />
+                </div>
+                <div class="modalfooter">
+                    <button class="btn btn-primary btn-lg">Купить билеты</button>
+                    <!--<button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} +')'">купить</button>-->
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div class="rightbar">
+    <div class="back" onclick="cart.sidebarPage('back');">назад</div>
+    <div class="center">
+        <div class="time">
+
+        </div>
+    </div>
+    <div id="sp1" class="sp">
+        <div class="empty">
+            Корзина пуста
+        </div>
+    </div>
+    <!--<div id="sp2" class="sp">-->
+        <!--<div class="order">-->
+            <!--<div class="zakaz">-->
+                <!--<span>Ваш заказ</span>-->
+                <!--<div id="orderlist"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="itog">Итого: <span id="fullprice" style="float: right;"></span></div>-->
+        <!--<div class="bottom">-->
+            <!--<div class="repost" id="repost"></div>-->
+            <!--<div class="btn" onclick="cart.sidebarPage('order');">Продолжить</div>-->
+            <!--<div class="under" style="opacity: 0;">Нажимая «Продолжить», вы подтверждаете свое согласие с <a href="#">условиями приобретения</a></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div id="sp3" class="sp">-->
+        <!--<div class="order">-->
+            <!--<div class="zakaz">-->
+                <!--<span>Данные покупателя</span>-->
+                <!--<div class="userdata">-->
+                    <!--<input type="text" id="name" placeholder="Имя и Фамилия"/>-->
+                    <!--<input type="text" id="mail" placeholder="E-mail"/>-->
+                    <!--<input type="text" id="phone" placeholder="Номер телефона"/>-->
+                    <!--<input type="text" id="promocode" placeholder="Промокод"/>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="bottom">-->
+            <!--<div class="btn" onclick="validate();">Продолжить</div>-->
+            <!--<div class="under">Нажимая «Продолжить», вы подтверждаете свое согласие с <a href="#">условиями приобретения</a></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div id="sp4" class="sp">-->
+        <!--<div class="loader hide"><span>Ожидание оплаты</span></div>-->
+        <!--<div class="bottom">-->
+            <!--<div class="sbor" id="mainSum"></div>-->
+            <!--<div class="sbor" id="promocodeSell"></div>-->
+            <!--<div class="sbor" id="repostSell"></div>-->
+            <!--<div class="sbor" id="sbor"></div>-->
+            <!--<div class="itog mainItog">К оплате: <span id="fullprice2" style="float: right;"></span></div>-->
+            <!--<a onclick="toPay()" href="#" class="btn">Перейти к оплате</a>-->
+            <!--<div class="under" style="opacity: 1;">Вы будуте перенаправлены на страницу оплаты.</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div id="sp5" class="sp">-->
+        <!--<div class="loader"></div>-->
+        <!--<div class="bottom">-->
+            <!--<a onclick="cart.sidebarPage('no')" href="#" class="btn">Назад</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div style="display: none;">-->
+        <!--<span id="tooltip_content">-->
+            <!--<span class="tooltipRep">Сделайте репост <a id="post" href="#" target="_blank">этой записи</a></span>-->
+        <!--</span>-->
+        <!--<span id="tooltip_content2">-->
+            <!--<span class="tooltipRep">Скидку за репост можно</span>-->
+        <!--</span>-->
+        <!--<span id="tooltip_content2_2">-->
+            <!--<span class="tooltipRep">Скидка за репост не действует.</span>-->
+        <!--</span>-->
+        <!--<span id="tooltip_content3">-->
+            <!--<span class="tooltipRep">Эти билеты закончились!</span>-->
+        <!--</span>-->
+    <!--</div>-->
+    <!--<div class="ovl"></div>-->
 </div>
 
 
@@ -52,11 +151,13 @@
 
 
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/ticket.js}"></script>-->
 <script
         src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
