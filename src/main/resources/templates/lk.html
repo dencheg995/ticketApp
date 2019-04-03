@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Регистрация мероприятия</title>
+    <title>Личный кабинет</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/style.css"/>
@@ -22,11 +22,13 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs pull-xs-left">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Список мероприятий</a>
+                        <a class="nav-link active" href="#">
+                            <h6>Список мероприятий</h6>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" data-toggle="modal" data-target="#eventModal">
-                            Новое мероприятие
+                            <h6>Новое мероприятие</h6>
                         </button>
                     </li>
                 </ul>
@@ -34,10 +36,21 @@
             <div class="card-body">
                 <div class="card">
                     <div class="card-body text-left">
-                        <h5 class="card-title">События</h5>
-                        <div class="card">
-                            <div class="card-title" th:each="clientEventsInfo : ${clientEvents}">
-                                    <p th:text = "${clientEventsInfo.getName()}"></p>
+                        <h5 class="card-title" style="margin-left: 10px">События</h5>
+                        <div th:each="clientEventsInfo : ${clientEvents}">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="card" style="margin-top: 10px">
+                                        <div class="card-title">
+                                            <h6 style="margin-top: 10px;margin-left: 50px" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>
+                                        </div>
+                                        <div>
+                                            <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
+                                            <a class="btn btn-primary" style="margin-left: 50px" role="button" th:href="'/tickets/new/' + ${clientEventsInfo.id}">Добавить билет</a>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -83,7 +96,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/.js}"></script>
+<script type="text/javascript" th:src="@{/js/lk.js}"></script>
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <script
         src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface EventRepository extends JpaRepository<Event, Long>{
 
-    @Query("SELECT event FROM Event event JOIN event.ticketList ticket WHERE ticket.ticketId = :ticketId ")
+    @Query("SELECT event FROM Event event JOIN event.ticketList ticket WHERE ticket.ticketId = :ticketId")
     Event getEventByTicketListId(@Param("ticketId") Long ticketId);
 }

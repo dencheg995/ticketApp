@@ -209,6 +209,21 @@ svg {
 	overflow: hidden;
 	text-align: center;
 }
+.ticketbar {
+	background: #fff;
+	position: absolute;
+	left: 0;
+	margin-top: 3px;
+	width: 1000px;
+	display: block;
+	height: calc(100% - 3px);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
+	z-index: 3;
+	font-size: 13.5px;
+	color: #636363;
+	overflow: hidden;
+	text-align: center;
+}
 .modalfooter {
 	padding: 15px;
 	text-align: center;
@@ -630,6 +645,14 @@ svg {
 	height: calc(100% - 48px);
 	position: absolute;
 	margin-left: 40%;
+}
+
+#ticketPage {
+	top: 48px;
+	width: 90%;
+	height: calc(100% - 48px);
+	position: absolute;
+	margin-left: 10%;
 }
 
 .header{

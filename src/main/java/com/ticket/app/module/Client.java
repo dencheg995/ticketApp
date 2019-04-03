@@ -1,5 +1,6 @@
 package com.ticket.app.module;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "client")
-@JsonIgnoreProperties
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Client implements UserDetails {
 
     @Id
@@ -43,6 +44,7 @@ public class Client implements UserDetails {
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
     @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
     @JoinTable(name = "permissions",
             joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},
             inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})
@@ -50,6 +52,7 @@ public class Client implements UserDetails {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
     @JoinTable(name = "client_event",
             joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},
             inverseJoinColumns = {@JoinColumn(name = "event_id", foreignKey = @ForeignKey(name = "FK_EVENT"))})

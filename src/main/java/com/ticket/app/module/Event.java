@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "event")
-@JsonIgnoreProperties
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Event {
 
     @Id
@@ -31,13 +31,14 @@ public class Event {
     private BigInteger pocket;
 
     @OneToMany(cascade = CascadeType.ALL)
-
     @JoinTable(name = "event_ticket",
             joinColumns = {@JoinColumn(name = "event_id", foreignKey = @ForeignKey(name = "FK_EVENT"))},
             inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
+    @JsonIgnore
     private List<Ticket> ticketList;
 
     @ManyToOne
+    @JsonIgnore
     @JoinTable(name = "client_event",
             joinColumns = {@JoinColumn(name = "event_id", foreignKey = @ForeignKey(name = "FK_EVENT"))},
             inverseJoinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))})

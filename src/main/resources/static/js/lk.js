@@ -21,3 +21,12 @@ function addEvent() {
         }
     });
 }
+
+function createTickets(eventId) {
+
+    var url = '/tickets/new/' + eventId + "/"
+    $.ajax({
+        type: "GET",
+        url: url,
+    });
+}

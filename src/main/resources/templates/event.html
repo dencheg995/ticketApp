@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Настройки</title>
+    <title>Покупка билетов</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/style.css"/>
@@ -17,7 +17,7 @@
     <div id="Ticketselect">
         <div th:each = "event : ${event}" th:value="${event.getTicketList()}">
             <div th:each="ticket : ${event.getTicketList()}">
-
+                <!--<div th:each="consumer : ${ticket.getConsumer()}">-->
                 <div class="row">
 
                     <div class="col-md-3">
@@ -55,107 +55,73 @@
                                     <span th:text="${ticket.getTicketPrice()}"></span>
                                     <p></p>
                                     <span>Кол-во билетов</span>
-                                    <input style="margin-top: 10px" id="count" class="form-control" name="count" type="number" />
+                                    <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1"/>
                                 </div>
                                 <div class="modalfooter">
-                                    <button class="btn btn-primary btn-lg">Купить билеты</button>
-                                    <!--<button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} +')'">купить</button>-->
+                                    <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.getTicketId()}">Далее</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="dataModal" th:id="'dataModal'+${ticket.getTicketId()}" tabindex="-1" role="dialog" aria-labelledby="dataModalLavel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modalstyle">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="dataModalLabel">Введите данные</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="firstname">Имя: </label>
+                                        <input id="firstname" class="form-control" name="firstname" type="text" placeholder="Иван"
+                                               data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
+                                               pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
+                                               required="required"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastname">Фамилия: </label>
+                                        <input id="lastname" class="form-control" name="lastname" type="text" placeholder="Иванов"
+                                               data-error="Фамилия должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
+                                               pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
+                                               required="required"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="add-user-email">Email</label>
+                                        <input type="email"
+                                               class="form-control"
+                                               data-error="Неверный формат Email"
+                                               required="required"
+                                               pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
+                                               id="add-user-email"/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="add-user-phone-number">Номер телефона</label>
+                                        <input type="tel"
+                                               class="form-control"
+                                               data-error='Введите телефон в допустимом формате (только цифры)'
+                                               required="required"
+                                               pattern="[0-9]*$"
+                                               id="add-user-phone-number" placeholder="89000000000"/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="modalfooter">
+                                    <button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getTicketPrice()} + ',' + ${event.id} +')'">Купить</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <!--</div>-->
         </div>
     </div>
 </div>
-
-
-<div class="rightbar">
-    <div class="back" onclick="cart.sidebarPage('back');">назад</div>
-    <div class="center">
-        <div class="time">
-
-        </div>
-    </div>
-    <div id="sp1" class="sp">
-        <div class="empty">
-            Корзина пуста
-        </div>
-    </div>
-    <!--<div id="sp2" class="sp">-->
-        <!--<div class="order">-->
-            <!--<div class="zakaz">-->
-                <!--<span>Ваш заказ</span>-->
-                <!--<div id="orderlist"></div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="itog">Итого: <span id="fullprice" style="float: right;"></span></div>-->
-        <!--<div class="bottom">-->
-            <!--<div class="repost" id="repost"></div>-->
-            <!--<div class="btn" onclick="cart.sidebarPage('order');">Продолжить</div>-->
-            <!--<div class="under" style="opacity: 0;">Нажимая «Продолжить», вы подтверждаете свое согласие с <a href="#">условиями приобретения</a></div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div id="sp3" class="sp">-->
-        <!--<div class="order">-->
-            <!--<div class="zakaz">-->
-                <!--<span>Данные покупателя</span>-->
-                <!--<div class="userdata">-->
-                    <!--<input type="text" id="name" placeholder="Имя и Фамилия"/>-->
-                    <!--<input type="text" id="mail" placeholder="E-mail"/>-->
-                    <!--<input type="text" id="phone" placeholder="Номер телефона"/>-->
-                    <!--<input type="text" id="promocode" placeholder="Промокод"/>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="bottom">-->
-            <!--<div class="btn" onclick="validate();">Продолжить</div>-->
-            <!--<div class="under">Нажимая «Продолжить», вы подтверждаете свое согласие с <a href="#">условиями приобретения</a></div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div id="sp4" class="sp">-->
-        <!--<div class="loader hide"><span>Ожидание оплаты</span></div>-->
-        <!--<div class="bottom">-->
-            <!--<div class="sbor" id="mainSum"></div>-->
-            <!--<div class="sbor" id="promocodeSell"></div>-->
-            <!--<div class="sbor" id="repostSell"></div>-->
-            <!--<div class="sbor" id="sbor"></div>-->
-            <!--<div class="itog mainItog">К оплате: <span id="fullprice2" style="float: right;"></span></div>-->
-            <!--<a onclick="toPay()" href="#" class="btn">Перейти к оплате</a>-->
-            <!--<div class="under" style="opacity: 1;">Вы будуте перенаправлены на страницу оплаты.</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div id="sp5" class="sp">-->
-        <!--<div class="loader"></div>-->
-        <!--<div class="bottom">-->
-            <!--<a onclick="cart.sidebarPage('no')" href="#" class="btn">Назад</a>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div style="display: none;">-->
-        <!--<span id="tooltip_content">-->
-            <!--<span class="tooltipRep">Сделайте репост <a id="post" href="#" target="_blank">этой записи</a></span>-->
-        <!--</span>-->
-        <!--<span id="tooltip_content2">-->
-            <!--<span class="tooltipRep">Скидку за репост можно</span>-->
-        <!--</span>-->
-        <!--<span id="tooltip_content2_2">-->
-            <!--<span class="tooltipRep">Скидка за репост не действует.</span>-->
-        <!--</span>-->
-        <!--<span id="tooltip_content3">-->
-            <!--<span class="tooltipRep">Эти билеты закончились!</span>-->
-        <!--</span>-->
-    <!--</div>-->
-    <!--<div class="ovl"></div>-->
-</div>
-
-
-
-
-
-
-
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
 <!--<script type="text/javascript" th:src="@{/js/ticket.js}"></script>-->
 <script

@@ -10,4 +10,6 @@ public interface ClientService {
     Client getByEmailOrPhone(String email, String phone);
 
     Client updateClient(Client client);
+
+    Client getClientByEventId(Long id);
 }
