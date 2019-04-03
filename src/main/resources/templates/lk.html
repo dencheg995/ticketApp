@@ -42,7 +42,7 @@
                                 <div class="col-sm-3">
                                     <div class="card" style="margin-top: 10px">
                                         <div class="card-title">
-                                            <h6 style="margin-top: 10px;margin-left: 50px" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>
+                                            <h6 style="margin-top: 10px;margin-left: 50px;" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>
                                         </div>
                                         <div>
                                             <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
@@ -87,7 +87,7 @@
                     <label for="pocket">кошелек: </label>
                     <input id="pocket" class="form-control" name="pocket" type="number" placeholder="4100175017397"
                            data-error='Введите номер кошелька в допустимом формате (только цифры)'
-                           required="required" min="10"/>
+                           required="required" minlength="14" maxlength="20"/>
                 </div>
                 <div class="modalfooter">
                     <button class="button btn-primary" onclick="addEvent()">Добавить мероприятие</button>
