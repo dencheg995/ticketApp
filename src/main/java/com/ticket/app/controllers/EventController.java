@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/event/app/{id}")
+//@RequestMapping("/event/app/{id}")
 public class EventController {
 
     private final EventService eventService;
@@ -36,14 +36,14 @@ public class EventController {
         this.consumerService = consumerService;
     }
 
-    @GetMapping
+    @GetMapping("/event/app/{id}")
     public ModelAndView eventPage(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("event");
         modelAndView.addObject("event", eventService.getEvent(id));
         return modelAndView;
     }
 
-    @PostMapping
+    @PostMapping("/purchase/tickets")
     public ResponseEntity buyTicket(@Valid @RequestBody Consumer consumer,
                                     @RequestParam Long ticketId,
                                     @RequestParam int priceTicket,

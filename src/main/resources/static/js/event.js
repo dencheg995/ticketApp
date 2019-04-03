@@ -1,19 +1,22 @@
-function buyTicket(ticketPrice, eventID) {
+function buyTicket(ticketId, ticketPrice, eventID) {
 
     if ($("#first-name-for-buy-ticket").val() == "" || $("#last-name-for-buy-ticket").val() == "" ||
         $('#add-user-email').val() == "" || $('#add-user-phone-number').val() == "") {
         alert('Заполните все поля');
     } else {
         var pocket;
-        var url = "https://money.yandex.ru/transfer?receiver=";
         ticketPrice = ticketPrice * $("#ticketCount").val();
+        var succsessURL = "http://localhost:8080/purchase/tickets?firstName=" + $("#first-name-for-buy-ticket").val() + "&lastName=" + $("#last-name-for-buy-ticket").val()
+            + "&email=" + $('#add-user-email').val() + "&phoneNumber=" + $('#add-user-phone-number').val() + "&ticketId=" + ticketId + "&priceTicket=" + ticketPrice + "&countTicket=" + $("#ticketCount").val();
+        var url = "https://money.yandex.ru/transfer?receiver=";
+
         $.ajax({
             type: "GET",
             contentType: "application/json",
             url: "/get/event",
             data: {eventId: eventID},
             success: function (data) {
-                url = url + data.pocket + "&sum=" + ticketPrice + "&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&origin=form&selectedPaymentType=AC&destination=%2316972&form-comment=йц&short-dest=&quickpay-form=donate";
+                url = url + data.pocket + "&sum=" + ticketPrice + "&successURL=" + succsessURL + "&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&origin=form&selectedPaymentType=AC&destination=%2316972&form-comment=йц&short-dest=&quickpay-form=donate";
                 window.open(url);
             }
         });
