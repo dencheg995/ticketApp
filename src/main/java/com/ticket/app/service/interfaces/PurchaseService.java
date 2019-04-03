@@ -14,4 +14,6 @@ public interface PurchaseService {
 
     void sendTicket(Purchase purchase);
 
+    Purchase getPurchaseById(Long id);
+
 }

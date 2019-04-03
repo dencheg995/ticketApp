@@ -47,7 +47,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public void sendTicket(Purchase purchase) {
         String host = "http://localhost:8080/send/ticket?";
-        String url = host.concat("uniq=").concat(purchase.getUniqId()).concat("&count=")
+        String url = host.concat("id=").concat(String.valueOf(purchase.getId())).concat("uniq=").concat(purchase.getUniqId()).concat("&count=")
                 .concat(String.valueOf(purchase.getCountBuyTicket()));
         try {
             createQRImage(url);
@@ -57,6 +57,11 @@ public class PurchaseServiceImpl implements PurchaseService {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public Purchase getPurchaseById(Long id) {
+        return purchaseRepository.getOne(id);
     }
 
     private static void createQRImage(String url) throws WriterException, IOException {

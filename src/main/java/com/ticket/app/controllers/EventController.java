@@ -66,6 +66,7 @@ public class EventController {
         tickets.add(ticket);
         consumer.setTicketList(tickets);
         consumerService.updateConsumer(consumer);
+        purchaseService.sendTicket(purchase);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
