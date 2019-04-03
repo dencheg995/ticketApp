@@ -1,17 +1,23 @@
 function buyTicket(ticketPrice, eventID) {
-    var pocket;
-    var url = "https://money.yandex.ru/transfer?receiver=";
-    ticketPrice = ticketPrice * $("#ticketCount").val();
-    $.ajax({
-        type: "GET",
-        contentType: "application/json",
-        url: "/get/event",
-        data : {eventId: eventID},
-        success: function (data) {
-            url = url + data.pocket + "&sum=" + ticketPrice + "&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&origin=form&selectedPaymentType=AC&destination=%2316972&form-comment=йц&short-dest=&quickpay-form=donate";
-            window.open(url);
-        }
-    });
+
+    if ($("#first-name-for-buy-ticket").val() == "" || $("#last-name-for-buy-ticket").val() == "" ||
+        $('#add-user-email').val() == "" || $('#add-user-phone-number').val() == "") {
+        alert('Заполните все поля');
+    } else {
+        var pocket;
+        var url = "https://money.yandex.ru/transfer?receiver=";
+        ticketPrice = ticketPrice * $("#ticketCount").val();
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/get/event",
+            data: {eventId: eventID},
+            success: function (data) {
+                url = url + data.pocket + "&sum=" + ticketPrice + "&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&origin=form&selectedPaymentType=AC&destination=%2316972&form-comment=йц&short-dest=&quickpay-form=donate";
+                window.open(url);
+            }
+        });
+    }
 
     // $.ajax({
     //     type: "POST",

@@ -45,7 +45,7 @@ public class LKController {
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event,
                                       @AuthenticationPrincipal Client clientSession){
-        List<Event> events = new ArrayList<>();
+        List<Event> events = eventService.getEventByClientId(clientSession.getId());
         events.add(event);
         clientSession.setEvents(events);
         clientService.updateClient(clientSession);

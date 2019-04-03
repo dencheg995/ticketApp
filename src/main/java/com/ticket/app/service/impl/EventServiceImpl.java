@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventServiceImpl implements EventService {
 
@@ -46,5 +48,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event getEventByTicketId(Long id) {
         return eventRepository.getEventByTicketListId(id);
+    }
+
+    @Override
+    public List<Event> getEventByClientId(Long clientId) {
+        return eventRepository.getEventByClientId(clientId);
     }
 }

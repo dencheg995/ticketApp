@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ticket")
@@ -38,7 +39,22 @@ public class Ticket {
     @JsonIgnore
     private Consumer consumer;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinTable(name = "purchase_ticket",
+            joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
+            inverseJoinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))})
+    private List<Purchase> purchaseTicketList;
+
     public Ticket() {
+    }
+
+    public List<Purchase> getPurchaseTicketList() {
+        return purchaseTicketList;
+    }
+
+    public void setPurchaseTicketList(List<Purchase> purchaseTicketList) {
+        this.purchaseTicketList = purchaseTicketList;
     }
 
     public Long getTicketId() {

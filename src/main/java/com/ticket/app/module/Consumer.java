@@ -41,7 +41,22 @@ public class Consumer implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
     private List<Ticket> ticketList;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinTable(name = "purchase_consumer",
+            joinColumns = {@JoinColumn(name = "consumer_id", foreignKey = @ForeignKey(name = "FK_CONSUMER"))},
+            inverseJoinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))})
+    private List<Purchase> purchaseTicketList;
+
     public Consumer() {
+    }
+
+    public List<Purchase> getPurchaseTicketList() {
+        return purchaseTicketList;
+    }
+
+    public void setPurchaseTicketList(List<Purchase> purchaseTicketList) {
+        this.purchaseTicketList = purchaseTicketList;
     }
 
     public Long getId() {

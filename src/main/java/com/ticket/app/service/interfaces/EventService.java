@@ -3,6 +3,8 @@ package com.ticket.app.service.interfaces;
 
 import com.ticket.app.module.Event;
 
+import java.util.List;
+
 public interface EventService {
     Event registEvent(Event event);
 
@@ -11,4 +13,6 @@ public interface EventService {
     Event updateEvent(Event event);
 
     Event getEventByTicketId(Long id);
+
+    List<Event> getEventByClientId(Long clientId);
 }
