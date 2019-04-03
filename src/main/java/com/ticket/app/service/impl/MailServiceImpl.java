@@ -4,11 +4,15 @@ import com.ticket.app.module.Purchase;
 import com.ticket.app.service.interfaces.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class MailServiceImpl implements MailService {
@@ -40,14 +44,22 @@ public class MailServiceImpl implements MailService {
             mimeMessageHelper.setFrom("Пока хз");
             mimeMessageHelper.setTo(purchase.getConsumer().getEmail());
             mimeMessageHelper.setSubject("Билеты на " + purchase.getTicket().getEvent().getName());
+            File file = new File("/");
+            if (file.exists()) {
+                InputStreamSource inputStreamSource = new FileSystemResource(file);
+                mimeMessageHelper.addInline("image", inputStreamSource, "image/jpeg");
+            } else {
+                logger.error("Can not send message! Attachment file {} not found. Reimport file.", file.getCanonicalPath());
+                return false;
+            }
             javaMailSender.send(mimeMessage);
-            result = true;
         } catch (MessagingException e) {
             logger.info("Message no sent.", e);
         } catch (NullPointerException e) {
             logger.info("No recipients found, clientData is empty.", e);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
         return result;
     }
 }

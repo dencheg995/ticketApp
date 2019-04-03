@@ -11,8 +11,11 @@ import com.ticket.app.repository.PurchaseRepository;
 import com.ticket.app.service.interfaces.PurchaseService;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -50,11 +53,13 @@ public class PurchaseServiceImpl implements PurchaseService {
             createQRImage(url);
         } catch (WriterException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
 
-    private static void createQRImage(String url) throws WriterException {
+    private static void createQRImage(String url) throws WriterException, IOException {
         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -73,6 +78,7 @@ public class PurchaseServiceImpl implements PurchaseService {
                 }
             }
         }
+        ImageIO.write(image, "image/jpeg", new File("/"));
     }
 }
 

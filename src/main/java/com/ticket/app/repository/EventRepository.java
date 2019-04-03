@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long>{
 
-    @Query("SELECT event FROM Event event JOIN event.ticketList ticket WHERE ticket.ticketId = :ticketId")
+    @Query("SELECT event FROM Event event JOIN event.ticketList ticket WHERE ticket.id = :ticketId")
     Event getEventByTicketListId(@Param("ticketId") Long ticketId);
 
     @Query("SELECT event FROM Event event JOIN event.client client WHERE client.id = :clientId")

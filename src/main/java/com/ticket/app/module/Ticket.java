@@ -14,7 +14,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticketId")
-    private Long ticketId;
+    private Long id;
 
     @Column(name = "ticketType")
     private String ticketType;
@@ -57,12 +57,12 @@ public class Ticket {
         this.purchaseTicketList = purchaseTicketList;
     }
 
-    public Long getTicketId() {
-        return ticketId;
+    public Long getId() {
+        return id;
     }
 
-    public void setTicketId(Long ticketId) {
-        this.ticketId = ticketId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTicketType() {
