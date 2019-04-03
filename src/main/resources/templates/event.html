@@ -32,12 +32,12 @@
                                     <span>Цена: </span>
                                     <span th:text = "${ticket.getTicketPrice()}"></span>
                                 </div>
-                                <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.getTicketId()}">Купить билеты</button>
+                                <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="ticketModal" th:id="'ticketModal'+${ticket.getTicketId()}" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+                <div class="modal fade" id="ticketModal" th:id="'ticketModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modalstyle">
                             <div class="modal-content">
@@ -55,16 +55,16 @@
                                     <span th:text="${ticket.getTicketPrice()}"></span>
                                     <p></p>
                                     <span>Кол-во билетов</span>
-                                    <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1"/>
+                                    <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>
                                 </div>
                                 <div class="modalfooter">
-                                    <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.getTicketId()}">Далее</button>
+                                    <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.id}">Далее</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="dataModal" th:id="'dataModal'+${ticket.getTicketId()}" tabindex="-1" role="dialog" aria-labelledby="dataModalLavel" aria-hidden="true">
+                <div class="modal fade" id="dataModal" th:id="'dataModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="dataModalLavel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modalstyle">
                             <div class="modal-content">
