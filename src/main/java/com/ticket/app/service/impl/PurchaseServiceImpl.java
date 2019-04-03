@@ -43,7 +43,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void sendTicket(Purchase purchase) {
-        String host = "http://localhost:8080?";
+        String host = "http://localhost:8080/send/ticket?";
         String url = host.concat("uniq=").concat(purchase.getUniqId()).concat("&count=")
                 .concat(String.valueOf(purchase.getCountBuyTicket()));
         try {
