@@ -41,10 +41,10 @@
                     <div class="card-body">
                         <div class="card">
                             <div class="card-body text-left">
-                                <div th:each="clientEventsInfo : ${clientEvents}">
+
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <h5>Мероприятие</h5>
+                                            <h5 th:for="eventName">Мероприятие</h5>
                                         </div>
                                         <div class="col-md-4">
 <!--                                            <div class="dropdown">-->
@@ -56,21 +56,24 @@
 <!--                                                </div>-->
 <!--                                            </div>-->
                                             <div class="form-group">
-                                                <select id="company" class="form-control">
-                                                    <option>small</option>
-                                                    <option>medium</option>
-                                                    <option>large</option>
+                                                <select id="eventName" class="form-control">
+                                                    <option selected="selected" disabled="disabled">Выберите мероприятие</option>
+                                                    <div th:each="clientEventsInfo : ${clientEvents}">
+                                                    <option th:text="${clientEventsInfo.getName()}"></option>
+                                                </div>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>
+                                            ?
+<!--                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>-->
                                         </div>
                                         <div class="col">
-                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>
+                                            ?
+<!--                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>-->
                                         </div>
                                     </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -79,9 +82,6 @@
         </div>
     </div>
 </div>
-
-
-
 <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
