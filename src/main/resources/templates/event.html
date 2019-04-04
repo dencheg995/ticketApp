@@ -15,7 +15,7 @@
         <div id="place"></div>
     </div>
     <div id="Ticketselect">
-        <div th:each = "event : ${event}" th:value="${event.getTicketList()}">
+        <div th:each = "event : ${event}" th:value="${event.ticketList}">
             <div th:each="ticket : ${event.getTicketList()}">
                 <!--<div th:each="consumer : ${ticket.getConsumer()}">-->
                 <div class="row">
@@ -53,7 +53,7 @@
                                     <span th:text="${ticket.getTicketPrice()}"></span>
                                     <p></p>
                                     <span>Кол-во билетов</span>
-                                    <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" onchange="sum(this)" th:min="1" th:max="${ticket.getTicketCount()}"/>
+                                    <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>
                                 </div>
                                 <div class="modalfooter">
                                     <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.id}">Далее</button>
@@ -107,13 +107,9 @@
                                                id="add-user-phone-number" placeholder="89000000000"/>
                                         <div class="help-block with-errors"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <span>Итоговая сумма: </span>
-                                        <span>?</span>
-                                    </div>
                                 </div>
                                 <div class="modalfooter">
-                                    <button class="btn btn-primary btn-lg" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getId()} + ',' + ${ticket.getTicketPrice()} + ',' + ${event.id} +')'">Купить</button>
+                                    <button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getId()} + ',' + ${ticket.getTicketPrice()} + ',' + ${event.id} +')'">Купить</button>
                                 </div>
                             </div>
                         </div>
@@ -125,12 +121,6 @@
     </div>
 </div>
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
-<script type="text/javascript">
-    function sum() {
-        var count = document.getElementById("ticketCount").value;
-        // var price = document.getElementById(ticket.getTicketPrice()).value;
-    }
-</script>
 <!--<script type="text/javascript" th:src="@{/js/ticket.js}"></script>-->
 <script
         src="https://code.jquery.com/jquery-3.3.1.js"

@@ -16,11 +16,13 @@ function buyTicket(ticketId, ticketPrice, eventID) {
             url: "/get/event",
             data: {eventId: eventID},
             success: function (data) {
-                url = url + data.pocket + "&sum=" + ticketPrice + "&successURL=" + succsessURL + "&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&origin=form&selectedPaymentType=AC&destination=%2316972&form-comment=йц&short-dest=&quickpay-form=donate";
+                url = url + data.pocket + "&sum=" + ticketPrice + "&successURL=" + succsessURL + "&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&selectedPaymentType=AC&destination=%2316972&form-comment=&";
                 window.open(url);
             }
         });
     }
+
+    //https://money.yandex.ru/transfer?receiver=410016766313352&sum=1&origin=form&selectedPaymentType=AC&short-dest=&quickpay-form=donate
 
     // $.ajax({
     //     type: "POST",

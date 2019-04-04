@@ -24,8 +24,8 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @GetMapping(value = "/tickets/new/{id}")
-    public ModelAndView registerUser(@PathVariable Long id) {
+    @GetMapping(value = "/tickets/new")
+    public ModelAndView registerUser(@RequestParam("ticketId") Long id) {
         ModelAndView modelAndView = new ModelAndView("tickets");
         modelAndView.addObject("event", eventService.getEvent(id));
         return modelAndView;

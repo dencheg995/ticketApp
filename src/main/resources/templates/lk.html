@@ -51,7 +51,7 @@
                                                 </div>
                                                 <div>
                                                     <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
-                                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new/' + ${clientEventsInfo.getId()}">Добавить билет</a>
+                                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Добавить билет</a>
                                                 </div>
                                                 <br/>
                                             </div>
