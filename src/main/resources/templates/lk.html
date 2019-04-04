@@ -41,21 +41,38 @@
                     <div class="card-body">
                         <div class="card">
                             <div class="card-body text-left">
-                                <h5 class="card-title" style="margin-left: 10px">События</h5>
                                 <div th:each="clientEventsInfo : ${clientEvents}">
                                     <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="card" style="margin-top: 10px">
-                                                <div class="card-title">
-                                                    <h6 style="margin-top: 10px;margin-left: 20px;" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>
-                                                </div>
-                                                <div>
-                                                    <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
-                                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new/' + ${clientEventsInfo.getId()}">Добавить билет</a>
-                                                </div>
-                                                <br/>
-                                            </div>
+                                        <div class="col">
+                                            <h5>Событие</h5>
                                         </div>
+                                        <div class="col">
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Название
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new/' + ${clientEventsInfo.getId()}">Билеты</a>
+                                        </div>
+                                        <div class="col">
+                                            ?
+
+                                        </div>
+<!--                                        <div class="col-sm-3">-->
+<!--                                            <div class="card" style="margin-top: 10px">-->
+<!--                                                <div class="card-title">-->
+<!--                                                    <h6 style="margin-top: 10px;margin-left: 20px;" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>-->
+<!--                                                </div>-->
+<!--                                                -->
+<!--                                                <br/>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                     </div>
                                 </div>
                             </div>
