@@ -41,13 +41,12 @@
                     <div class="card-body">
                         <div class="card">
                             <div class="card-body text-left">
-                                <h5 class="card-title" style="margin-left: 10px">События</h5>
                                 <div th:each="clientEventsInfo : ${clientEvents}">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <h5>Событие</h5>
+                                            <h5>Мероприятие</h5>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-md-4">
 <!--                                            <div class="dropdown">-->
 <!--                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
 <!--                                                    Название-->
@@ -62,16 +61,13 @@
                                                     <option>medium</option>
                                                     <option>large</option>
                                                 </select>
-
                                             </div>
                                         </div>
                                         <div class="col">
-                                                <div>
-                                                    <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
-                                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Добавить билет</a>
-                                                </div>
-                                                <br/>
-                                            </div>
+                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +78,7 @@
             </div>
         </div>
     </div>
-
+</div>
 
 
 
