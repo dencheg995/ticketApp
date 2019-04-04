@@ -28,22 +28,22 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-3">
-                                <label style="margin-top: 10px" th:for="'ticketType' + ${ticket.getTicketId()}">Тип билета(Вип, танцпол)</label>
-                                <input th:id = "'ticketType' + ${ticket.getTicketId()}" class="form-control" th:value="${ticket.getTicketType()}" disabled = 'disabled'/>
+                                <label style="margin-top: 10px" th:for="'ticketType' + ${ticket.id}">Тип билета(Вип, танцпол)</label>
+                                <input th:id = "'ticketType' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketType()}" disabled = 'disabled'/>
                             </div>
                             <div class="col-sm-3">
-                                <label style="margin-top: 10px" th:for="'ticketPrice' + ${ticket.getTicketId()}">Цена билета</label>
-                                <input th:id = "'ticketPrice' + ${ticket.getTicketId()}" class="form-control" th:value="${ticket.getTicketPrice()}" disabled = 'disabled'/>
+                                <label style="margin-top: 10px" th:for="'ticketPrice' + ${ticket.id}">Цена билета</label>
+                                <input th:id = "'ticketPrice' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketPrice()}" disabled = 'disabled'/>
                             </div>
                             <div class="col-sm-3">
-                                <label style="margin-top: 10px" th:for="'ticketCount' + ${ticket.getTicketId()}">Количество билетов</label>
-                                <input th:id = "'ticketCount' + ${ticket.getTicketId()}" class="form-control" th:value="${ticket.getTicketCount()}" disabled = 'disabled'/>
+                                <label style="margin-top: 10px" th:for="'ticketCount' + ${ticket.id}">Количество билетов</label>
+                                <input th:id = "'ticketCount' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketCount()}" disabled = 'disabled'/>
                             </div>
                             <div class="col-sm-3">
-                                <button class="btn btn-warning" style="margin-top: 42px" th:id="'editButton' + ${ticket.getTicketId()} " th:onclick="'editTicket('+ ${ticket.getTicketId()} + ',' + ${event.id}  +')'">Редактировать билет</button>
+                                <button class="btn btn-warning" style="margin-top: 42px" th:id="'editButton' + ${ticket.id} " th:onclick="'editTicket('+ ${ticket.id} + ',' + ${event.id}  +')'">Редактировать билет</button>
                             </div>
                             <div class="col-sm-3">
-                                <button class="btn btn-danger" style="margin-top: 10px" th:id="'removeButton' + ${ticket.getTicketId()}" th:onclick="'removeTicket('+ ${ticket.getTicketId()} + ')'">Удалить билет</button>
+                                <button class="btn btn-danger" style="margin-top: 10px" th:id="'removeButton' + ${ticket.id}" th:onclick="'removeTicket('+ ${ticket.id} + ')'">Удалить билет</button>
                             </div>
                         </div>
                         <br/>

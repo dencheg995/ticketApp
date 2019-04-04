@@ -44,7 +44,6 @@ public class Client implements UserDetails {
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JsonIgnore
     @JoinTable(name = "permissions",
             joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},
             inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})

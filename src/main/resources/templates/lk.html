@@ -15,52 +15,59 @@
         <div id="place"></div>
     </div>
 </div>
-<div th:replace="fragments/sidebar::sidebar"></div>
-<div id="SeatSelect">
-    <div class="tab-pane fade show active" id="list-event" role="tabpanel" aria-labelledby="list-home-event">
-        <div class="card card-default">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs pull-xs-left">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <h6>Список мероприятий</h6>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" data-toggle="modal" data-target="#eventModal">
-                            <h6>Новое мероприятие</h6>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <div class="card">
-                    <div class="card-body text-left">
-                        <h5 class="card-title" style="margin-left: 10px">События</h5>
-                        <div th:each="clientEventsInfo : ${clientEvents}">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="card" style="margin-top: 10px">
-                                        <div class="card-title">
-                                            <h6 style="margin-top: 10px;margin-left: 50px;" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-md-3">
+            <div th:replace="fragments/sidebar::sidebar"></div>
+        </div>
+        <div class="col col-md-9">
+            <div class="tab-pane fade show active" id="list-event" role="tabpanel" aria-labelledby="list-home-event">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs pull-xs-left">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <h6>Список мероприятий</h6>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-toggle="modal" data-target="#eventModal">
+                                    <h6>Новое мероприятие</h6>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <h5 class="card-title" style="margin-left: 10px">События</h5>
+                                <div th:each="clientEventsInfo : ${clientEvents}">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="card" style="margin-top: 10px">
+                                                <div class="card-title">
+                                                    <h6 style="margin-top: 10px;margin-left: 20px;" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>
+                                                </div>
+                                                <div>
+                                                    <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
+                                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new/' + ${clientEventsInfo.getId()}">Добавить билет</a>
+                                                </div>
+                                                <br/>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
-                                            <a class="btn btn-primary" style="margin-left: 50px" role="button" th:href="'/tickets/new/' + ${clientEventsInfo.getId()}">Добавить билет</a>
-                                        </div>
-                                        <br/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -87,7 +94,7 @@
                     <label for="pocket">кошелек: </label>
                     <input id="pocket" class="form-control" name="pocket" type="number" placeholder="4100175017397"
                            data-error='Введите номер кошелька в допустимом формате (только цифры)'
-                           required="required" minlength="14" maxlength="20"/>
+                           required="required" th:min="10000000000" th:max="999999999999999999999999999999999"/>
                 </div>
                 <div class="modalfooter">
                     <button class="button btn-primary" onclick="addEvent()">Добавить мероприятие</button>
