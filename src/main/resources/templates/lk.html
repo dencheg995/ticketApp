@@ -44,19 +44,26 @@
                                 <h5 class="card-title" style="margin-left: 10px">События</h5>
                                 <div th:each="clientEventsInfo : ${clientEvents}">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-md-2">
                                             <h5>Событие</h5>
                                         </div>
                                         <div class="col">
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Название
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+<!--                                            <div class="dropdown">-->
+<!--                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                                    Название-->
+<!--                                                </button>-->
+<!--                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
 
-                                                </div>
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                            <div class="form-group">
+                                                <select id="company" class="form-control">
+                                                    <option>small</option>
+                                                    <option>medium</option>
+                                                    <option>large</option>
+                                                </select>
+
                                             </div>
-
                                         </div>
                                         <div class="col">
                                                 <div>
