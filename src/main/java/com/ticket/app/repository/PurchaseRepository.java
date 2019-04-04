@@ -17,4 +17,6 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     List<Purchase> getPurchaseByConsumerId(@Param("consumerId") Long consumerId);
 
     Purchase getPurchaseByUniqId(String uniqId);
+
+    Purchase getPurchaseByNumSale(int numSale);
 }

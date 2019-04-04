@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Покупка билетов</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -77,15 +77,15 @@
                                         <label for="first-name-for-buy-ticket">Имя: </label>
                                         <input id="first-name-for-buy-ticket" class="form-control" name="firstname" type="text" placeholder="Иван"
                                                data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
-                                               pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
-                                               required="required"/>
+                                               required="required"
+                                               pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="last-name-for-buy-ticket">Фамилия: </label>
                                         <input id="last-name-for-buy-ticket" class="form-control" name="lastname" type="text" placeholder="Иванов"
                                                data-error="Фамилия должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
-                                               pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
-                                               required="required"/>
+                                               required="required"
+                                               pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="add-user-email">Email</label>
@@ -109,7 +109,26 @@
                                     </div>
                                 </div>
                                 <div class="modalfooter">
-                                    <button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getId()} + ',' + ${ticket.getTicketPrice()} + ',' + ${event.id} +')'">Купить</button>
+                                    <!--<button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.getId()} + ',' + ${ticket.getTicketPrice()} + ',' + ${event.id} +')'">Купить</button>-->
+
+                                    <form id="yandexForm" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                                        <input type="hidden" id = "receiver" name="receiver" th:value="${event.getPocket()}" />
+                                        <!--<input type="hidden" id = "formcomment" name="formcomment"/>-->
+                                        <input type="hidden" id = "label" name="label" th:value="'# ' + ${ticket.id}" />
+                                        <input type="hidden" name="quickpay-form" value="donate">
+                                        <input type="hidden" id = "targets" name="targets" th:value="'# ' + ${ticket.id}"/>
+                                        <input type="hidden" id = "sum" name="sum" data-type="number" th:value="${ticket.ticketPrice}"/>
+                                        <input type="hidden" name="successURL" th:value="'http://localhost:8080/send/ticket?numSale=' + ${ticket.ticketCount}"/>
+                                        <input type="hidden" name="need-fio" value="false"/>
+                                        <input type="hidden" name="need-email" value="false"/>
+                                        <input type="hidden" name="need-phone" value="false"/>
+                                        <input type="hidden" name="need-address" value="false"/>
+                                        <!--<label><input type="radio" name="paymentType" value="PC">Яндекс.Деньгами</label>-->
+                                        <input type="hidden" name="paymentType" value="AC"/>
+                                        <!--<input type="submit" value="купить"/>-->
+                                        <button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.id} + ',' + ${ticket.ticketPrice} + ',' + ${event.id} + ')'">Купить</button>
+                                        </input>
+                                    </form>
                                 </div>
                             </div>
                         </div>

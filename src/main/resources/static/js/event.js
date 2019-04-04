@@ -1,47 +1,3 @@
-function buyTicket(ticketId, ticketPrice, eventID) {
-
-    if ($("#first-name-for-buy-ticket").val() == "" || $("#last-name-for-buy-ticket").val() == "" ||
-        $('#add-user-email').val() == "" || $('#add-user-phone-number').val() == "") {
-        alert('Заполните все поля');
-    } else {
-        var pocket;
-        ticketPrice = ticketPrice * $("#ticketCount").val();
-        var succsessURL = "http://localhost:8080/purchase/tickets?firstName=" + $("#first-name-for-buy-ticket").val() + "&lastName=" + $("#last-name-for-buy-ticket").val()
-            + "&email=" + $('#add-user-email').val() + "&phoneNumber=" + $('#add-user-phone-number').val() + "&ticketId=" + ticketId + "&priceTicket=" + ticketPrice + "&countTicket=" + $("#ticketCount").val();
-        var url = "https://money.yandex.ru/transfer?receiver=";
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json",
-            url: "/get/event",
-            data: {eventId: eventID},
-            success: function (data) {
-                url = url + data.pocket + "&sum=" + ticketPrice + "&successURL=" + succsessURL + "&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&selectedPaymentType=AC&destination=%2316972&form-comment=&";
-                window.open(url);
-            }
-        });
-    }
-
-    //https://money.yandex.ru/transfer?receiver=410016766313352&sum=1&origin=form&selectedPaymentType=AC&short-dest=&quickpay-form=donate
-
-    // $.ajax({
-    //     type: "POST",
-    //     contentType: "application/json",
-    //     url: url,
-    //     success: function () {
-    //         location.reload();
-    //         console.log("Success");
-    //     },
-    //     error: function (e) {
-    //         alert("Неверный формат данных!");
-    //         console.log("ERROR: ", e);
-    //     }
-    // });
-
-
-    //https://money.yandex.ru/transfer?receiver=410018098845268&sum=100&successURL=https%3A%2F%2Fsoldout.media%2Ftickets%2Fpayment%2Fpay.php%3Fhash%3D0440e9f6edb931aeb8859b3ec281c57e%26uid%3D42713&quickpay-back-url=https%3A%2F%2Fsoldout.media%2Ftickets%2Fpayment%2Fpay.php%3Fhash%3D0440e9f6edb931aeb8859b3ec281c57e%26uid%3D42713&shop-host=soldout.media&label=SPBJikP8VwRo6ByuhColzWFWKb48KvNsaf1jpHia3Zp0rNkz&targets=%2316972&comment=&origin=form&selectedPaymentType=AC&destination=%2316972&form-comment=%D0%A1%D0%95%D0%9A%D0%A2%D0%90%20II&short-dest=&quickpay-form=donate
-    // https://money.yandex.ru/transfer?receiver=410018098845268-------sum=100-------successURL=-------quickpay-back-url=-------shop-host=-------label=-------targets=-------comment=-------origin=form-------selectedPaymentType=AC-------destination=-------form-comment=------short-dest=-------quickpay-form=donate
-}
 
 function addTicket() {
     var formData = {
@@ -67,7 +23,7 @@ function addTicket() {
 function putTicket(eventId) {
     $.ajax({
         type: "GET",
-        contentType: "application/json",
+        contentType: "application/json; charset=utf-8",
         url: "/put/new/ticket",
         data : {eventId : eventId},
         success: function () {
@@ -114,4 +70,34 @@ function removeTicket(ticketId) {
             location.reload()
         }
     });
+}
+
+
+function buyTicket(ticketId, ticketPrice, eventId) {
+    if ($("#first-name-for-buy-ticket").val() == "" || $("#last-name-for-buy-ticket").val() == "" ||
+        $('#add-user-email').val() == "" || $('#add-user-phone-number').val() == "") {
+        alert('Заполните все поля');
+    } else {
+        var url = "/event/app/" + eventId + "/purchase/tickets";
+
+        let wrap = {
+            firstName: $("#first-name-for-buy-ticket").val(),
+            lastName: $("#last-name-for-buy-ticket").val(),
+            phoneNumber: $('#add-user-phone-number').val(),
+            email: $('#add-user-email').val() ,
+            ticketId: ticketId,
+            ticketPrice: ticketPrice,
+            countTicket: $("#ticketCount").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(wrap),
+            success: function (result) {
+                location.reload()
+            }
+        });
+    }
 }

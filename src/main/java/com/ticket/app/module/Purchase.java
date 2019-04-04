@@ -24,6 +24,12 @@ public class Purchase {
     @Column(name = "cost_purchase_ticket")
     private int costBuyTicket;
 
+    @Column(name = "check_purchase")
+    private boolean check;
+
+    @Column(name = "num_sale")
+    private Integer numSale;
+
     @ManyToOne
     @JoinTable(name = "purchase_consumer",
             joinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))},
@@ -37,6 +43,22 @@ public class Purchase {
             inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
     @JsonIgnore
     private Ticket ticket;
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public Integer getNumSale() {
+        return numSale;
+    }
+
+    public void setNumSale(Integer numSale) {
+        this.numSale = numSale;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
 
     public Long getId() {
         return id;

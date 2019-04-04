@@ -16,4 +16,8 @@ public interface PurchaseService {
 
     Purchase getPurchaseById(Long id);
 
+    Purchase getPurchaseByNumSale(int numSale);
+
+    Purchase update(Purchase purchase);
+
 }

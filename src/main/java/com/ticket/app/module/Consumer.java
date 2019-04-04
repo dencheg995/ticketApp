@@ -19,19 +19,15 @@ public class Consumer implements Serializable {
     private Long id;
 
     @Column(name = "consumer_name")
-    @NotNull
     private String firstName;
 
     @Column(name = "consumer_last_name")
-    @NotNull
     private String lastName;
 
     @Column(name = "consumer_email")
-    @NotNull
     private String email;
 
     @Column(name = "consumer_phone")
-    @NotNull
     private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -49,6 +45,13 @@ public class Consumer implements Serializable {
     private List<Purchase> purchaseTicketList;
 
     public Consumer() {
+    }
+
+    public Consumer(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public List<Purchase> getPurchaseTicketList() {

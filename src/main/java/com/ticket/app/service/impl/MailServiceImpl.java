@@ -6,25 +6,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamSource;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+@Service
 public class MailServiceImpl implements MailService {
 
     private static Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
+
     private final JavaMailSender javaMailSender;
 
     public MailServiceImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
-    private boolean sendingMailingsEmails(Purchase purchase) {
+
+    public boolean sendingMailingsEmails(Purchase purchase) {
         boolean result = false;
         StringBuilder br = new StringBuilder();
         br.append("Поздравляем вас с покупкой билетов на мероприятие ").append("\n")
@@ -41,10 +45,10 @@ public class MailServiceImpl implements MailService {
         try {
             final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-            mimeMessageHelper.setFrom("Пока хз");
+            mimeMessageHelper.setFrom("xz");
             mimeMessageHelper.setTo(purchase.getConsumer().getEmail());
             mimeMessageHelper.setSubject("Билеты на " + purchase.getTicket().getEvent().getName());
-            File file = new File("/");
+            File file = new File("./image.png");
             if (file.exists()) {
                 InputStreamSource inputStreamSource = new FileSystemResource(file);
                 mimeMessageHelper.addInline("image", inputStreamSource, "image/jpeg");

@@ -8,6 +8,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.ticket.app.module.Purchase;
 import com.ticket.app.repository.PurchaseRepository;
+import com.ticket.app.service.interfaces.MailService;
 import com.ticket.app.service.interfaces.PurchaseService;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     private final PurchaseRepository purchaseRepository;
 
-    public PurchaseServiceImpl(PurchaseRepository purchaseRepository) {
+    private final MailService mailService;
+
+    public PurchaseServiceImpl(PurchaseRepository purchaseRepository, MailService mailService) {
         this.purchaseRepository = purchaseRepository;
+        this.mailService = mailService;
     }
 
 
@@ -46,11 +50,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void sendTicket(Purchase purchase) {
-        String host = "http://localhost:8080/send/ticket?";
-        String url = host.concat("id=").concat(String.valueOf(purchase.getId())).concat("uniq=").concat(purchase.getUniqId()).concat("&count=")
+        String host = "http://localhost:8080/verify/ticket?";
+        String url = host.concat("id=").concat(String.valueOf(purchase.getId())).concat("&uniq=").concat(purchase.getUniqId()).concat("&count=")
                 .concat(String.valueOf(purchase.getCountBuyTicket()));
         try {
             createQRImage(url);
+            mailService.sendingMailingsEmails(purchase);
+
         } catch (WriterException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -62,6 +68,16 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public Purchase getPurchaseById(Long id) {
         return purchaseRepository.getOne(id);
+    }
+
+    @Override
+    public Purchase getPurchaseByNumSale(int numSale) {
+        return purchaseRepository.getPurchaseByNumSale(numSale);
+    }
+
+    @Override
+    public Purchase update(Purchase purchase) {
+        return purchaseRepository.saveAndFlush(purchase);
     }
 
     private static void createQRImage(String url) throws WriterException, IOException {
@@ -83,7 +99,7 @@ public class PurchaseServiceImpl implements PurchaseService {
                 }
             }
         }
-        ImageIO.write(image, "image/jpeg", new File("/"));
+        ImageIO.write(image, "png", new File("./image.png"));
     }
 }
 
