@@ -13,9 +13,26 @@
     <div class="header">
         <div id="event"></div>
         <div id="place"></div>
+        <button class="btn btn-danger" style="float: right">Выйти</button>
     </div>
 </div>
-<div th:replace="fragments/sidebar::sidebar"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div th:replace="fragments/sidebar::sidebar"></div>
+        </div>
+        <div class="col-md-9">
+            <div class="card card-default">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
