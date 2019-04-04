@@ -13,7 +13,7 @@
     <div class="header">
         <div id="event"></div>
         <div id="place"></div>
-        <button class="btn btn-danger" style="float: right">Выйти</button>
+        <button class="btn btn-danger" style="float: right; margin-top: 4px">Выйти</button>
     </div>
 </div>
 <div class="container-fluid">
@@ -95,11 +95,11 @@
                     <label for="pocket">кошелек: </label>
                     <input id="pocket" class="form-control" name="pocket" type="number" placeholder="4100175017397"
                            data-error='Введите номер кошелька в допустимом формате (только цифры)'
-                           required="required" th:min="10000000000" th:max="999999999999999999999999999999999"/>
+                           required="required"/>
                 </div>
-                <div class="modalfooter">
-                    <button class="button btn-primary" onclick="addEvent()">Добавить мероприятие</button>
-                </div>
+            </div>
+            <div class="modalfooter">
+                <button class="btn btn-primary" onclick="addEvent()">Добавить мероприятие</button>
             </div>
         </div>
     </div>
