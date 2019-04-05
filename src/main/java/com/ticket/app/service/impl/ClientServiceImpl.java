@@ -56,6 +56,11 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.getClientByEventId(id);
     }
 
+    @Override
+    public Client getClientById(Long id) {
+        return clientRepository.getOne(id);
+    }
+
     private void phoneNumberValidation(Client client) {
         String phoneNumber = client.getPhoneNumber();
         Pattern pattern = Pattern.compile("^((8|\\+7|7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Настройки</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -13,7 +13,14 @@
     <div class="header">
         <div id="event"></div>
         <div id="place"></div>
-        <button class="btn btn-danger" style="float: right; margin-top: 4px">Выйти</button>
+        <!--<a href="/logout" class="btn btn-danger" style="float: right; margin-top: 4px" >Выйти</a>-->
+        <a href="javascript:;" class="btn btn-danger" onclick="document.getElementById('logout').submit();" style="float: right; margin-top: 4px">Выход</a>
+
+        <form action="/logout" id="logout" method="post">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+        </form>
     </div>
 </div>
 <div class="container-fluid">
@@ -27,13 +34,71 @@
 
                 </div>
                 <div class="card-body">
+                    <div style="margin-top: 3%">
+                        <div id = "user-info-container" class="container-fluid">
+                            <div class="row-fluid">
+                                <div class="col-md-3" id="column1">
+                                    <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary" id="editUser">Редактировать</button>
+                                            <button type="submit" class="btn btn-primary" id="saveChanges" th:onclick="'changeUser(\''+ ${user.id} + ')'">Сохранить</button>
+                                            <a href="/lk" class="btn btn-primary" id="backToMain">Назад</a>
+                                        </div>
+                                        <p><span id = "message"></span></p>
+                                        <input type="checkbox" checked="checked" class="form-control"  style="display:none"    id="edit-user-isVerified"/>
+                                        <div class="form-group">
+                                            <label for="edit-user-first-name">Имя</label>
+                                            <input class="form-control" data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$" required="required" disabled="disabled" id="edit-user-first-name" th:value="${user.getFirstName()}"/>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="edit-user-last-name">Фамилия</label>
+                                            <input class="form-control" data-error="Фамилия должна начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$"  required="required" id="edit-user-last-name" disabled="disabled" th:value="${user.getLastName()}"/>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="edit-user-password">Пароль</label>
+                                            <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.getPassword()}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="edit-user-phone-number">Номер телефона</label>
+                                            <input type="tel" class="form-control" required="required" disabled="disabled" id="edit-user-phone-number" th:value="${user.getPhoneNumber()}"/>
+                                        </div>
 
+
+                                        <div class="form-group">
+                                            <label for="edit-user-email">Email</label>
+                                            <input type="email" data-error="Неверный формат Email" class="form-control" required = "required" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$" disabled="disabled" id="edit-user-email" th:value="${user.getEmail()}"/>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <!--<div class="form-group">-->
+                                            <!--<label for="edit-user-VKid">VK id</label>-->
+                                            <!--<input type="text" class="form-control" disabled="disabled" id="edit-user-VKid" th:value="${user.vk}"/>-->
+                                        <!--</div>-->
+
+                                        <!--<div class="form-group" id = "edit-user-roles" sec:authorize="hasAnyAuthority('ADMIN')">-->
+                                            <!--<label for="edit-user-roles">Роли</label>-->
+                                            <!--<div id="current-user-roles">-->
+                                                <!--<span th:each="role : ${user.role}" th:value="${role.id}"></span>-->
+                                            <!--</div>-->
+                                            <!--<div class="checkbox" th:each="role : ${roles}">-->
+                                                <!--<input type="checkbox" disabled="disabled" th:id="'checkbox-user-' + ${role.id}" th:value="${role.id}" name = "roleCheckBx" title=""/>-->
+                                                <!--<label th:for="'checkbox-user-' + ${role.id}" th:text="${role.roleName}"></label>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    </form>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script type="text/javascript" th:src="@{/js/user-edit.js}"></script>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script

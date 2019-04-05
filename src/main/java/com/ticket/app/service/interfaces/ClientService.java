@@ -12,4 +12,6 @@ public interface ClientService {
     Client updateClient(Client client);
 
     Client getClientByEventId(Long id);
+
+    Client getClientById(Long id);
 }

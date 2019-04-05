@@ -43,38 +43,6 @@ public class EventController {
         return modelAndView;
     }
 
-//    @PostMapping("/purchase/tickets")
-//    @ResponseBody
-//    public ResponseEntity buyTicket(@RequestParam(required=false, value = "firstName") String firstName,
-//                                    @RequestParam(required=false, name = "lastName") String lastName,
-//                                    @RequestParam(required=false, name = "email") String email,
-//                                    @RequestParam(required=false, name = "phoneNumber") String phoneNumber,
-//                                    @RequestParam(required=false, name = "ticketId") Long ticketId,
-//                                    @RequestParam(required=false, name = "priceTicket") Integer priceTicket,
-//                                    @RequestParam(required=false, name = "countTicket") Integer countTicket) {
-//        Consumer consumer = new Consumer(firstName,lastName,email,phoneNumber);
-//        Ticket ticket = ticketService.getTicket(ticketId);
-//        Purchase purchase = new Purchase();
-//        String uniqueID = UUID.randomUUID().toString();
-//        purchase.setUniqId(uniqueID);
-//        purchase.setCountBuyTicket(countTicket);
-//        purchase.setCostBuyTicket(priceTicket);
-//        purchase.setCheck(false);
-//        List<Purchase> purchasesForTicket = purchaseService.getPurchaseByTicketId(ticketId);
-//        purchasesForTicket.add(purchase);
-//        ticket.setPurchaseTicketList(purchasesForTicket);
-//        ticket.setTicketCount(ticket.getTicketCount() - countTicket);
-//        ticketService.updateTicket(ticket);
-//        List<Purchase> purchasesForConsumer = purchaseService.getPurchaseByConsumerId(consumer.getId());
-//        purchasesForConsumer.add(purchase);
-//        consumer.setPurchaseTicketList(purchasesForConsumer);
-//        List<Ticket> tickets = ticketService.getTicketByConsumerId(consumer.getId());
-//        tickets.add(ticket);
-//        consumer.setTicketList(tickets);
-//        consumerService.updateConsumer(consumer);
-//        //purchaseService.sendTicket(purchase);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
 
     @RequestMapping(value = "/purchase/tickets")
     public @ResponseBody ResponseEntity buyTicket(@RequestBody POJOTicket pojoTicket) {
