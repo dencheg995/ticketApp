@@ -1,7 +1,7 @@
 package com.ticket.app.service.impl;
 
 
-import com.ticket.app.exeptions.event.EventExeption;
+import com.ticket.app.exeptions.event.EventException;
 import com.ticket.app.module.Event;
 import com.ticket.app.repository.EventRepository;
 import com.ticket.app.repository.TicketRepository;
@@ -35,7 +35,7 @@ public class EventServiceImpl implements EventService {
     public Event getEvent(Long id) {
         if (eventRepository.getOne(id) == null) {
             logger.error("Ups, we haven't this app");
-            throw new EventExeption();
+            throw new EventException();
         }
         return eventRepository.getOne(id);
     }
@@ -54,4 +54,14 @@ public class EventServiceImpl implements EventService {
     public List<Event> getEventByClientId(Long clientId) {
         return eventRepository.getEventByClientId(clientId);
     }
+
+    @Override
+    public void removeEvent(Long id) {
+        if (eventRepository.getOne(id) != null) {
+            eventRepository.deleteById(id);
+        } else {
+            throw new EventException();
+        }
+    }
+
 }

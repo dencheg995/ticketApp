@@ -1,6 +1,6 @@
 package com.ticket.app.service.impl;
 
-import com.ticket.app.exeptions.ticket.TicketExeption;
+import com.ticket.app.exeptions.ticket.TicketException;
 import com.ticket.app.module.Ticket;
 import com.ticket.app.repository.TicketRepository;
 import com.ticket.app.service.interfaces.TicketService;
@@ -47,7 +47,7 @@ public class TicketServiceImpl implements TicketService {
         if (ticketRepository.getOne(id) != null) {
             ticketRepository.deleteById(id);
         } else {
-            throw new TicketExeption();
+            throw new TicketException();
         }
     }
 

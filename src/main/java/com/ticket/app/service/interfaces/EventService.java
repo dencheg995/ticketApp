@@ -15,4 +15,6 @@ public interface EventService {
     Event getEventByTicketId(Long id);
 
     List<Event> getEventByClientId(Long clientId);
+
+    void removeEvent(Long id);
 }
