@@ -33,15 +33,8 @@ public class ClientController {
     }
 
     @PostMapping(value = "/edit/user/update")
-    public @ResponseBody ResponseEntity edit(@RequestBody POJOUser user,
-                                             @AuthenticationPrincipal Client clientSession) {
-
-        clientSession.setFirstName(user.getFirstName());
-        clientSession.setLastName(user.getLastName());
-        clientSession.setEmail(user.getEmail());
-        clientSession.setPhoneNumber(user.getPhoneNumber());
-        clientSession.setPassword(user.getPassword());
-        clientService.updateClient(clientSession);
+    public @ResponseBody ResponseEntity edit(@RequestBody POJOUser user) {
+        clientService.edit(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

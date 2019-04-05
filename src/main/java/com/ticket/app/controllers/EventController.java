@@ -68,29 +68,4 @@ public class EventController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/event/new")
-    public ModelAndView registerUser(@RequestParam("eventId") Long id) {
-        ModelAndView modelAndView = new ModelAndView("event-settings");
-        modelAndView.addObject("event", eventService.getEvent(id));
-        return modelAndView;
-    }
-
-    @GetMapping(value = "/edit/event")
-    public ResponseEntity<Event> editEvent(@RequestParam(value = "eventId") Long eventId,
-                                             @RequestParam(value = "eventName") String eventName,
-                                             @RequestParam(value = "eventAddress") String eventAddress,
-                                             @RequestParam(value = "eventPocket") BigInteger eventPocket) {
-        Event event = eventService.getEvent(eventId);
-        event.setName(eventName);
-        event.setAddress(eventAddress);
-        event.setPocket(eventPocket);
-        eventService.updateEvent(event);
-        return ResponseEntity.ok(event);
-    }
-
-    @GetMapping(value = "/remove/event")
-    public ResponseEntity removeEvent (@RequestParam Long eventId) {
-        eventService.removeEvent(eventId);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
 }

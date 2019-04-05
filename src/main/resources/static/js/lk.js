@@ -32,15 +32,18 @@ function addEvent() {
 // }
 
 function openTicketPage() {
-
-    var eventId = $("#eventName").val()
-    var url = '/tickets/new/?eventId=' + eventId
-    window.open(url, '_self');
+    var eventId = $("#eventName").val();
+    if (eventId != null) {
+        var url = '/tickets/new/?eventId=' + eventId
+        window.open(url, '_self');
+    }
 }
 
 function openEventPage() {
 
     var eventId = $("#eventName").val()
-    var url = '/event/new/?eventId=' + eventId
-    window.open(url, '_self');
+    if (eventId != null) {
+        var url = '/event/new/?eventId=' + eventId
+        window.open(url, '_self');
+    }
 }

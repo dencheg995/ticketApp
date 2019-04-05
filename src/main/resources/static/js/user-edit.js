@@ -3,7 +3,7 @@ function changeUser(userId) {
     let url = '/edit/user/update';
 
     let wrap = {
-        id: id,
+        id: userId,
         firstName: $('#edit-user-first-name').val(),
         lastName: $('#edit-user-last-name').val(),
         phoneNumber: $('#edit-user-phone-number').val(),
@@ -37,7 +37,6 @@ $(document).on('click', '#editUser', function editUserBtn() {
     });
 
         $('#editUser').attr("class", "btn btn-secondary")[0].innerText = 'Заблокировать';
-        $("#edit-user-password").prop("disabled", true);
+        $("#edit-user-password").prop("disabled", false);
         $('#editUser').attr("class", "btn btn-primary")[0].innerText = 'Редактировать';
-        $("#edit-user-password").prop("disabled", true);
 });
