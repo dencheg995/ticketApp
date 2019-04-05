@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавление билетов</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="content">
+    <div class="header">
+        <div id="event"></div>
+        <div id="place"></div>
+        <button class="btn btn-danger" style="float: right; margin-top: 4px">Выйти</button>
+    </div>
+</div>
+<div class="card card-default">
+    <div th:each="event :${event}">
+        <div class="card-header">
+            <div class="card-title">
+                <h5 style="margin-left: 15px" th:text="'Билеты для: ' + ${event.getName()}"></h5>
+            </div>
+        </div>
+        <div class="card-body">
+            <div th:each="ticket : ${event.getTicketList()}">
+                <div class="card" style="margin-top: 10px">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label style="margin-top: 10px" th:for="'ticketType' + ${ticket.id}">Тип билета(Вип, танцпол)</label>
+                                <input th:id = "'ticketType' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketType()}" disabled = 'disabled'/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label style="margin-top: 10px" th:for="'ticketPrice' + ${ticket.id}">Цена билета</label>
+                                <input th:id = "'ticketPrice' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketPrice()}" disabled = 'disabled'/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label style="margin-top: 10px" th:for="'ticketCount' + ${ticket.id}">Количество билетов</label>
+                                <input th:id = "'ticketCount' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketCount()}" disabled = 'disabled'/>
+                            </div>
+                            <div class="col-sm-3">
+                                <button class="btn btn-warning" style="margin-top: 42px" th:id="'editButton' + ${ticket.id} " th:onclick="'editTicket('+ ${ticket.id} + ',' + ${event.id}  +')'">Редактировать билет</button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button class="btn btn-danger" style="margin-top: 10px" th:id="'removeButton' + ${ticket.id}" th:onclick="'removeTicket('+ ${ticket.id} + ')'">Удалить билет</button>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" style="margin-top: 10px; margin-left: 15px" th:onclick="'putTicket('+ ${event.id} +')'">Добавить Билет</button>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div>
+                <a class="btn btn-success" style="margin-left: 15px" href="/lk" role="button">Готово</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+</body>
+</html>

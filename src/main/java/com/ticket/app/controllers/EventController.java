@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public class EventController {
 
     @GetMapping
     public ModelAndView eventPage(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("event");
+        ModelAndView modelAndView = new ModelAndView("sale");
         modelAndView.addObject("event", eventService.getEvent(id));
         return modelAndView;
     }

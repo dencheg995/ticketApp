@@ -48,38 +48,30 @@
                     <div class="card-body">
                         <div class="card">
                             <div class="card-body text-left">
-
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <h5 th:for="eventName">Мероприятие</h5>
-                                        </div>
-                                        <div class="col-md-4">
-<!--                                            <div class="dropdown">-->
-<!--                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                                    Название-->
-<!--                                                </button>-->
-<!--                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
-
-<!--                                                </div>-->
-<!--                                            </div>-->
-                                            <div class="form-group">
-                                                <select id="eventName" class="form-control">
-                                                    <option selected="selected" disabled="disabled">Выберите мероприятие</option>
-                                                    <option th:each="clientEventsInfo : ${clientEvents}"
-                                                                th:value="${clientEventsInfo.id}"
-                                                                th:utext="${clientEventsInfo.getName()}"  th:id="eventId"></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <button class="btn btn-primary" style="margin-left: 20px" role="button" onclick="openTicketPage()">Билеты</button>
-                                        </div>
-                                        <div class="col">
-                                            ?
-<!--                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>-->
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h5 th:for="eventName">Мероприятие</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select id="eventName" class="form-control">
+                                                <option selected="selected" disabled="disabled">Выберите мероприятие</option>
+                                                <option th:each="clientEventsInfo : ${clientEvents}"
+                                                        th:value="${clientEventsInfo.id}"
+                                                        th:utext="${clientEventsInfo.getName()}"  th:id="eventId"></option>
+                                            </select>
                                         </div>
                                     </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary" style="margin-left: 20px" role="button" onclick="openTicketPage()">Билеты</button>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
 
+                                        </div>
+<!--                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
