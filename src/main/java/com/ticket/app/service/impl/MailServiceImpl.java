@@ -32,8 +32,8 @@ public class MailServiceImpl implements MailService {
         boolean result = false;
         StringBuilder br = new StringBuilder();
         br.append("Поздравляем вас с покупкой билетов на мероприятие ").append("\n")
-                .append(purchase.getTicket().getEvent().getName()).append("Номер заказа: ")
-                .append(purchase.getTicket().getEvent().getId()).append("Дата и время :").append(purchase.getTicket().getEvent()).append("\n")
+                .append(purchase.getTicket().getEvent().getName()).append("\n").append("Номер заказа: ")
+                .append(purchase.getTicket().getEvent().getId()).append("\n\n").append("Дата и время :").append(purchase.getTicket().getEvent().getId()).append("\n")
                 .append("Место проведени: ").append(purchase.getTicket().getEvent()).append("\n")
                 .append("По адресу: ").append(purchase.getTicket().getEvent().getAddress()).append("\n\n")
                 .append("Электронные билеты прикреплены к этому сообщению . ").append(
@@ -48,6 +48,7 @@ public class MailServiceImpl implements MailService {
             mimeMessageHelper.setFrom("xz");
             mimeMessageHelper.setTo(purchase.getConsumer().getEmail());
             mimeMessageHelper.setSubject("Билеты на " + purchase.getTicket().getEvent().getName());
+            mimeMessageHelper.setText(br.toString());
             File file = new File("./image.png");
             if (file.exists()) {
                 InputStreamSource inputStreamSource = new FileSystemResource(file);

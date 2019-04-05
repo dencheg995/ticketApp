@@ -22,11 +22,18 @@ function addEvent() {
     });
 }
 
-function createTickets(eventId) {
+// function createTickets(eventId) {
+//
+//     var url = '/tickets/new/' + eventId + "/"
+//     $.ajax({
+//         type: "GET",
+//         url: url,
+//     });
+// }
 
-    var url = '/tickets/new/' + eventId + "/"
-    $.ajax({
-        type: "GET",
-        url: url,
-    });
+function openTicketPage() {
+
+    var eventId = $("#eventName").val()
+    var url = '/tickets/new/?eventId=' + eventId
+    window.open(url, '_self');
 }

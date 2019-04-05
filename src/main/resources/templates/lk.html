@@ -13,7 +13,14 @@
     <div class="header">
         <div id="event"></div>
         <div id="place"></div>
-        <button class="btn btn-danger" style="float: right; margin-top: 4px">Выйти</button>
+        <!--<a href="/logout" class="btn btn-danger" style="float: right; margin-top: 4px" >Выйти</a>-->
+        <a href="javascript:;" class="btn btn-danger" onclick="document.getElementById('logout').submit();" style="float: right; margin-top: 4px">Выход</a>
+
+        <form action="/logout" id="logout" method="post">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+        </form>
     </div>
 </div>
 <div class="container-fluid">
@@ -58,15 +65,14 @@
                                             <div class="form-group">
                                                 <select id="eventName" class="form-control">
                                                     <option selected="selected" disabled="disabled">Выберите мероприятие</option>
-                                                    <div th:each="clientEventsInfo : ${clientEvents}">
-                                                    <option th:text="${clientEventsInfo.getName()}"></option>
-                                                </div>
+                                                    <option th:each="clientEventsInfo : ${clientEvents}"
+                                                                th:value="${clientEventsInfo.id}"
+                                                                th:utext="${clientEventsInfo.getName()}"  th:id="eventId"></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col">
-                                            ?
-<!--                                            <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>-->
+                                            <button class="btn btn-primary" style="margin-left: 20px" role="button" onclick="openTicketPage()">Билеты</button>
                                         </div>
                                         <div class="col">
                                             ?
