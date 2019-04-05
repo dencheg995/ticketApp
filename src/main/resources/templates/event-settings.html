@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Добавление билетов</title>
+    <title>Редактирование мероприятия</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/style.css"/>
@@ -13,46 +13,47 @@
     <div class="header">
         <div id="event"></div>
         <div id="place"></div>
-        <button class="btn btn-danger" style="float: right; margin-top: 4px">Выйти</button>
+        <a href="javascript:;" class="btn btn-danger" onclick="document.getElementById('logout').submit();" style="float: right; margin-top: 4px">Выход</a>
+
+        <form action="/logout" id="logout" method="post">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+        </form>
     </div>
 </div>
 <div class="card card-default">
-    <div th:each="event :${event}">
+    <div th:each="event : ${event}">
         <div class="card-header">
             <div class="card-title">
-                <h5 style="margin-left: 15px" th:text="'Билеты для: ' + ${event.getName()}"></h5>
+                <h5 style="margin-left: 15px" th:text="'Мероприятие: ' + ${event.getName()}"></h5>
             </div>
         </div>
         <div class="card-body">
-            <div th:each="ticket : ${event.getTicketList()}">
-                <div class="card" style="margin-top: 10px">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <label style="margin-top: 10px" th:for="'ticketType' + ${ticket.id}">Тип билета(Вип, танцпол)</label>
-                                <input th:id = "'ticketType' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketType()}" disabled = 'disabled'/>
-                            </div>
-                            <div class="col-sm-3">
-                                <label style="margin-top: 10px" th:for="'ticketPrice' + ${ticket.id}">Цена билета</label>
-                                <input th:id = "'ticketPrice' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketPrice()}" disabled = 'disabled'/>
-                            </div>
-                            <div class="col-sm-3">
-                                <label style="margin-top: 10px" th:for="'ticketCount' + ${ticket.id}">Количество билетов</label>
-                                <input th:id = "'ticketCount' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketCount()}" disabled = 'disabled'/>
-                            </div>
-                            <div class="col-sm-3">
-                                <button class="btn btn-warning" style="margin-top: 42px" th:id="'editButton' + ${ticket.id} " th:onclick="'editTicket('+ ${ticket.id} + ',' + ${event.id}  +')'">Редактировать билет</button>
-                            </div>
-                            <div class="col-sm-3">
-                                <button class="btn btn-danger" style="margin-top: 10px" th:id="'removeButton' + ${ticket.id}" th:onclick="'removeTicket('+ ${ticket.id} + ')'">Удалить билет</button>
-                            </div>
+            <div class="card" style="margin-top: 10px">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label style="margin-top: 10px" th:for="'eventName' + ${event.id}">Название</label>
+                            <input th:id = "'eventName' + ${event.id}" class="form-control" th:value="${event.name}" disabled = 'disabled'/>
                         </div>
-                        <br/>
+                        <div class="col-sm-3">
+                            <label style="margin-top: 10px" th:for="'eventAddress' + ${event.id}">Адрес</label>
+                            <input th:id = "'eventAddress' + ${event.id}" class="form-control" th:value="${event.address}" disabled = 'disabled'/>
+                        </div>
+                        <div class="col-sm-3">
+                            <label style="margin-top: 10px" th:for="'eventPocket' + ${event.id}">Кошелек</label>
+                            <input th:id = "'eventPocket' + ${event.id}" class="form-control" th:value="${event.pocket}" disabled = 'disabled'/>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-warning" style="margin-top: 42px" th:id="'editButton' + ${event.id} " th:onclick="'editEvent('+ ${event.id} +')'">Редактировать мероприятие</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-danger" style="margin-top: 10px" th:id="'removeButton' + ${event.id}" th:onclick="'removeEvent('+ ${event.id} + ')'">Удалить мероприятие</button>
+                        </div>
                     </div>
+                    <br/>
                 </div>
-            </div>
-            <div>
-                <button class="btn btn-primary" style="margin-top: 10px; margin-left: 15px" th:onclick="'putTicket('+ ${event.id} +')'">Добавить Билет</button>
             </div>
         </div>
         <div class="card-footer">

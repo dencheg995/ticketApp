@@ -1,9 +1,6 @@
 package com.ticket.app.controllers;
 
-import com.ticket.app.module.Consumer;
-import com.ticket.app.module.POJOTicket;
-import com.ticket.app.module.Purchase;
-import com.ticket.app.module.Ticket;
+import com.ticket.app.module.*;
 import com.ticket.app.service.interfaces.ConsumerService;
 import com.ticket.app.service.interfaces.EventService;
 import com.ticket.app.service.interfaces.PurchaseService;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,6 +65,32 @@ public class EventController {
         consumer.setTicketList(tickets);
         consumerService.updateConsumer(consumer);
         //purchaseService.sendTicket(purchase);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/event/new")
+    public ModelAndView registerUser(@RequestParam("eventId") Long id) {
+        ModelAndView modelAndView = new ModelAndView("event-settings");
+        modelAndView.addObject("event", eventService.getEvent(id));
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/edit/event")
+    public ResponseEntity<Event> editEvent(@RequestParam(value = "eventId") Long eventId,
+                                             @RequestParam(value = "eventName") String eventName,
+                                             @RequestParam(value = "eventAddress") String eventAddress,
+                                             @RequestParam(value = "eventPocket") BigInteger eventPocket) {
+        Event event = eventService.getEvent(eventId);
+        event.setName(eventName);
+        event.setAddress(eventAddress);
+        event.setPocket(eventPocket);
+        eventService.updateEvent(event);
+        return ResponseEntity.ok(event);
+    }
+
+    @GetMapping(value = "/remove/event")
+    public ResponseEntity removeEvent (@RequestParam Long eventId) {
+        eventService.removeEvent(eventId);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

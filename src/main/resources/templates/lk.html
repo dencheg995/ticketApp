@@ -13,7 +13,6 @@
     <div class="header">
         <div id="event"></div>
         <div id="place"></div>
-        <!--<a href="/logout" class="btn btn-danger" style="float: right; margin-top: 4px" >Выйти</a>-->
         <a href="javascript:;" class="btn btn-danger" onclick="document.getElementById('logout').submit();" style="float: right; margin-top: 4px">Выход</a>
 
         <form action="/logout" id="logout" method="post">
@@ -50,7 +49,7 @@
                             <div class="card-body text-left">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <h5 th:for="eventName">Мероприятие</h5>
+                                        <h5 th:for="eventName" style="margin-top: 5px">Мероприятие:</h5>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -62,14 +61,11 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-5">
                                         <button class="btn btn-primary" style="margin-left: 20px" role="button" onclick="openTicketPage()">Билеты</button>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group">
-
-                                        </div>
-<!--                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new?ticketId=' + ${clientEventsInfo.getId()}">Билеты</a>-->
+                                        <img src="/img/шестеренка.png" onclick="openEventPage()"/>
                                     </div>
                                 </div>
                             </div>

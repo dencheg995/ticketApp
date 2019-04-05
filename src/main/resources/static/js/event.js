@@ -101,3 +101,43 @@ function buyTicket(ticketId, ticketPrice, eventId) {
         });
     }
 }
+
+function editEvent(eventId) {
+
+    if ($("#editButton" + eventId).text() === "Редактировать билет") {
+        $("#eventName" + eventId).removeAttr('disabled');
+        $("#eventAddress" + eventId).removeAttr('disabled');
+        $("#eventPocket" + eventId).removeAttr('disabled');
+        $("#editButton" + eventId).html('Сохранить');
+    } else if ($("#editButton" + eventId).text() === "Сохранить") {
+
+        var formData = {
+            ticketId: eventId,
+            ticketType: $("#eventName" + eventId).val(),
+            ticketCount: $("#eventAddress" + eventId).val(),
+            ticketPrice: $("#eventPocket" + eventId).val()
+        };
+        var url = "/edit/event"
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: url,
+            data: formData,
+            success: function () {
+                location.reload()
+            }
+        });
+    }
+}
+
+function removeEvent(eventId) {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/remove/event",
+        data: {eventId : eventId} ,
+        success: function () {
+            location.reload()
+        }
+    });
+}

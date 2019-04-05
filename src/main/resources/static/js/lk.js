@@ -37,3 +37,10 @@ function openTicketPage() {
     var url = '/tickets/new/?eventId=' + eventId
     window.open(url, '_self');
 }
+
+function openEventPage() {
+
+    var eventId = $("#eventName").val()
+    var url = '/event/new/?eventId=' + eventId
+    window.open(url, '_self');
+}
