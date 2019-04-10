@@ -24,14 +24,10 @@ public class RegistRestController {
         this.userService = userService;
     }
 
-    @Value("${spring.mail.password}")
-    private String password;
-
     @PostMapping(value = "/register")
     public ResponseEntity addUser(@Valid @RequestBody Client user) {
         userService.addClient(user);
         logger.info("{} has register user: email {}", user.getFirstName(), user.getEmail());
-        logger.info("{} is password", password);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

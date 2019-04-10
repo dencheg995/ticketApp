@@ -33,7 +33,7 @@ function addEvent() {
 
 function openTicketPage() {
     var eventId = $("#eventName").val();
-    if (eventId != null) {
+    if (eventId != null && eventId != "") {
         var url = '/tickets/new/?eventId=' + eventId
         window.open(url, '_self');
     }
@@ -42,7 +42,7 @@ function openTicketPage() {
 function openEventPage() {
 
     var eventId = $("#eventName").val()
-    if (eventId != null) {
+    if (eventId != null && eventId != "") {
         var url = '/event/new/?eventId=' + eventId
         window.open(url, '_self');
     }
