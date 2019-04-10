@@ -1,4 +1,7 @@
 function registerUser() {
+    if ($("#saveChanges")[0].className === "btn btn-primary disabled") {
+        return;
+    }
     let url = '/register';
     var obj = {};
     obj["id"] = 2;

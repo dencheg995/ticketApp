@@ -87,21 +87,23 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="name">название: </label>
-                    <input id="name" class="form-control" name="name" type="text" placeholder="Polyland"
+                    <label for="name">Название: </label>
+                    <input id="name" class="form-control" name="name" type="text" placeholder="Название мероприятия"
                            data-error="Название должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
                            required="required"/>
+                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
-                    <label for="address">адрес: </label>
-                    <input id="address" class="form-control" name="address" type="text" placeholder="Saint-Petersburg, Nevsky prospect, 1"/>
+                    <label for="address">Место проведения: </label>
+                    <input id="address" class="form-control" name="address" type="text" placeholder="Санкт-Петербург, Невский проспект, 1"/>
                 </div>
                 <div class="form-group">
-                    <label for="pocket">кошелек: </label>
+                    <label for="pocket">Yandex-кошелек: </label>
                     <input id="pocket" class="form-control" name="pocket" type="number" placeholder="4100175017397"
                            data-error='Введите номер кошелька в допустимом формате (только цифры)'
                            required="required"/>
+                    <div class="help-block with-errors"></div>
                 </div>
             </div>
             <div class="modalfooter">

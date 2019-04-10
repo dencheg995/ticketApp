@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -30,6 +31,9 @@ public class Purchase {
     @Column(name = "num_sale")
     private Integer numSale;
 
+    @Column(name = "purchase_time")
+    private LocalDateTime localDateTime;
+
     @ManyToOne
     @JoinTable(name = "purchase_consumer",
             joinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))},
@@ -50,6 +54,14 @@ public class Purchase {
 
     public Integer getNumSale() {
         return numSale;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public void setNumSale(Integer numSale) {

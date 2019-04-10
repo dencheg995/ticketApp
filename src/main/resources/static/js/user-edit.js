@@ -1,5 +1,7 @@
 function changeUser(userId) {
-
+    if ($("#saveChanges")[0].className === "btn btn-primary disabled") {
+        return;
+    }
     let url = '/edit/user/update';
 
     let wrap = {
@@ -18,7 +20,7 @@ function changeUser(userId) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(wrap),
         success: function (result) {
-            window.location.replace("/lk")
+           location.reload()
         },
         error: function (e) {
             setErrorMessage(e.responseJSON.message);
@@ -27,16 +29,21 @@ function changeUser(userId) {
     });
 }
 
+
 $(document).on('click', '#editUser', function editUserBtn() {
     $('#column1').find('input').each(function () {
         $(this)[0].disabled = $(this)[0].disabled !== true;
     });
 
-    $('#column1').find('select').each(function () {
-        $(this)[0].disabled = $(this)[0].disabled !== true;
-    });
-
+    if ($('#editUser').attr("class", "btn btn-secondary")[0].innerText === 'Редактировать') {
         $('#editUser').attr("class", "btn btn-secondary")[0].innerText = 'Заблокировать';
-        $("#edit-user-password").prop("disabled", false);
+    } else {
         $('#editUser').attr("class", "btn btn-primary")[0].innerText = 'Редактировать';
+    }
 });
+
+
+$(document).ready(function () {
+    $('#user-form').validator()
+});
+

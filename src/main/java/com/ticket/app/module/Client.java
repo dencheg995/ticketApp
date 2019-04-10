@@ -36,6 +36,9 @@ public class Client implements UserDetails {
     @Column(name = "user_phone")
     private String phoneNumber;
 
+    @Column(name = "vk_id")
+    private String vkId;
+
     private String password;
 
     @Column(name = "is_enabled") // включен, разрешен??? user-info.js, всегда false
@@ -105,6 +108,13 @@ public class Client implements UserDetails {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getVkId() {
+        return vkId;
+    }
+
+    public void setVkId(String vkId) {
+        this.vkId = vkId;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
