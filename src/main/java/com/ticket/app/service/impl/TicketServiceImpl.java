@@ -23,11 +23,6 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getTicketByConsumerId(Long consumerId) {
-        return ticketRepository.getTicketsByConsumerId(consumerId);
-    }
-
-    @Override
     public List<Ticket> getTicketsByEventId(Long eventId) {
         return ticketRepository.getTicketsByEventId(eventId);
     }

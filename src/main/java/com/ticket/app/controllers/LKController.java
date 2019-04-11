@@ -42,6 +42,7 @@ public class LKController {
         this.clientService = clientService;
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event,
                                       @AuthenticationPrincipal Client clientSession){
@@ -53,6 +54,7 @@ public class LKController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping("/add/ticket")
     public ResponseEntity addTicket(@Valid @RequestBody List<Ticket> tickets,
                                     @RequestParam Long eventId){
@@ -63,6 +65,7 @@ public class LKController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping
     public ModelAndView lkPage(@AuthenticationPrincipal Client clientSession) {
         ModelAndView modelAndView = new ModelAndView("lk");

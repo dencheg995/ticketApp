@@ -79,7 +79,7 @@ function buyTicket(ticketId, ticketPrice, eventId) {
         alert('Заполните все поля');
     } else {
         var url = "/event/app/" + eventId + "/purchase/tickets";
-
+        var date = new Date();
         let wrap = {
             firstName: $("#first-name-for-buy-ticket").val(),
             lastName: $("#last-name-for-buy-ticket").val(),
@@ -87,7 +87,8 @@ function buyTicket(ticketId, ticketPrice, eventId) {
             email: $('#add-user-email').val() ,
             ticketId: ticketId,
             ticketPrice: ticketPrice,
-            countTicket: $("#ticketCount").val()
+            countTicket: $("#ticketCount").val(),
+            date : date
         };
 
         $.ajax({

@@ -1,5 +1,7 @@
 package com.ticket.app.module;
 
+import java.time.LocalDateTime;
+
 public class POJOTicket {
 
     private String firstName;
@@ -16,6 +18,15 @@ public class POJOTicket {
 
     private int countTicket;
 
+    private LocalDateTime date;
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -7,8 +7,6 @@ import java.util.List;
 public interface TicketService {
     Ticket addTicket(Ticket ticket);
 
-    List<Ticket> getTicketByConsumerId(Long consumerId);
-
     List<Ticket> getTicketsByEventId(Long eventId);
 
     Ticket getTicket(Long id);

@@ -53,6 +53,7 @@ public class EventController {
         purchase.setCostBuyTicket(pojoTicket.getTicketPrice());
         purchase.setCheck(false);
         purchase.setNumSale(ticket.getTicketCount());
+        purchase.setLocalDateTime(pojoTicket.getDate());
         List<Purchase> purchasesForTicket = purchaseService.getPurchaseByTicketId(pojoTicket.getTicketId());
         purchasesForTicket.add(purchase);
         ticket.setPurchaseTicketList(purchasesForTicket);
@@ -60,12 +61,8 @@ public class EventController {
         List<Purchase> purchasesForConsumer = purchaseService.getPurchaseByConsumerId(consumer.getId());
         purchasesForConsumer.add(purchase);
         consumer.setPurchaseTicketList(purchasesForConsumer);
-        //List<Ticket> tickets = ticketService.getTicketByConsumerId(consumer.getId());
-//        tickets.add(ticket);
-//        consumer.setTicketList(tickets);
         consumerService.updateConsumer(consumer);
         ticketService.updateTicket(ticket);
-        //purchaseService.sendTicket(purchase);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

@@ -6,6 +6,7 @@ import com.ticket.app.service.interfaces.EventService;
 import com.ticket.app.service.interfaces.TicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,7 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/tickets/new")
     public ModelAndView registerUser(@RequestParam("eventId") Long id) {
         ModelAndView modelAndView = new ModelAndView("tickets");
@@ -31,6 +33,7 @@ public class TicketController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/put/new/ticket")
     public ResponseEntity<Ticket> putTicket(@RequestParam Long eventId) {
         Ticket ticket = new Ticket();
@@ -45,7 +48,7 @@ public class TicketController {
         return ResponseEntity.ok(ticket);
     }
 
-
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/edit/ticket")
     public ResponseEntity<Ticket> editTicket(@RequestParam(value = "ticketId") Long ticketId,
                                              @RequestParam(value = "ticketType") String ticketType,
@@ -59,6 +62,7 @@ public class TicketController {
         return ResponseEntity.ok(ticket);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/remove/ticket")
     public ResponseEntity removeTicket (@RequestParam Long ticketId) {
         ticketService.removeTicket(ticketId);

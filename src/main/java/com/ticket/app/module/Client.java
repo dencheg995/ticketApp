@@ -24,24 +24,25 @@ public class Client implements UserDetails {
     @Column(name = "client_id")
     private Long id;
 
-    @Column(name = "client_name")
+    @Column(name = "client_name", nullable = false)
     private String firstName;
 
-    @Column(name = "clinet_last_name")
+    @Column(name = "clinet_last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "user_phone")
+    @Column(name = "user_phone", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "vk_id")
+    @Column(name = "vk_id", nullable = false)
     private String vkId;
 
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "is_enabled") // включен, разрешен??? user-info.js, всегда false
+    @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
     @NotNull

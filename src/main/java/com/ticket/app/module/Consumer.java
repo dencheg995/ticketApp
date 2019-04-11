@@ -32,13 +32,6 @@ public class Consumer implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinTable(name = "consumer_ticket",
-            joinColumns = {@JoinColumn(name = "consumer_id", foreignKey = @ForeignKey(name = "FK_CONSUMER"))},
-            inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
-    private List<Ticket> ticketList;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     @JoinTable(name = "purchase_consumer",
             joinColumns = {@JoinColumn(name = "consumer_id", foreignKey = @ForeignKey(name = "FK_CONSUMER"))},
             inverseJoinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))})
@@ -100,13 +93,5 @@ public class Consumer implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
     }
 }

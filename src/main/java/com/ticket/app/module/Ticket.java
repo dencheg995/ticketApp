@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "ticket")
@@ -32,19 +33,19 @@ public class Ticket {
     @JsonIgnore
     private Event event;
 
-    @ManyToOne
-    @JoinTable(name = "consumer_ticket",
-            joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
-            inverseJoinColumns = {@JoinColumn(name = "consumer_id", foreignKey = @ForeignKey(name = "FK_CONSUMER"))})
-    @JsonIgnore
-    private Consumer consumer;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinTable(name = "purchase_ticket",
             joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
             inverseJoinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))})
     private List<Purchase> purchaseTicketList;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinTable(name = "ticket_promo",
+            joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
+            inverseJoinColumns = {@JoinColumn(name = "promo_id", foreignKey = @ForeignKey(name = "FK_PROMO"))})
+    private Set<Promocode> promocodeSet;
 
     public Ticket() {
     }
@@ -55,6 +56,14 @@ public class Ticket {
 
     public void setPurchaseTicketList(List<Purchase> purchaseTicketList) {
         this.purchaseTicketList = purchaseTicketList;
+    }
+
+    public Set<Promocode> getPromocodeSet() {
+        return promocodeSet;
+    }
+
+    public void setPromocodeSet(Set<Promocode> promocodeSet) {
+        this.promocodeSet = promocodeSet;
     }
 
     public Long getId() {
@@ -95,13 +104,5 @@ public class Ticket {
 
     public void setEvent(Event event) {
         this.event = event;
-    }
-
-    public Consumer getConsumer() {
-        return consumer;
-    }
-
-    public void setConsumer(Consumer consumer) {
-        this.consumer = consumer;
     }
 }
