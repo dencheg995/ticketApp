@@ -1,11 +1,13 @@
 package com.ticket.app.module;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -22,6 +24,9 @@ public class Event {
     @NotNull
     private String name;
 
+    @Column(name = "club_name")
+    private String clubName;
+
     @Column(name = "event_address")
     @NotNull
     private String address;
@@ -29,6 +34,18 @@ public class Event {
     @Column(name = "event_pocket")
     @NotNull
     private BigInteger pocket;
+
+    @Column(name = "event_date")
+    private String date;
+
+    private String vkPostUrl;
+
+    private String closeVkRepost;
+
+    private Integer saleForVkPost;
+
+    @Column(name = "event_age_limit")
+    private Integer eventAgeLimit;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "event_ticket",
@@ -45,6 +62,56 @@ public class Event {
     private Client client;
 
     public Event() {
+    }
+
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCloseVkRepost() {
+        return closeVkRepost;
+    }
+
+    public void setCloseVkRepost(String closeVkRepost) {
+        this.closeVkRepost = closeVkRepost;
+    }
+
+    public String getVkPostUrl() {
+        return vkPostUrl;
+    }
+
+    public void setVkPostUrl(String vkPostUrl) {
+        this.vkPostUrl = vkPostUrl;
+    }
+
+
+
+    public Integer getSaleForVkPost() {
+        return saleForVkPost;
+    }
+
+    public void setSaleForVkPost(Integer saleForVkPost) {
+        this.saleForVkPost = saleForVkPost;
+    }
+
+    public Integer getEventAgeLimit() {
+        return eventAgeLimit;
+    }
+
+    public void setEventAgeLimit(Integer eventAgeLimit) {
+        this.eventAgeLimit = eventAgeLimit;
     }
 
     public Client getClient() {

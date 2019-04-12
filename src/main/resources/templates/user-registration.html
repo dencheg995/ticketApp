@@ -9,6 +9,36 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
+    <style>
+    .divider-text {
+        position: relative;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .divider-text span {
+        padding: 7px;
+        font-size: 12px;
+        position: relative;
+        z-index: 2;
+    }
+    .divider-text:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        top: 55%;
+        left: 0;
+        z-index: 1;
+    }
+
+
+    .btn-vk {
+        background-color: #172fec;
+        color: #fff;
+    }
+</style>
 </head>
 <body>
 <div id="content">
@@ -17,71 +47,105 @@
         <div id="place"></div>
     </div>
 </div>
-<div id="registPage">
-    <div class="registbar">
-        <div id="user-info-container" class="container-fluid">
-            <div class="row-fluid">
-                <div id="column1">
-                    <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
-                        <p><span id="message"></span></p>
-                        <div class="form-group topbar">
-                            <label for="add-user-first-name">Имя</label>
-                            <input class="form-control"
-                                   data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
-                                   pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
-                                   required="required"
-                                   id="add-user-first-name"/>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-user-last-name">Фамилия</label>
-                            <input class="form-control"
-                                   data-error="Фамилия должна начинаться с заглавной буквы, минимум из 2-х символов, можно использовать буквы, пробелы и дефис в составных фамилиях."
-                                   pattern="^[A-ZА-ЯЁ][a-zа-яё]+(?:[- ][A-ZА-ЯЁa-zа-яё]+)*$"
-                                   required="required"
-                                   id="add-user-last-name"/>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-user-password">Пароль</label>
-                            <input type="password"
-                                   class="form-control"
-                                   required="required"
-                                   id="add-user-password"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-user-phone-number">Номер телефона</label>
-                            <input type="tel"
-                                   class="form-control"
-                                   data-error='Введите телефон в допустимом формате (только цифры)'
-                                   required="required"
-                                   pattern="[0-9]*$"
-                                   id="add-user-phone-number" placeholder="89000000000"/>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-user-email">Email</label>
-                            <input type="email"
-                                   class="form-control"
-                                   data-error="Неверный формат Email"
-                                   required="required"
-                                   pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
-                                   id="add-user-email"/>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-primary" id="saveChanges" onclick="registerUser()">
-                                Сохранить
-                            </button>
-                            <a href="/login" class="btn btn-primary" id="backToMain">Назад</a>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-6"></div>
-            </div>
-        </div>
-    </div>
+
+
+<div class="container">
+
+
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Создать Аккаунт</h4>
+	<p>
+		<button onclick="vkLogin()" class="btn btn-block btn-vk"> <i class="fab fa-vk"></i>  Войти с помощью VK</button>
+	</p>
+	<p class="divider-text">
+        <span class="bg-light">Или</span>
+    </p>
+	<form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
+                            <p><span id="message"></span></p>
+                            <div class="form-group input-group">
+
+                            <div class="input-group-prepend">
+                            		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            		 </div>
+                                <input class="form-control"
+                                       data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
+                                       pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
+                                       required="required"
+                                       id="add-user-first-name" placeholder="Ваше имя"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                 </div>
+                                <input class="form-control input-group"
+                                       data-error="Фамилия должна начинаться с заглавной буквы, минимум из 2-х символов, можно использовать буквы, пробелы и дефис в составных фамилиях."
+                                       pattern="^[A-ZА-ЯЁ][a-zа-яё]+(?:[- ][A-ZА-ЯЁa-zа-яё]+)*$"
+                                       required="required"
+                                       id="add-user-last-name" placeholder="Ваша фамилия"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group input-group">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                </div>
+                                    <input type="email"
+                                           class="form-control"
+                                           data-error="Неверный формат Email"
+                                           required="required"
+                                           pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
+                                           id="add-user-email" placeholder="Email адрес"/>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                          <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                                </div>
+                                       <input type="tel"
+                                             class="form-control"
+                                             data-error='Введите телефон в допустимом формате (только цифры)'
+                                             required="required"
+                                             pattern="[0-9]*$"
+                                             id="add-user-phone-number" placeholder="89000000000"/>
+                                      <div class="help-block with-errors"></div>
+                                  </div>
+
+                            <div class="form-group input-group">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                            </div>
+                                <input type="password"
+                                       class="form-control"
+                                       required="required"
+                                       id="add-user-password"/>
+                            </div>
+
+
+                             <div class="form-group input-group">
+
+                               <div class="input-group-prepend">
+                                  <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                               </div>
+                                   <input type="password"
+                                          class="form-control"
+                                          required="required"
+                                          id="add-user-password"/>
+                               </div>
+
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary" id="saveChanges" onclick="registerUser()">
+                                    Сохранить
+                                </button>
+                                <a href="/login" class="btn btn-primary" id="backToMain">Назад</a>
+                            </div>
+                        </form>
+</article>
 </div>
+</div>
+
 <script type="text/javascript" th:src="@{/js/regist.js}"></script>
 <script th:src="@{/js/validator.min.js}"></script>
 </body>

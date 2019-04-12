@@ -7,6 +7,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.js"></script>
     <link rel="stylesheet" href="/css/style.css"/>
+
+
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="content">
@@ -15,23 +23,42 @@
         <div id="place"></div>
     </div>
 </div>
-<div id="registPage">
-    <div class="loginbar">
-        <div class="container">
-            <form class="form-signin" name='loginForm' action="/processing-url" method='POST'>
-                <input type="hidden"
-                       th:name="${_csrf.parameterName}"
-                       th:value="${_csrf.token}" />
-                <h4 class="form-signin-heading topbar">Пожалуйста, введите логин и пароль</h4>
-                <input class="form-control topbar" placeholder="Логин" type="text" name="username"/>
-                <input class="form-control topbar" placeholder="Пароль" type="password" name="password"/>
-                <br/>
-                <input class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Войти"/>
-                <a href="/register" class="btn btn-lg btn-primary btn-block" id="registerUser">Регистрация</a>
-            </form>
 
-        </div>
-    </div>
-</div>
+   <div id="login-overlay" class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Вход</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-xs-6">
+                      <div class="well">
+                          <form class="form-signin" name='loginForm' action="/processing-url" method='POST'>
+                           <input type="hidden"
+                                                 th:name="${_csrf.parameterName}"
+                                                 th:value="${_csrf.token}" />
+                              <div class="form-group">
+                                  <label for="username" class="control-label">Логин</label>
+                                  <input type="text" class="form-control" id="username" name="username"  title="Введите ваш логин" placeholder="example@gmail.com"/>
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="password" class="control-label">Пароль</label>
+                                  <input type="password" class="form-control" id="password" name="password"  title="Please enter your password"/>
+                                  <span class="help-block"></span>
+                              </div>
+                              <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                              <button type="submit" class="btn btn-success btn-block">Войти</button>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <p><a href="/register" class="btn btn-info btn-block">Регистрация!</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
 </body>
 </html>

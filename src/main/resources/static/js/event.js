@@ -105,7 +105,7 @@ function buyTicket(ticketId, ticketPrice, eventId) {
 
 function editEvent(eventId) {
 
-    if ($("#editButton" + eventId).text() === "Редактировать билет") {
+    if ($("#editButton" + eventId).text() === "Редактировать мероприятие") {
         $("#eventName" + eventId).removeAttr('disabled');
         $("#eventAddress" + eventId).removeAttr('disabled');
         $("#eventPocket" + eventId).removeAttr('disabled');
@@ -113,10 +113,10 @@ function editEvent(eventId) {
     } else if ($("#editButton" + eventId).text() === "Сохранить") {
 
         var formData = {
-            ticketId: eventId,
-            ticketType: $("#eventName" + eventId).val(),
-            ticketCount: $("#eventAddress" + eventId).val(),
-            ticketPrice: $("#eventPocket" + eventId).val()
+            eventId: eventId,
+            eventName: $("#eventName" + eventId).val(),
+            eventAddress: $("#eventAddress" + eventId).val(),
+            eventPocket: $("#eventPocket" + eventId).val()
         };
         var url = "/edit/event"
         $.ajax({
@@ -142,3 +142,90 @@ function removeEvent(eventId) {
         }
     });
 }
+
+
+function addEvent() {
+
+    var formData = {
+        name: $("#name").val(),
+        clubName: $("#clubName").val(),
+        address: $("#address").val(),
+        pocket: $("#pocket").val(),
+        date: $("#date").val(),
+        vkPostUrl: $("#postVk").val(),
+        closeVkRepost: $("#timePostVk").val(),
+        saleForVkPost: $("#salePostVk").val(),
+        eventAgeLimit: $("#age-limit").val()
+    };
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/add/event",
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        success: function () {
+            window.open("/lk",  '_self');
+            console.log("Success");
+        },
+        error: function (e) {
+            alert("Неверный формат данных!");
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
+$(document).ready(function () {
+    let startDate = moment(new Date()).utcOffset(180); //устанавливаем минимальную дату и время по МСК (UTC + 3 часа )
+    $('#date').daterangepicker({
+        "singleDatePicker": true, //отключаем выбор диапазона дат (range)
+        "showWeekNumbers": false,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerIncrement": 10,
+        "locale": {
+            "format": "DD.MM.YYYY HH:mm МСК",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+            "monthNames": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "firstDay": 0
+        },
+        "linkedCalendars": false,
+        "startDate": startDate,
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
+            end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+
+
+    $('#timePostVk').daterangepicker({
+        "singleDatePicker": true, //отключаем выбор диапазона дат (range)
+        "showWeekNumbers": false,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerIncrement": 10,
+        "locale": {
+            "format": "DD.MM.YYYY HH:mm МСК",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+            "monthNames": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "firstDay": 0
+        },
+        "linkedCalendars": false,
+        "startDate": startDate,
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
+            end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+});

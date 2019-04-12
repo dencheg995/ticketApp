@@ -42,17 +42,6 @@ public class LKController {
         this.clientService = clientService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-    @RequestMapping("/add/event")
-    public ResponseEntity registEvent(@Valid @RequestBody Event event,
-                                      @AuthenticationPrincipal Client clientSession){
-        List<Event> events = eventService.getEventByClientId(clientSession.getId());
-        events.add(event);
-        clientSession.setEvents(events);
-        clientService.updateClient(clientSession);
-        logger.info("{} has register event: email {}", event.getName());
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping("/add/ticket")
