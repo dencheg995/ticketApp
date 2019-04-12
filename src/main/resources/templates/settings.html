@@ -18,6 +18,37 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/assets/demo/demo.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <style>
+        .showPass {
+            position:absolute;
+            right: 0px;
+            top: 4px;
+            border:none;
+            height:20px;
+            width:20px;
+            border-radius:100%;
+            outline:none;
+            text-align:center;
+            font-weight:bold;
+            padding:2px;
+        }
+
+        .buttonInside{
+            position:relative;
+            margin-bottom:10px;
+        }
+
+        .inputStyle {
+            height:25px;
+            width:100%;
+            padding-left:10px;
+            border-radius: 4px;
+            border:none;outline:none;
+        }
+    </style>
 </head>
 <body class="">
     <div class="wrapper">
@@ -32,7 +63,7 @@
                                 <h5 class="title">Профиль</h5>
                             </div>
                             <div class="card-body">
-                                <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
+                                <form id="column1" data-toggle="validator" role="form" onsubmit="return false;">
                                     <div class="row">
                                         <div class="col-md-6 pr-md-1">
                                             <div class="form-group">
@@ -44,9 +75,17 @@
                                         <div class="col-md-6 pl-md-1">
                                             <div class="form-group">
                                                 <div class="form-group">
-                                                    <label for="edit-user-password">Пароль</label>
-                                                    <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.getPassword()}"/>
+                                                    <!--<label for="edit-user-password">Пароль</label>-->
+                                                    <!--<input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.getPassword()}"/>-->
+                                                    <!--<button class = "showPass">k</button>-->
+                                                    <div class="buttonInside">
+                                                        <label for="edit-user-password">Пароль</label>
+                                                        <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.getPassword()}"/>
+                                                        <button class="showPass" id="showPassword"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                    </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +112,7 @@
                                         </div>
                                     </div>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-primary" id="editUser" onclick="reventButton()">Редактировать</button>
+                                        <button type="button" class="btn btn-primary" id="editUser">Редактировать</button>
                                         <button type="submit" class="btn btn-primary" id="saveChanges" th:onclick="'changeUser(' + ${user.id} + ')'">Сохранить</button>
                                     </div>
                                     <p><span id = "message"></span></p>
