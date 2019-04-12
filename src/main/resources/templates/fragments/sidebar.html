@@ -5,22 +5,43 @@
 </head>
 <body>
 <th:block th:fragment="sidebar">
-    <div class="card">
-        <div class="card-body">
-            <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action" href="/lk">
-                    <h6>Мои мероприятия</h6>
-                </a>
-                <a class="list-group-item list-group-item-action" href="/event/create">
-                    <h6>Новое мероприятие</h6>
-                </a>
-                <a class="list-group-item list-group-item-action" href="/stats">
-                    <h6>Статистика</h6>
-                </a>
-                <a class="list-group-item list-group-item-action" href="/edit/user">
-                    <h6>Настройки</h6>
-                </a>
-            </div>
+    <div class="sidebar">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+      -->
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a href="/stats">
+                        <i class="tim-icons icon-chart-pie-36"></i>
+                        <p>Статистика</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/lk">
+                        <i class="tim-icons icon-puzzle-10"></i>
+                        <p>Список мероприятий</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/event/create">
+                        <i class="tim-icons icon-align-center"></i>
+                        <p>Новое мероприятие</p>
+                    </a>
+                </li>
+                <li class="active ">
+                    <a href="/edit/user">
+                        <i class="tim-icons icon-single-02"></i>
+                        <p>Настройки профиля</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/edit/user">
+                        <i class="tim-icons icon-atom"></i>
+                        <p>Настройки мероприятия</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </th:block>
