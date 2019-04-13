@@ -114,11 +114,11 @@
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
             <version>${thymeleaf.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring4</artifactId>
-            <version>${thymeleaf.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.thymeleaf</groupId>-->
+            <!--<artifactId>thymeleaf-spring4</artifactId>-->
+            <!--<version>${thymeleaf.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.github.scribejava</groupId>
