@@ -2,6 +2,7 @@ package com.ticket.app.module;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "promo")
@@ -14,14 +15,19 @@ public class Promocode {
 
 
     @Column(name = "promocode")
-    private String promocode;
+    @ElementCollection
+    private List<String> promocode;
 
-    @Column(name = "date_realized")
-    private String date;
+    @Column(name = "date_start")
+    private String dateStart;
+
+    @Column(name = "date_end")
+    private String dateEnd;
 
     @Column(name = "sale")
     private String sale;
 
+    private Integer count;
 
     @ManyToOne
     @JoinTable(name = "ticket_promo",
@@ -37,11 +43,11 @@ public class Promocode {
         this.id = id;
     }
 
-    public String getPromocode() {
+    public List<String> getPromocode() {
         return promocode;
     }
 
-    public void setPromocode(String promocode) {
+    public void setPromocode(List<String> promocode) {
         this.promocode = promocode;
     }
 
@@ -53,12 +59,20 @@ public class Promocode {
         this.ticket = ticket;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateStart() {
+        return dateStart;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public String getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public String getSale() {
@@ -67,5 +81,13 @@ public class Promocode {
 
     public void setSale(String sale) {
         this.sale = sale;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

@@ -52,7 +52,7 @@
                                     <span th:text="${ticket.getTicketType()}"></span>
                                     <p></p>
                                     <span>Цена: </span>
-                                    <span id = "ticketPrice" th:text="${ticket.getTicketPrice()}"></span>
+                                    <span th:text="${ticket.getTicketPrice()}"></span>
                                     <p></p>
                                     <span>Кол-во билетов</span>
                                     <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>
