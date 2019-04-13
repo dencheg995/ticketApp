@@ -2,7 +2,6 @@ package com.ticket.app.controllers;
 
 import com.ticket.app.module.Purchase;
 import com.ticket.app.service.interfaces.PurchaseService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

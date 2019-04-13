@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png"/>
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/bulb-lit.png"/>
+    <link rel="icon" type="image/png" href="/assets/img/ticket.png"/>
     <title>
         Настройки профиля
     </title>
@@ -21,34 +21,6 @@
 
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-    <style>
-        .showPass {
-            position:absolute;
-            right: 0px;
-            top: 4px;
-            border:none;
-            height:20px;
-            width:20px;
-            border-radius:100%;
-            outline:none;
-            text-align:center;
-            font-weight:bold;
-            padding:2px;
-        }
-
-        .buttonInside{
-            position:relative;
-            margin-bottom:10px;
-        }
-
-        .inputStyle {
-            height:25px;
-            width:100%;
-            padding-left:10px;
-            border-radius: 4px;
-            border:none;outline:none;
-        }
-    </style>
 </head>
 <body class="">
     <div class="wrapper">
@@ -57,7 +29,7 @@
             <div th:replace="fragments/navbar::navbar"></div>
             <div class="content">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="title">Профиль</h5>
@@ -75,17 +47,12 @@
                                         <div class="col-md-6 pl-md-1">
                                             <div class="form-group">
                                                 <div class="form-group">
-                                                    <!--<label for="edit-user-password">Пароль</label>-->
-                                                    <!--<input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.getPassword()}"/>-->
-                                                    <!--<button class = "showPass">k</button>-->
                                                     <div class="buttonInside">
                                                         <label for="edit-user-password">Пароль</label>
-                                                        <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.getPassword()}"/>
+                                                        <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.password}"/>
                                                         <button class="showPass" id="showPassword"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -111,34 +78,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary" id="editUser">Редактировать</button>
-                                        <button type="submit" class="btn btn-primary" id="saveChanges" th:onclick="'changeUser(' + ${user.id} + ')'">Сохранить</button>
+                                    <div class="row">
+                                        <div class="form-group" style="margin-left: 17px">
+                                            <button type="button" class="btn btn-primary" id="editUser">Редактировать</button>
+                                            <button type="submit" class="btn btn-primary" id="saveChanges" th:onclick="'changeUser(' + ${user.id} + ')'">Сохранить</button>
+                                        </div>
                                     </div>
                                     <p><span id = "message"></span></p>
                                     <input type="checkbox" checked="checked" class="form-control"  style="display:none"    id="edit-user-isVerified"/>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-user">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <div class="author">
-                                        <div class="block block-one"></div>
-                                        <div class="block block-two"></div>
-                                        <div class="block block-three"></div>
-                                        <div class="block block-four"></div>
-                                        <a href="javascript:void(0)">
-                                            <img class="avatar" src="/assets/img/emilyz.jpg" alt="..."/>
-                                            <h5 class="title">Mike Andrew</h5>
-                                        </a>
-                                    </div>
-                                </p>
-                                <p class="description">
-                                    Ceo/Co-Founder
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -160,7 +108,6 @@
                             <span class="badge filter badge-info" data-color="blue"></span>
                             <span class="badge filter badge-success" data-color="green"></span>
                         </div>
-                        <div class="clearfix"></div>
                     </a>
                 </li>
                 <li class="adjustments-line text-center color-change">
@@ -172,8 +119,11 @@
             </ul>
         </div>
     </div>
+<script type="text/javascript" th:src="@{/js/animation.js}"></script>
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script type="text/javascript" th:src="@{/js/lk.js}"></script>
+<script type="text/javascript" th:src="@{/js/regist.js}"></script>
 <script type="text/javascript" th:src="@{/js/user-edit.js}"></script>
-<script th:src="@{/js/animation.js}"></script>
 <script th:src="@{/js/validator.min.js}"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script

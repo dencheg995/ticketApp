@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png"/>
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/bulb-lit.png"/>
+    <link rel="icon" type="image/png" href="/assets/img/ticket.png"/>
     <title>
 
     </title>
@@ -30,8 +30,38 @@
     </div>
 </div>
 
-
-<script th:src="@{/js/animation.js}"></script>
+<div class="fixed-plugin">
+        <div class="dropdown show-dropdown">
+            <a href="#" data-toggle="dropdown">
+                <i class="fa fa-cog fa-2x"> </i>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="header-title"> Sidebar Background</li>
+                <li class="adjustments-line">
+                    <a href="javascript:void(0)" class="switch-trigger background-color">
+                        <div class="badge-colors text-center">
+                            <span class="badge filter badge-primary active" data-color="primary"></span>
+                            <span class="badge filter badge-info" data-color="blue"></span>
+                            <span class="badge filter badge-success" data-color="green"></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+                <li class="adjustments-line text-center color-change">
+                    <span class="color-label">LIGHT MODE</span>
+                    <span class="badge light-badge mr-2"></span>
+                    <span class="badge dark-badge ml-2"></span>
+                    <span class="color-label">DARK MODE</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+<script type="text/javascript" th:src="@{/js/animation.js}"></script>
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script type="text/javascript" th:src="@{/js/lk.js}"></script>
+<script type="text/javascript" th:src="@{/js/regist.js}"></script>
+<script type="text/javascript" th:src="@{/js/user-edit.js}"></script>
+<script th:src="@{/js/validator.min.js}"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script
         src="https://code.jquery.com/jquery-3.3.1.js"

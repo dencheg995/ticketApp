@@ -53,7 +53,3 @@ $("#showPassword").click(function(){
 });
 
 
-$(document).ready(function () {
-    $('#user-form').validator()
-});
-

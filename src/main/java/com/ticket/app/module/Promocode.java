@@ -16,6 +16,12 @@ public class Promocode {
     @Column(name = "promocode")
     private String promocode;
 
+    @Column(name = "date_realized")
+    private String date;
+
+    @Column(name = "sale")
+    private String sale;
+
 
     @ManyToOne
     @JoinTable(name = "ticket_promo",
@@ -45,5 +51,21 @@ public class Promocode {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getSale() {
+        return sale;
+    }
+
+    public void setSale(String sale) {
+        this.sale = sale;
     }
 }
