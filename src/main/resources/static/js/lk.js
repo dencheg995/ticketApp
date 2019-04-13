@@ -9,17 +9,15 @@
 //     });
 // }
 
-function openTicketPage() {
-    var eventId = $("#eventName").val();
+function openTicketPage(eventId) {
     if (eventId != null && eventId != "") {
         var url = '/tickets/new/?eventId=' + eventId
         window.open(url, '_self');
     }
 }
 
-function openEventPage() {
+function openEventPage(eventId) {
 
-    var eventId = $("#eventName").val()
     if (eventId != null && eventId != "") {
         var url = '/event/new/?eventId=' + eventId
         window.open(url, '_self');

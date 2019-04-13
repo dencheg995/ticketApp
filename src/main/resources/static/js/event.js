@@ -34,13 +34,6 @@ function putTicket(eventId) {
 
 function editTicket(ticketId) {
 
-    if ($("#editButton" + ticketId).text() === "Редактировать билет") {
-        $("#ticketType" + ticketId).removeAttr('disabled');
-        $("#ticketPrice" + ticketId).removeAttr('disabled');
-        $("#ticketCount" + ticketId).removeAttr('disabled');
-        $("#editButton" + ticketId).html('Сохранить');
-    } else if ($("#editButton" + ticketId).text() === "Сохранить") {
-
         var formData = {
             ticketId: ticketId,
             ticketType: $("#ticketType" + ticketId).val(),
@@ -57,8 +50,15 @@ function editTicket(ticketId) {
                 location.reload()
             }
         });
-    }
 }
+
+function openTicketInput(ticketId) {
+    if ($("#ticketType" + ticketId).prop('disabled') === true)
+    $("#ticketType" + ticketId).removeAttr('disabled');
+    $("#ticketPrice" + ticketId).removeAttr('disabled');
+    $("#ticketCount" + ticketId).removeAttr('disabled');
+}
+
 
 function removeTicket(ticketId) {
     $.ajax({

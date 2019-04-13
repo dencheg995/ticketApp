@@ -29,20 +29,38 @@
                     <div class="col-md-12">
                         <div class="card ">
                             <div class="card-header">
-                                <h4 class="card-title">Список мероприятий</h4>
+                                <h4 class="title">Список мероприятий</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table tablesorter " id="">
-                                        <thead class=" text-primary">
+                                    <table class="table tablesorter" id="">
+                                        <thead class="text-primary">
                                             <tr>
-                                                <th>Название</th>
-                                                <th>Место</th>
+                                                <th >Название</th>
+                                                <th>Адрес</th>
+                                                <th></th>
                                                 <th>Дата</th>
-                                                <th class="text-center"> </th>
-                                                <th class="text-center"> </th>
+                                                <th class="text-center"></th>
+                                                <th class="text-center"></th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <div th:each="event : ${clientEvents}">
+                                                <tr>
+                                                    <tr>
+                                                        <td rowspan="2" th:text="${event.name}"></td>
+                                                        <td th:text="${event.clubName}"></td>
+                                                        <td rowspan="2"></td>
+                                                        <td rowspan="2" th:text="${event.date}"></td>
+                                                        <td rowspan="2"><a th:onclick="'openTicketPage('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-notes"></i></a></td>
+                                                        <td rowspan="2"><a th:onclick="'openEventPage('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td th:text="${event.address}"></td>
+                                                    </tr>
+                                                </tr>
+                                            </div>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
