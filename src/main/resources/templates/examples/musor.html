@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Личный кабинет</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="content">
+    <div class="header">
+        <div id="event"></div>
+        <div id="place"></div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-md-3">
+            <div th:replace="fragments/sidebar::sidebar"></div>
+        </div>
+        <div class="col col-md-9">
+            <div class="tab-pane fade show active" id="list-event" role="tabpanel" aria-labelledby="list-home-event">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs pull-xs-left">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <h6>Список мероприятий</h6>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-toggle="modal" data-target="#eventModal">
+                                    <h6>Новое мероприятие</h6>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <h5 class="card-title" style="margin-left: 10px">События</h5>
+                                <div th:each="clientEventsInfo : ${clientEvents}">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="card" style="margin-top: 10px">
+                                                <div class="card-title">
+                                                    <h6 style="margin-top: 10px;margin-left: 20px;" th:text = "'Билеты для: ' + ${clientEventsInfo.getName()}"></h6>
+                                                </div>
+                                                <div>
+                                                    <!--<button th:onclick="'createTickets('+ ${clientEventsInfo.id} +')'">Добавить билет</button>-->
+                                                    <a class="btn btn-primary" style="margin-left: 20px" role="button" th:href="'/tickets/new/' + ${clientEventsInfo.getId()}">Добавить билет</a>
+                                                </div>
+                                                <br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="eventModalLabel">Новое мероприятие</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    x
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">название: </label>
+                    <input id="name" class="form-control" name="name" type="text" placeholder="Polyland"
+                           data-error="Название должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
+                           pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
+                           required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="address">адрес: </label>
+                    <input id="address" class="form-control" name="address" type="text" placeholder="Saint-Petersburg, Nevsky prospect, 1"/>
+                </div>
+                <div class="form-group">
+                    <label for="pocket">кошелек: </label>
+                    <input id="pocket" class="form-control" name="pocket" type="number" placeholder="4100175017397"
+                           data-error='Введите номер кошелька в допустимом формате (только цифры)'
+                           required="required" th:min="10000000000" th:max="999999999999999999999999999999999"/>
+                </div>
+                <div class="modalfooter">
+                    <button class="button btn-primary" onclick="addEvent()">Добавить мероприятие</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/lk.js}"></script>
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
