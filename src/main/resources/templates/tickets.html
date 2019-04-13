@@ -28,20 +28,21 @@
             <div class="card card-plain">
                 <div th:each="event :${event}">
                     <div class="card-header">
-                        <h4 class="title" th:text="'Билеты для: ' + ${event.getName()}"></h4>
+                        <h4 class="title" style="font-weight: bold" th:text="'Билеты для: ' + ${event.getName()}"></h4>
                     </div>
                     <div class="card-body">
+                        <a th:onclick="'putTicket('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-simple-add"></i></a>
                         <div class="table-responsive">
                             <table class="table tablesorter" id="">
                                 <tr>
                                     <th:block th:each="ticket : ${event.getTicketList()}">
                                         <td>
                                             <div id = "editTicket" class="card card-plain" style="width: 200px">
-                                                <label style="margin-top: 10px" th:for="'ticketType' + ${ticket.id}">Тип билета(Вип, танцпол)</label>
+                                                <label style="margin-top: 10px; font-weight: bold" th:for="'ticketType' + ${ticket.id}">Тип билета(Вип, танцпол)</label>
                                                 <input th:id = "'ticketType' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketType()}" disabled = 'disabled'/>
-                                                <label style="margin-top: 10px" th:for="'ticketPrice' + ${ticket.id}">Цена билета</label>
+                                                <label style="margin-top: 10px; font-weight: bold" th:for="'ticketPrice' + ${ticket.id}">Цена билета</label>
                                                 <input th:id = "'ticketPrice' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketPrice()}" disabled = 'disabled'/>
-                                                <label style="margin-top: 10px" th:for="'ticketCount' + ${ticket.id}">Количество билетов</label>
+                                                <label style="margin-top: 10px; font-weight: bold" th:for="'ticketCount' + ${ticket.id}">Количество билетов</label>
                                                 <input th:id = "'ticketCount' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketCount()}" disabled = 'disabled'/>
                                                 <div class="row" style="margin-top: 5px">
                                                     <div class="col-2">
@@ -53,7 +54,6 @@
                                                     <div class="col-2">
                                                         <a th:id="'removeButton' + ${ticket.id}" th:onclick="'removeTicket('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-trash-simple"></i></a>
                                                     </div>
-                                                    <div class="col"><button class="btn btn-primary" style="margin-top: 10px; margin-left: 15px" th:onclick="'putTicket('+ ${event.id} +')'">Добавить Билет</button></div>
                                                 </div>
                                             </div>
                                         </td>
