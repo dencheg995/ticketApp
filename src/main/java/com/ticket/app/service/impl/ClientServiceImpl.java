@@ -4,7 +4,9 @@ package com.ticket.app.service.impl;
 import com.ticket.app.exeptions.user.UserExistsException;
 import com.ticket.app.module.Client;
 import com.ticket.app.module.POJOUser;
+import com.ticket.app.module.Role;
 import com.ticket.app.repository.ClientRepository;
+import com.ticket.app.repository.RoleRepository;
 import com.ticket.app.service.interfaces.ClientService;
 
 import org.slf4j.Logger;
@@ -22,15 +24,26 @@ public class ClientServiceImpl implements ClientService {
     private static Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
     private final ClientRepository clientRepository;
 
+    private final RoleRepository roleRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, RoleRepository roleRepository) {
         this.clientRepository = clientRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public Client addClient(Client user) {
+        if (roleRepository.findAll() == null) {
+            Role roleAdmin = new Role();
+            roleAdmin.setRoleName("ADMIN");
+            Role roleUser = new Role();
+            roleUser.setRoleName("USER");
+            roleRepository.saveAndFlush(roleAdmin);
+            roleRepository.saveAndFlush(roleUser);
+        }
         logger.info("{}: adding of a new user...", ClientServiceImpl.class.getName());
         phoneNumberValidation(user);
         if (clientRepository.getClientByEmail(user.getEmail()) != null) {
