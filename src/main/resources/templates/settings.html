@@ -40,7 +40,7 @@
                                         <div class="col-md-6 pr-md-1">
                                             <div class="form-group">
                                                 <label for="edit-user-email">Email</label>
-                                                <input type="email" data-error="Неверный формат Email" class="form-control" required = "required" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$" disabled="disabled" id="edit-user-email" th:value="${user.getEmail()}"/>
+                                                <input type="email" data-error="Неверный формат Email" class="form-control" required = "required" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$" disabled="disabled" id="edit-user-email" th:value="${user.get().getEmail()}"/>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
@@ -49,7 +49,7 @@
                                                 <div class="form-group">
                                                     <div class="buttonInside">
                                                         <label for="edit-user-password">Пароль</label>
-                                                        <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.password}"/>
+                                                        <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.get().password}"/>
                                                         <button class="showPass" id="showPassword"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                                     </div>
                                                 </div>
@@ -60,28 +60,28 @@
                                         <div class="col-md-4 pr-md-1">
                                             <div class="form-group">
                                                 <label for="edit-user-first-name">Имя</label>
-                                                <input class="form-control" data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$" required="required" disabled="disabled" id="edit-user-first-name" th:value="${user.getFirstName()}"/>
+                                                <input class="form-control" data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$" required="required" disabled="disabled" id="edit-user-first-name" th:value="${user.get().getFirstName()}"/>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-4 px-md-1">
                                             <div class="form-group">
                                                 <label for="edit-user-last-name">Фамилия</label>
-                                                <input class="form-control" data-error="Фамилия должна начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$"  required="required" id="edit-user-last-name" disabled="disabled" th:value="${user.getLastName()}"/>
+                                                <input class="form-control" data-error="Фамилия должна начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$"  required="required" id="edit-user-last-name" disabled="disabled" th:value="${user.get().getLastName()}"/>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-4 pl-md-1">
                                             <div class="form-group">
                                                 <label for="edit-user-phone-number">Номер телефона</label>
-                                                <input type="tel" class="form-control" required="required" disabled="disabled" id="edit-user-phone-number" th:value="${user.getPhoneNumber()}"/>
+                                                <input type="tel" class="form-control" required="required" disabled="disabled" id="edit-user-phone-number" th:value="${user.get().getPhoneNumber()}"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group" style="margin-left: 17px">
                                             <button type="button" class="btn btn-primary" id="editUser">Редактировать</button>
-                                            <button type="submit" class="btn btn-primary" id="saveChanges" th:onclick="'changeUser(' + ${user.id} + ')'">Сохранить</button>
+                                            <button type="submit" class="btn btn-primary" id="saveChanges" th:onclick="'changeUser(' + ${user.get().id} + ')'">Сохранить</button>
                                         </div>
                                     </div>
                                     <p><span id = "message"></span></p>

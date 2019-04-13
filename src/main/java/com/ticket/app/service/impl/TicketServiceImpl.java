@@ -7,6 +7,7 @@ import com.ticket.app.service.interfaces.TicketService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -23,8 +24,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getTicketsByEventId(Long eventId) {
-        return ticketRepository.getTicketsByEventId(eventId);
+    public Optional<List<Ticket>> getTicketsByEventId(Long eventId) {
+        return Optional.ofNullable(ticketRepository.getTicketsByEventId(eventId));
     }
 
 

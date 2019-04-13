@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class EventSettingController {
@@ -76,9 +77,9 @@ public class EventSettingController {
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event,
                                       @AuthenticationPrincipal Client clientSession){
-        List<Event> events = eventService.getEventByClientId(clientSession.getId());
-        events.add(event);
-        clientSession.setEvents(events);
+        Optional<List<Event>> events = eventService.getEventByClientId(clientSession.getId());
+        events.get().add(event);
+        clientSession.setEvents(events.get());
         clientService.updateClient(clientSession);
         logger.info("{} has register event ", event.getName());
         return ResponseEntity.ok(HttpStatus.OK);

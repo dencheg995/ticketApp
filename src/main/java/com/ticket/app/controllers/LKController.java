@@ -58,7 +58,7 @@ public class LKController {
     @GetMapping
     public ModelAndView lkPage(@AuthenticationPrincipal Client clientSession) {
         ModelAndView modelAndView = new ModelAndView("lk");
-        modelAndView.addObject("clientEvents", clientSession.getEvents());
+        modelAndView.addObject("clientEvents", eventService.getAll());
         return modelAndView;
     }
 }

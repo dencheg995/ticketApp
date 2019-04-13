@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -46,13 +47,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getEventByTicketId(Long id) {
-        return eventRepository.getEventByTicketListId(id);
+    public Optional<Event> getEventByTicketId(Long id) {
+        return Optional.ofNullable(eventRepository.getEventByTicketListId(id));
     }
 
     @Override
-    public List<Event> getEventByClientId(Long clientId) {
-        return eventRepository.getEventByClientId(clientId);
+    public Optional<List<Event>> getEventByClientId(Long clientId) {
+        return Optional.ofNullable(eventRepository.getEventByClientId(clientId));
     }
 
     @Override
@@ -62,6 +63,11 @@ public class EventServiceImpl implements EventService {
         } else {
             throw new EventException();
         }
+    }
+
+    @Override
+    public List<Event> getAll() {
+        return eventRepository.findAll();
     }
 
 }

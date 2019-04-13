@@ -4,6 +4,7 @@ package com.ticket.app.service.interfaces;
 import com.ticket.app.module.Event;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EventService {
     Event registEvent(Event event);
@@ -12,9 +13,11 @@ public interface EventService {
 
     Event updateEvent(Event event);
 
-    Event getEventByTicketId(Long id);
+    Optional<Event> getEventByTicketId(Long id);
 
-    List<Event> getEventByClientId(Long clientId);
+    Optional<List<Event>> getEventByClientId(Long clientId);
 
     void removeEvent(Long id);
+
+    List<Event> getAll();
 }

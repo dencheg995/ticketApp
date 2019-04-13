@@ -3,11 +3,12 @@ package com.ticket.app.service.interfaces;
 import com.ticket.app.module.Ticket;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TicketService {
     Ticket addTicket(Ticket ticket);
 
-    List<Ticket> getTicketsByEventId(Long eventId);
+    Optional<List<Ticket>> getTicketsByEventId(Long eventId);
 
     Ticket getTicket(Long id);
 

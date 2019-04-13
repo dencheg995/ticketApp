@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TicketController {
@@ -40,10 +41,10 @@ public class TicketController {
         ticket.setTicketType("");
         ticket.setTicketCount(0);
         ticket.setTicketPrice(0);
-        List<Ticket> tickets = ticketService.getTicketsByEventId(eventId);
-        tickets.add(ticket);
+        Optional<List<Ticket>> tickets = ticketService.getTicketsByEventId(eventId);
+        tickets.get().add(ticket);
         Event event = eventService.getEvent(eventId);
-        event.setTicketList(tickets);
+        event.setTicketList(tickets.get());
         eventService.updateEvent(event);
         return ResponseEntity.ok(ticket);
     }

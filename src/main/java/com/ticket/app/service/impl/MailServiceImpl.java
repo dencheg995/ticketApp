@@ -27,7 +27,6 @@ public class MailServiceImpl implements MailService {
         this.javaMailSender = javaMailSender;
     }
 
-
     public boolean sendingMailingsEmails(Purchase purchase) {
         boolean result = false;
         StringBuilder br = new StringBuilder();

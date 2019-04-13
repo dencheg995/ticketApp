@@ -19,7 +19,7 @@ public class ClientRestController {
 
     @GetMapping("/get/event/client")
     public ResponseEntity<Client> getEventClient(@RequestParam(value = "eventId") Long eventId) {
-        System.out.println(clientService.getClientByEventId(eventId).getEmail());
-        return ResponseEntity.ok(clientService.getClientByEventId(eventId));
+        System.out.println(clientService.getClientByEventId(eventId).get().getEmail());
+        return ResponseEntity.ok(clientService.getClientByEventId(eventId).get());
     }
 }

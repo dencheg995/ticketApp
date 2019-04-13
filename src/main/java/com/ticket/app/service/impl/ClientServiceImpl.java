@@ -6,12 +6,13 @@ import com.ticket.app.module.Client;
 import com.ticket.app.module.POJOUser;
 import com.ticket.app.repository.ClientRepository;
 import com.ticket.app.service.interfaces.ClientService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,6 +45,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client edit(POJOUser client) {
+        logger.info("{}: updating of a user...", ClientServiceImpl.class.getName());
         Client currentClient = clientRepository.getOne(client.getId());
         currentClient.setFirstName(client.getFirstName());
         currentClient.setLastName(client.getLastName());
@@ -57,8 +59,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client getByEmailOrPhone(String email, String phone) {
-        return clientRepository.getClientByEmailOrPhoneNumber(email, phone);
+    public Optional<Client> getByEmailOrPhone(String email, String phone) {
+        return Optional.ofNullable(clientRepository.getClientByEmailOrPhoneNumber(email, phone));
     }
 
     @Override
@@ -67,13 +69,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client getClientByEventId(Long id) {
-        return clientRepository.getClientByEventId(id);
+    public Optional<Client> getClientByEventId(Long id) {
+        return Optional.ofNullable(clientRepository.getClientByEventId(id));
     }
 
     @Override
-    public Client getClientById(Long id) {
-        return clientRepository.getOne(id);
+    public Optional<Client> getClientById(Long id) {
+        return Optional.ofNullable(clientRepository.getOne(id));
     }
 
     private void phoneNumberValidation(Client client) {
