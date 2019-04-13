@@ -33,8 +33,8 @@ public class MailServiceImpl implements MailService {
         StringBuilder br = new StringBuilder();
         br.append("Поздравляем вас с покупкой билетов на мероприятие ").append("\n")
                 .append(purchase.getTicket().getEvent().getName()).append("\n").append("Номер заказа: ")
-                .append(purchase.getTicket().getEvent().getId()).append("\n\n").append("Дата и время :").append(purchase.getTicket().getEvent().getId()).append("\n")
-                .append("Место проведени: ").append(purchase.getTicket().getEvent()).append("\n")
+                .append(purchase.getTicket().getEvent().getId()).append("\n\n").append("Дата и время :").append(purchase.getTicket().getEvent().getDate()).append("\n")
+                .append("Место проведения: ").append(purchase.getTicket().getEvent().getClubName()).append("\n")
                 .append("По адресу: ").append(purchase.getTicket().getEvent().getAddress()).append("\n\n")
                 .append("Электронные билеты прикреплены к этому сообщению . ").append(
                         "Копия этого письма уже ждет вас на почте .").append(
@@ -49,7 +49,7 @@ public class MailServiceImpl implements MailService {
             mimeMessageHelper.setTo(purchase.getConsumer().getEmail());
             mimeMessageHelper.setSubject("Билеты на " + purchase.getTicket().getEvent().getName());
             mimeMessageHelper.setText(br.toString());
-            File file = new File("./image.png");
+            File file = new File("./tickets/purchase_".concat(purchase.getId().toString()).concat(".png"));
             if (file.exists()) {
                 InputStreamSource inputStreamSource = new FileSystemResource(file);
                 mimeMessageHelper.addInline("image", inputStreamSource, "image/jpeg");
