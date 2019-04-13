@@ -55,7 +55,7 @@
                                                         <a th:id="'removeButton' + ${ticket.id}" th:onclick="'removeTicket('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-trash-simple"></i></a>
                                                     </div>
                                                     <div class="col-2">
-                                                        <a th:id="'addPromo' + ${ticket.id}" th:onclick="'addPromo('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-link-72"></i></a>
+                                                        <a data-toggle="modal" data-target="#addPromoModal"><i class="tim-icons tim-icons-32 icon-link-72"></i></a>
                                                     </div>
                                                     <div class="col-2">
                                                         <a th:id="'listPromo' + ${ticket.id}" th:onclick="'listPromo('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-paper"></i></a>
@@ -75,7 +75,44 @@
 </div>
 
 
-
+<div class="modal fade" id="addPromoModal" tabindex="-1" role="dialog" aria-labelledby="addPromoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addPromoModalLabel">Добавление промокода</h4>
+            </div>
+            <div class="modal-body">
+                <div class="card card-plain">
+                    <div class="card-body">
+                         <div class="row">
+                             <div class="col-md-4 pr-md-1">
+                                <div class="form-group">
+                                    <label>Скидка для промокодов</label>
+                                    <input type="number" th:min="0" class="form-control" placeholder="0">
+                                </div>
+                             </div>
+                             <div class="col-md-4 px-md-1">
+                                <div class="form-group">
+                                    <label>Дата начала</label>
+                                    <input type="text" class="form-control" placeholder="Country" value="Andrew">
+                                </div>
+                             </div>
+                             <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="number" class="form-control" placeholder="ZIP Code">
+                                </div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="fixed-plugin">
         <div class="dropdown show-dropdown">
