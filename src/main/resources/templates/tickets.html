@@ -41,9 +41,9 @@
                                                 <label style="margin-top: 10px; font-weight: bold" th:for="'ticketType' + ${ticket.id}">Тип билета(Вип, танцпол)</label>
                                                 <input th:id = "'ticketType' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketType()}" disabled = 'disabled'/>
                                                 <label style="margin-top: 10px; font-weight: bold" th:for="'ticketPrice' + ${ticket.id}">Цена билета</label>
-                                                <input th:id = "'ticketPrice' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketPrice()}" disabled = 'disabled'/>
+                                                <input th:id = "'ticketPrice' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketPrice()}" th:min="1" disabled = 'disabled'/>
                                                 <label style="margin-top: 10px; font-weight: bold" th:for="'ticketCount' + ${ticket.id}">Количество билетов</label>
-                                                <input th:id = "'ticketCount' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketCount()}" disabled = 'disabled'/>
+                                                <input th:id = "'ticketCount' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketCount()}" th:min="1" disabled = 'disabled'/>
                                                 <div class="row" style="margin-top: 5px">
                                                     <div class="col-2">
                                                         <a th:id="'editButton' + ${ticket.id} " value="Редактировать билет" th:onclick="'editTicket('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-pencil"></i></a>
@@ -53,6 +53,12 @@
                                                     </div>
                                                     <div class="col-2">
                                                         <a th:id="'removeButton' + ${ticket.id}" th:onclick="'removeTicket('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-trash-simple"></i></a>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <a th:id="'addPromo' + ${ticket.id}" th:onclick="'addPromo('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-link-72"></i></a>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <a th:id="'listPromo' + ${ticket.id}" th:onclick="'listPromo('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-paper"></i></a>
                                                     </div>
                                                 </div>
                                             </div>

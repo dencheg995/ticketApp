@@ -36,7 +36,7 @@ public class Client implements UserDetails {
     @Column(name = "user_phone", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "vk_id", nullable = false)
+    @Column(name = "vk_id")
     private String vkId;
 
     @Column(name = "password", nullable = false)
