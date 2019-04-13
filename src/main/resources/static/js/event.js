@@ -228,4 +228,56 @@ $(document).ready(function () {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
             end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
+
+
+    $('#promoStartDate').daterangepicker({
+        "singleDatePicker": true, //отключаем выбор диапазона дат (range)
+        "showWeekNumbers": false,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerIncrement": 10,
+        "locale": {
+            "format": "DD.MM.YYYY HH:mm МСК",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+            "monthNames": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "firstDay": 0
+        },
+        "linkedCalendars": false,
+        "startDate": startDate,
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
+            end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+    $('#promoEndDate').daterangepicker({
+        "singleDatePicker": true, //отключаем выбор диапазона дат (range)
+        "showWeekNumbers": false,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerIncrement": 10,
+        "locale": {
+            "format": "DD.MM.YYYY HH:mm МСК",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+            "monthNames": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "firstDay": 0
+        },
+        "linkedCalendars": false,
+        "startDate": startDate,
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
+            end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
 });
