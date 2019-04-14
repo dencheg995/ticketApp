@@ -36,14 +36,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client addClient(Client user) {
-        if (roleRepository.findAll() == null) {
-            Role roleAdmin = new Role();
-            roleAdmin.setRoleName("ADMIN");
-            Role roleUser = new Role();
-            roleUser.setRoleName("USER");
-            roleRepository.saveAndFlush(roleAdmin);
-            roleRepository.saveAndFlush(roleUser);
-        }
         logger.info("{}: adding of a new user...", ClientServiceImpl.class.getName());
         phoneNumberValidation(user);
         if (clientRepository.getClientByEmail(user.getEmail()) != null) {
