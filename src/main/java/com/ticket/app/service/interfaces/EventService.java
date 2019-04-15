@@ -2,6 +2,8 @@ package com.ticket.app.service.interfaces;
 
 
 import com.ticket.app.module.Event;
+import com.ticket.app.module.Ticket;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,4 +22,6 @@ public interface EventService {
     void removeEvent(Long id);
 
     List<Event> getAll();
+
+    Optional<List<Ticket>> getTicketByEventId(Long eventId);
 }

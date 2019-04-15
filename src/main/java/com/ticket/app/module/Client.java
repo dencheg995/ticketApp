@@ -39,6 +39,8 @@ public class Client implements UserDetails {
     @Column(name = "vk_id")
     private String vkId;
 
+    private Double balance;
+
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -53,7 +55,7 @@ public class Client implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})
     private List<Role> role = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     @JoinTable(name = "client_event",
@@ -91,6 +93,14 @@ public class Client implements UserDetails {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
     public String getEmail() {

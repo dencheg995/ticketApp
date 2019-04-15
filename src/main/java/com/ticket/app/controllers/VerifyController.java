@@ -36,6 +36,7 @@ public class VerifyController {
     @RequestMapping("/send/ticket")
     public ResponseEntity<String> sendTicket(@RequestParam int numSale) {
         Purchase purchase = purchaseService.getPurchaseByNumSale(numSale);
+        purchase.getTicket().getEvent().getClient().setBalance(purchase.getTicket().getTicketPrice()*0.8);
         purchase.setCheck(true);
         purchaseService.update(purchase);
         purchaseService.sendTicket(purchase);

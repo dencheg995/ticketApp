@@ -2,6 +2,7 @@ package com.ticket.app.controllers;
 
 import com.ticket.app.module.Client;
 import com.ticket.app.module.Event;
+import com.ticket.app.module.Ticket;
 import com.ticket.app.service.interfaces.ClientService;
 import com.ticket.app.service.interfaces.EventService;
 import org.slf4j.Logger;
@@ -61,12 +62,10 @@ public class EventSettingController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/remove/event")
-    public ResponseEntity removeEvent (@RequestParam Long eventId,
+    public ResponseEntity removeEvent(@RequestParam Long eventId,
                                         @AuthenticationPrincipal Client clientSession) {
-        List<Event> events = clientSession.getEvents();
-
         eventService.removeEvent(eventId);
-        return ResponseEntity.ok("redirect:/lk");
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")

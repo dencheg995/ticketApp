@@ -9,8 +9,8 @@ function addTicket() {
         url: "/event/app/{id}",
         data: JSON.stringify(formData),
         dataType: 'json',
-        success: function () {
-            location.reload();
+        success: function (html) {
+            location.reload()
             console.log("Success");
         },
         error: function (e) {
@@ -26,8 +26,8 @@ function putTicket(eventId) {
         contentType: "application/json; charset=utf-8",
         url: "/put/new/ticket",
         data : {eventId : eventId},
-        success: function () {
-            location.reload()
+        success: function (html) {
+            location.reload();
         }
     });
 }
@@ -149,9 +149,9 @@ function removeEvent(eventId) {
         contentType: "application/json",
         url: "/remove/event",
         data: {eventId : eventId} ,
-        // success: function () {
-        //     location.reload()
-        // }
+        success: function () {
+            window.open("/lk", '_self')
+        }
     });
 }
 

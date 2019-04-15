@@ -26,12 +26,12 @@
         <link href="/assets/demo/demo.css" rel="stylesheet" />
 </head>
 <body class="">
-<div class="wrapper">
+<div  class="wrapper">
     <div th:replace="fragments/sidebar::sidebar"></div>
     <div class="main-panel">
         <div th:replace="fragments/navbar::navbar"></div>
         <div class="content">
-            <div class="card card-plain">
+            <div class="card card-plain" >
                 <div th:each="event :${event}">
                     <div class="card-header">
                         <h4 class="title" style="font-weight: bold" th:text="'Билеты для: ' + ${event.getName()}"></h4>
@@ -39,11 +39,11 @@
                     <div class="card-body">
                         <a th:onclick="'putTicket('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-simple-add"></i></a>
                         <div class="table-responsive">
-                            <table class="table tablesorter" id="">
+                            <table class="table tablesorter">
                                 <tr>
                                     <th:block th:each="ticket : ${event.getTicketList()}">
                                         <td>
-                                            <div id = "editTicket" class="card card-plain" style="width: 200px">
+                                            <div class="card card-plain" style="width: 200px">
                                                 <label style="margin-top: 10px; font-weight: bold" th:for="'ticketType' + ${ticket.id}">Тип билета(Вип, танцпол)</label>
                                                 <input th:id = "'ticketType' + ${ticket.id}" class="form-control" th:value="${ticket.getTicketType()}" disabled = 'disabled'/>
                                                 <label style="margin-top: 10px; font-weight: bold" th:for="'ticketPrice' + ${ticket.id}">Цена билета</label>
