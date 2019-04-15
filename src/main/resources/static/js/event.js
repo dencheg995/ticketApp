@@ -105,8 +105,14 @@ function buyTicket(ticketId, ticketPrice, eventId) {
 
 function editEvent(eventId) {
 
-    if ($("#editButton" + eventId).text() === "Редактировать мероприятие") {
+    if ($("#editButton" + eventId).text() === "Редактировать") {
         $("#eventName" + eventId).removeAttr('disabled');
+        $("#eventDate" + eventId).removeAttr('disabled');
+        $("#eventAgeLimit" + eventId).removeAttr('disabled');
+        $("#eventClubName" + eventId).removeAttr('disabled');
+        $("#eventSaleForVkPost" + eventId).removeAttr('disabled');
+        $("#eventCloseVkRepost" + eventId).removeAttr('disabled');
+        $("#eventVkPostUrl" + eventId).removeAttr('disabled');
         $("#eventAddress" + eventId).removeAttr('disabled');
         $("#eventPocket" + eventId).removeAttr('disabled');
         $("#editButton" + eventId).html('Сохранить');
@@ -116,6 +122,12 @@ function editEvent(eventId) {
             eventId: eventId,
             eventName: $("#eventName" + eventId).val(),
             eventAddress: $("#eventAddress" + eventId).val(),
+            eventDate: $("#eventDate" + eventId).val(),
+            eventAgeLimit: $("#eventAgeLimit" + eventId).val(),
+            eventClubName: $("#eventClubName" + eventId).val(),
+            eventSaleForVkPost: $("#eventSaleForVkPost" + eventId).val(),
+            eventCloseVkRepost: $("#eventCloseVkRepost" + eventId).val(),
+            eventVkPostUrl: $("#eventVkPostUrl" + eventId).val(),
             eventPocket: $("#eventPocket" + eventId).val()
         };
         var url = "/edit/event"
@@ -137,9 +149,9 @@ function removeEvent(eventId) {
         contentType: "application/json",
         url: "/remove/event",
         data: {eventId : eventId} ,
-        success: function () {
-            location.reload()
-        }
+        // success: function () {
+        //     location.reload()
+        // }
     });
 }
 
@@ -256,6 +268,31 @@ $(document).ready(function () {
             end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
     $('#promoEndDate').daterangepicker({
+        "singleDatePicker": true, //отключаем выбор диапазона дат (range)
+        "showWeekNumbers": false,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerIncrement": 10,
+        "locale": {
+            "format": "DD.MM.YYYY HH:mm МСК",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+            "monthNames": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "firstDay": 0
+        },
+        "linkedCalendars": false,
+        "startDate": startDate,
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' +
+            end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+    $('#startDate').daterangepicker({
         "singleDatePicker": true, //отключаем выбор диапазона дат (range)
         "showWeekNumbers": false,
         "timePicker": true,

@@ -25,44 +25,82 @@
     <div class="main-panel">
         <div th:replace="fragments/navbar::navbar"></div>
         <div class="content">
-            <div class="card card-default">
+            <div class="card">
                 <div th:each="event : ${event}">
                     <div class="card-header">
-                        <div class="card-title">
-                            <h5 style="margin-left: 15px" th:text="'Мероприятие: ' + ${event.getName()}"></h5>
+                        <div class="card-header">
+                            <h4 class="title" th:text="'Мероприятие: ' + ${event.getName()}"></h4>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="card" style="margin-top: 10px">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label style="margin-top: 10px" th:for="'eventName' + ${event.id}">Название</label>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4 pr-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventName' + ${event.id}">Название мероприятия</label>
                                         <input th:id = "'eventName' + ${event.id}" class="form-control" th:value="${event.name}" disabled = 'disabled'/>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label style="margin-top: 10px" th:for="'eventAddress' + ${event.id}">Адрес</label>
-                                        <input th:id = "'eventAddress' + ${event.id}" class="form-control" th:value="${event.address}" disabled = 'disabled'/>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label style="margin-top: 10px" th:for="'eventPocket' + ${event.id}">Кошелек</label>
-                                        <input th:id = "'eventPocket' + ${event.id}" class="form-control" th:value="${event.pocket}" disabled = 'disabled'/>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button class="btn btn-warning" style="margin-top: 42px" th:id="'editButton' + ${event.id} " th:onclick="'editEvent('+ ${event.id} +')'">Редактировать мероприятие</button>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button class="btn btn-danger" style="margin-top: 10px" th:id="'removeButton' + ${event.id}" th:onclick="'removeEvent('+ ${event.id} + ')'">Удалить мероприятие</button>
+                                </div>
+                                <div class="col-md-4 px-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventDate' + ${event.id}">Дата проведения</label>
+                                        <input th:id = "'eventDate' + ${event.id}" class="form-control" th:value="${event.date}" disabled = 'disabled'/>
                                     </div>
                                 </div>
-                                <br/>
+                                <div class="col-md-4 pl-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventAgeLimit' + ${event.id}">Возрастное ограничение</label>
+                                        <input th:id = "'eventAgeLimit' + ${event.id}" class="form-control" th:value="${event.eventAgeLimit}" disabled = 'disabled'/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div>
-                            <a class="btn btn-success" style="margin-left: 15px" href="/lk" role="button">Готово</a>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventClubName' + ${event.id}">Название заведения</label>
+                                        <input th:id = "'eventClubName' + ${event.id}" class="form-control" th:value="${event.clubName}" disabled = 'disabled'/>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 pl-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventAddress' + ${event.id}">Адрес заведения</label>
+                                        <input th:id = "'eventAddress' + ${event.id}" class="form-control" th:value="${event.address}" disabled = 'disabled'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 pr-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventVkPostUrl' + ${event.id}">Ссылка на пост</label>
+                                        <input th:id = "'eventVkPostUrl' + ${event.id}" class="form-control" th:value="${event.vkPostUrl}" disabled = 'disabled'/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pl-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventCloseVkRepost' + ${event.id}">Закрытие репостов</label>
+                                        <input th:id = "'eventCloseVkRepost' + ${event.id}" class="form-control" th:value="${event.closeVkRepost}" disabled = 'disabled'/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pr-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventSaleForVkPost' + ${event.id}">Скидка за репост</label>
+                                        <input th:id = "'eventSaleForVkPost' + ${event.id}" class="form-control" th:value="${event.saleForVkPost}" disabled = 'disabled'/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pr-md-1">
+                                    <div class="form-group">
+                                        <label style="font-weight: bold" th:for="'eventPocket' + ${event.id}">Yandex-кошелек</label>
+                                        <input th:id = "'eventPocket' + ${event.id}" class="form-control" th:value="${event.pocket}" disabled = 'disabled'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group" style="margin-left: 17px">
+                                    <button type="button" class="btn btn-primary" th:id="'editButton' + ${event.id} " th:onclick="'editEvent('+ ${event.id} +')'">Редактировать</button>
+                                    <button type="button" class="btn btn-primary" th:id="'removeButton' + ${event.id}" th:onclick="'removeEvent('+ ${event.id} + ')'">Удалить</button>
+                                </div>
+                             </div>
+                        </form>
                     </div>
                 </div>
             </div>

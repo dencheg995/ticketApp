@@ -59,7 +59,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void removeEvent(Long id) {
         if (eventRepository.getOne(id) != null) {
-            eventRepository.deleteById(id);
+            eventRepository.delete(eventRepository.getOne(id));
         } else {
             throw new EventException();
         }

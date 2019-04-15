@@ -61,9 +61,12 @@ public class EventSettingController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/remove/event")
-    public ResponseEntity removeEvent (@RequestParam Long eventId) {
+    public ResponseEntity removeEvent (@RequestParam Long eventId,
+                                        @AuthenticationPrincipal Client clientSession) {
+        List<Event> events = clientSession.getEvents();
+
         eventService.removeEvent(eventId);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok("redirect:/lk");
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")

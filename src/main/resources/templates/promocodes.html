@@ -32,13 +32,13 @@
         <div class="content">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Промокоды</h4>
+                    <h4 class="title">Промокоды</h4>
                 </div>
                 <div class="card-body">
                      <div class="row">
                          <div class="col-md-4 pr-md-1">
                             <div class="form-group">
-                                <label for="discountValue">Скидка для промокодов</label>
+                                <label for="discountValue" style="font-weight: bold">Скидка для промокодов</label>
                                 <input id="discountValue" class="form-control" name="discount" type="text" placeholder="0"
                                                                       data-error='Введите скидку в допустимом формате (только цифры)'
                                                                       pattern="[0-9]{,3}"
@@ -57,6 +57,10 @@
                                 <input id="promoEndDate" type="text" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
                             </div>
                          </div>
+                     </div>
+                     <div class="row" style="margin-left: 15px">
+                        <label></label>
+                        <textarea onkeyup="textAreaAdjust(this)" class="form-control" placeholder="Введите каждый промокод с НОВОЙ СТРОКИ"></textarea>
                      </div>
                 </div>
             </div>

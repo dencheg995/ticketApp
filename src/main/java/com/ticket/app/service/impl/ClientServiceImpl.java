@@ -22,6 +22,7 @@ public class ClientServiceImpl implements ClientService {
     private static Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
     private final ClientRepository clientRepository;
 
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
