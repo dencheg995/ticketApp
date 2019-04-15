@@ -27,7 +27,7 @@
 <body class="">
 <div class="wrapper">
     <div class="main-panel">
-        <div th:replace="fragments/navbar::navbar"></div>
+        <div th:replace="fragments/loginNavbar::loginNavbar"></div>
         <div class="content">
             <div class="row">
                 <div class="col-md-3 pr-md-1"></div>
@@ -182,6 +182,7 @@
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <!--  Notifications Plugin    -->
 <script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
 <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/assets/js/black-dashboard.min.js?v=1.0.0"></script>
 <!-- Black Dashboard DEMO methods, don't include it in your project! -->

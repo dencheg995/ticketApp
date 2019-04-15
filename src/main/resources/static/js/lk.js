@@ -16,6 +16,13 @@ function openTicketPage(eventId) {
     }
 }
 
+function openSalePage(eventId) {
+    if (eventId != null && eventId != "") {
+        var url = '/event/app/' + eventId
+        window.open(url, '_self');
+    }
+}
+
 function openEventPage(eventId) {
 
     if (eventId != null && eventId != "") {

@@ -27,7 +27,7 @@
 <body class="">
 <div class="wrapper">
     <div class="main-panel">
-        <div th:replace="fragments/navbar::navbar"></div>
+        <div th:replace="fragments/loginNavbar::loginNavbar"></div>
         <div class="content">
             <div class="row">
                 <div class="col-md-3 pr-md-1"></div>
@@ -51,7 +51,7 @@
                                     <input type="password" class="form-control" id="password" name="password"  title="Please enter your password"/>
                                     <span class="help-block"></span>
                                 </div>
-                                <button type="submit" onclick="showNotification('top', 'center')" class="btn btn-success btn-block">Войти</button>
+                                <button type="submit" class="btn btn-success btn-block">Войти</button>
                                 <label style="font-weight: bold" class="control-label">Впервые на сайте? Зарегистрируйтесь!</label>
                                 <p><a href="/register" class="btn btn-info btn-block">Регистрация</a></p>
                             </form>
@@ -111,6 +111,8 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <!-- Chart JS -->
 <script src="/assets/js/plugins/chartjs.min.js"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+
 <!--  Notifications Plugin    -->
 <script src="/assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
