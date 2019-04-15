@@ -30,16 +30,23 @@
         <div th:replace="fragments/navbar::navbar"></div>
         <div class="content">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-6">
+                <div class="col-md-3 pr-md-1"></div>
+                <div class="col-md-4 pr-md-1">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="title">Профиль</h4>
+                            <div class="row">
+                                <div class="col-md-6 pr-md-1"><h4 class="title">Профиль</h4></div>
+                                <div class="col-md-4 pr-md-1"></div>
+                                <div class="col-md-2 pr-md-1">
+                                    <span align="right"><a href="/login"><i class="tim-icons tim-icons-32 icon-bank"></i></a></span>
+                                </div>
+                            </div>
                             <p>
-                                <button onclick="vkLogin()" class="btn btn-block btn-vk"><i class="fab fa-vk"></i>Войти с помощью VK</button>
+                                <button onclick="vkLogin()" class="btn btn-block btn-vk"><i class="fab fa-vk"></i>  Войти с помощью VK</button>
                             </p>
-                            <p class="divider-text">
-                                <span style="text-align: center">Или</span>
+
+                            <p class="divider-text" align="center">
+                                <span>Или</span>
                             </p>
                         </div>
                         <div class="card-body">
@@ -109,17 +116,18 @@
                                         required="required"
                                         id="add-user-password"/>
                                     </div>
-                                <div class="btn-group">
-                                    <button type="submit" class="btn btn-primary" id="saveChanges" onclick="registerUser()">
-                                        Сохранить
-                                    </button>
-                                    <a href="/login" class="btn btn-primary" id="backToMain">Назад</a>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary" id="saveChanges" onclick="registerUser()">
+                                            Сохранить
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-md-4 pr-md-1"></div>
             </div>
         </div>
     </div>

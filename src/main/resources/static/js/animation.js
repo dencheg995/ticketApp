@@ -113,3 +113,20 @@ function textAreaAdjust(o) {
     o.style.width = "285px";
 
 }
+
+function showNotification(from, align) {
+    color = Math.floor((Math.random() * 4) + 1);
+
+    $.notify({
+        icon: "tim-icons icon-bell-55",
+        message: "Неверные логин или пароль"
+
+    }, {
+        type: type[color],
+        timer: 8000,
+        placement: {
+            from: from,
+            align: align
+        }
+    });
+}
