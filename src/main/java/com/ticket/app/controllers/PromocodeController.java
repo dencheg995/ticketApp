@@ -1,5 +1,6 @@
 package com.ticket.app.controllers;
 
+import com.ticket.app.module.PromoPOJO;
 import com.ticket.app.module.Promocode;
 import com.ticket.app.module.Ticket;
 import com.ticket.app.service.interfaces.PromocodeService;
@@ -8,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
@@ -31,26 +29,24 @@ public class PromocodeController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/promo/new")
-    public ModelAndView newPromo() {
+    public ModelAndView newPromo(@RequestParam Long ticketId) {
         ModelAndView modelAndView = new ModelAndView("promocodes");
+        modelAndView.addObject("ticket",ticketService.getTicket(ticketId));
         return modelAndView;
     }
 
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping(value = "/add-promo", method = RequestMethod.POST)
-    public ResponseEntity addPromo(@RequestParam("idTicket") Long idTicket,
-                                   @RequestParam("listPromo") String listPromo,
-                                               @RequestParam("dateStart") String dateStart,
-                                               @RequestParam("dateEnd") String dateEnd,
-                                               @RequestParam("sale") String sale,
-                                               @RequestParam("count") Integer count) {
-        Ticket ticket = ticketService.getTicket(idTicket);
+    public @ResponseBody ResponseEntity addPromo(@RequestBody PromoPOJO promoPOJO) {
+        Ticket ticket = ticketService.getTicket(promoPOJO.getIdTicket());
         Promocode promocode = new Promocode();
-        List<String> promocodes = Arrays.asList(listPromo.split("\n"));
+        List<String> promocodes = Arrays.asList(promoPOJO.getPromocodes().split("\n"));
         promocode.setPromocode(promocodes);
-        promocode.setDateStart(dateStart);
-        promocode.setDateEnd(dateEnd);
-        promocode.setSale(sale);
-        promocode.setCount(count);
+        promocode.setDateStart(promoPOJO.getPromoStartDate());
+        promocode.setDateEnd(promoPOJO.getPromoEndDate());
+        promocode.setSale(promoPOJO.getDiscountValue());
+        promocode.setCount(promoPOJO.getCount());
         promocode.setTicket(ticket);
         promocodeService.addPromo(promocode);
         return ResponseEntity.ok(HttpStatus.OK);

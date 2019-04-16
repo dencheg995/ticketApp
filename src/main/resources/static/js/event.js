@@ -318,3 +318,29 @@ $(document).ready(function () {
             end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
 });
+
+
+function addPromo(ticketId) {
+    let promocodes = $('#promocodes').val();
+    let discountValue = $('#discountValue').val();
+    let promoStartDate = $('#promoStartDate').val();
+    let promoEndDate = $('#promoEndDate').val();
+
+    let wrap = {
+        idTicket : ticketId,
+        promocodes : promocodes,
+        discountValue : discountValue,
+        promoStartDate : promoStartDate,
+        promoEndDate : promoEndDate
+    }
+
+    $.ajax({
+        type: "POST",
+        contentType: 'application/json; charset=UTF-8',
+        url: '/add-promo',
+        data: JSON.stringify(wrap),
+        success: function () {
+            location.reload();
+        }
+    });
+}
