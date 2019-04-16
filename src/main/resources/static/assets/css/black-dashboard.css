@@ -42,7 +42,6 @@
   --light: #adb5bd;
   --dark: #212529;
   --default: #344675;
-  --white: #ffffff;
   --neutral: #ffffff;
   --darker: black;
   --breakpoint-xs: 0;
@@ -1988,7 +1987,16 @@ textarea.form-control {
   margin-top: 0.3rem;
   margin-left: -1.25rem;
 }
-
+.input-group-addon {
+  padding: 2px 2px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+  color: #ffffff;
+  text-align: center;
+  background-color: #27293D;
+  border: none;
+}
 .form-check-input:disabled~.form-check-label {
   color: #6c757d;
 }
@@ -13988,7 +13996,7 @@ img {
 }
 
 body {
-  -moz-osx-font-smoothing: grayscale;
+
   -webkit-font-smoothing: antialiased;
 }
 
@@ -16543,7 +16551,7 @@ textarea.form-control:active {
   padding: 10px;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(39, 41, 61, 0.7);
 }
 
 .search-bar.input-group i {

@@ -23,6 +23,7 @@
     <link href="/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/assets/demo/demo.css" rel="stylesheet" />
+    <link href="/css/bootstrap-social.css" rel="stylesheet" />
 </head>
 <body class="">
 <div class="wrapper">
@@ -45,15 +46,22 @@
                                         <div class="col-md-2">
                                             <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
                                         </div>
-                                        <div class="col-md-1" style="margin-top: 18px">
-                                            <a><i class="tim-icons tim-icons-20 icon-simple-delete" style="color: white"></i></a>
+                                        <div class="col-md-3" style="margin-top: 9px">
+                                            <div class="js-spinner">
+                                                <button class="btn-yahoo badge" type="button" spinner-button="up">+</button>
+                                                <input autofocus="autofocus" type="number" min="0" max="100" step="1" value="0" class="input-group-addon"/>
+                                                <button class="btn-yahoo badge" type="button" spinner-button="down">−</button>
+                                            </div>
                                         </div>
-                                        <div class="col-md-1" style="margin-top: 15px">
-                                            <span style="font-weight: bold; color:white; font-size: 20px"> 0 </span>
-                                        </div>
-                                        <div class="col-md-1" style="margin-top: 18px">
-                                            <a><i class="tim-icons tim-icons-20 icon-simple-add" style="color: white"></i></a>
-                                        </div>
+<!--                                        <div class="col-md-1" style="margin-top: 18px">-->
+<!--                                            <div class="down"><i class="tim-icons tim-icons-20 icon-simple-delete" style="color: white"></i></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-1" style="margin-top: 15px">-->
+<!--                                            <span style="font-weight: bold; color:white; font-size: 20px" th:autofocus="autofocus" type="number" th:min="0" th:max="100" th:step="1" th:value="0" class="stepper__input"></span>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-1" style="margin-top: 18px">-->
+<!--                                            <div class="up"><i class="tim-icons tim-icons-20 icon-simple-add" style="color: white"></i></div>-->
+<!--                                        </div>-->
 
 
 
@@ -207,6 +215,7 @@
         var multy = $('#ticketPrice').val() * $('#ticketCount').val();
     });
 </script>
+<script src="/assets/demo/stepper.js"></script>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
 <script type="text/javascript" th:src="@{/js/lk.js}"></script>
