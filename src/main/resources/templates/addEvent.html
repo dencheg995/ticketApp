@@ -31,71 +31,95 @@
     <div class="main-panel">
         <div th:replace="fragments/navbar::navbar"></div>
         <div class="content">
-            <div class="card card-default">
-                 <div class="card-header">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="title">Создание нового мероприятия</h4>
+                </div>
+                 <div class="card-body">
                      <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
-                           <div class="form-group">
-                               <label for="name">Название мероприятия: </label>
-                               <input id="name" class="form-control"  type="text" placeholder="Название мероприятия"
-                                      data-error="Название должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
-                                      pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
-                                      required="required"/>
-                               <div class="help-block with-errors"></div>
+                           <div class="row">
+                               <div class="col-md-4 pr-md-1">
+                                   <div class="form-group">
+                                        <label for="name" style="font-weight: bold">Название мероприятия</label>
+                                        <input id="name" class="form-control"  type="text"
+                                         data-error="Название должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
+                                         pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
+                                         required="required"/>
+                                        <div class="help-block with-errors"></div>
+                                   </div>
+                               </div>
+                               <div class="col-md-4 px-md-1">
+                                   <div class="form-group" style="font-weight: bold">
+                                        <label for="date">Дата проведения</label>
+                                        <input id="date" type="text" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
+                                   </div>
+                               </div>
+                               <div class="col-md-4 pl-md-1">
+                                    <div class="form-group">
+                                        <label for="age-limit" style="font-weight: bold">Возрастное ограничение</label>
+                                        <input id="age-limit" class="form-control" type="text"
+                                             pattern="[0-9]{1,}"
+                                             required="required"/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                               </div>
                            </div>
-                           <div class="form-group">
-                               <label for="age-limit">Возрастное ограничение: </label>
-                               <input id="age-limit" class="form-control" type="text"
-                                      pattern="[0-9]{1,}"
-                                      required="required"/>
-                               <div class="help-block with-errors"></div>
+                           <div class="row">
+                               <div class="col-md-4 pr-md-1">
+                                   <div class="form-group">
+                                       <label for="clubName" style="font-weight: bold">Название заведения</label>
+                                       <input id="clubName" class="form-control" type="text"/>
+                                   </div>
+                               </div>
+                               <div class="col-md-8 pl-md-1">
+                                   <div class="form-group">
+                                       <label for="address" style="font-weight: bold">Адрес заведения</label>
+                                       <input id="address" class="form-control" type="text" placeholder="Санкт-Петербург, Невский проспект, 1"/>
+                                   </div>
+                               </div>
                            </div>
-                           <div class="form-group">
-                               <label for="clubName">Место проведения: </label>
-                               <input id="clubName" class="form-control" type="text"/>
+                           <div class="row">
+                               <div class="col-md-3 pr-md-1">
+                                   <div class="form-group">
+                                       <label for="postVk" style="font-weight: bold">Ссылка на пост</label>
+                                       <input id="postVk" class="form-control" type="text"/>
+                                   </div>
+                               </div>
+                               <div class="col-md-3 pl-md-1">
+                                   <div class="form-group">
+                                       <label for="timePostVk" style="font-weight: bold">Закрытие репостов</label>
+                                       <input type="text" id = "timePostVk" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
+                                   </div>
+                               </div>
+                               <div class="col-md-3 pr-md-1">
+                                   <div class="form-group">
+                                       <label for="salePostVk" style="font-weight: bold">Скидка за репост</label>
+                                       <input id="salePostVk" class="form-control" type="number"/>
+                                   </div>
+                               </div>
+                               <div class="col-md-3 pr-md-1">
+                                   <div class="form-group">
+                                        <label for="pocket" style="font-weight: bold">Yandex-кошелек</label>
+                                        <input id="pocket" class="form-control" name="pocket" type="text" placeholder="4100175017397"
+                                             data-error='Введите номер кошелька в допустимом формате (только цифры)'
+                                             pattern="[0-9]{11,}"
+                                             required="required" min="11"/>
+                                        <div class="help-block with-errors"></div>
+                                   </div>
+                               </div>
                            </div>
-
-                           <div class="form-group">
-                               <label for="address">Адрес места: </label>
-                               <input id="address" class="form-control" type="text" placeholder="Санкт-Петербург, Невский проспект, 1"/>
+                           <div class="row">
+                               <div class="form-group" style="margin-left: 17px">
+                                    <button type="submit" class="btn btn-primary" id="saveChanges" onclick="addEvent()">
+                                        Сохранить
+                                    </button>
+                               </div>
                            </div>
-
-                           <div class="form-group">
-                               <label for="date">Дата проведения: </label>
-                               <input id="date" type="text" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
-                           </div>
-                           <div class="form-group">
-                               <label for="postVk">Ссылка на пост: </label>
-                               <input id="postVk" class="form-control" type="text"/>
-
-                           </div>
-                           <div class="form-group">
-                               <label for="timePostVk">Закрытие репостов: </label>
-                               <input type="text" id = "timePostVk" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
-
-                           </div>
-                           <div class="form-group">
-                               <label for="salePostVk">Скидка за репост: </label>
-                               <input id="salePostVk" class="form-control" type="number"/>
-
-                           </div>
-                           <div class="form-group">
-                               <label for="pocket">Yandex-кошелек: </label>
-                               <input id="pocket" class="form-control" name="pocket" type="text" placeholder="4100175017397"
-                                      data-error='Введите номер кошелька в допустимом формате (только цифры)'
-                                      pattern="[0-9]{11,}"
-                                      required="required" min="11"/>
-                               <div class="help-block with-errors"></div>
-                           </div>
-                          <div class="btn-group">
-                              <button type="submit" class="btn btn-primary" id="saveChanges" onclick="addEvent()">
-                                  Сохранить
-                              </button>
-                          </div>
-                      </form>
+                     </form>
                  </div>
             </div>
         </div>
-        </div>
+    </div>
 </div>
 
 <div class="fixed-plugin">
@@ -142,6 +166,7 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <!-- Chart JS -->
 <script src="/assets/js/plugins/chartjs.min.js"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
 <!--  Notifications Plugin    -->
 <script src="/assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->

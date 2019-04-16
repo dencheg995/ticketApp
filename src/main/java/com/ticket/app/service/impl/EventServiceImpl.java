@@ -3,6 +3,7 @@ package com.ticket.app.service.impl;
 
 import com.ticket.app.exeptions.event.EventException;
 import com.ticket.app.module.Event;
+import com.ticket.app.module.Ticket;
 import com.ticket.app.repository.EventRepository;
 import com.ticket.app.repository.TicketRepository;
 import com.ticket.app.service.interfaces.EventService;
@@ -59,7 +60,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void removeEvent(Long id) {
         if (eventRepository.getOne(id) != null) {
-            eventRepository.deleteById(id);
+            eventRepository.delete(id);
         } else {
             throw new EventException();
         }
@@ -68,6 +69,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getAll() {
         return eventRepository.findAll();
+    }
+
+    @Override
+    public Optional<List<Ticket>> getTicketByEventId(Long eventId) {
+        return Optional.ofNullable(eventRepository.getTicketByEventId(eventId));
     }
 
 }

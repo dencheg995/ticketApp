@@ -4,9 +4,7 @@ package com.ticket.app.service.impl;
 import com.ticket.app.exeptions.user.UserExistsException;
 import com.ticket.app.module.Client;
 import com.ticket.app.module.POJOUser;
-import com.ticket.app.module.Role;
 import com.ticket.app.repository.ClientRepository;
-import com.ticket.app.repository.RoleRepository;
 import com.ticket.app.service.interfaces.ClientService;
 
 import org.slf4j.Logger;
@@ -24,14 +22,12 @@ public class ClientServiceImpl implements ClientService {
     private static Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
     private final ClientRepository clientRepository;
 
-    private final RoleRepository roleRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public ClientServiceImpl(ClientRepository clientRepository, RoleRepository roleRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
-        this.roleRepository = roleRepository;
     }
 
     @Override
