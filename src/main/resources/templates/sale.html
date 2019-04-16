@@ -27,24 +27,40 @@
 <body class="">
 <div class="wrapper">
     <div class="main-panel">
-        <div th:replace="fragments/loginNavbar::loginNavbar"></div>
+        <div th:replace="fragments/saleNavbar::saleNavbar"></div>
         <div class="content">
             <div th:each = "event : ${event}" th:value="${event.ticketList}">
                 <div th:each="ticket : ${event.getTicketList()}">
                     <!--<div th:each="consumer : ${ticket.getConsumer()}">-->
                     <div class="row">
-                        <div class="col-md-2">
-                            <div class="card"  style="margin-top: 5px">
+                        <div class="col-md-12">
+                            <div class="card" style="margin-top: 5px">
                                 <div class="card-body">
-                                    <h5 class="card-title">
-                                        <span>Тип билета: </span>
-                                        <span th:text = "${ticket.getTicketType()}"></span>
-                                    </h5>
-                                    <div class="card-text">
-                                        <span>Цена: </span>
-                                        <span th:text = "${ticket.getTicketPrice()}"></span>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h4 class="title" style="font-weight: bold" th:text = "${ticket.getTicketType()}"></h4>
+                                            <p style="font-weight: bold">Входной билет</p>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2">
+                                            <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 18px">
+                                            <a><i class="tim-icons tim-icons-20 icon-simple-delete" style="color: white"></i></a>
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 15px">
+                                            <span style="font-weight: bold; color:white; font-size: 20px"> 0 </span>
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 18px">
+                                            <a><i class="tim-icons tim-icons-20 icon-simple-add" style="color: white"></i></a>
+                                        </div>
+
+
+
+<!--                                            <button class="btn btn-primary" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>-->
+<!--                                            <button class="btn btn-primary" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>-->
+
                                     </div>
-                                    <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>
                                 </div>
                             </div>
                         </div>
@@ -157,32 +173,32 @@
     </div>
 </div>
 
-<div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-            <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-            <li class="header-title"> Sidebar Background</li>
-            <li class="adjustments-line">
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <div class="badge-colors text-center">
-                        <span class="badge filter badge-primary active" data-color="primary"></span>
-                        <span class="badge filter badge-info" data-color="blue"></span>
-                        <span class="badge filter badge-success" data-color="green"></span>
-                    </div>
-                    <div class="clearfix"></div>
-                </a>
-            </li>
-            <li class="adjustments-line text-center color-change">
-                <span class="color-label">LIGHT MODE</span>
-                <span class="badge light-badge mr-2"></span>
-                <span class="badge dark-badge ml-2"></span>
-                <span class="color-label">DARK MODE</span>
-            </li>
-        </ul>
-    </div>
-</div>
+<!--<div class="fixed-plugin">-->
+<!--    <div class="dropdown show-dropdown">-->
+<!--        <a href="#" data-toggle="dropdown">-->
+<!--            <i class="fa fa-cog fa-2x"> </i>-->
+<!--        </a>-->
+<!--        <ul class="dropdown-menu">-->
+<!--            <li class="header-title"> Sidebar Background</li>-->
+<!--            <li class="adjustments-line">-->
+<!--                <a href="javascript:void(0)" class="switch-trigger background-color">-->
+<!--                    <div class="badge-colors text-center">-->
+<!--                        <span class="badge filter badge-primary active" data-color="primary"></span>-->
+<!--                        <span class="badge filter badge-info" data-color="blue"></span>-->
+<!--                        <span class="badge filter badge-success" data-color="green"></span>-->
+<!--                    </div>-->
+<!--                    <div class="clearfix"></div>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="adjustments-line text-center color-change">-->
+<!--                <span class="color-label">LIGHT MODE</span>-->
+<!--                <span class="badge light-badge mr-2"></span>-->
+<!--                <span class="badge dark-badge ml-2"></span>-->
+<!--                <span class="color-label">DARK MODE</span>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
 <script>
     $(document).ready(function () {
         document.getElementById("wer").innerText;
@@ -212,7 +228,6 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <!-- Chart JS -->
 <script src="/assets/js/plugins/chartjs.min.js"></script>
-<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
 <!--  Notifications Plugin    -->
 <script src="/assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->

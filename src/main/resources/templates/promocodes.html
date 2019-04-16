@@ -58,11 +58,12 @@
                             </div>
                          </div>
                      </div>
-                     <div class="row" style="margin-left: 15px">
-                        <label></label>
-                        <textarea id = "promocodes" onkeyup="textAreaAdjust(this)" class="form-control" placeholder="Введите каждый промокод с НОВОЙ СТРОКИ"></textarea>
-                        <button th:onclick="'addPromo(' + ${ticket.id} + ')' ">Добавить</button>
-
+                     <div class="row" style="margin-left: 2px">
+                         <div class="form-group">
+                            <label style="font-weight: bold">Введите каждый промокод с НОВОЙ СТРОКИ</label>
+                            <textarea id = "promocodes" onkeyup="textAreaAdjust(this)" class="form-control" placeholder="Введите каждый промокод с НОВОЙ СТРОКИ"></textarea>
+                            <button style="margin-top: 20px" class="btn btn-primary" th:onclick="'addPromo(' + ${ticket.id} + ')' ">Добавить</button>
+                         </div>
                      </div>
                 </div>
             </div>
