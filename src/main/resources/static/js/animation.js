@@ -131,15 +131,4 @@ function showNotification(from, align) {
     });
 }
 
-function plusminus() {
-    var splashInput = document.querySelector(".splash-input");
-    var splashVal = parseInt(splashInput.value, 10);
-    document.querySelector(".counter-elem__plus").onclick = function() {
-        splashInput.value = ++splashVal;
-    }
-    document.querySelector(".counter-elem__minus").onclick = function() {
-        if (splashVal > 0) {
-            splashInput.value = --splashVal;
-        }
-    }
-}
+
