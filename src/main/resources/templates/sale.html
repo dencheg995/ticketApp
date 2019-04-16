@@ -32,156 +32,164 @@
         <div class="content">
             <div th:each = "event : ${event}" th:value="${event.ticketList}">
                 <div th:each="ticket : ${event.getTicketList()}">
-                    <!--<div th:each="consumer : ${ticket.getConsumer()}">-->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card" style="margin-top: 5px">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h4 class="title" style="font-weight: bold" th:text = "${ticket.getTicketType()}"></h4>
-                                            <p style="font-weight: bold">Входной билет</p>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-2">
-                                            <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
-                                        </div>
-                                        <div class="col-md-3" style="margin-top: 9px">
-                                            <div class="js-spinner">
-                                                <button class="btn-yahoo badge" type="button" spinner-button="up">+</button>
-                                                <input autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
-                                                <button class="btn-yahoo badge" type="button" spinner-button="down">−</button>
+                    <div th:if="${ticket.getTicketCount()} > 0">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card" style="margin-top: 5px">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h4 class="title" style="font-weight: bold" th:text = "${ticket.getTicketType()}"></h4>
+                                                <p style="font-weight: bold">Входной билет</p>
                                             </div>
-                                        </div>
-<!--                                        <div class="col-md-1" style="margin-top: 18px">-->
-<!--                                            <div class="down"><i class="tim-icons tim-icons-20 icon-simple-delete" style="color: white"></i></div>-->
-<!--                                        </div>-->
-<!--                                        <div class="col-md-1" style="margin-top: 15px">-->
-<!--                                            <span style="font-weight: bold; color:white; font-size: 20px" th:autofocus="autofocus" type="number" th:min="0" th:max="100" th:step="1" th:value="0" class="stepper__input"></span>-->
-<!--                                        </div>-->
-<!--                                        <div class="col-md-1" style="margin-top: 18px">-->
-<!--                                            <div class="up"><i class="tim-icons tim-icons-20 icon-simple-add" style="color: white"></i></div>-->
-<!--                                        </div>-->
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-2">
+                                                <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
+                                            </div>
+                                            <div class="col-md-3" style="margin-top: 9px">
+                                                <div class="js-spinner">
+                                                    <button class="btn-yahoo badge" type="button" spinner-button="down">−</button>
+                                                    <input autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
+                                                    <button class="btn-yahoo badge" type="button" spinner-button="up">+</button>
+                                                </div>
+                                            </div>
+    <!--                                        <div class="col-md-1" style="margin-top: 18px">-->
+    <!--                                            <div class="down"><i class="tim-icons tim-icons-20 icon-simple-delete" style="color: white"></i></div>-->
+    <!--                                        </div>-->
+    <!--                                        <div class="col-md-1" style="margin-top: 15px">-->
+    <!--                                            <span style="font-weight: bold; color:white; font-size: 20px" th:autofocus="autofocus" type="number" th:min="0" th:max="100" th:step="1" th:value="0" class="stepper__input"></span>-->
+    <!--                                        </div>-->
+    <!--                                        <div class="col-md-1" style="margin-top: 18px">-->
+    <!--                                            <div class="up"><i class="tim-icons tim-icons-20 icon-simple-add" style="color: white"></i></div>-->
+    <!--                                        </div>-->
 
 
 
-<!--                                            <button class="btn btn-primary" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>-->
-<!--                                            <button class="btn btn-primary" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>-->
+    <!--                                            <button class="btn btn-primary" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>-->
+    <!--                                            <button class="btn btn-primary" style="margin-top: 10px" data-toggle="modal" href="#ticketModal" role="button" th:href="'#ticketModal'+${ticket.id}">Купить билеты</button>-->
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="ticketModal" th:id="'ticketModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modalstyle">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="ticketModalLabel">Выберите количество билетов</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <span>Тип билета: </span>
-                                        <span th:text="${ticket.getTicketType()}"></span>
-                                        <p></p>
-                                        <span>Цена: </span>
-                                        <span th:text="${ticket.getTicketPrice()}"></span>
-                                        <p></p>
-                                        <span>Кол-во билетов</span>
-                                        <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>
-                                    </div>
-                                    <div class="modalfooter">
-                                        <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.id}">Далее</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="dataModal" th:id="'dataModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="dataModalLavel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modalstyle">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="dataModalLabel">Введите данные</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="first-name-for-buy-ticket">Имя: </label>
-                                            <input id="first-name-for-buy-ticket" class="form-control" name="firstname" type="text" placeholder="Иван"
-                                                   data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
-                                                   required="required"
-                                                   pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="last-name-for-buy-ticket">Фамилия: </label>
-                                            <input id="last-name-for-buy-ticket" class="form-control" name="lastname" type="text" placeholder="Иванов"
-                                                   data-error="Фамилия должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
-                                                   required="required"
-                                                   pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="add-user-email">Email</label>
-                                            <input type="email"
-                                                   class="form-control"
-                                                   data-error="Неверный формат Email"
-                                                   required="required"
-                                                   pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
-                                                   id="add-user-email"/>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="add-user-phone-number">Номер телефона</label>
-                                            <input type="tel"
-                                                   class="form-control"
-                                                   data-error='Введите телефон в допустимом формате (только цифры)'
-                                                   required="required"
-                                                   pattern="[0-9]*$"
-                                                   id="add-user-phone-number" placeholder="89000000000"/>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="modalfooter">
-                                        <div id = "ticketBuy">
-                                            <h1 id = "wer" th:with="someVariable = 2" th:value="opio">
-                                                <p th:with="someVariable=${ticket.ticketPrice + someVariable}">
-                                                    <span th:text="${someVariable}"></span>
-                                                <form id="yandexForm" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-                                                    <input type="hidden" id = "receiver" name="receiver" th:value="${event.getPocket()}" />
-                                                    <input type="hidden" id = "label" name="label" th:value="'# ' + ${ticket.id}" />
-                                                    <input type="hidden" name="quickpay-form" value="donate">
-                                                    <input type="hidden" id = "targets" name="targets" th:value="'# ' + ${ticket.id}"/>
-                                                    <input type="hidden" id = "sum" name="sum" data-type="number" th:value = "${someVariable}" />
-                                                    <input type="hidden" name="successURL" th:value="'http://localhost:8080/send/ticket?numSale=' + ${ticket.ticketCount}"/>
-                                                    <input type="hidden" name="need-fio" value="false"/>
-                                                    <input type="hidden" name="need-email" value="false"/>
-                                                    <input type="hidden" name="need-phone" value="false"/>
-                                                    <input type="hidden" name="need-address" value="false"/>
-                                                    <input type="hidden" name="paymentType" value="AC"/>
-                                                    <button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.id} + ',' + ${ticket.ticketPrice} + ',' + ${event.id} + ')'">Купить</button>
-                                                    </input>
-                                                </form>
-                                                </p>
-                                            </h1>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+<!--                    <div class="modal fade" id="ticketModal" th:id="'ticketModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">-->
+<!--                        <div class="modal-dialog modal-sm">-->
+<!--                            <div class="modalstyle">-->
+<!--                                <div class="modal-content">-->
+<!--                                    <div class="modal-header">-->
+<!--                                        <h5 class="modal-title" id="ticketModalLabel">Выберите количество билетов</h5>-->
+<!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                            <span aria-hidden="true">&times;</span>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                    <div class="modal-body">-->
+<!--                                        <span>Тип билета: </span>-->
+<!--                                        <span th:text="${ticket.getTicketType()}"></span>-->
+<!--                                        <p></p>-->
+<!--                                        <span>Цена: </span>-->
+<!--                                        <span th:text="${ticket.getTicketPrice()}"></span>-->
+<!--                                        <p></p>-->
+<!--                                        <span>Кол-во билетов</span>-->
+<!--                                        <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="modalfooter">-->
+<!--                                        <button class="btn btn-primary btn-lg" style="margin-top: 10px" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.id}">Далее</button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="openSidebar">-->
+
+<!--                    </div>-->
+<!--                    <th:block th:if="">-->
+<!--                        <script>-->
+
+<!--                        </script>-->
+<!--                    </th:block>-->
+
+<!--                    <div class="modal fade" id="dataModal" th:id="'dataModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="dataModalLavel" aria-hidden="true">-->
+<!--                        <div class="modal-dialog modal-sm">-->
+<!--                            <div class="modalstyle">-->
+<!--                                <div class="modal-content">-->
+<!--                                    <div class="modal-header">-->
+<!--                                        <h5 class="modal-title" id="dataModalLabel">Введите данные</h5>-->
+<!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                            <span aria-hidden="true">&times;</span>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                    <div class="modal-body">-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label for="first-name-for-buy-ticket">Имя: </label>-->
+<!--                                            <input id="first-name-for-buy-ticket" class="form-control" name="firstname" type="text" placeholder="Иван"-->
+<!--                                                   data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."-->
+<!--                                                   required="required"-->
+<!--                                                   pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label for="last-name-for-buy-ticket">Фамилия: </label>-->
+<!--                                            <input id="last-name-for-buy-ticket" class="form-control" name="lastname" type="text" placeholder="Иванов"-->
+<!--                                                   data-error="Фамилия должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."-->
+<!--                                                   required="required"-->
+<!--                                                   pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label for="add-user-email">Email</label>-->
+<!--                                            <input type="email"-->
+<!--                                                   class="form-control"-->
+<!--                                                   data-error="Неверный формат Email"-->
+<!--                                                   required="required"-->
+<!--                                                   pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"-->
+<!--                                                   id="add-user-email"/>-->
+<!--                                            <div class="help-block with-errors"></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label for="add-user-phone-number">Номер телефона</label>-->
+<!--                                            <input type="tel"-->
+<!--                                                   class="form-control"-->
+<!--                                                   data-error='Введите телефон в допустимом формате (только цифры)'-->
+<!--                                                   required="required"-->
+<!--                                                   pattern="[0-9]*$"-->
+<!--                                                   id="add-user-phone-number" placeholder="89000000000"/>-->
+<!--                                            <div class="help-block with-errors"></div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="modalfooter">-->
+<!--                                        <div id = "ticketBuy">-->
+<!--                                            <h1 id = "wer" th:with="someVariable = 2" th:value="opio">-->
+<!--                                                <p th:with="someVariable=${ticket.ticketPrice + someVariable}">-->
+<!--                                                    <span th:text="${someVariable}"></span>-->
+<!--                                                <form id="yandexForm" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">-->
+<!--                                                    <input type="hidden" id = "receiver" name="receiver" th:value="${event.getPocket()}" />-->
+<!--                                                    <input type="hidden" id = "label" name="label" th:value="'# ' + ${ticket.id}" />-->
+<!--                                                    <input type="hidden" name="quickpay-form" value="donate">-->
+<!--                                                    <input type="hidden" id = "targets" name="targets" th:value="'# ' + ${ticket.id}"/>-->
+<!--                                                    <input type="hidden" id = "sum" name="sum" data-type="number" th:value = "${someVariable}" />-->
+<!--                                                    <input type="hidden" name="successURL" th:value="'http://localhost:8080/send/ticket?numSale=' + ${ticket.ticketCount}"/>-->
+<!--                                                    <input type="hidden" name="need-fio" value="false"/>-->
+<!--                                                    <input type="hidden" name="need-email" value="false"/>-->
+<!--                                                    <input type="hidden" name="need-phone" value="false"/>-->
+<!--                                                    <input type="hidden" name="need-address" value="false"/>-->
+<!--                                                    <input type="hidden" name="paymentType" value="AC"/>-->
+<!--                                                    <button class="btn btn-primary" style="margin-top: 10px" th:onclick="'buyTicket('+ ${ticket.id} + ',' + ${ticket.ticketPrice} + ',' + ${event.id} + ')'">Купить</button>-->
+<!--                                                    </input>-->
+<!--                                                </form>-->
+<!--                                                </p>-->
+<!--                                            </h1>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="openSidebar">
-    <th:block th:each=""></th:block>
-</div>
+
 
 <!--<div class="fixed-plugin">-->
 <!--    <div class="dropdown show-dropdown">-->
