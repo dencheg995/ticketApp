@@ -6,6 +6,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.security.SocialUserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "client")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Client implements UserDetails {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +31,20 @@ public class Client implements UserDetails {
     @Column(name = "clinet_last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "username")
+    private String userName;
+
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "user_phone", nullable = false)
+    @Column(name = "user_phone")
     private String phoneNumber;
 
     @Column(name = "vk_id")
     private String vkId;
+
+    @Column(name = "access_token")
+    private String vkToken;
 
     private Double balance;
 
@@ -47,13 +54,13 @@ public class Client implements UserDetails {
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
-    @NotNull
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(name = "permissions",
-            joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})
-    private List<Role> role = new ArrayList<>();
+//    @NotNull
+//    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    @JoinTable(name = "permissions",
+//            joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},
+//            inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})
+//    private List<Role> role = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -71,12 +78,36 @@ public class Client implements UserDetails {
         this.events = events;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public String getVkToken() {
+        return vkToken;
+    }
+
+    public void setVkToken(String vkToken) {
+        this.vkToken = vkToken;
     }
 
     public String getFirstName() {
@@ -127,40 +158,6 @@ public class Client implements UserDetails {
         this.vkId = vkId;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.synchronizedList(role);
-    }
-
-    @Override
-    public String getUsername() {
-        return firstName + " " + lastName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return isEnabled;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -170,20 +167,20 @@ public class Client implements UserDetails {
         isEnabled = enabled;
     }
 
-    public List<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
+//    public List<Role> getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(List<Role> role) {
+//        this.role = role;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Client user = (Client) o;
+        AppUser user = (AppUser) o;
 
         if (!firstName.equals(user.firstName)) return false;
         if (!lastName.equals(user.lastName)) return false;

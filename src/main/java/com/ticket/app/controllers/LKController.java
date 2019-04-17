@@ -1,7 +1,7 @@
 package com.ticket.app.controllers;
 
 
-import com.ticket.app.module.Client;
+import com.ticket.app.module.AppUser;
 import com.ticket.app.module.Event;
 import com.ticket.app.module.Ticket;
 import com.ticket.app.service.interfaces.ClientService;
@@ -54,11 +54,11 @@ public class LKController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-    @GetMapping
-    public ModelAndView lkPage(@AuthenticationPrincipal Client clientSession) {
-        ModelAndView modelAndView = new ModelAndView("lk");
-        modelAndView.addObject("clientEvents", eventService.getAll());
-        return modelAndView;
-    }
+//    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+//    @GetMapping
+//    public ModelAndView lkPage(@AuthenticationPrincipal AppUser clientSession) {
+//        ModelAndView modelAndView = new ModelAndView("lk");
+//        modelAndView.addObject("clientEvents", eventService.getAll());
+//        return modelAndView;
+//    }
 }

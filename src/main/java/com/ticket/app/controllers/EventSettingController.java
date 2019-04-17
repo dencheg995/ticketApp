@@ -1,6 +1,6 @@
 package com.ticket.app.controllers;
 
-import com.ticket.app.module.Client;
+import com.ticket.app.module.AppUser;
 import com.ticket.app.module.Event;
 import com.ticket.app.module.Ticket;
 import com.ticket.app.service.interfaces.ClientService;
@@ -63,7 +63,7 @@ public class EventSettingController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/remove/event")
     public ResponseEntity removeEvent(@RequestParam Long eventId,
-                                        @AuthenticationPrincipal Client clientSession) {
+                                        @AuthenticationPrincipal AppUser clientSession) {
         eventService.removeEvent(eventId);
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -78,7 +78,7 @@ public class EventSettingController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event,
-                                      @AuthenticationPrincipal Client clientSession){
+                                      @AuthenticationPrincipal AppUser clientSession){
         Optional<List<Event>> events = eventService.getEventByClientId(clientSession.getId());
         events.get().add(event);
         clientSession.setEvents(events.get());

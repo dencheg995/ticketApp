@@ -43,6 +43,6 @@ function registerUser() {
 }
 
 function vkLogin() {
-    var url = "https://oauth.vk.com/authorize?client_id=6941019&display=page&redirect_uri=http://localhost:8080/vk/token&scope=offline,ads,notifications,groups,wall,questions,offers,pages,notes,docs,video,audio,photos,friends,notify&response_type=code&v=5.92"
+    var url = "https://oauth.vk.com/authorize?client_id=6941019&display=page&redirect_uri=http://localhost:8080/vk/token&scope=offline,questions,offers,pages,wall&response_type=code&v=5.92"
     window.open(url,  '_self');
 }

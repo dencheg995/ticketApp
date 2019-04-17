@@ -50,7 +50,7 @@
                             </p>
                         </div>
                         <div class="card-body">
-                            <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
+                            <form id="user-form" th:object="${myForm}" data-toggle="validator" role="form" onsubmit="return false;">
                                 <p><span id="message"></span></p>
                                 <div class="form-group input-group">
                                 <div class="input-group-prepend">
@@ -60,7 +60,7 @@
                                            data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
                                            required="required"
-                                           id="add-user-first-name" placeholder="Ваше имя"/>
+                                           id="add-user-first-name" placeholder="Ваше имя" th:field="*{firstName}"/>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group input-group">
@@ -71,8 +71,8 @@
                                            data-error="Фамилия должна начинаться с заглавной буквы, минимум из 2-х символов, можно использовать буквы, пробелы и дефис в составных фамилиях."
                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+(?:[- ][A-ZА-ЯЁa-zа-яё]+)*$"
                                            required="required"
-                                           id="add-user-last-name" placeholder="Ваша фамилия"/>
-                                    <div class="help-block with-errors"></div>
+                                           id="add-user-last-name" placeholder="Ваша фамилия" th:field="*{lastName}"/>
+                                    <div class="help-block with-errors" ></div>
                                 </div>
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
@@ -84,7 +84,7 @@
                                        required="required"
                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
                                        id="add-user-email" placeholder="Email адрес"/>
-                                    <div class="help-block with-errors"></div>
+                                    <div class="help-block with-errors" th:field="*{email}"></div>
                                 </div>
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
@@ -105,7 +105,7 @@
                                     <input type="password"
                                            class="form-control"
                                            required="required"
-                                           id="add-user-password"/>
+                                           id="add-user-password" />
                                 </div>
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
@@ -114,7 +114,7 @@
                                     <input type="password"
                                         class="form-control"
                                         required="required"
-                                        id="add-user-password"/>
+                                        id="add-user-password" />
                                     </div>
                                 <div class="row">
                                     <div class="col-md-6">

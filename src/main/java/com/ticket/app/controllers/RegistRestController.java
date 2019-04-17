@@ -1,6 +1,6 @@
 package com.ticket.app.controllers;
 
-import com.ticket.app.module.Client;
+import com.ticket.app.module.AppUser;
 import com.ticket.app.service.interfaces.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class RegistRestController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity addUser(@Valid @RequestBody Client user) {
+    public ResponseEntity addUser(@Valid @RequestBody AppUser user) {
         userService.addClient(user);
         logger.info("{} has register user: email {}", user.getFirstName(), user.getEmail());
         return ResponseEntity.ok(HttpStatus.OK);
