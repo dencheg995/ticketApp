@@ -1988,9 +1988,10 @@ textarea.form-control {
   margin-left: -1.25rem;
 }
 .input-group-addon {
-  padding: 2px 2px;
+  padding: 5px 5px;
   font-size: 18px;
   font-weight: bold;
+  width: 50px;
   line-height: 1;
   color: #ffffff;
   text-align: center;
