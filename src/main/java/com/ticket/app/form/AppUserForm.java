@@ -8,6 +8,7 @@ public class AppUserForm {
 
 	private Long userId;
 	private String email;
+	private String tel;
 	private String userName;
 
 	private String firstName;
@@ -17,6 +18,9 @@ public class AppUserForm {
 	private String signInProvider;
 	private String providerUserId;
 
+	private String passwordRep;
+
+
 	public AppUserForm() {
 
 	}
@@ -25,9 +29,9 @@ public class AppUserForm {
 		UserProfile socialUserProfile = connection.fetchUserProfile();
 		this.userId = null;
 		this.email = socialUserProfile.getEmail();
-		this.userName = socialUserProfile.getUsername();
 		this.firstName = socialUserProfile.getFirstName();
 		this.lastName = socialUserProfile.getLastName();
+		this.userName = socialUserProfile.getUsername();
 
 		ConnectionKey key = connection.getKey();
 		this.signInProvider = key.getProviderId();
@@ -50,8 +54,24 @@ public class AppUserForm {
 		this.email = email;
 	}
 
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
 	public String getUserName() {
 		return userName;
+	}
+
+	public String getPasswordRep() {
+		return passwordRep;
+	}
+
+	public void setPasswordRep(String passwordRep) {
+		this.passwordRep = passwordRep;
 	}
 
 	public void setUserName(String userName) {

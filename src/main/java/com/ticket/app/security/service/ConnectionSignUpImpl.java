@@ -21,7 +21,6 @@ public class ConnectionSignUpImpl implements ConnectionSignUp {
 	// if it does not already exist.
 	@Override
 	public String execute(Connection<?> connection) {
-
 		AppUser account = appUserDAO.createAppUser(connection);
 		return account.getUserName();
 	}

@@ -54,11 +54,4 @@ public class LKController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-//    @GetMapping
-//    public ModelAndView lkPage(@AuthenticationPrincipal AppUser clientSession) {
-//        ModelAndView modelAndView = new ModelAndView("lk");
-//        modelAndView.addObject("clientEvents", eventService.getAll());
-//        return modelAndView;
-//    }
 }

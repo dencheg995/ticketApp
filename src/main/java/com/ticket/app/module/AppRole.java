@@ -10,7 +10,7 @@ public class AppRole {
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Role_Id", nullable = false)
 	private Long roleId;
 

@@ -45,9 +45,10 @@ public class AppUserDAO {
 	public AppUser findAppUserByUserName(String userName) {
         try {
             String sql = "select e from " + AppUser.class.getName() + " e " 
-                    + " where e.userName = :userName ";
+                    + " where e.userName = :userName or e.email = :email";
             Query query = entityManager.createQuery(sql, AppUser.class);
             query.setParameter("userName", userName);
+            query.setParameter("email", userName);
             return (AppUser) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
@@ -117,10 +118,11 @@ public class AppUserDAO {
 	    public AppUser registerNewUserAccount(AppUserForm appUserForm, List<String> roleNames) {
 			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 			AppUser appUser = new AppUser();
-	        appUser.setUserName(appUserForm.getUserName());
+	        appUser.setPhoneNumber(appUserForm.getTel());
 	        appUser.setEmail(appUserForm.getEmail());
 	        appUser.setFirstName(appUserForm.getFirstName());
 	        appUser.setLastName(appUserForm.getLastName());
+	        appUser.setUserName(appUserForm.getUserName());
 	        appUser.setEnabled(true);
 	        String encrytedPassword = bCryptPasswordEncoder.encode(appUserForm.getPassword());
 	        appUser.setPassword("{bcrypt}"+encrytedPassword);
