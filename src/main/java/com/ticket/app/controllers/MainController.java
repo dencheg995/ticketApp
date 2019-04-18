@@ -6,11 +6,13 @@ import com.ticket.app.exeptions.user.UserExistsException;
 import com.ticket.app.form.AppUserForm;
 import com.ticket.app.module.AppUser;
 import com.ticket.app.module.Role;
-import com.ticket.app.security.util.SecurityUtil;
+import com.ticket.app.repository.RoleRepositories;
 import com.ticket.app.security.util.WebUtils;
 import com.ticket.app.service.interfaces.ClientService;
 import com.ticket.app.service.interfaces.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,14 +30,14 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @Transactional
 public class MainController {
 
 	private final ClientService clientService;
+
+	private final RoleRepositories roleRepositories;
 
 	@Autowired
 	private ConnectionFactoryLocator connectionFactoryLocator;
@@ -45,8 +47,9 @@ public class MainController {
 
 	private final EventService eventService;
 
-	public MainController(ClientService clientService, EventService eventService) {
+	public MainController(ClientService clientService, RoleRepositories roleRepositories, EventService eventService) {
 		this.clientService = clientService;
+		this.roleRepositories = roleRepositories;
 		this.eventService = eventService;
 	}
 
@@ -58,6 +61,17 @@ public class MainController {
 			return "redirect:/lk";
 		}
 
+	}
+
+	@GetMapping("/role/add/for/our/app")
+	public ResponseEntity addRole() {
+		Role roleForAdmin = new Role();
+		roleForAdmin.setRoleName("ADMIN");
+		roleRepositories.saveAndFlush(roleForAdmin);
+		Role roleForUser = new Role();
+		roleForUser.setRoleName("USER");
+		roleRepositories.saveAndFlush(roleForUser);
+		return ResponseEntity.ok(HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
