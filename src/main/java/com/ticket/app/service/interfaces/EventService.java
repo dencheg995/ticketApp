@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventService {
+
     Event registEvent(Event event);
 
     Event getEvent(Long id);

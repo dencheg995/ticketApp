@@ -29,7 +29,7 @@ public class Role implements GrantedAuthority {
 	@JoinTable(name = "permissions",
 			joinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))},
 			inverseJoinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))})
-	private List<Client> clients = new ArrayList<>();
+	private List<AppUser> clients = new ArrayList<>();
 
 	public Role() {
 	}
@@ -38,11 +38,11 @@ public class Role implements GrantedAuthority {
 		this.roleName = roleName;
 	}
 
-	public List<Client> getClients() {
+	public List<AppUser> getClients() {
 		return clients;
 	}
 
-	public void setClients(List<Client> clients) {
+	public void setClients(List<AppUser> clients) {
 		this.clients = clients;
 	}
 

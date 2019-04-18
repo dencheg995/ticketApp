@@ -19,13 +19,10 @@ public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
 
-    private final TicketRepository ticketRepository;
-
     private static Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
 
-    public EventServiceImpl(EventRepository eventRepository, TicketRepository ticketRepository) {
+    public EventServiceImpl(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
-        this.ticketRepository = ticketRepository;
     }
 
     @Override

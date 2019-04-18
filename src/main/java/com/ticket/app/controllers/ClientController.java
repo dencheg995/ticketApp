@@ -1,6 +1,7 @@
 package com.ticket.app.controllers;
 
-import com.ticket.app.module.Client;
+
+import com.ticket.app.module.AppUser;
 import com.ticket.app.module.POJOUser;
 import com.ticket.app.service.interfaces.ClientService;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class ClientController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/edit/user")
-    public ModelAndView editUser(@AuthenticationPrincipal Client clientSession) {
+    public ModelAndView editUser(@AuthenticationPrincipal AppUser clientSession) {
         ModelAndView modelAndView = new ModelAndView("settings");
         modelAndView.addObject("user", clientService.getClientById(clientSession.getId()));
         return modelAndView;

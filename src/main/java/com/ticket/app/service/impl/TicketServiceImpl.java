@@ -28,7 +28,6 @@ public class TicketServiceImpl implements TicketService {
         return Optional.ofNullable(ticketRepository.getTicketsByEventId(eventId));
     }
 
-
     public Ticket getTicket(Long id) {
         return ticketRepository.getOne(id);
     }
