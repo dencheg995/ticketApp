@@ -1958,6 +1958,23 @@ textarea.form-control {
   margin-bottom: 1rem;
 }
 
+.footer{
+  position: fixed;
+  right: 0;
+  background-color: #27293D;
+  bottom: 0;
+  width: 20%;
+  height: 10%;
+}
+.modalstyle{
+  -webkit-box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.75);
+  box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.75);
+  border-radius: 17px 17px 17px 17px;
+  -moz-border-radius: 17px 17px 17px 17px;
+  -webkit-border-radius: 17px 17px 17px 17px;
+  border: 0px solid #000000;
+}
 .form-text {
   display: block;
   margin-top: 0.25rem;
@@ -7804,10 +7821,11 @@ button.bg-darker:focus {
 
 .fixed-bottom {
   position: fixed;
-  right: 0;
+  height: 18%;
+  right: 45%;
   bottom: 0;
-  left: 0;
-  z-index: 1030;
+  left: 25%;
+  width: 30%;
 }
 
 @supports (position: sticky) {
