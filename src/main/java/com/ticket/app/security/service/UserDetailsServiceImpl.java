@@ -43,15 +43,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("User " + userName + " was not found in the database");
 		}
 		System.out.println("Found User: " + appUser);
-//		List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getId());
-//		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-//		if (roleNames != null) {
-//			for (String role : roleNames) {
-//				GrantedAuthority authority = new SimpleGrantedAuthority(role);
-//				grantList.add(authority);
-//			}
-//		}
-	//	SocialUserDetailsImpl userDetails = new SocialUserDetailsImpl(appUser);
 		return appUser;
 	}
 

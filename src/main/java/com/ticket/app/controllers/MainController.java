@@ -138,8 +138,7 @@ public class MainController {
 						= new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
 				providerSignInUtils.doPostSignUp(registered.getVkId(), request);
 			}
-			SecurityUtil.logInUser(registered);
-			return "redirect:/lk";
+			return "redirect:/";
 		}
 		else {
 			model.addAttribute("errorMessage", "Error ".concat(new PassworNoEquals().getMessage()));
