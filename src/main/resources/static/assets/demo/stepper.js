@@ -4,7 +4,7 @@
 (function ($) {
 
     "use strict";
-
+    $('.input-group-addon').prop('disabled', true);
     $.fn.stepper = function (options) {
 
         var timeout = void 0;

@@ -28,31 +28,34 @@
 <body class="">
 <div class="wrapper">
     <div class="main-panel">
-        <div th:replace="fragments/saleNavbar::saleNavbar"></div>
-        <div class="content">
+        <div class="content" style="width: 788px; height: 600px;">
             <div th:each = "event : ${event}" th:value="${event.ticketList}">
                 <div th:each="ticket : ${event.getTicketList()}">
                     <div th:if="${ticket.getTicketCount()} > 0">
-                        <div class="row">
+                        <div class="row" style="width: 758px; height: 130px;">
                             <div class="col-md-12">
                                 <div class="card" style="margin-top: 5px">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="padding-left: 0;">
                                                 <h4 class="title" style="font-weight: bold" th:text = "${ticket.getTicketType()}"></h4>
                                                 <p style="font-weight: bold">Входной билет</p>
                                             </div>
                                             <div class="col-md-4">
+
                                             </div>
                                             <div class="col-md-2">
                                                 <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
                                             </div>
-                                            <div class="col-md-3" style="margin-top: 9px">
+                                            <div class="col-md-3">
+<!--                                                <span class="minus bg-dark">-</span>-->
+<!--                                                <input style="color: white; text-align: center" type="number" class="count" name="qty" value="1"/>-->
+<!--                                                <span class="plus bg-dark">+</span>-->
+
                                                 <div class="js-spinner">
-                                                    <button class="btn-yahoo badge" id="d" type="button" name="down" spinner-button="down" th:onclick="'getSum('+ ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')' ">Minus</button>
-<!--                                                    <input id="currentCount" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>-->
-                                                    <span id="values" value="0"></span>
-                                                    <button class="btn-yahoo badge" id="u" type="button" name="up" spinner-button="up" th:onclick="'getSum('+ ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'">Plus</button>
+                                                    <button class="btn-yahoo badge" id="d" type="button" name="down" spinner-button="down" th:onclick="'getSum('+ ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')' ">-</button>
+                                                    <input id="currentCount" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
+                                                    <button class="btn-yahoo badge" id="u" type="button" name="up" spinner-button="up" th:onclick="'getSum('+ ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'">+</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,14 +131,14 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="first-name-for-buy-ticket">Имя: </label>
-                                                    <input id="first-name-for-buy-ticket" class="form-control" name="firstname" type="text" placeholder="Иван"
+                                                    <input id="first-name-for-buy-ticket" class="form-control" style="color: #000" name="firstname" type="text" placeholder="Иван"
                                                            data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="last-name-for-buy-ticket">Фамилия: </label>
-                                                    <input id="last-name-for-buy-ticket" class="form-control" name="lastname" type="text" placeholder="Иванов"
+                                                    <input id="last-name-for-buy-ticket" class="form-control" style="color: #000" name="lastname" type="text" placeholder="Иванов"
                                                            data-error="Фамилия должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
@@ -145,6 +148,7 @@
                                                     <input type="email"
                                                            class="form-control"
                                                            data-error="Неверный формат Email"
+                                                           style="color: #000"
                                                            required="required"
                                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
                                                            id="add-user-email"/>
@@ -156,6 +160,7 @@
                                                            class="form-control"
                                                            data-error='Введите телефон в допустимом формате (только цифры)'
                                                            required="required"
+                                                           style="color: #000"
                                                            pattern="[0-9]*$"
                                                            id="add-user-phone-number" placeholder="89000000000"/>
                                                     <div class="help-block with-errors"></div>
@@ -165,10 +170,11 @@
                                                     <input id="promo-for-buy-ticket" class="form-control" name="promo" type="text" placeholder="ABCDF"
                                                            data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
+                                                           style="color: #000"
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                                 </div>
                                             </div>
-                                            <div class="modalfooter">
+                                            <div class="modal-footer">
                                                 <button class="btn btn-primary" data-toggle="modal" href="#saleModal" role="button" th:href="'#saleModal'+${ticket.id}">Подтвердить бронирование</button>
 
                                             </div>
@@ -254,11 +260,11 @@
                         </div>
 
                         <div class="fixed-bottom">
-                            <div class="card">
+                            <div class="card" style="width: 231px; height: 108px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <span>0 rub.</span>
+                                            <div class="col-md-3" style="margin-top: 10px;">
+                                                <span style="color: #fff; font-size: 18px;">0 Р</span>
                                             </div>
                                             <div class="col-md-4">
                                                 <button class="btn btn-primary" data-toggle="modal" href="#ticketModal" th:href="'#ticketModal'+${ticket.id}" role="button" >Купить</button>
@@ -290,7 +296,9 @@
 <!--                                            <div class="col-md-1" style="margin-top: 18px">-->
 <!--                                                <div class="up"><i class="tim-icons tim-icons-20 icon-simple-add" style="color: white"></i></div>-->
 <!--                                            </div>-->
+<script>
 
+</script>
 <script src="/assets/demo/stepper.js"></script>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>
 <script type="text/javascript" th:src="@{/js/event.js}"></script>

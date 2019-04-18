@@ -1014,16 +1014,7 @@ td:nth-child(3){
 	color: #fff;
 	background: #000;
 }
-.count{
-	width: 34%;
-	display: inline-block;
-	text-align: center;
-	float: right;
-	font-weight: 300;
-	font-size: 29px;
-	margin-top: 4px;
 
-}
 .info.count{
 	width: 6%;
 }
