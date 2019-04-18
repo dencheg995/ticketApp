@@ -1,9 +1,8 @@
 package com.ticket.app.dao;
 
 
-import com.ticket.app.module.AppRole;
 import com.ticket.app.module.AppUser;
-import com.ticket.app.module.UserRole;
+import com.ticket.app.module.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,21 +21,21 @@ public class AppRoleDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<String> getRoleNames(Long userId) {
-        String sql = "Select ur.appRole.roleName from " + UserRole.class.getName() + " ur "
-                + " where ur.appUser.id = :id ";
+        String sql = "Select ur.roleName from " + Role.class.getName() + " ur "
+                + "join ur.appUser a where a.id = :id ";
         Query query = this.entityManager.createQuery(sql, String.class);
         query.setParameter("id", userId);
         return query.getResultList();
     }
 	
-	 public AppRole findAppRoleByName(String roleName) {
+	 public Role findAppRoleByName(String roleName) {
 	        try {
-	            String sql = "Select e from " + AppRole.class.getName() + " e " 
+	            String sql = "Select e from " + Role.class.getName() + " e "
 	                    + " where e.roleName = :roleName ";
 	 
-	            Query query = this.entityManager.createQuery(sql, AppRole.class);
+	            Query query = this.entityManager.createQuery(sql, Role.class);
 	            query.setParameter("roleName", roleName);
-	            return (AppRole) query.getSingleResult();
+	            return (Role) query.getSingleResult();
 	        } catch (NoResultException e) {
 	            return null;
 	        }
@@ -45,18 +44,18 @@ public class AppRoleDAO {
 	 public void createRoleFor(AppUser appUser, List<String> roleNames) {
 	        //
 	        for (String roleName : roleNames) {
-	            AppRole role = this.findAppRoleByName(roleName);
+	            Role role = this.findAppRoleByName(roleName);
 	            if (role == null) {
-	                role = new AppRole();
-	                role.setRoleName(AppRole.ROLE_USER);
+	                role = new Role();
+	                role.setRoleName("USER");
 	                this.entityManager.persist(role);
 	                this.entityManager.flush();
 	            }
-	            UserRole userRole = new UserRole();
-	            userRole.setAppRole(role);
-	            userRole.setAppUser(appUser);
-	            this.entityManager.persist(userRole);
-	            this.entityManager.flush();
+//	            UserRole userRole = new UserRole();
+//	            userRole.setAppRole(role);
+//	            userRole.setAppUser(appUser);
+//	            this.entityManager.persist(userRole);
+//	            this.entityManager.flush();
 	        }
 	    }
 	 

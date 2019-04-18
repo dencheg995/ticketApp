@@ -1,11 +1,9 @@
 package com.ticket.app.dao;
 
 import com.ticket.app.form.AppUserForm;
-import com.ticket.app.module.AppRole;
 import com.ticket.app.module.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.connect.UserProfile;
@@ -45,7 +43,7 @@ public class AppUserDAO {
 	public AppUser findAppUserByUserName(String userName) {
         try {
             String sql = "select e from " + AppUser.class.getName() + " e " 
-                    + " where e.userName = :userName or e.email = :email";
+                    + " where e.vkId = :userName or e.email = :email";
             Query query = entityManager.createQuery(sql, AppUser.class);
             query.setParameter("userName", userName);
             query.setParameter("email", userName);
@@ -101,15 +99,15 @@ public class AppUserDAO {
 	        String encrytedPassword = bCryptPasswordEncoder.encode(randomPassword);
 	        appUser = new AppUser();
 	        appUser.setEnabled(true);
-	        appUser.setPassword("{bcrypt}"+encrytedPassword);
-	        appUser.setUserName(userName);
+	        appUser.setPassword(encrytedPassword);
+	        appUser.setVkId(userName);
 	        appUser.setEmail(email);
 	        appUser.setFirstName(userProfile.getFirstName());
 	        appUser.setLastName(userProfile.getLastName());
 	        this.entityManager.persist(appUser);
 	        // Create default Role
 	        List<String> roleNames = new ArrayList<String>();
-	        roleNames.add(AppRole.ROLE_USER);
+	        roleNames.add("USER");
 	        this.appRoleDAO.createRoleFor(appUser, roleNames);
 	  
 	        return appUser;
@@ -122,10 +120,10 @@ public class AppUserDAO {
 	        appUser.setEmail(appUserForm.getEmail());
 	        appUser.setFirstName(appUserForm.getFirstName());
 	        appUser.setLastName(appUserForm.getLastName());
-	        appUser.setUserName(appUserForm.getUserName());
+	        appUser.setVkId(appUserForm.getUserName());
 	        appUser.setEnabled(true);
 	        String encrytedPassword = bCryptPasswordEncoder.encode(appUserForm.getPassword());
-	        appUser.setPassword("{bcrypt}"+encrytedPassword);
+	        appUser.setPassword(encrytedPassword);
 	        this.entityManager.persist(appUser);
 	        this.entityManager.flush();
 	  

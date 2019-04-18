@@ -1,14 +1,15 @@
 package com.ticket.app.controllers;
 
 
-import com.ticket.app.dao.AppUserDAO;
+import com.ticket.app.exeptions.PassworNoEquals;
+import com.ticket.app.exeptions.user.UserExistsException;
 import com.ticket.app.form.AppUserForm;
-import com.ticket.app.module.AppRole;
 import com.ticket.app.module.AppUser;
+import com.ticket.app.module.Role;
 import com.ticket.app.security.util.SecurityUtil;
 import com.ticket.app.security.util.WebUtils;
+import com.ticket.app.service.interfaces.ClientService;
 import com.ticket.app.service.interfaces.EventService;
-import com.ticket.app.validator.AppUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -22,13 +23,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +35,7 @@ import java.util.List;
 @Transactional
 public class MainController {
 
-	@Autowired
-	private AppUserDAO appUserDAO;
+	private final ClientService clientService;
 
 	@Autowired
 	private ConnectionFactoryLocator connectionFactoryLocator;
@@ -46,27 +43,11 @@ public class MainController {
 	@Autowired
 	private UsersConnectionRepository connectionRepository;
 
-	@Autowired
-	private AppUserValidator appUserValidator;
-
 	private final EventService eventService;
 
-	public MainController(EventService eventService) {
+	public MainController(ClientService clientService, EventService eventService) {
+		this.clientService = clientService;
 		this.eventService = eventService;
-	}
-
-	@InitBinder
-	protected void initBinder(WebDataBinder dataBinder) {
-
-		Object target = dataBinder.getTarget();
-		if (target == null) {
-			return;
-		}
-		System.out.println("Target=" + target);
-
-		if (target.getClass() == AppUserForm.class) {
-			dataBinder.setValidator(appUserValidator);
-		}
 	}
 
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
@@ -78,7 +59,6 @@ public class MainController {
 		}
 
 	}
-
 
 	@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
 	@RequestMapping(value = "/lk", method = RequestMethod.GET)
@@ -97,21 +77,17 @@ public class MainController {
 
 		if (principal != null) {
 			UserDetails loginedUser = (UserDetails) ((Authentication) principal).getPrincipal();
-
 			String userInfo = WebUtils.toString(loginedUser);
-
 			model.addAttribute("userInfo", userInfo);
-
 			String message = "Hi " + principal.getName() //
 					+ "<br> You do not have permission to access this page!";
 			model.addAttribute("message", message);
-
 		}
 		return "403Page";
 	}
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login() {
 		return "login";
 	}
 
@@ -120,14 +96,12 @@ public class MainController {
 		return "redirect:/login";
 	}
 
-
-
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.GET)
 	public String signupPage(WebRequest request, Model model) {
 		ProviderSignInUtils providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator,
 				connectionRepository);
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-		AppUserForm myForm = null;
+		AppUserForm myForm;
 		if (connection != null) {
 			myForm = new AppUserForm(connection);
 		} else {
@@ -138,43 +112,38 @@ public class MainController {
 	}
 
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
-	public String signupSave(WebRequest request, //
-							 Model model, //
-							 @Validated AppUserForm appUserForm, //
+	public String signupSave(WebRequest request,
+							 Model model,
+							 @ModelAttribute("myForm") @Validated AppUserForm appUserForm,
 							 BindingResult result) {
-
 		if (appUserForm.getPassword().equals(appUserForm.getPasswordRep())) {
-
-			// Validation error.
 			if (result.hasErrors()) {
 				return "user-registration";
 			}
-
-			List<String> roleNames = new ArrayList<String>();
-			roleNames.add(AppRole.ROLE_USER);
-
-			AppUser registered = null;
-
+			AppUser registered;
 			try {
-				registered = appUserDAO.registerNewUserAccount(appUserForm, roleNames);
+				if (clientService.getClientByEmail(appUserForm.getEmail()) != null & clientService.getByVkId(appUserForm.getUserName()) != null) {
+					model.addAttribute("errorMessage", "Error ".concat(new UserExistsException().getMessage()));
+					return "user-registration";
+				} else {
+					registered = clientService.addClient(appUserForm);
+				}
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				model.addAttribute("errorMessage", "Error " + ex.getMessage());
 				return "user-registration";
 			}
-
 			if (appUserForm.getSignInProvider() != null) {
 				ProviderSignInUtils providerSignInUtils //
 						= new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
-				providerSignInUtils.doPostSignUp(registered.getUserName(), request);
+				providerSignInUtils.doPostSignUp(registered.getVkId(), request);
 			}
-
-			SecurityUtil.logInUser(registered, roleNames);
-
+			SecurityUtil.logInUser(registered);
 			return "redirect:/lk";
 		}
 		else {
+			model.addAttribute("errorMessage", "Error ".concat(new PassworNoEquals().getMessage()));
 			return "user-registration";
 		}
-		}
+	}
 }

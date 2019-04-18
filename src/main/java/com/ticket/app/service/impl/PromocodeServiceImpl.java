@@ -14,7 +14,6 @@ public class PromocodeServiceImpl implements PromocodeService {
         this.promocodeRepository = promocodeRepository;
     }
 
-
     @Override
     public Promocode addPromo(Promocode promocode) {
         return promocodeRepository.saveAndFlush(promocode);
@@ -27,6 +26,5 @@ public class PromocodeServiceImpl implements PromocodeService {
 
     @Override
     public void remove(Long id) {
-
     }
 }

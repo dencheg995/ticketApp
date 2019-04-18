@@ -15,12 +15,10 @@ public class UserConnection implements Serializable {
 	@Id
     @Column(name = "Userid", length = 255, nullable = false)
     private String userId;
- 
-    @Id
+
     @Column(name = "Providerid", length = 255, nullable = false)
     private String providerId;
- 
-    @Id
+
     @Column(name = "Provideruserid", length = 255, nullable = false)
     private String providerUserId;
  

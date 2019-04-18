@@ -1,6 +1,5 @@
 package com.ticket.app.security.handlers;
 
-import com.ticket.app.module.AppRole;
 import com.ticket.app.module.AppUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,10 +51,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     protected String determineTargetUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         AppUser user = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (authorities.contains(new AppRole("ROLE_ADMIN"))) {
+        if (authorities.contains("ADMIN")) {
             logger.info(user.getEmail() + " has been logged in like ADMIN");
             return "/lk";
-        } else if (authorities.contains(new AppRole("ROLE_USER"))) {
+        } else if (authorities.contains("ADMIN")) {
             logger.info(user.getEmail() + " has been logged in like USER");
             return "/lk";
         } else {

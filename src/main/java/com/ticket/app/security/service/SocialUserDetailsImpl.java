@@ -2,6 +2,7 @@ package com.ticket.app.security.service;
 
 
 import com.ticket.app.module.AppUser;
+import com.ticket.app.module.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.social.security.SocialUserDetails;
@@ -10,18 +11,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class SocialUserDetailsImpl implements SocialUserDetails {
+public class SocialUserDetailsImpl implements SocialUserDetails{
 
 	private static final long serialVersionUID = 1L;
 	private List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 	private AppUser appUser;
 
-	public SocialUserDetailsImpl(AppUser appUser, List<String> roleNames) {
+	public SocialUserDetailsImpl(AppUser appUser) {
 		this.appUser = appUser;
 
-		for (String roleName : roleNames) {
-
-			GrantedAuthority grant = new SimpleGrantedAuthority(roleName);
+		for (Role roleName : appUser.getRole()) {
+			GrantedAuthority grant = new SimpleGrantedAuthority(roleName.getRoleName());
 			this.list.add(grant);
 		}
 	}
@@ -33,7 +33,7 @@ public class SocialUserDetailsImpl implements SocialUserDetails {
 
 	@Override
 	public String getUsername() {
-		return appUser.getUserName();
+		return appUser.getVkId();
 	}
 
 	@Override

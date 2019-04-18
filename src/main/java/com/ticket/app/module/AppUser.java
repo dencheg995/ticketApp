@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "client")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class AppUser {
+public class AppUser implements SocialUserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,6 @@ public class AppUser {
     @Column(name = "clinet_last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "username")
-    private String userName;
-
     @Column(name = "email", unique = true)
     private String email;
 
@@ -43,9 +40,6 @@ public class AppUser {
     @Column(name = "vk_id")
     private String vkId;
 
-    @Column(name = "access_token")
-    private String vkToken;
-
     private Double balance;
 
     @Column(name = "password", nullable = false)
@@ -54,15 +48,15 @@ public class AppUser {
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
-//    @NotNull
-//    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @JoinTable(name = "permissions",
-//            joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},
-//            inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})
-//    private List<Role> role = new ArrayList<>();
+    @NotNull
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class , cascade=CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(name = "permissions",
+            joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_ROLE"))})
+    private List<Role> role = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     @JoinTable(name = "client_event",
@@ -78,14 +72,6 @@ public class AppUser {
         this.events = events;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public Long getId() {
         return id;
     }
@@ -94,20 +80,45 @@ public class AppUser {
         this.id = id;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.synchronizedList(role);
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public boolean isEnabled() {
+    @Override
+    public String getUsername() {
+        return vkId;
+    }
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
+        this.role = role;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
         return isEnabled;
     }
 
-    public String getVkToken() {
-        return vkToken;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setVkToken(String vkToken) {
-        this.vkToken = vkToken;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     public String getFirstName() {
@@ -158,7 +169,6 @@ public class AppUser {
         this.vkId = vkId;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -167,13 +177,6 @@ public class AppUser {
         isEnabled = enabled;
     }
 
-//    public List<Role> getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(List<Role> role) {
-//        this.role = role;
-//    }
 
     @Override
     public boolean equals(Object o) {
@@ -195,5 +198,10 @@ public class AppUser {
         result = 31 * result + email.hashCode();
         result = 31 * result + phoneNumber.hashCode();
         return result;
+    }
+
+    @Override
+    public String getUserId() {
+        return vkId;
     }
 }

@@ -12,9 +12,9 @@ import java.util.List;
 
 public class SecurityUtil {
 
-	public static void logInUser(AppUser user, List<String> roleNames) {
-		SocialUserDetails userDetails = new SocialUserDetailsImpl(user, roleNames);
-		Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
+	public static void logInUser(AppUser user) {
+		SocialUserDetails userDetails = new SocialUserDetailsImpl(user);
+		Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 }

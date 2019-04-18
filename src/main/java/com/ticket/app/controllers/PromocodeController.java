@@ -35,7 +35,6 @@ public class PromocodeController {
         return modelAndView;
     }
 
-
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping(value = "/add-promo", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity addPromo(@RequestBody PromoPOJO promoPOJO) {

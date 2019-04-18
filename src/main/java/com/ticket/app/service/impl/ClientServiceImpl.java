@@ -2,22 +2,22 @@ package com.ticket.app.service.impl;
 
 
 import com.ticket.app.exeptions.user.UserExistsException;
+import com.ticket.app.form.AppUserForm;
 import com.ticket.app.module.AppUser;
 
 import com.ticket.app.module.POJOUser;
+import com.ticket.app.module.Role;
 import com.ticket.app.repository.ClientRepository;
+import com.ticket.app.repository.RoleRepositories;
 import com.ticket.app.service.interfaces.ClientService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.UserProfile;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,52 +28,12 @@ public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
 
+    private final RoleRepositories roleRepositories;
 
-    public ClientServiceImpl(ClientRepository clientRepository) {
+
+    public ClientServiceImpl(ClientRepository clientRepository, RoleRepositories roleRepositories) {
         this.clientRepository = clientRepository;
-    }
-
-    @Override
-    public AppUser addClient(AppUser user) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        logger.info("{}: adding of a new user...", ClientServiceImpl.class.getName());
-        if (user.getEmail() != null) {
-            phoneNumberValidation(user);
-            if (clientRepository.getClientByEmail(user.getEmail()) != null) {
-                logger.warn("{}: user with email {} is already exist", ClientServiceImpl.class.getName(), user.getEmail());
-                throw new UserExistsException();
-            }
-        }
-        user.setPassword(bCryptPasswordEncoder.encode((user.getPassword())));
-
-        logger.info("{}: user saved successfully", ClientServiceImpl.class.getName());
-        return clientRepository.saveAndFlush(user);
-    }
-
-    @Override
-    public AppUser addClientConnection(Connection<?> connection) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        AppUser client = new AppUser();
-        UserProfile userProfile = connection.fetchUserProfile();
-        if (clientRepository.getClientByEmail(userProfile.getEmail()) != null) {
-            logger.warn("{}: user with email {} is already exist", ClientServiceImpl.class.getName(), userProfile.getEmail());
-            throw new UserExistsException();
-        }
-
-        String randomPassword = UUID.randomUUID().toString().substring(0, 5);
-        String encrytedPassword = bCryptPasswordEncoder.encode(randomPassword);
-
-        client.setFirstName(userProfile.getFirstName());
-        client.setLastName(userProfile.getLastName());
-        client.setEmail(userProfile.getEmail());
-        client.setPassword(encrytedPassword);
-        client.setVkId(userProfile.getId());
-        clientRepository.saveAndFlush(client);
-
-
-        return client;
+        this.roleRepositories = roleRepositories;
     }
 
     @Override
@@ -98,8 +58,37 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Optional<AppUser> getClientByEmailOrPhoneNumberOrVkToken(String email, String phone, String vkToken) {
-        return Optional.ofNullable(clientRepository.getClientByEmailOrPhoneNumberOrVkToken(email, phone, vkToken));
+    public AppUser addClient(AppUserForm appUserForm) {
+        logger.info("{}: adding of a new user...", ClientServiceImpl.class.getName());
+        List<Role> roleList = roleRepositories.getRoles("USER");
+        AppUser appUser = new AppUser();
+        appUser.setPhoneNumber(appUserForm.getTel());
+        appUser.setEmail(appUserForm.getEmail());
+        appUser.setFirstName(appUserForm.getFirstName());
+        appUser.setLastName(appUserForm.getLastName());
+        appUser.setVkId(appUserForm.getUserName());
+        appUser.setEnabled(true);
+        appUser.setRole(roleList);
+        phoneNumberValidation(appUser);
+        if (clientRepository.getClientByEmail(appUser.getEmail()) != null) {
+            logger.warn("{}: user with email {} is already exist", ClientServiceImpl.class.getName(), appUser.getEmail());
+            throw new UserExistsException();
+        }
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        appUser.setPassword(bCryptPasswordEncoder.encode(appUserForm.getPassword()));
+
+        logger.info("{}: user saved successfully", ClientServiceImpl.class.getName());
+        return clientRepository.save(appUser);
+    }
+
+    @Override
+    public Optional<AppUser> getByEmailOrPhoneOrVkId(String email, String phone, String vkId) {
+        return Optional.ofNullable(clientRepository.getByEmailOrPhoneNumberOrVkId(email, phone, vkId));
+    }
+
+    @Override
+    public Optional<AppUser> getByVkId(String vkId) {
+        return Optional.ofNullable(clientRepository.getByVkId(vkId));
     }
 
     @Override

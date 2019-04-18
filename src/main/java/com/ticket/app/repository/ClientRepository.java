@@ -9,7 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface ClientRepository extends JpaRepository<AppUser, Long> {
 
-    AppUser getClientByEmailOrPhoneNumberOrVkToken(String email, String phoneNumber, String vkToken);
+    AppUser getByEmailOrPhoneNumberOrVkId(String email, String phone, String vkId);
+
+    AppUser getByVkId(String vkId);
 
     AppUser getClientByEmail(String email);
 

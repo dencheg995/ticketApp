@@ -22,7 +22,7 @@ public class ConnectionSignUpImpl implements ConnectionSignUp {
 	@Override
 	public String execute(Connection<?> connection) {
 		AppUser account = appUserDAO.createAppUser(connection);
-		return account.getUserName();
+		return account.getVkId();
 	}
 
 }
