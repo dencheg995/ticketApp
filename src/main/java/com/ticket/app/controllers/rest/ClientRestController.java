@@ -1,6 +1,6 @@
 package com.ticket.app.controllers.rest;
 
-import com.ticket.app.module.Client;
+import com.ticket.app.module.AppUser;
 import com.ticket.app.service.interfaces.ClientService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class ClientRestController {
     }
 
     @GetMapping("/get/event/client")
-    public ResponseEntity<Client> getEventClient(@RequestParam(value = "eventId") Long eventId) {
+    public ResponseEntity<AppUser> getEventClient(@RequestParam(value = "eventId") Long eventId) {
         System.out.println(clientService.getClientByEventId(eventId).get().getEmail());
         return ResponseEntity.ok(clientService.getClientByEventId(eventId).get());
     }

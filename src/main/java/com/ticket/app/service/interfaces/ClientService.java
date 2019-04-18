@@ -1,22 +1,31 @@
 package com.ticket.app.service.interfaces;
 
 
-import com.ticket.app.module.Client;
+import com.ticket.app.form.AppUserForm;
+import com.ticket.app.module.AppUser;
 import com.ticket.app.module.POJOUser;
 
+import com.ticket.app.module.Role;
+import org.springframework.social.connect.Connection;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface ClientService {
 
-    Client addClient(Client client);
+    AppUser addClient(AppUserForm user);
 
-    Optional<Client> getByEmailOrPhone(String email, String phone);
+    Optional<AppUser> getByEmailOrPhoneOrVkId(String email, String phone, String vkId);
 
-    Client updateClient(Client client);
+    Optional<AppUser> getByVkId(String vkId);
 
-    Optional<Client> getClientByEventId(Long id);
+    AppUser updateClient(AppUser client);
 
-    Optional<Client> getClientById(Long id);
+    Optional<AppUser> getClientByEventId(Long id);
 
-    Client edit(POJOUser client);
+    Optional<AppUser> getClientById(Long id);
+
+    AppUser edit(POJOUser client);
+
+    AppUser getClientByEmail(String username);
 }

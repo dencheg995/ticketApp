@@ -53,8 +53,12 @@
                                 </div>
                                 <button type="submit" class="btn btn-success btn-block">Войти</button>
                                 <label style="font-weight: bold" class="control-label">Впервые на сайте? Зарегистрируйтесь!</label>
-                                <p><a href="/register" class="btn btn-info btn-block">Регистрация</a></p>
+                                <p><a href="/signup" class="btn btn-info btn-block">Регистрация</a></p>
+
                             </form>
+                           <a th:href="@{/auth/vkontakte}" class="btn btn-block btn-vk"><i class="fab fa-vk"></i>
+                                Войти с помощью VK
+                             </a>
                         </div>
                     </div>
                 </div>

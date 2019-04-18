@@ -37,6 +37,9 @@
                 </div>
                  <div class="card-body">
                      <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
+                     <input id = "token" type="hidden"
+                                                         th:name="${_csrf.parameterName}"
+                                      th:value="${_csrf.token}" />
                            <div class="row">
                                <div class="col-md-4 pr-md-1">
                                    <div class="form-group">

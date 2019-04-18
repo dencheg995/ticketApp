@@ -59,7 +59,7 @@ public class Event {
     @JoinTable(name = "client_event",
             joinColumns = {@JoinColumn(name = "event_id", foreignKey = @ForeignKey(name = "FK_EVENT"))},
             inverseJoinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))})
-    private Client client;
+    private AppUser client;
 
     public Event() {
     }
@@ -114,11 +114,11 @@ public class Event {
         this.eventAgeLimit = eventAgeLimit;
     }
 
-    public Client getClient() {
+    public AppUser getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(AppUser client) {
         this.client = client;
     }
 

@@ -1,6 +1,6 @@
 package com.ticket.app.controllers;
 
-import com.ticket.app.module.Client;
+import com.ticket.app.module.AppUser;
 import com.ticket.app.module.Event;
 import com.ticket.app.module.Ticket;
 import com.ticket.app.service.interfaces.ClientService;
@@ -12,18 +12,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.math.BigInteger;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
 public class EventSettingController {
 
 
@@ -37,7 +36,6 @@ public class EventSettingController {
         this.eventService = eventService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/event/new")
     public ModelAndView newEvent(@RequestParam("eventId") Long id) {
         ModelAndView modelAndView = new ModelAndView("event-settings");
@@ -45,40 +43,47 @@ public class EventSettingController {
         return modelAndView;
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/edit/event")
     public ResponseEntity<Event> editEvent(@RequestParam(value = "eventId") Long eventId,
                                            @RequestParam(value = "eventName") String eventName,
                                            @RequestParam(value = "eventAddress") String eventAddress,
-                                           @RequestParam(value = "eventPocket") BigInteger eventPocket) {
+                                           @RequestParam(value = "eventPocket") BigInteger eventPocket,
+                                           @RequestParam(value = "eventDate") String date,
+                                           @RequestParam(value = "eventAgeLimit") Integer eventAgeLimit,
+                                           @RequestParam(value = "eventClubName") String clubName,
+                                           @RequestParam(value = "eventSaleForVkPost") Integer saleForVkPost,
+                                           @RequestParam(value = "eventCloseVkRepost") String eventCloseVkRepost,
+                                           @RequestParam(value = "eventVkPostUrl") String eventVkPostUrl) {
         Event event = eventService.getEvent(eventId);
         event.setName(eventName);
         event.setAddress(eventAddress);
         event.setPocket(eventPocket);
+        event.setDate(date);
+        event.setEventAgeLimit(eventAgeLimit);
+        event.setClubName(clubName);
+        event.setSaleForVkPost(saleForVkPost);
+        event.setCloseVkRepost(eventCloseVkRepost);
+        event.setVkPostUrl(eventVkPostUrl);
         eventService.updateEvent(event);
         return ResponseEntity.ok(event);
     }
 
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/remove/event")
-    public ResponseEntity removeEvent(@RequestParam Long eventId,
-                                        @AuthenticationPrincipal Client clientSession) {
+    public ResponseEntity removeEvent(@RequestParam Long eventId) {
         eventService.removeEvent(eventId);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/event/create")
     public ModelAndView addEvent() {
         ModelAndView modelAndView = new ModelAndView("addEvent");
         return modelAndView;
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event,
-                                      @AuthenticationPrincipal Client clientSession){
+                                      @AuthenticationPrincipal AppUser clientSession){
         Optional<List<Event>> events = eventService.getEventByClientId(clientSession.getId());
         events.get().add(event);
         clientSession.setEvents(events.get());
