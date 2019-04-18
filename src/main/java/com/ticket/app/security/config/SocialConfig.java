@@ -41,14 +41,14 @@ public class SocialConfig implements SocialConfigurer {
 	@Override
     public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
         try {
-            this.autoSignUp = Boolean.parseBoolean(env.getProperty("social.auto-signup"));
+            this.autoSignUp = Boolean.parseBoolean(env.getRequiredProperty("social.auto-signup"));
         } catch (Exception e) {
             this.autoSignUp = false;
         }
 
         VKontakteConnectionFactory vKontakteConnectionFactory = new VKontakteConnectionFactory(
-                env.getProperty("vk.app.clientId"),
-                env.getProperty("vk.app.secret"));
+                env.getRequiredProperty("vk.app.clientId"),
+                env.getRequiredProperty("vk.app.secret"));
         vKontakteConnectionFactory.setScope(env.getRequiredProperty("vk.scope"));
 
         cfConfig.addConnectionFactory(vKontakteConnectionFactory);
