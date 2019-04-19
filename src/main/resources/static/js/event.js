@@ -372,14 +372,13 @@ $(document).ready(function () {
 
 
 function editPromo(ticketId) {
-
     if ($("#editPromo").text() === "Редактировать") {
         $("#edit-promo-sale").removeAttr('disabled');
         $("#edit-promo-date-start").removeAttr('disabled');
         $("#edit-promo-date-end").removeAttr('disabled');
         $("#edit-promo-date-count").removeAttr('disabled');
         $("#edit-promo").removeAttr('disabled');
-        $("#editButton" + eventId).html('Сохранить');
+        $("#editPromo").html('Сохранить');
     } else if ($("#editPromo").text() === "Сохранить") {
         let discountValue = $("#edit-promo-sale").val();
         let promoStartDate = $("#edit-promo-date-start").val();

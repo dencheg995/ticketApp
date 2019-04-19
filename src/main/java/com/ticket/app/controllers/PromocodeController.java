@@ -55,10 +55,8 @@ public class PromocodeController {
     @GetMapping(value = "/promo/edit")
     public ModelAndView editPromo(@RequestParam Long ticketId) {
         ModelAndView modelAndView = new ModelAndView("listPromo");
-        modelAndView.addObject("ticketEdit",ticketService.getTicket(ticketId));
-        for (Promocode promocode : ticketService.getTicket(ticketId).getPromocodeSet()) {
-            modelAndView.addObject("promocode".concat(promocode.getId().toString()), promocode);
-        }
+        modelAndView.addObject("ticketEdit",ticketService.getTicket(ticketId).getPromocodeSet());
+        modelAndView.addObject("ticket",ticketService.getTicket(ticketId));
         return modelAndView;
     }
 

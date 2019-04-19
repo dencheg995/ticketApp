@@ -32,14 +32,6 @@
         <div th:replace="fragments/navbar::navbar"></div>
         <div class="content">
             <div class="row">
-                <div class="col-md-4">
-                    <input/>
-                </div>
-                <div class="col-md-4">
-                    <button class="btn btn-primary">Получить промо с данной скидкой</button>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col">
                     <div class="col-md-12">
                         <div class="card ">
@@ -60,8 +52,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <div th:each="ticket : ${ticketEdit}">
-                                                <div th:each="promo : ${ticket.promocodeSet}">
+                                            <div th:each="promo : ${ticketEdit}">
                                                    <tr><td th:text="${promo.id}"></td>
                                                        <td th:text="${promo.sale}"></td>
                                                        <td th:text="${promo.count}"></td>
@@ -69,7 +60,6 @@
                                                        <td th:text="${promo.dateEnd}"></td>
                                                        <td><button id="editButton" class="btn btn-primary promo-modal" data-toggle="modal" href="#editPromoModal" role="button" ><i class="tim-icons tim-icons-32 icon-settings-gear-63"></i></button></td>
                                                    </tr>
-                                                </div>
                                             </div>
                                         </tbody>
                                     </table>
