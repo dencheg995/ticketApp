@@ -24,6 +24,11 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/assets/demo/demo.css" rel="stylesheet" />
     <link href="/css/bootstrap-social.css" rel="stylesheet" />
+    <style>
+        body{
+            margin-bottom: 108px;
+        }
+    </style>
 </head>
 <body class="">
 <div class="wrapper">
@@ -58,6 +63,7 @@
                                                     <button class="btn-yahoo badge" id="up" type="button" name="up" spinner-button="up" onclick="addition()">+</button>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -258,27 +264,21 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="fixed-bottom">
-                            <div class="card" style="width: 231px; height: 108px;">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-3" style="margin-top: 10px;">
-                                                <span id="sumResult" style="color: #fff; font-size: 18px;" value="0"></span>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <button class="btn btn-primary" data-toggle="modal" href="#ticketModal" th:href="'#ticketModal'+${ticket.id}" role="button" >Купить</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                    </div>
+                </div>
+            </div>
+            <div class="card" id="footer" style="width: 231px; height: 108px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3" style="margin-top: 10px;">
+                            <p id="sumResult"></p>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" data-toggle="modal"  role="button" >Купить</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

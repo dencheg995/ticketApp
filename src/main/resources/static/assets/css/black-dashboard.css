@@ -521,6 +521,14 @@ mark,
   font-size: 80%;
   color: #6c757d;
 }
+#footer{
+    position: fixed;
+    bottom: 0;
+    left: 190px;
+    width: 231px;
+    height: 108px;
+    background-color: #27293C;
+}
 
 .blockquote-footer::before {
   content: "\2014 \00A0";
