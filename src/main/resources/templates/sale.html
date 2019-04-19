@@ -54,7 +54,7 @@
 <!--                                                <span class="plus bg-dark">+</span>-->
 
                                                 <div class="js-spinner">
-                                                    <button class="btn-yahoo badge " id="down" type="button" name="down" spinner-button="down" th:onclick="'addition(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} +  ', ' + ${ticket.getTicketCount()} + ')'">-</button>
+                                                    <button class="btn-yahoo badge " id="down" type="button" name="down" spinner-button="down" th:onclick="'subtraction(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'">-</button>
                                                     <input th:id="'currentCount' + ${ticket.id}" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
                                                     <button class="btn-yahoo badge" id="up" type="button" name="up" spinner-button="up" th:onclick="'addition(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'">+</button>
                                                 </div>
@@ -266,8 +266,8 @@
             <div class="card" id="footer" style="width: 250px; height: 108px; padding-right: 20px">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-5" style="margin-top: 10px;">
-                            <input id="sumResult" disabled="disabled">0</input> <p>руб.</p>
+                        <div class="col-md-5" style="margin-top: 10px; color: #fff;">
+                            <input id="sumResult" style="color: #fff;" disabled="disabled"/><span>  руб.</span>
                         </div>
                         <div class="col-md-4">
                             <button class="btn btn-primary" data-toggle="modal"  role="button" >Купить</button>
