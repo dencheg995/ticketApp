@@ -30,7 +30,7 @@ public class PromocodeController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/promo/new")
     public ModelAndView newPromo(@RequestParam Long ticketId) {
-        ModelAndView modelAndView = new ModelAndView("promocodes");
+        ModelAndView modelAndView = new ModelAndView("addPromocodes");
         modelAndView.addObject("ticket",ticketService.getTicket(ticketId));
         return modelAndView;
     }
