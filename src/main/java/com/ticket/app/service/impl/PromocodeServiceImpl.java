@@ -5,6 +5,8 @@ import com.ticket.app.repository.PromocodeRepository;
 import com.ticket.app.service.interfaces.PromocodeService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PromocodeServiceImpl implements PromocodeService {
 
@@ -27,4 +29,16 @@ public class PromocodeServiceImpl implements PromocodeService {
     @Override
     public void remove(Long id) {
     }
+
+    @Override
+    public Optional<Promocode> getClientByEventId(Long ticketId) {
+        return Optional.ofNullable(promocodeRepository.getClientByEventId(ticketId));
+    }
+
+    @Override
+    public Optional<Promocode> getPromoById(Long promoId) {
+        return Optional.ofNullable(promocodeRepository.getOne(promoId));
+    }
+
+
 }

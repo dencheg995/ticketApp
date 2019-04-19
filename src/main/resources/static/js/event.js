@@ -344,3 +344,66 @@ function addPromo(ticketId) {
         }
     });
 }
+
+$(document).ready(function () {
+    $('#promoTable').delegate('.promo-modal', 'click', function() {
+        $('#editPromoModal').modal('show');
+        var idPromo = $(this).closest('tr').children('td:first').text();
+        $.ajax({
+            type: "GET",
+            contentType: 'application/json; charset=UTF-8',
+            url: '/get-promo',
+            data: {
+                promoId: idPromo
+            },
+            success: function (promo) {
+                $("#edit-promo-sale").val(promo.sale);
+                $("#edit-promo-date-start").val(promo.dateStart);
+                $("#edit-promo-date-end").val(promo.dateEnd);
+                $("#edit-promo-date-count").val(promo.count);
+                $("#edit-promo").each(function() {
+                    $(this).val(promo.promocode
+                        .join("\n"));
+                });
+            }
+        });
+    })
+});
+
+
+function editPromo(ticketId) {
+
+    if ($("#editPromo").text() === "Редактировать") {
+        $("#edit-promo-sale").removeAttr('disabled');
+        $("#edit-promo-date-start").removeAttr('disabled');
+        $("#edit-promo-date-end").removeAttr('disabled');
+        $("#edit-promo-date-count").removeAttr('disabled');
+        $("#edit-promo").removeAttr('disabled');
+        $("#editButton" + eventId).html('Сохранить');
+    } else if ($("#editPromo").text() === "Сохранить") {
+        let discountValue = $("#edit-promo-sale").val();
+        let promoStartDate = $("#edit-promo-date-start").val();
+        let promoEndDate = $("#edit-promo-date-end").val();
+        let count = $("#edit-promo-date-count").val();
+        let promocodes = $("#edit-promo").val();
+        let wrap = {
+            idTicket: ticketId,
+            promocodes: promocodes,
+            discountValue: discountValue,
+            promoStartDate: promoStartDate,
+            promoEndDate: promoEndDate,
+            count: count
+        }
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json; charset=UTF-8',
+            url: '/edit-promo',
+            data: JSON.stringify(wrap),
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+}
+
+

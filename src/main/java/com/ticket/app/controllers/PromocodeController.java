@@ -51,4 +51,22 @@ public class PromocodeController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping(value = "/promo/edit")
+    public ModelAndView editPromo(@RequestParam Long ticketId) {
+        ModelAndView modelAndView = new ModelAndView("listPromo");
+        modelAndView.addObject("ticketEdit",ticketService.getTicket(ticketId));
+        for (Promocode promocode : ticketService.getTicket(ticketId).getPromocodeSet()) {
+            modelAndView.addObject("promocode".concat(promocode.getId().toString()), promocode);
+        }
+        return modelAndView;
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping(value = "/get-promo")
+    public ResponseEntity<Promocode> getPromo(@RequestParam Long promoId) {
+        return promocodeService.getPromoById(promoId).map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+
 }

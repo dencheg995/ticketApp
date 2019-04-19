@@ -4,3 +4,10 @@ function openPromoPage(ticketId) {
         window.open(url, '_self');
     }
 }
+
+function listPromo(ticketId) {
+    if (ticketId != null && ticketId != "") {
+        var url = '/promo/edit/?ticketId=' + ticketId
+        window.open(url, '_self');
+    }
+}
