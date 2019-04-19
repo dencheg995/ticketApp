@@ -53,9 +53,9 @@
 <!--                                                <span class="plus bg-dark">+</span>-->
 
                                                 <div class="js-spinner">
-                                                    <button class="btn-yahoo badge" id="d" type="button" name="down" spinner-button="down" th:onclick="'getSum('+ ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')' ">-</button>
+                                                    <button class="btn-yahoo badge" id="down" type="button" name="down" spinner-button="down" >-</button>
                                                     <input id="currentCount" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
-                                                    <button class="btn-yahoo badge" id="u" type="button" name="up" spinner-button="up" th:onclick="'getSum('+ ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'">+</button>
+                                                    <button class="btn-yahoo badge" id="up" type="button" name="up" spinner-button="up" onclick="addition()">+</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -264,7 +264,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-3" style="margin-top: 10px;">
-                                                <span style="color: #fff; font-size: 18px;">0 Р</span>
+                                                <span id="sumResult" style="color: #fff; font-size: 18px;" value="0"></span>
                                             </div>
                                             <div class="col-md-4">
                                                 <button class="btn btn-primary" data-toggle="modal" href="#ticketModal" th:href="'#ticketModal'+${ticket.id}" role="button" >Купить</button>
