@@ -24,16 +24,12 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/assets/demo/demo.css" rel="stylesheet" />
     <link href="/css/bootstrap-social.css" rel="stylesheet" />
-    <style>
-        body{
-            margin-bottom: 108px;
-        }
-    </style>
+
 </head>
 <body class="">
 <div class="wrapper">
     <div class="main-panel">
-        <div class="content" style="width: 788px; height: 600px;">
+        <div class="content" style="padding-left: 40px;">
             <div th:each = "event : ${event}" th:value="${event.ticketList}">
                 <div th:each="ticket : ${event.getTicketList()}">
                     <div th:if="${ticket.getTicketCount()} > 0">
@@ -58,9 +54,9 @@
 <!--                                                <span class="plus bg-dark">+</span>-->
 
                                                 <div class="js-spinner">
-                                                    <button class="btn-yahoo badge" id="down" type="button" name="down" spinner-button="down" >-</button>
-                                                    <input id="currentCount" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
-                                                    <button class="btn-yahoo badge" id="up" type="button" name="up" spinner-button="up" onclick="addition()">+</button>
+                                                    <button class="btn-yahoo badge" id="down" type="button" name="down" spinner-button="down" th:onclick="'subtraction(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'">-</button>
+                                                    <input th:id="'currentCount' + ${ticket.id}" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
+                                                    <button class="btn-yahoo badge" id="up" type="button" name="up" spinner-button="up" th:onclick="'addition(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'">+</button>
                                                 </div>
                                             </div>
 
@@ -267,15 +263,16 @@
                     </div>
                 </div>
             </div>
-            <div class="card" id="footer" style="width: 231px; height: 108px;">
+            <div class="card" id="footer" style="width: 250px; height: 108px; padding-right: 20px">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3" style="margin-top: 10px;">
-                            <p id="sumResult"></p>
+                        <div class="col-md-5" style="margin-top: 10px;">
+                            <p id="sumResult">0 руб.</p>
                         </div>
                         <div class="col-md-4">
                             <button class="btn btn-primary" data-toggle="modal"  role="button" >Купить</button>
                         </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>
