@@ -1,4 +1,4 @@
-function addition(ticketId, ticketPrice) {
+function getSum(ticketId, ticketPrice) {
     var cId = "currentCount" + ticketId;
     let currentCount = parseInt(document.getElementById(cId).value);
     var sum =+ currentCount*ticketPrice;
