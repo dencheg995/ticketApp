@@ -3,6 +3,7 @@ package com.ticket.app.controllers;
 import com.ticket.app.module.PromoPOJO;
 import com.ticket.app.module.Promocode;
 import com.ticket.app.module.Ticket;
+import com.ticket.app.service.interfaces.EventService;
 import com.ticket.app.service.interfaces.PromocodeService;
 import com.ticket.app.service.interfaces.TicketService;
 import org.springframework.http.HttpStatus;
@@ -21,17 +22,21 @@ public class PromocodeController {
     private final PromocodeService promocodeService;
 
     private final TicketService ticketService;
+    private final EventService eventService;
 
-    public PromocodeController(PromocodeService promocodeService, TicketService ticketService) {
+    public PromocodeController(PromocodeService promocodeService, TicketService ticketService, EventService eventService) {
         this.promocodeService = promocodeService;
         this.ticketService = ticketService;
+        this.eventService = eventService;
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/promo/new")
-    public ModelAndView newPromo(@RequestParam Long ticketId) {
-        ModelAndView modelAndView = new ModelAndView("promocodes");
+    public ModelAndView newPromo(@RequestParam Long ticketId,
+                                 @RequestParam Long eventId) {
+        ModelAndView modelAndView = new ModelAndView("addPromocodes");
         modelAndView.addObject("ticket",ticketService.getTicket(ticketId));
+        modelAndView.addObject("event",eventService.getEvent(eventId));
         return modelAndView;
     }
 
@@ -50,5 +55,23 @@ public class PromocodeController {
         promocodeService.addPromo(promocode);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping(value = "/promo/edit")
+    public ModelAndView editPromo(@RequestParam Long ticketId,
+                                  @RequestParam Long eventId) {
+        ModelAndView modelAndView = new ModelAndView("listPromo");
+        modelAndView.addObject("ticketEdit",ticketService.getTicket(ticketId).getPromocodeSet());
+        modelAndView.addObject("ticket",ticketService.getTicket(ticketId));
+        modelAndView.addObject("event",eventService.getEvent(eventId));
+        return modelAndView;
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping(value = "/get-promo")
+    public ResponseEntity<Promocode> getPromo(@RequestParam Long promoId) {
+        return promocodeService.getPromoById(promoId).map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 
 }

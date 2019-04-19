@@ -1,12 +1,16 @@
 package com.ticket.app.module;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "promo")
-public class Promocode {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Promocode implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

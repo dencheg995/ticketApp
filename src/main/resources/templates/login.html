@@ -31,7 +31,7 @@
         <div class="content">
             <div class="row">
                 <div class="col-md-3 pr-md-1"></div>
-                <div class="col-md-4 pr-md-1">
+                <div class="col-md-5 pr-md-1">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="title">Вход</h4>
@@ -54,11 +54,12 @@
                                 <button type="submit" class="btn btn-success btn-block">Войти</button>
                                 <label style="font-weight: bold" class="control-label">Впервые на сайте? Зарегистрируйтесь!</label>
                                 <p><a href="/signup" class="btn btn-info btn-block">Регистрация</a></p>
-
+                                <label style="font-weight: bold" class="control-label">Или</label>
+                                <a th:href="@{/auth/vkontakte}" class="btn btn-block btn-vk"><i class="fab fa-vk"></i>
+                                    Войти с помощью VK
+                                </a>
                             </form>
-                           <a th:href="@{/auth/vkontakte}" class="btn btn-block btn-vk"><i class="fab fa-vk"></i>
-                                Войти с помощью VK
-                             </a>
+
                         </div>
                     </div>
                 </div>

@@ -521,6 +521,14 @@ mark,
   font-size: 80%;
   color: #6c757d;
 }
+#footer{
+    position: fixed;
+    bottom: 0;
+    left: 210px;
+    width: 250px;
+    height: 108px;
+    background-color: #27293C;
+}
 
 .blockquote-footer::before {
   content: "\2014 \00A0";
@@ -16423,7 +16431,66 @@ code {
   margin-bottom: 10px;
   position: relative;
 }
+.qty .count {
+    color: #fff;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px;
+    min-width: 35px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 50%;
+}
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: #fff;
+    width: 50px;
+    height: 50px;
 
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+div {
+    text-align: center;
+}
+.minus:hover{
+    background-color: #717fe0 !important;
+}
+.plus:hover{
+    background-color: #717fe0 !important;
+}
+/*Prevent text selection*/
+span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+input{
+    border: 0;
+    width: 20px;
+}
+nput::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input:disabled{
+    background-color: #27293D;
+}
 .input-group .form-control-static,
 .form-group .form-control-static {
   margin-top: 9px;
@@ -16431,7 +16498,7 @@ code {
 
 .input-group[disabled] .input-group-prepend .input-group-text,
 .input-group[disabled] .input-group-append .input-group-text {
-  background-color: #E3E3E3;
+  background-color: #27293D;
 }
 
 .input-group .form-control:not(:first-child):not(:last-child),

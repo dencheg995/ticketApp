@@ -61,10 +61,10 @@
                                                         <a th:id="'removeButton' + ${ticket.id}" th:onclick="'removeTicket('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-trash-simple"></i></a>
                                                     </div>
                                                     <div class="col-2">
-                                                        <a th:id="'openPromoPage'+ ${ticket.id}" th:onclick="'openPromoPage('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-link-72"></i></a>
+                                                        <a th:id="'openPromoPage'+ ${ticket.id}" th:onclick="'openPromoPage('+ ${ticket.id} + ', ' + ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-link-72"></i></a>
                                                     </div>
                                                     <div class="col-2">
-                                                        <a th:id="'listPromo' + ${ticket.id}" th:onclick="'listPromo('+ ${ticket.id} + ')'"><i class="tim-icons tim-icons-32 icon-paper"></i></a>
+                                                        <a th:id="'listPromo' + ${ticket.id}" th:onclick="'listPromo('+ ${ticket.id} +  ', ' + ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-paper"></i></a>
                                                     </div>
                                                 </div>
                                             </div>

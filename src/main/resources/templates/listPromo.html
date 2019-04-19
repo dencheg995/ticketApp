@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/bulb-lit.png"/>
+    <link rel="icon" type="image/png" href="/assets/img/ticket.png"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+    <title>
+        Список промокодов
+    </title>
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/assets/demo/demo.css" rel="stylesheet" />
+</head>
+<body class="">
+<div class="wrapper">
+    <div th:replace="fragments/sidebar::sidebar"></div>
+    <div class="main-panel">
+        <div th:replace="fragments/navbar::navbar"></div>
+        <div class="content">
+            <div class="card ">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3 pr-md-1"><h4 class="title">Список промокодов</h4></div>
+                        <div class="col-md-7 pr-md-1"></div>
+                        <div class="col-md-2 pr-md-1" style="padding-right: 20px">
+                            <span><a th:onclick="'openTicketPage('+ ${event.id} +')'">К билетам</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table tablesorter" id="promoTable">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>Промокод</th>
+                                    <th>Скидка</th>
+                                    <th>Кол-во использований</th>
+                                    <th>Начало действия</th>
+                                    <th>Конец действия</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div th:each="promo : ${ticketEdit}">
+                                   <tr><td th:text="${promo.id}"></td>
+                                       <td th:text="${promo.sale}"></td>
+                                       <td th:text="${promo.count}"></td>
+                                       <td th:text="${promo.dateStart}"></td>
+                                       <td th:text="${promo.dateEnd}"></td>
+                                       <td><a id="editButton" data-toggle="modal" href="#editPromoModal"><i class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
+                                   </tr>
+                                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade"  id="editPromoModal" tabindex="-1" role="dialog" aria-labelledby="promoModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modalstyle">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="title" id="promoModalLabel">Редактирование промокода</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: #0a0c0d; font-size: 14px">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body promo-setting" >
+                                    <div class="row">
+                                        <div class="col-md-4 pl-md-1">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="buttonInside">
+                                                        <label for="edit-promo-sale">Скидка</label>
+                                                        <input  id="edit-promo-sale"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pl-md-1">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="buttonInside">
+                                                        <label for="edit-promo-count">Количество использований</label>
+                                                        <input  id="edit-promo-count"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 pr-md-1">
+                                            <div class="form-group">
+                                                <label for="edit-promo-date-start">Начало действия</label>
+                                                <input class="form-control"  id="edit-promo-date-start"  />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-md-1">
+                                            <div class="form-group">
+                                                <label for="edit-promo-date-end">Конец действия</label>
+                                                <input class="form-control"  id="edit-promo-date-end"  />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 pr-md-1">
+                                        <div class="form-group">
+                                            <label for="edit-promo">Промокод</label>
+                                            <textarea disabled="disabled" id="edit-promo"  />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group" style="margin-left: 17px">
+                                            <button type="button" class="btn btn-primary" id="editPromo" >Редактировать</button>
+                                        </div>
+                                    </div>
+                                    <p><span id = "message"></span></p>
+                                    <input type="checkbox" checked="checked" class="form-control"  style="display:none"    id="edit-user-isVerified"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header-title"> Sidebar Background</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                        <span class="badge filter badge-primary active" data-color="primary"></span>
+                        <span class="badge filter badge-info" data-color="blue"></span>
+                        <span class="badge filter badge-success" data-color="green"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+            <li class="adjustments-line text-center color-change">
+                <span class="color-label">LIGHT MODE</span>
+                <span class="badge light-badge mr-2"></span>
+                <span class="badge dark-badge ml-2"></span>
+                <span class="color-label">DARK MODE</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/animation.js}"></script>
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
+<script type="text/javascript" th:src="@{/js/lk.js}"></script>
+<script th:src="@{/js/validator.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--<script-->
+        <!--src="https://code.jquery.com/jquery-3.3.1.min.js"-->
+        <!--integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="-->
+        <!--crossorigin="anonymous">-->
+<!--</script>-->
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<!--   Core JS Files   -->
+
+<!--  Google Maps Plugin    -->
+<!-- Place this tag in your head or just before your close body tag. -->
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/black-dashboard.min.js?v=1.0.0"></script>
+<!-- Black Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
