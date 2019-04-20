@@ -1,7 +1,5 @@
 package com.ticket.app.controllers;
 
-
-
 import com.ticket.app.module.Event;
 import com.ticket.app.module.Ticket;
 import com.ticket.app.service.interfaces.EventService;

@@ -44,7 +44,7 @@ function addition(ticketId, ticketPrice, ticketCountMax) {
     }
 }
 
-function subtraction(ticketId, ticketPrice, ticketCountMax) {
+function subtraction(ticketId, ticketPrice) {
     var cId = "currentCount" + ticketId;
     $("#up" + ticketId).attr("disabled", false);
     $("#up" + ticketId).attr("field", "off");
@@ -82,5 +82,32 @@ function subtraction(ticketId, ticketPrice, ticketCountMax) {
             $("#down" + ticketId).attr("field", "on")
 
     }
-    }
+}
 
+$(document).ready(function () {
+   $('#saleButton').show();
+});
+// $(document).ready(function () {
+//     $('#promoTable').delegate('.promo-modal', 'click', function() {
+//         $('#editPromoModal').modal('show');
+//         var idPromo = $(this).closest('tr').children('td:first').text();
+//         $.ajax({
+//             type: "GET",
+//             contentType: 'application/json; charset=UTF-8',
+//             url: '/get-promo',
+//             data: {
+//                 promoId: idPromo
+//             },
+//             success: function (promo) {
+//                 $("#edit-promo-sale").val(promo.sale);
+//                 $("#edit-promo-date-start").val(promo.dateStart);
+//                 $("#edit-promo-date-end").val(promo.dateEnd);
+//                 $("#edit-promo-date-count").val(promo.count);
+//                 $("#edit-promo").each(function() {
+//                     $(this).val(promo.promocode
+//                         .join("\n"));
+//                 });
+//             }
+//         });
+//     })
+// });

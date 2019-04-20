@@ -332,7 +332,7 @@ function addPromo(ticketId) {
         discountValue : discountValue,
         promoStartDate : promoStartDate,
         promoEndDate : promoEndDate
-    }
+    };
 
     $.ajax({
         type: "POST",
@@ -392,7 +392,7 @@ function editPromo(ticketId) {
             promoStartDate: promoStartDate,
             promoEndDate: promoEndDate,
             count: count
-        }
+        };
         $.ajax({
             type: "POST",
             contentType: 'application/json; charset=UTF-8',
