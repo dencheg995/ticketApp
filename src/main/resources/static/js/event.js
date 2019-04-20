@@ -34,27 +34,27 @@ function putTicket(eventId) {
 
 function editTicket(ticketId) {
 
-        var formData = {
-            ticketId: ticketId,
-            ticketType: $("#ticketType" + ticketId).val(),
-            ticketCount: $("#ticketCount" + ticketId).val(),
-            ticketPrice: $("#ticketPrice" + ticketId).val()
-        };
-        var url = "/edit/ticket"
-        $.ajax({
-            type: "GET",
-            contentType: "application/json",
-            url: url,
-            data: formData,
-            success: function () {
-                location.reload()
-            }
-        });
+    var formData = {
+        ticketId: ticketId,
+        ticketType: $("#ticketType" + ticketId).val(),
+        ticketCount: $("#ticketCount" + ticketId).val(),
+        ticketPrice: $("#ticketPrice" + ticketId).val()
+    };
+    var url = "/edit/ticket"
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: url,
+        data: formData,
+        success: function () {
+            location.reload()
+        }
+    });
 }
 
 function openTicketInput(ticketId) {
     if ($("#ticketType" + ticketId).prop('disabled') === true)
-    $("#ticketType" + ticketId).removeAttr('disabled');
+        $("#ticketType" + ticketId).removeAttr('disabled');
     $("#ticketPrice" + ticketId).removeAttr('disabled');
     $("#ticketCount" + ticketId).removeAttr('disabled');
 }
@@ -404,5 +404,3 @@ function editPromo(ticketId) {
         });
     }
 }
-
-
