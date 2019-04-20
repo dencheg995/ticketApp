@@ -15426,7 +15426,25 @@ table.tablesorter thead tr .headerSortDown {
   padding: 78px 30px 30px 280px;
   min-height: calc(100vh - 70px);
 }
-
+.main-panel>.content-login{
+  padding: 78px 30px 30px 30px;
+  min-height: calc(100vh - 70px);
+}
+.center-position{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.right-position{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.left-position{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
 .main-panel>.navbar {
   margin-bottom: 0;
 }
