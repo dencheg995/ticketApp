@@ -105,7 +105,7 @@ function buyTicket(eventId) {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(wrap),
             success: function (result) {
-                ("#yandexForm").submit()
+                $('#saleModal').modal('show');
             }
         });
     }
