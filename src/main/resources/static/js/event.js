@@ -86,9 +86,10 @@ function buyTicket(ticketId, ticketPrice, eventId) {
             phoneNumber: $('#add-user-phone-number').val(),
             email: $('#add-user-email').val() ,
             ticketId: ticketId,
-            ticketPrice: ticketPrice,
-            countTicket: $("#ticketCount").val(),
-            date : date
+            ticketPrice: $("#sumResult").val(),
+            countTicket:localStorage.getItem("currentCount"),
+            date : date,
+            promo: $("#promo-for-buy-ticket")
         };
 
         $.ajax({

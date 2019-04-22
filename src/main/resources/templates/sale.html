@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/bulb-lit.png"/>
@@ -29,6 +30,7 @@
 <body class="">
 <div class="wrapper">
     <div class="main-panel">
+        <div th:replace="fragments/loginNavbar::loginNavbar"></div>
         <div class="content" style="padding-left: 40px;">
             <div th:each = "event : ${event}" th:value="${event.ticketList}">
                 <div th:each="ticket : ${event.getTicketList()}">
@@ -59,14 +61,13 @@
                                                     <button class="btn-yahoo badge" th:id="'up' + ${ticket.id}" th:field = "off" type="button" name="up" spinner-button="up" th:onclick="'addition(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ', ' + ${ticket.getTicketCount()} +')'">+</button>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="modal fade" id="ticketModal" th:id="'ticketModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="fixed-top">
                                     <div class="modalstyle">
@@ -82,12 +83,11 @@
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                <p>2 билета</p>
-                                                                <p>Vip</p>
+                                                                <p id = "count"></p>
                                                             </div>
                                                             <div class="col-md-5"></div>
                                                             <div class="col-md-3">
-                                                                1200 руб.
+                                                                <p id = "cost"></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -177,8 +177,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-primary" data-toggle="modal" href="#saleModal" role="button" th:href="'#saleModal'+${ticket.id}">Подтвердить бронирование</button>
-
+                                                <button class="btn btn-primary" onclick="" data-toggle="modal" href="#saleModal" role="button" th:href="'#saleModal'+${ticket.id}">Подтвердить бронирование</button>
                                             </div>
                                         </div>
                                     </div>
@@ -270,9 +269,8 @@
                             <input id="sumResult" style="color: #fff; width: 30px" disabled="disabled"/><span>  руб.</span>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-primary" id="saleButton" data-toggle="modal" href="#saleTicketModal">Купить</button>
+                            <button class="btn btn-primary" id="saleButton" data-toggle="modal" href="#ticketModal">Купить</button>
                         </div>
-                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>

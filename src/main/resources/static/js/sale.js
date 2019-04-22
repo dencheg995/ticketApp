@@ -85,7 +85,9 @@ function subtraction(ticketId, ticketPrice) {
 }
 
 $(document).ready(function () {
-   $('#saleButton').show();
+    $('#saleButton').click(function() {
+        $('#ticketModal').modal('show');
+    })
 });
 // $(document).ready(function () {
 //     $('#promoTable').delegate('.promo-modal', 'click', function() {
@@ -111,3 +113,8 @@ $(document).ready(function () {
 //         });
 //     })
 // });
+
+function openLKPage() {
+    var url = '/lk';
+    window.open(url, '_self');
+}
