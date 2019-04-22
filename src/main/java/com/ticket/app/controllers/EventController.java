@@ -46,24 +46,27 @@ public class EventController {
     @RequestMapping(value = "/purchase/tickets")
     public @ResponseBody ResponseEntity buyTicket(@RequestBody POJOTicket pojoTicket) {
         Consumer consumer = new Consumer(pojoTicket.getFirstName(), pojoTicket.getLastName(), pojoTicket.getEmail(), pojoTicket.getPhoneNumber());
-        Ticket ticket = ticketService.getTicket(pojoTicket.getTicketId());
-        Purchase purchase = new Purchase();
-        String uniqueID = UUID.randomUUID().toString();
-        purchase.setUniqId(uniqueID);
-        purchase.setCountBuyTicket(pojoTicket.getCountTicket());
-        purchase.setCostBuyTicket(pojoTicket.getTicketPrice());
-        purchase.setCheck(false);
-        purchase.setNumSale(ticket.getTicketCount());
-        purchase.setLocalDateTime(pojoTicket.getDate());
-        List<Purchase> purchasesForTicket = purchaseService.getPurchaseByTicketId(pojoTicket.getTicketId());
-        purchasesForTicket.add(purchase);
-        ticket.setPurchaseTicketList(purchasesForTicket);
-        ticket.setTicketCount(ticket.getTicketCount() - pojoTicket.getCountTicket());
-        List<Purchase> purchasesForConsumer = purchaseService.getPurchaseByConsumerId(consumer.getId());
-        purchasesForConsumer.add(purchase);
-        consumer.setPurchaseTicketList(purchasesForConsumer);
-        consumerService.updateConsumer(consumer);
-        ticketService.updateTicket(ticket);
+        Ticket ticket;
+        for (int i = 0; i < pojoTicket.getTicketId().size(); i++) {
+            ticket = ticketService.getTicket(pojoTicket.getTicketId().get(i));
+            Purchase purchase = new Purchase();
+            String uniqueID = UUID.randomUUID().toString();
+            purchase.setUniqId(uniqueID);
+            purchase.setCountBuyTicket(pojoTicket.getCountTicket());
+            purchase.setCostBuyTicket(pojoTicket.getTicketPrice());
+            purchase.setCheck(false);
+            purchase.setNumSale(ticket.getTicketCount());
+            purchase.setLocalDateTime(pojoTicket.getDate());
+            List<Purchase> purchasesForTicket = purchaseService.getPurchaseByTicketId(pojoTicket.getTicketId().get(i));
+            purchasesForTicket.add(purchase);
+            ticket.setPurchaseTicketList(purchasesForTicket);
+            ticket.setTicketCount(ticket.getTicketCount() - pojoTicket.getCountTicket());
+            List<Purchase> purchasesForConsumer = purchaseService.getPurchaseByConsumerId(consumer.getId());
+            purchasesForConsumer.add(purchase);
+            consumer.setPurchaseTicketList(purchasesForConsumer);
+            consumerService.updateConsumer(consumer);
+            ticketService.updateTicket(ticket);
+        }
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

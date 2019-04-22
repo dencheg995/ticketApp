@@ -1,7 +1,9 @@
 var sum = 0;
 var currentCount = 0;
+var count = 0;
 var prevId = 0;
 localStorage.setItem("currentCount", currentCount);
+localStorage.setItem("count", count);
 localStorage.setItem("sum", sum);
 function addition(ticketId, ticketPrice, ticketCountMax) {
     var cId = "currentCount" + ticketId;
@@ -9,8 +11,11 @@ function addition(ticketId, ticketPrice, ticketCountMax) {
     $("#down" + ticketId).attr("field", "off");
     if (ticketCountMax != parseInt(document.getElementById(cId).value)) {
         currentCount = parseInt(localStorage.getItem("currentCount"));
+        count = parseInt(localStorage.getItem("count"));
         currentCount =+ parseInt(document.getElementById(cId).value);
+        count = count + (currentCount - (currentCount - 1))
         localStorage.setItem("currentCount", currentCount);
+        localStorage.setItem("count", count);
         if (parseInt(currentCount) == 0) {
             $("#sumResult").val(sum);
         }

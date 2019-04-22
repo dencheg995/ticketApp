@@ -1,6 +1,9 @@
 package com.ticket.app.module;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class POJOTicket {
 
@@ -12,13 +15,23 @@ public class POJOTicket {
 
     private String phoneNumber;
 
-    private Long ticketId;
+    private List<Long> ticketId;
 
     private int ticketPrice;
 
     private int countTicket;
 
     private LocalDateTime date;
+
+    private String promo;
+
+    public String getPromo() {
+        return promo;
+    }
+
+    public void setPromo(String promo) {
+        this.promo = promo;
+    }
 
     public LocalDateTime getDate() {
         return date;
@@ -60,11 +73,11 @@ public class POJOTicket {
         this.phoneNumber = phoneNumber;
     }
 
-    public Long getTicketId() {
+    public List<Long> getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(Long ticketId) {
+    public void setTicketId(List<Long> ticketId) {
         this.ticketId = ticketId;
     }
 

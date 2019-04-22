@@ -41,7 +41,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-3" style="padding-left: 0;">
-                                                <h4 class="title" style="font-weight: bold" th:text = "${ticket.getTicketType()}"></h4>
+                                                <h4 class="title qet" style="font-weight: bold" th:text = "${ticket.getTicketType()}" th:id="${ticket.getId()}"></h4>
                                                 <p style="font-weight: bold">Входной билет</p>
                                             </div>
                                             <div class="col-md-4">
@@ -177,7 +177,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-primary" onclick="" data-toggle="modal" href="#saleModal" role="button" th:href="'#saleModal'+${ticket.id}">Подтвердить бронирование</button>
+                                                <button class="btn btn-primary" th:onclick="'buyTicket(' + ${event.id} + ')'" data-toggle="modal" href="#saleModal" role="button" th:href="'#saleModal'+${ticket.id}">Подтвердить бронирование</button>
                                             </div>
                                         </div>
                                     </div>

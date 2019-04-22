@@ -73,13 +73,21 @@ function removeTicket(ticketId) {
 }
 
 
-function buyTicket(ticketId, ticketPrice, eventId) {
+function buyTicket(eventId) {
     if ($("#first-name-for-buy-ticket").val() == "" || $("#last-name-for-buy-ticket").val() == "" ||
         $('#add-user-email').val() == "" || $('#add-user-phone-number').val() == "") {
         alert('Заполните все поля');
     } else {
         var url = "/event/app/" + eventId + "/purchase/tickets";
         var date = new Date();
+        var index = 0;
+        var ticketId = [];
+        $(".qet").each(function() {
+
+             var obj = $(this)[index].id;
+            ticketId.push(obj);
+        })
+
         let wrap = {
             firstName: $("#first-name-for-buy-ticket").val(),
             lastName: $("#last-name-for-buy-ticket").val(),
@@ -87,11 +95,10 @@ function buyTicket(ticketId, ticketPrice, eventId) {
             email: $('#add-user-email').val() ,
             ticketId: ticketId,
             ticketPrice: $("#sumResult").val(),
-            countTicket:localStorage.getItem("currentCount"),
+            countTicket:localStorage.getItem("count"),
             date : date,
-            promo: $("#promo-for-buy-ticket")
+            promo: $("#promo-for-buy-ticket").val()
         };
-
         $.ajax({
             type: "POST",
             url: url,
