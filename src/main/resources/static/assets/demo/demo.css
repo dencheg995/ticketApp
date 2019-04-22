@@ -61,3 +61,11 @@
   max-width: 530px;
   margin: 0 auto;
 }
+
+.panel {
+  padding: 20px;
+  width: 250px;
+  background: #eeeeee;
+  border: #282828 2px solid;
+  font-family: Georgia;
+}

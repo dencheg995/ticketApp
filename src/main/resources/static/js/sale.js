@@ -8,6 +8,7 @@ localStorage.setItem("sum", sum);
 function addition(ticketId, ticketPrice, ticketCountMax) {
     var cId = "currentCount" + ticketId;
     $("#down" + ticketId).attr("disabled", false);
+    $("#saleButton").attr("disabled", false);
     $("#down" + ticketId).attr("field", "off");
     if (ticketCountMax != parseInt(document.getElementById(cId).value)) {
         currentCount = parseInt(localStorage.getItem("currentCount"));
@@ -79,6 +80,9 @@ function subtraction(ticketId, ticketPrice) {
 
                 sum -= ticketPrice;
                 localStorage.setItem("sum", sum);
+                if (sum == 0){
+                    $("#saleButton").attr("disabled", true);
+                }
                 if (parseInt(localStorage.getItem("prevId")) != parseInt(ticketId))
                     localStorage.setItem("prevId", ticketId);
                 $("#sumResult").val(sum);
@@ -90,6 +94,7 @@ function subtraction(ticketId, ticketPrice) {
 }
 
 $(document).ready(function () {
+    $("#sumResult").val(sum);
     $('#saleButton').click(function() {
         $('#ticketModal').modal('show');
     })
