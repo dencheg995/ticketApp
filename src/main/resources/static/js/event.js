@@ -112,6 +112,22 @@ function buyTicket(eventId) {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(wrap),
             success: function (result) {
+                for (var i = 1; i < result.length; i++) {
+                    if (i <= result[0]) {
+                        $("#ticketType2").text(result[i].ticketType)
+                        $("#ticketCount2").text(result[i].ticketCount)
+                        $("#ticketPrice2").text(result[i].ticketPrice * result[i].ticketCount)
+                    } else if (i > result[0] & i < result.length-1) {
+                        $("#consumerFName").text(result[i].firstName)
+                        $("#consumerLName").text(result[i].lastName)
+                        $("#consumerEmail").text(result[i].email)
+                        $("#consumerTelephone").text(result[i].phoneNumber)
+                    } else {
+                        $("#lastSum").text(result[result.length-1] / 1.1)
+                        $("#service").text(result[result.length-1] - result[result.length-1] / 1.1)
+                        $("#forPay").text(result[result.length-1])
+                    }
+                }
                 $('#saleModal').modal('show');
             }
         });
