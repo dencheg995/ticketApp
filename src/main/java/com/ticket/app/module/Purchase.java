@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table
@@ -19,11 +22,9 @@ public class Purchase {
     @Column(name = "uniq_id", unique = true)
     private String uniqId;
 
-    @Column(name = "count_purchase_ticket")
-    private int countBuyTicket;
-
+    @ElementCollection
     @Column(name = "cost_purchase_ticket")
-    private int costBuyTicket;
+    private Map<Ticket,Double> costBuyTicket;
 
     @Column(name = "check_purchase")
     private boolean check;
@@ -34,19 +35,20 @@ public class Purchase {
     @Column(name = "purchase_time")
     private LocalDateTime localDateTime;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "purchase_consumer",
             joinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))},
             inverseJoinColumns = {@JoinColumn(name = "consumer_id", foreignKey = @ForeignKey(name = "FK_CONSUMER"))})
     @JsonIgnore
     private Consumer consumer;
 
-    @ManyToOne
-    @JoinTable(name = "purchase_ticket",
-            joinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))},
-            inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
-    @JsonIgnore
-    private Ticket ticket;
+    @ElementCollection
+//    @JoinTable(name = "purchase_ticket",
+//            joinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))},
+//            inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
+//    @JsonIgnore
+//    @MapKey(name = "ticket")
+    private Map<Ticket, Integer> ticket = new HashMap<>();
 
     public boolean isCheck() {
         return check;
@@ -88,20 +90,12 @@ public class Purchase {
         this.uniqId = uniqId;
     }
 
-    public int getCostBuyTicket() {
+    public Map<Ticket, Double> getCostBuyTicket() {
         return costBuyTicket;
     }
 
-    public void setCostBuyTicket(int costBuyTicket) {
+    public void setCostBuyTicket(Map<Ticket, Double> costBuyTicket) {
         this.costBuyTicket = costBuyTicket;
-    }
-
-    public int getCountBuyTicket() {
-        return countBuyTicket;
-    }
-
-    public void setCountBuyTicket(int countBuyTicket) {
-        this.countBuyTicket = countBuyTicket;
     }
 
     public Consumer getConsumer() {
@@ -112,11 +106,11 @@ public class Purchase {
         this.consumer = consumer;
     }
 
-    public Ticket getTicket() {
+    public Map<Ticket, Integer> getTicket() {
         return ticket;
     }
 
-    public void setTicket(Ticket ticket) {
+    public void setTicket(Map<Ticket, Integer> ticket) {
         this.ticket = ticket;
     }
 }

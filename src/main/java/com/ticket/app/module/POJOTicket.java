@@ -3,7 +3,9 @@ package com.ticket.app.module;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class POJOTicket {
 
@@ -15,9 +17,9 @@ public class POJOTicket {
 
     private String phoneNumber;
 
-    private List<Long> ticketId;
+    private Map<Long, Integer> ticketId = new HashMap<>();
 
-    private int ticketPrice;
+    private Double ticketPrice;
 
     private int countTicket;
 
@@ -73,19 +75,19 @@ public class POJOTicket {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Long> getTicketId() {
+    public Map<Long, Integer> getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(List<Long> ticketId) {
+    public void setTicketId(Map<Long, Integer> ticketId) {
         this.ticketId = ticketId;
     }
 
-    public int getTicketPrice() {
+    public Double getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(int ticketPrice) {
+    public void setTicketPrice(Double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "promo")
@@ -18,7 +19,7 @@ public class Promocode implements Serializable {
     private Long id;
 
 
-    @Column(name = "promocode")
+    @Column(name = "promocode", unique = true)
     @ElementCollection
     private List<String> promocode;
 
@@ -33,7 +34,7 @@ public class Promocode implements Serializable {
 
     private Integer count;
 
-    @ManyToOne
+    @OneToOne
     @JoinTable(name = "ticket_promo",
             joinColumns = {@JoinColumn(name = "promo_id", foreignKey = @ForeignKey(name = "FK_PROMO"))},
             inverseJoinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))})
@@ -93,5 +94,24 @@ public class Promocode implements Serializable {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Promocode promocode1 = (Promocode) o;
+        return Objects.equals(id, promocode1.id) &&
+                Objects.equals(promocode, promocode1.promocode) &&
+                Objects.equals(dateStart, promocode1.dateStart) &&
+                Objects.equals(dateEnd, promocode1.dateEnd) &&
+                Objects.equals(sale, promocode1.sale) &&
+                Objects.equals(count, promocode1.count) &&
+                Objects.equals(ticket, promocode1.ticket);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, promocode, dateStart, dateEnd, sale, count, ticket);
     }
 }

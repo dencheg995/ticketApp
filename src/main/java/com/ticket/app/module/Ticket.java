@@ -33,36 +33,37 @@ public class Ticket {
     @JsonIgnore
     private Event event;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
-    @JoinTable(name = "purchase_ticket",
-            joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
-            inverseJoinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))})
-    private List<Purchase> purchaseTicketList;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    @JoinTable(name = "purchase_ticket",
+//            joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
+//            inverseJoinColumns = {@JoinColumn(name = "purchase_ticket_id", foreignKey = @ForeignKey(name = "FK_PURCHASE_TICKET"))})
+//    private List<Purchase> purchaseTicketList;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinTable(name = "ticket_promo",
             joinColumns = {@JoinColumn(name = "ticket_id", foreignKey = @ForeignKey(name = "FK_TICKET"))},
             inverseJoinColumns = {@JoinColumn(name = "promo_id", foreignKey = @ForeignKey(name = "FK_PROMO"))})
-    private Set<Promocode> promocodeSet;
+    private Promocode promocodeSet;
 
     public Ticket() {
     }
 
-    public List<Purchase> getPurchaseTicketList() {
-        return purchaseTicketList;
-    }
+//    public List<Purchase> getPurchaseTicketList() {
+//        return purchaseTicketList;
+//    }
+//
+//    public void setPurchaseTicketList(List<Purchase> purchaseTicketList) {
+//        this.purchaseTicketList = purchaseTicketList;
+//    }
 
-    public void setPurchaseTicketList(List<Purchase> purchaseTicketList) {
-        this.purchaseTicketList = purchaseTicketList;
-    }
 
-    public Set<Promocode> getPromocodeSet() {
+    public Promocode getPromocodeSet() {
         return promocodeSet;
     }
 
-    public void setPromocodeSet(Set<Promocode> promocodeSet) {
+    public void setPromocodeSet(Promocode promocodeSet) {
         this.promocodeSet = promocodeSet;
     }
 

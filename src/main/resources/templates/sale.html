@@ -57,7 +57,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
                                                 <div class="js-spinner">
                                                     <button class="btn-yahoo badge " th:id="'down' + ${ticket.id}" th:field = "off" type="button" name="down" spinner-button="down" th:onclick="'subtraction(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'" disabled="disabled">-</button>
-                                                    <input th:id="'currentCount' + ${ticket.id}" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
+                                                    <input th:id="'currentCount' + ${ticket.id}" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon count"/>
                                                     <button class="btn-yahoo badge" th:id="'up' + ${ticket.id}" th:field = "off" type="button" name="up" spinner-button="up" th:onclick="'addition(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ', ' + ${ticket.getTicketCount()} +')'">+</button>
                                                 </div>
                                             </div>
@@ -203,7 +203,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
                                             <div class="modal-footer modalDarkStyle">
                                                 <button class="btn btn-primary" th:onclick="'buyTicket(' + ${event.id} + ')'">Подтвердить бронирование</button>
                                             </div>
@@ -385,7 +384,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             </div>
         </div>
     </div>
-</div>
 </div>
 <script src="/assets/demo/stepper.js"></script>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>

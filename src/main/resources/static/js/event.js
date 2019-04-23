@@ -80,12 +80,19 @@ function buyTicket(eventId) {
     } else {
         var url = "/event/app/" + eventId + "/purchase/tickets";
         var date = new Date();
-        var index = 0;
-        var ticketId = [];
-        $(".qet").each(function() {
-
-             var obj = $(this)[index].id;
-            ticketId.push(obj);
+        offset = date.getTimezoneOffset();
+        date.setMinutes(date.getMinutes() + offset);
+        var count = 0;
+        var obj = {}
+        $(".qet").each(function(i, index) {
+            $(".count").each(function(idx, c) {
+                if ($(this).val() > 0) {
+                 count = $(this).val();
+                 obj[$(index)[0].id] = count;
+                 return false;
+                }
+            })
+            return;
         })
 
         let wrap = {
@@ -93,7 +100,7 @@ function buyTicket(eventId) {
             lastName: $("#last-name-for-buy-ticket").val(),
             phoneNumber: $('#add-user-phone-number').val(),
             email: $('#add-user-email').val() ,
-            ticketId: ticketId,
+            ticketId: obj,
             ticketPrice: $("#sumResult").val(),
             countTicket:localStorage.getItem("count"),
             date : date,
