@@ -58,7 +58,7 @@ public class EventController {
         purchase.setCheck(false);
         purchase.setLocalDateTime(pojoTicket.getDate());
         purchase.setConsumer(consumer);
-        infa.add(pojoTicket.getTicketId().entrySet().size());
+        infa.add(pojoTicket.getTicketId().entrySet().size() * 2);
         for (Map.Entry<Long, Integer> entry : pojoTicket.getTicketId().entrySet()) {
             ticket = ticketService.getTicket(entry.getKey());
             if (promocodeService.getPromoByTicketId(entry.getKey()).isPresent()) {
@@ -79,10 +79,10 @@ public class EventController {
                 sum = ((pojoTicket.getTicketPrice() * 1.1d));
             }
             tickets.put(ticket, entry.getValue());
+            infa.add(ticket);
+            infa.add(entry.getValue());
             ticket.setTicketCount(ticket.getTicketCount() - entry.getValue());
             ticketService.updateTicket(ticket);
-            ticket.setTicketCount(entry.getValue());
-            infa.add(ticket);
         }
         infa.add(consumer);
         infa.add(sum);

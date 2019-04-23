@@ -50,6 +50,14 @@ public class Ticket {
     public Ticket() {
     }
 
+    public Ticket(Ticket ticket) {
+        ticket.setTicketCount(ticketCount);
+        ticket.setTicketPrice(ticketPrice);
+        ticket.setEvent(event);
+        ticket.setTicketType(ticketType);
+        ticket.setPromocodeSet(promocodeSet);
+    }
+
 //    public List<Purchase> getPurchaseTicketList() {
 //        return purchaseTicketList;
 //    }
@@ -57,6 +65,7 @@ public class Ticket {
 //    public void setPurchaseTicketList(List<Purchase> purchaseTicketList) {
 //        this.purchaseTicketList = purchaseTicketList;
 //    }
+
 
 
     public Promocode getPromocodeSet() {

@@ -83,12 +83,14 @@ function buyTicket(eventId) {
         offset = date.getTimezoneOffset();
         date.setMinutes(date.getMinutes() + offset);
         var count = 0;
+        var k = 0;
         var obj = {};
         $(".qet").each(function(i, index) {
             $(".count").each(function(idx, c) {
-                if ($(this).val() > 0) {
+                if ($(this).val() > 0 && k == idx) {
                  count = $(this).val();
                  obj[$(index)[0].id] = count;
+                 k++;
                  return false;
                 }
             });
@@ -113,16 +115,16 @@ function buyTicket(eventId) {
             data: JSON.stringify(wrap),
             success: function (result) {
                 for (var i = 1; i < result.length; i++) {
-                    if (i <= result[0]) {
+                    if (i <= result[0] & i % 2 != 0) {
                         $("#ticketType2").text(result[i].ticketType)
-                        $("#ticketCount2").text(result[i].ticketCount)
-                        $("#ticketPrice2").text(result[i].ticketPrice * result[i].ticketCount)
+                        $("#ticketCount2").text(result[i+1])
+                        $("#ticketPrice2").text(result[i].ticketPrice * result[i+1])
                     } else if (i > result[0] & i < result.length-1) {
                         $("#consumerFName").text(result[i].firstName)
                         $("#consumerLName").text(result[i].lastName)
                         $("#consumerEmail").text(result[i].email)
                         $("#consumerTelephone").text(result[i].phoneNumber)
-                    } else {
+                    } else if (i < result.length-1) {
                         $("#lastSum").text(result[result.length-1] / 1.1)
                         $("#service").text(result[result.length-1] - result[result.length-1] / 1.1)
                         $("#forPay").text(result[result.length-1])
