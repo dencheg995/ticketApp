@@ -35,9 +35,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <div th:each = "event : ${event}" th:value="${event.ticketList}">
                 <div th:each="ticket : ${event.getTicketList()}">
                     <div th:if="${ticket.getTicketCount()} > 0">
-                        <div class="row" style="width: 758px; height: 130px;">
-                            <div class="col-md-12">
-                                <div class="card" style="margin-top: 5px">
+                        <div class="row">
+                            <div class="col center-position">
+                                <div class="card" style="width: 758px; height: 130px;margin-top: 5px">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-3" style="padding-left: 0;">
@@ -50,7 +50,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                             <div class="col-md-2">
                                                 <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="margin-top: 6px">
 <!--                                                <span class="minus bg-dark">-</span>-->
 <!--                                                <input style="color: white; text-align: center" type="number" class="count" name="qty" value="1"/>-->
 <!--                                                <span class="plus bg-dark">+</span>-->
@@ -79,22 +79,22 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                 </button>
                                             </div>
                                             <div class="modal-body modalDarkStyle">
-<!--                                                <div th:each="">-->
-                                                    <div class="card card-plain">
-                                                        <div class="card-header">
-                                                            <div class="row">
-                                                                <div class="col left-position">
-                                                                    <p style="color: #fff;font-weight: bold">Type: </p>
-                                                                </div>
-                                                                <div class="col center-position">
-                                                                    <p style="color: #fff;font-weight: bold">Count: </p>
-                                                                </div>
-                                                                <div class="col right-position">
-                                                                    <p style="color: #fff;font-weight: bold">Price: </p>
-                                                                </div>
+                                                <div class="card card-plain">
+                                                    <div class="card-header">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Type: </p>
+                                                            </div>
+                                                            <div class="col center-position">
+                                                                <p style="color: #fff;font-weight: bold">Count: </p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p style="color: #fff;font-weight: bold">Price: </p>
                                                             </div>
                                                         </div>
-                                                        <div class="card-body">
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div>
                                                             <div class="row">
                                                                 <div class="col left-position">
                                                                     <p id="ticketType" style="color: #fff;">Vip</p>
@@ -106,26 +106,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                                     <p id ="ticketPrice" style="color: #fff;">100</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col left-position">
-                                                                    <p id="ticketType1" style="color: #fff;">DanceFloor</p>
-                                                                </div>
-                                                                <div class="col center-position">
-                                                                    <p id ="ticketCount1" style="color: #fff;">100</p>
-                                                                </div>
-                                                                <div class="col right-position">
-                                                                    <p id ="ticketPrice1" style="color: #fff;">10</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-footer">
-                                                            <div class="row">
-                                                                <div class="col left-position" style="font-weight: bold">Price</div>
-                                                                <div class="col right-position" style="font-weight: bold">1222</div>
-                                                            </div>
                                                         </div>
                                                     </div>
-<!--                                                </div>-->
+                                                    <div class="card-footer">
+                                                        <div class="row">
+                                                            <div class="col left-position" style="font-weight: bold">Price</div>
+                                                            <div class="col right-position" style="font-weight: bold">1222</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 <!--                                            <div class="modal-footer">-->
 <!--                                                <span>Тип билета: </span>-->
@@ -145,7 +134,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal fade" id="dataModal" th:id="'dataModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="dataModalLavel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="fixed-top">
@@ -159,14 +147,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                             </div>
                                             <div class="modal-body modalDarkStyle">
                                                 <div class="form-group">
-                                                    <label for="first-name-for-buy-ticket" style="color: #fff">Имя: </label>
+                                                    <label for="first-name-for-buy-ticket" style="color: #fff">Имя</label>
                                                     <input id="first-name-for-buy-ticket" class="form-control" style="color: #fff" name="firstname" type="text" placeholder="Иван"
                                                            data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="last-name-for-buy-ticket" style="color: #fff">Фамилия: </label>
+                                                    <label for="last-name-for-buy-ticket" style="color: #fff">Фамилия</label>
                                                     <input id="last-name-for-buy-ticket" class="form-control" style="color: #fff" name="lastname" type="text" placeholder="Иванов"
                                                            data-error="Фамилия должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
@@ -178,6 +166,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                            class="form-control"
                                                            data-error="Неверный формат Email"
                                                            style="color: #fff"
+                                                           placeholder="info@gmail.com"
                                                            required="required"
                                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
                                                            id="add-user-email"/>
@@ -195,7 +184,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="promo-for-buy-ticket" style="color: #fff">Промокод: </label>
+                                                    <label for="promo-for-buy-ticket" style="color: #fff">Промокод</label>
                                                     <input id="promo-for-buy-ticket" class="form-control" name="promo" type="text" placeholder="ABCDF"
                                                            data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"

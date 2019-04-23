@@ -12382,6 +12382,7 @@ fieldset[disabled] .btn-link.active {
   color: #6c757c;
   opacity: 1;
   filter: alpha(opacity=100);
+
 }
 
 .form-control {

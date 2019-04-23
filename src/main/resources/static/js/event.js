@@ -83,7 +83,7 @@ function buyTicket(eventId) {
         offset = date.getTimezoneOffset();
         date.setMinutes(date.getMinutes() + offset);
         var count = 0;
-        var obj = {}
+        var obj = {};
         $(".qet").each(function(i, index) {
             $(".count").each(function(idx, c) {
                 if ($(this).val() > 0) {
@@ -91,9 +91,9 @@ function buyTicket(eventId) {
                  obj[$(index)[0].id] = count;
                  return false;
                 }
-            })
+            });
             return;
-        })
+        });
 
         let wrap = {
             firstName: $("#first-name-for-buy-ticket").val(),

@@ -37,7 +37,7 @@
                         <h4 class="title" style="font-weight: bold" th:text="'Билеты для: ' + ${event.getName()}"></h4>
                     </div>
                     <div class="card-body">
-                        <a th:onclick="'putTicket('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-simple-add"></i></a>
+                        <a class="left-position" th:onclick="'putTicket('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-simple-add"></i></a>
                         <div class="table-responsive">
                             <table class="table tablesorter">
                                 <tr>

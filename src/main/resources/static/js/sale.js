@@ -97,32 +97,13 @@ $(document).ready(function () {
     $("#sumResult").val(sum);
     $('#saleButton').click(function() {
         $('#ticketModal').modal('show');
+        var date = new Date();
+        offset = date.getTimezoneOffset();
+        date.setMinutes(date.getMinutes() + offset);
+        var count = 0;
+        var obj = {};
     })
 });
-// $(document).ready(function () {
-//     $('#promoTable').delegate('.promo-modal', 'click', function() {
-//         $('#editPromoModal').modal('show');
-//         var idPromo = $(this).closest('tr').children('td:first').text();
-//         $.ajax({
-//             type: "GET",
-//             contentType: 'application/json; charset=UTF-8',
-//             url: '/get-promo',
-//             data: {
-//                 promoId: idPromo
-//             },
-//             success: function (promo) {
-//                 $("#edit-promo-sale").val(promo.sale);
-//                 $("#edit-promo-date-start").val(promo.dateStart);
-//                 $("#edit-promo-date-end").val(promo.dateEnd);
-//                 $("#edit-promo-date-count").val(promo.count);
-//                 $("#edit-promo").each(function() {
-//                     $(this).val(promo.promocode
-//                         .join("\n"));
-//                 });
-//             }
-//         });
-//     })
-// });
 
 function openLKPage() {
     var url = '/lk';
