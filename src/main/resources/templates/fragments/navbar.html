@@ -16,7 +16,7 @@
                         <span class="navbar-toggler-bar bar3"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" style="font-weight: bold" href="javascript:void(0)">Личный кабинет</a>
+                <a class="navbar-brand" style="font-weight: bold; align-items: center;" href="javascript:void(0)">Личный кабинет</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -25,20 +25,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="navbar-nav ml-auto">
-                    <li class="search-bar input-group">
-                        <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
-                            <span class="d-lg-none d-md-block">Поиск</span>
-                        </button>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a href="javascript:;" class="btn btn-danger btn-sm" onclick="document.getElementById('logout').submit();" style="margin-top: 8px">Выход</a>
-
-                        <form action="/logout" id="logout" method="post">
+                    <li class="search-bar input-group" style="align-items: center;">
+                        <div class="col-md-2">
+                            <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
+                                <span class="d-lg-none d-md-block">Поиск</span>
+                            </button>
+                        </div>
+                        <div class="col-md-5"></div>
+                        <div class="col-md-5 right-position">
+                            <a href="javascript:;" class="btn btn-danger btn-sm center-position" style="width: 87px;" onclick="document.getElementById('logout').submit();">Выход</a>
+                            <form action="/logout" id="logout" method="post">
                             <input type="hidden"
                                    th:name="${_csrf.parameterName}"
                                    th:value="${_csrf.token}"/>
-                        </form>
-
+                            </form>
+                        </div>
                     </li>
                     <li class="separator d-lg-none"></li>
                 </ul>
