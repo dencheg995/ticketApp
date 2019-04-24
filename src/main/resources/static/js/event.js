@@ -132,14 +132,14 @@ function buyTicket(eventId) {
                             </div>");
 
                     } else if (i > result[0] & i < result.length-1) {
-                        $("#consumerFName").text(result[i].firstName)
-                        $("#consumerLName").text(result[i].lastName)
-                        $("#consumerEmail").text(result[i].email)
+                        $("#consumerFName").text(result[i].firstName);
+                        $("#consumerLName").text(result[i].lastName);
+                        $("#consumerEmail").text(result[i].email);
                         $("#consumerTelephone").text(result[i].phoneNumber)
                     } else if (i < result.length-1) {
-                        $("#lastSum").text(result[result.length-1] / 1.1)
-                        $("#service").text(result[result.length-1] - result[result.length-1] / 1.1)
-                        $("#forPay").text(result[result.length-1])
+                        $("#lastSum").text((result[result.length-1] / 1.1).toFixed(0));
+                        $("#service").text((result[result.length-1] - result[result.length-1] / 1.1).toFixed(2));
+                        $("#forPay").text((result[result.length-1]).toFixed(1))
                     }
                 }
                 $('#saleModal').modal('show');

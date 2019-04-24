@@ -85,10 +85,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                     <div class="card-header">
                                                         <div class="row">
                                                             <div class="col left-position">
-                                                                <p style="color: #fff;font-weight: bold">Type: </p>
+                                                                <p style="color: #fff;font-weight: bold">Тип билета: </p>
                                                             </div>
                                                             <div class="col right-position">
-                                                                <p style="color: #fff;font-weight: bold">Count: </p>
+                                                                <p style="color: #fff;font-weight: bold">Кол-во: </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,8 +110,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                     </div>
                                                     <div class="card-footer">
                                                         <div class="row">
-                                                            <div class="col left-position" style="font-weight: bold">Price</div>
-                                                            <div class="col right-position firstPrice" style="font-weight: bold"></div>
+                                                            <div class="col left-position" style="font-weight: bold; font-size: 18px;">Сумма:</div>
+                                                            <div class="col right-position firstPrice" style="font-weight: bold; font-size: 18px;"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -244,14 +244,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                     </div>
                                                 </div>
                                                 <div class="card card-plain">
-                                                    <p>Consumer</p>
                                                     <div class="card-header">
                                                         <div class="row">
                                                             <div class="col left-position">
-                                                                <p style="color: #fff;font-weight: bold">Покупатель:</p>
+                                                                <p style="color: #fff;font-weight: bold">Имя:</p>
                                                             </div>
                                                             <div class="col center-position">
-                                                                <p style="color: #fff;font-weight: bold">Email:</p>
+                                                                <p style="color: #fff;font-weight: bold">Фамилия:</p>
                                                             </div>
                                                             <div class="col right-position">
                                                                 <p style="color: #fff;font-weight: bold">Номер телефона:</p>
@@ -262,28 +261,27 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                         <div class="row">
                                                             <div class="col left-position">
                                                                 <p id="consumerFName" style="color: #fff;"></p>
-                                                                <p id="consumerLName" style="color: #fff;"></p>
                                                             </div>
                                                             <div class="col center-position">
-                                                                <p id ="consumerEmail" style="color: #fff;"></p>
+                                                                <p id="consumerLName" style="color: #fff;"></p>
                                                             </div>
                                                             <div class="col right-position">
                                                                 <p id ="consumerTelephone" style="color: #fff;"></p>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="card-footer">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Email:</p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p id ="consumerEmail" style="color: #fff;"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <!--                                            <div class="modal-footer">-->
-                                            <!--                                                <span>Тип билета: </span>-->
-                                            <!--                                                <span th:text="${ticket.getTicketType()}"></span>-->
-                                            <!--                                                <p></p>-->
-                                            <!--                                                <span>Цена: </span>-->
-                                            <!--                                                <span th:text="${ticket.getTicketPrice()}"></span>-->
-                                            <!--                                                <p></p>-->
-                                            <!--                                                <span>Кол-во билетов</span>-->
-                                            <!--                                                <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>-->
-                                            <!--                                            </div>-->
                                             <div class="modal-footer modalDarkStyle">
                                                 <div class="card">
                                                     <div class="card-body">
@@ -307,7 +305,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                     <div class="card-footer">
                                                         <div class="row">
                                                             <div class="col left-position">
-                                                                <p style="color: #fff;font-weight: bold">К оплате:</p>
+                                                                <p style="color: #fff;font-weight: bold; font-size: 18px;">К оплате:</p>
                                                             </div>
                                                             <div class="col right-position">
                                                                 <p id = "forPay" style="color: #fff;font-weight: bold; font-size: 18px;"></p>
