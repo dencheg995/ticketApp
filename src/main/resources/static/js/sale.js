@@ -96,16 +96,44 @@ function subtraction(ticketId, ticketPrice) {
 $(document).ready(function () {
     $("#sumResult").val(sum);
     $('#saleButton').click(function() {
+        var obj = {};
+        var count = 0;
+        var k = 0;
+        $(".firstPrice").text(localStorage.getItem("sum"))
+        $(".qet").each(function(i, index) {
+            $(".count").each(function(idx, c) {
+                if ($(this).val() > 0 && (k == idx || k == 0)) {
+                    count = $(this).val();
+                    $(".firstModal").append("<div class='row'> \
+                            <div class='col left-position'> \
+                             <p style='color: #fff;'>" + $(index)[0].innerHTML + "</p>  \
+                            </div> \
+                            <div class='col right-position'> \
+                            <p id ='ticketPrice2' style='color: #fff;'>" + count + "</p> \
+                            </div> \
+                            </div>")
+                    obj[$(index)[0].innerHTML] = count;
+                    k++;
+                    return false;
+                } else {
+                    k = 0;
+                }
+            });
+            return;
+        });
         $('#ticketModal').modal('show');
         var date = new Date();
         offset = date.getTimezoneOffset();
         date.setMinutes(date.getMinutes() + offset);
-        var count = 0;
-        var obj = {};
+
     })
 });
 
 function openLKPage() {
     var url = '/lk';
     window.open(url, '_self');
+}
+
+function clearModal() {
+    $(".firstModal").empty();
 }

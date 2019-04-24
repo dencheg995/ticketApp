@@ -48,7 +48,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
                                             </div>
                                             <div class="col-md-2">
-                                                <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
+                                                <h4 class = "money" style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()}"></h4>
+                                                <h4 class = "money" style="font-weight: bold; margin-top: 16px" text = 'руб'></h4>
+
                                             </div>
                                             <div class="col-md-3" style="margin-top: 6px">
 <!--                                                <span class="minus bg-dark">-</span>-->
@@ -74,7 +76,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                         <div class="modal-content">
                                             <div class="modal-header modalDarkStyle">
                                                 <h4 class="title" style="color: #fff;" id="ticketModalLabel">Детали заказа</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearModal()">
                                                     <span aria-hidden="true" style="color: #fff;font-size: 14px">Назад</span>
                                                 </button>
                                             </div>
@@ -85,33 +87,31 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                             <div class="col left-position">
                                                                 <p style="color: #fff;font-weight: bold">Type: </p>
                                                             </div>
-                                                            <div class="col center-position">
-                                                                <p style="color: #fff;font-weight: bold">Count: </p>
-                                                            </div>
                                                             <div class="col right-position">
-                                                                <p style="color: #fff;font-weight: bold">Price: </p>
+                                                                <p style="color: #fff;font-weight: bold">Count: </p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-body">
-                                                        <div>
-                                                            <div class="row">
-                                                                <div class="col left-position">
-                                                                    <p id="ticketType" style="color: #fff;">Vip</p>
-                                                                </div>
-                                                                <div class="col center-position">
-                                                                    <p id ="ticketCount" style="color: #fff;">21</p>
-                                                                </div>
-                                                                <div class="col right-position">
-                                                                    <p id ="ticketPrice" style="color: #fff;">100</p>
-                                                                </div>
-                                                            </div>
+                                                        <div class="firstModal">
+
                                                         </div>
+                                                        <!--<div>-->
+                                                            <!--<div class="row">-->
+                                                                <!--<div class="col left-position">-->
+                                                                    <!--<p id="ticketType" style="color: #fff;">Vip</p>-->
+                                                                <!--</div>-->
+
+                                                                <!--<div class="col right-position">-->
+                                                                    <!--<p id ="ticketPrice" style="color: #fff;">100</p>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
                                                     </div>
                                                     <div class="card-footer">
                                                         <div class="row">
                                                             <div class="col left-position" style="font-weight: bold">Price</div>
-                                                            <div class="col right-position" style="font-weight: bold">1222</div>
+                                                            <div class="col right-position firstPrice" style="font-weight: bold"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -230,28 +230,28 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                         </div>
                                                     </div>
                                                     <div class="card-body fillBody">
-                                                        <div class="row">
-                                                            <div class="col left-position">
-                                                                <p id="ticketType2" style="color: #fff;">Vip</p>
-                                                            </div>
-                                                            <div class="col center-position">
-                                                                <p id ="ticketCount2" style="color: #fff;">21</p>
-                                                            </div>
-                                                            <div class="col right-position">
-                                                                <p id ="ticketPrice2" style="color: #fff;">100</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col left-position">
-                                                                <p id="ticketType13" style="color: #fff;">DanceFloor</p>
-                                                            </div>
-                                                            <div class="col center-position">
-                                                                <p id ="ticketCount13" style="color: #fff;">100</p>
-                                                            </div>
-                                                            <div class="col right-position">
-                                                                <p id ="ticketPrice13" style="color: #fff;">10</p>
-                                                            </div>
-                                                        </div>
+                                                        <!--<div class="row">-->
+                                                            <!--<div class="col left-position">-->
+                                                                <!--<p id="ticketType2" style="color: #fff;">Vip</p>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col center-position">-->
+                                                                <!--<p id ="ticketCount2" style="color: #fff;">21</p>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col right-position">-->
+                                                                <!--<p id ="ticketPrice2" style="color: #fff;">100</p>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="row">-->
+                                                            <!--<div class="col left-position">-->
+                                                                <!--<p id="ticketType13" style="color: #fff;">DanceFloor</p>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col center-position">-->
+                                                                <!--<p id ="ticketCount13" style="color: #fff;">100</p>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col right-position">-->
+                                                                <!--<p id ="ticketPrice13" style="color: #fff;">10</p>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
                                                     </div>
                                                 </div>
                                                 <div class="card card-plain">
