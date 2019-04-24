@@ -102,7 +102,7 @@ $(document).ready(function () {
         $(".firstPrice").text(localStorage.getItem("sum"))
         $(".qet").each(function(i, index) {
             $(".count").each(function(idx, c) {
-                if ($(this).val() > 0 && (k == idx || k == 0)) {
+                if ($(this).val() > 0 && (k == idx)) {
                     count = $(this).val();
                     $(".firstModal").append("<div class='row'> \
                             <div class='col left-position'> \
@@ -113,12 +113,10 @@ $(document).ready(function () {
                             </div> \
                             </div>")
                     obj[$(index)[0].innerHTML] = count;
-                    k++;
                     return false;
-                } else {
-                    k = 0;
                 }
             });
+            k++;
             return;
         });
         $('#ticketModal').modal('show');
@@ -136,4 +134,8 @@ function openLKPage() {
 
 function clearModal() {
     $(".firstModal").empty();
+}
+
+function clearModal2() {
+    $(".fillBody").empty();
 }

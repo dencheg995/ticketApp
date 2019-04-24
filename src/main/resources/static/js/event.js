@@ -87,13 +87,13 @@ function buyTicket(eventId) {
         var obj = {};
         $(".qet").each(function(i, index) {
             $(".count").each(function(idx, c) {
-                if ($(this).val() > 0 && (k == idx || k == 0)) {
+                if ($(this).val() > 0 && (k == idx)) {
                  count = $(this).val();
                  obj[$(index)[0].id] = count;
-                 k = idx;
                  return false;
                 }
             });
+            k++;
             return;
         });
 
