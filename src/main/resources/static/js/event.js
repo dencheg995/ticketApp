@@ -116,9 +116,21 @@ function buyTicket(eventId) {
             success: function (result) {
                 for (var i = 1; i < result.length; i++) {
                     if (i <= result[0] & i % 2 != 0) {
-                        $("#ticketType2").text(result[i].ticketType)
-                        $("#ticketCount2").text(result[i+1])
-                        $("#ticketPrice2").text(result[i].ticketPrice * result[i+1])
+                        // $("#ticketType2").text(result[i].ticketType)
+                        // $("#ticketCount2").text(result[i+1])
+                        // $("#ticketPrice2").text(result[i].ticketPrice * result[i+1])
+                        $(".fillBody").append("<div class='row'> \
+                            <div class='col left-position'> \
+                             <p style='color: #fff;'>" + result[i].ticketType + "</p>  \
+                            </div> \
+                            <div class='col center-position'> \
+                            <p id ='ticketCount2' style='color: #fff;'>" + result[i+1] + "</p> \
+                            </div> \
+                            <div class='col right-position'> \
+                            <p id ='ticketPrice2' style='color: #fff;'>" + result[i].ticketPrice * result[i+1] + "</p> \
+                            </div> \
+                            </div>");
+
                     } else if (i > result[0] & i < result.length-1) {
                         $("#consumerFName").text(result[i].firstName)
                         $("#consumerLName").text(result[i].lastName)
