@@ -34,27 +34,27 @@ function putTicket(eventId) {
 
 function editTicket(ticketId) {
 
-        var formData = {
-            ticketId: ticketId,
-            ticketType: $("#ticketType" + ticketId).val(),
-            ticketCount: $("#ticketCount" + ticketId).val(),
-            ticketPrice: $("#ticketPrice" + ticketId).val()
-        };
-        var url = "/edit/ticket"
-        $.ajax({
-            type: "GET",
-            contentType: "application/json",
-            url: url,
-            data: formData,
-            success: function () {
-                location.reload()
-            }
-        });
+    var formData = {
+        ticketId: ticketId,
+        ticketType: $("#ticketType" + ticketId).val(),
+        ticketCount: $("#ticketCount" + ticketId).val(),
+        ticketPrice: $("#ticketPrice" + ticketId).val()
+    };
+    var url = "/edit/ticket"
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: url,
+        data: formData,
+        success: function () {
+            location.reload()
+        }
+    });
 }
 
 function openTicketInput(ticketId) {
     if ($("#ticketType" + ticketId).prop('disabled') === true)
-    $("#ticketType" + ticketId).removeAttr('disabled');
+        $("#ticketType" + ticketId).removeAttr('disabled');
     $("#ticketPrice" + ticketId).removeAttr('disabled');
     $("#ticketCount" + ticketId).removeAttr('disabled');
 }
@@ -73,31 +73,76 @@ function removeTicket(ticketId) {
 }
 
 
-function buyTicket(ticketId, ticketPrice, eventId) {
+function buyTicket(eventId) {
     if ($("#first-name-for-buy-ticket").val() == "" || $("#last-name-for-buy-ticket").val() == "" ||
         $('#add-user-email').val() == "" || $('#add-user-phone-number').val() == "") {
         alert('Заполните все поля');
     } else {
         var url = "/event/app/" + eventId + "/purchase/tickets";
         var date = new Date();
+        offset = date.getTimezoneOffset();
+        date.setMinutes(date.getMinutes() + offset);
+        var count = 0;
+        var k = 0;
+        var obj = {};
+        $(".qet").each(function(i, index) {
+            $(".count").each(function(idx, c) {
+                if ($(this).val() > 0 && (k == idx)) {
+                 count = $(this).val();
+                 obj[$(index)[0].id] = count;
+                 return false;
+                }
+            });
+            k++;
+            return;
+        });
+
         let wrap = {
             firstName: $("#first-name-for-buy-ticket").val(),
             lastName: $("#last-name-for-buy-ticket").val(),
             phoneNumber: $('#add-user-phone-number').val(),
             email: $('#add-user-email').val() ,
-            ticketId: ticketId,
-            ticketPrice: ticketPrice,
-            countTicket: $("#ticketCount").val(),
-            date : date
+            ticketId: obj,
+            ticketPrice: $("#sumResult").val(),
+            countTicket:localStorage.getItem("count"),
+            date : date,
+            promo: $("#promo-for-buy-ticket").val()
         };
-
         $.ajax({
             type: "POST",
             url: url,
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(wrap),
             success: function (result) {
-                ("#yandexForm").submit()
+                for (var i = 1; i < result.length; i++) {
+                    if (i <= result[0] & i % 2 != 0) {
+                        // $("#ticketType2").text(result[i].ticketType)
+                        // $("#ticketCount2").text(result[i+1])
+                        // $("#ticketPrice2").text(result[i].ticketPrice * result[i+1])
+                        $(".fillBody").append("<div class='row'> \
+                            <div class='col left-position'> \
+                             <p style='color: #fff;'>" + result[i].ticketType + "</p>  \
+                            </div> \
+                            <div class='col center-position'> \
+                            <p id ='ticketCount2' style='color: #fff;'>" + result[i+1] + "</p> \
+                            </div> \
+                            <div class='col right-position'> \
+                            <p id ='ticketPrice2' style='color: #fff;'>" + result[i].ticketPrice * result[i+1] + "</p> \
+                            </div> \
+                            </div>");
+
+                    } else if (i > result[0] & i < result.length-1) {
+                        $("#consumerFName").text(result[i].firstName);
+                        $("#consumerLName").text(result[i].lastName);
+                        $("#consumerEmail").text(result[i].email);
+                        $("#consumerTelephone").text(result[i].phoneNumber)
+                    } else if (i < result.length-1) {
+                        $("#lastSum").text((result[result.length-1] / 1.1).toFixed(0));
+                        $("#service").text((result[result.length-1] - result[result.length-1] / 1.1).toFixed(2));
+                        $("#forPay").text((result[result.length-1]).toFixed(1))
+                    }
+                }
+                $('#saleModal').modal('show');
             }
         });
     }
@@ -332,7 +377,7 @@ function addPromo(ticketId) {
         discountValue : discountValue,
         promoStartDate : promoStartDate,
         promoEndDate : promoEndDate
-    }
+    };
 
     $.ajax({
         type: "POST",
@@ -392,7 +437,7 @@ function editPromo(ticketId) {
             promoStartDate: promoStartDate,
             promoEndDate: promoEndDate,
             count: count
-        }
+        };
         $.ajax({
             type: "POST",
             contentType: 'application/json; charset=UTF-8',
@@ -404,5 +449,3 @@ function editPromo(ticketId) {
         });
     }
 }
-
-

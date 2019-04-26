@@ -2,6 +2,7 @@ package com.ticket.app.service.interfaces;
 
 import com.ticket.app.module.Promocode;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public interface PromocodeService {
 
     void remove(Long id);
 
-    Optional<Promocode> getClientByEventId(Long ticketId);
+    Optional<Promocode> getPromoByTicketId(Long ticketId);
 
     Optional<Promocode> getPromoById(Long promoId);
 

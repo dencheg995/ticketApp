@@ -8,6 +8,9 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
         <div class="container-fluid">
+            <div sec:authorize="isAuthenticated()">
+                <a onclick="openLKPage()" style="color: #fff; font-weight: bold">В личный кабинет</a>
+            </div>
         </div>
     </nav>
     <!-- End Navbar -->

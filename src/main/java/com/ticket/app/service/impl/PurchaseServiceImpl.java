@@ -7,6 +7,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.ticket.app.module.Purchase;
+import com.ticket.app.module.Ticket;
 import com.ticket.app.repository.PurchaseRepository;
 import com.ticket.app.service.interfaces.MailService;
 import com.ticket.app.service.interfaces.PurchaseService;
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
@@ -52,7 +54,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public void sendTicket(Purchase purchase) {
         String host = "http://localhost:8080/verify/ticket?";
         String url = host.concat("id=").concat(String.valueOf(purchase.getId())).concat("&uniq=").concat(purchase.getUniqId()).concat("&count=")
-                .concat(String.valueOf(purchase.getCountBuyTicket()));
+                .concat(String.valueOf(purchase.getCostBuyTicket()));
         try {
             createQRImage(url, purchase);
             mailService.sendingMailingsEmails(purchase);
@@ -80,6 +82,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     private static void createQRImage(String url, Purchase purchase) throws WriterException, IOException {
+        int k = 0;
         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -104,44 +107,52 @@ public class PurchaseServiceImpl implements PurchaseService {
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, 660, 952);
         graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
-        graphics.drawString(purchase.getTicket().getEvent().getName(), 40, 60);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 20));
-        graphics.setColor(Color.gray);
-        graphics.drawString(purchase.getTicket().getEvent().getDate(), 42, 90);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
-        graphics.drawString("18+", 560, 70);
-        graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
-        graphics.drawString(purchase.getTicket().getEvent().getClubName(), 40, 170);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 20));
-        graphics.setColor(Color.gray);
-        graphics.drawString(purchase.getTicket().getEvent().getAddress(), 42, 205);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 25));
-        graphics.drawString("ТИП БИЛЕТА", 40, 285);
-        graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
-        graphics.drawString(purchase.getTicket().getTicketType(), 40, 325);
-        graphics.setColor(Color.gray);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 25));
-        graphics.drawString("ПОКУПАТЕЛЬ", 40, 550);
-        graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
-        graphics.drawString(purchase.getConsumer().getFirstName().concat(" ").concat(purchase.getConsumer().getLastName()), 40, 590);
-        graphics.setColor(Color.decode("#72D573"));
-        graphics.fillRect(0, 630, 660, 322);
-        graphics.setColor(Color.WHITE);
-        graphics.setFont(new Font("Avenir", Font.BOLD, 35));
-        graphics.drawString("Покажите QR-код", 40, 690);
-        graphics.drawString("билета кассиру", 40, 730);
-        graphics.drawString("при входе на", 40, 770);
-        graphics.drawString("мероприятие", 40, 810);
-        graphics.setFont(new Font("Avenir", Font.PLAIN, 25));
-        graphics.drawString("Служба поддержки", 40, 880);
-        graphics.setFont(new Font("Avenir", Font.BOLD, 35));
-        graphics.drawString("hue@example.com", 40, 920);
-        graphics.drawImage(qr, null, 370,670);
-
+        int y = 325;
+        for (Map.Entry<Ticket, Integer> entry : purchase.getTicket().entrySet()) {
+            if (k == 0) {
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
+                graphics.drawString(entry.getKey().getEvent().getName(), 40, 60);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 20));
+                graphics.setColor(Color.gray);
+                graphics.drawString(entry.getKey().getEvent().getDate(), 42, 90);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
+                graphics.drawString("18+", 560, 70);
+                graphics.setColor(Color.BLACK);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
+                graphics.drawString(entry.getKey().getEvent().getClubName(), 40, 170);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 20));
+                graphics.setColor(Color.gray);
+                graphics.drawString(entry.getKey().getEvent().getAddress(), 42, 205);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 25));
+                graphics.drawString("ТИП БИЛЕТА", 40, 285);
+            }
+            graphics.setColor(Color.BLACK);
+            graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
+            graphics.drawString(entry.getKey().getTicketType(), 40, y);
+            y = y + 30;
+            if (k == 0) {
+                graphics.setColor(Color.gray);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 25));
+                graphics.drawString("ПОКУПАТЕЛЬ", 40, 550);
+                graphics.setColor(Color.BLACK);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 31));
+                graphics.drawString(purchase.getConsumer().getFirstName().concat(" ").concat(purchase.getConsumer().getLastName()), 40, 590);
+                graphics.setColor(Color.decode("#72D573"));
+                graphics.fillRect(0, 630, 660, 322);
+                graphics.setColor(Color.WHITE);
+                graphics.setFont(new Font("Avenir", Font.BOLD, 35));
+                graphics.drawString("Покажите QR-код", 40, 690);
+                graphics.drawString("билета кассиру", 40, 730);
+                graphics.drawString("при входе на", 40, 770);
+                graphics.drawString("мероприятие", 40, 810);
+                graphics.setFont(new Font("Avenir", Font.PLAIN, 25));
+                graphics.drawString("Служба поддержки", 40, 880);
+                graphics.setFont(new Font("Avenir", Font.BOLD, 35));
+                graphics.drawString("hue@example.com", 40, 920);
+                graphics.drawImage(qr, null, 370, 670);
+            }
+            k++;
+        }
         ImageIO.write(image, "png", new File("./tickets/purchase_".concat(purchase.getId().toString()).concat(".png")));
     }
 }

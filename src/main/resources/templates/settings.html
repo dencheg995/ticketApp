@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="col-md-6 pr-md-1">
                                             <div class="form-group">
-                                                <label for="edit-user-email">Email</label>
+                                                <label for="edit-user-email" style="font-weight: bold;">Email</label>
                                                 <input type="email" data-error="Неверный формат Email" class="form-control" required = "required" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$" disabled="disabled" id="edit-user-email" th:value="${user.get().getEmail()}"/>
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -48,7 +48,7 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="buttonInside">
-                                                        <label for="edit-user-password">Пароль</label>
+                                                        <label for="edit-user-password" style="font-weight: bold;">Пароль</label>
                                                         <input type="password" class="form-control" required="required" disabled="disabled" id="edit-user-password" th:value="${user.get().password}"/>
                                                         <button class="showPass" id="showPassword"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                                     </div>
@@ -59,21 +59,21 @@
                                     <div class="row">
                                         <div class="col-md-4 pr-md-1">
                                             <div class="form-group">
-                                                <label for="edit-user-first-name">Имя</label>
+                                                <label for="edit-user-first-name" style="font-weight: bold;">Имя</label>
                                                 <input class="form-control" data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$" required="required" disabled="disabled" id="edit-user-first-name" th:value="${user.get().getFirstName()}"/>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-4 px-md-1">
                                             <div class="form-group">
-                                                <label for="edit-user-last-name">Фамилия</label>
+                                                <label for="edit-user-last-name" style="font-weight: bold;">Фамилия</label>
                                                 <input class="form-control" data-error="Фамилия должна начинаться с заглавной буквы, минимум из 2-х символов и только буквы" pattern="^[A-ZА-Я][a-zа-я]+$"  required="required" id="edit-user-last-name" disabled="disabled" th:value="${user.get().getLastName()}"/>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-4 pl-md-1">
                                             <div class="form-group">
-                                                <label for="edit-user-phone-number">Номер телефона</label>
+                                                <label for="edit-user-phone-number" style="font-weight: bold;">Номер телефона</label>
                                                 <input type="tel" class="form-control" required="required" disabled="disabled" id="edit-user-phone-number" th:value="${user.get().getPhoneNumber()}"/>
                                             </div>
                                         </div>
@@ -85,12 +85,49 @@
                                         </div>
                                     </div>
                                     <p><span id = "message"></span></p>
-                                    <input type="checkbox" checked="checked" class="form-control"  style="display:none"    id="edit-user-isVerified"/>
+                                    <input type="checkbox" checked="checked" class="form-control" style="display:none" id="edit-user-isVerified"/>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+<!--                <div class="row">-->
+<!--                    <div class="col-md-6">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h4 class="title">Лицевой счет</h4>-->
+<!--                            </div>-->
+<!--                            <div class="card-body">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-6 left-position"><p style="color: white">Баланс</p></div>-->
+<!--                                    <div class="col-md-6 right-position" style="color: white">0.00 Р.</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h4 class="title">Управление счетом</h4>-->
+<!--                            </div>-->
+<!--                            <div class="card-body">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-3 left-position">-->
+<!--                                        <button class="btn btn-primary"><i class="tim-icons tim-icons-32 icon-money-coins"></i></button>-->
+<!--                                    </div>-->
+<!--                                    <div class="col left-position"><p style="color: white">Вывести со счета</p></div>-->
+<!--                                </div>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-3 left-position">-->
+<!--                                        <button class="btn btn-primary"><i class="tim-icons tim-icons-32 icon-wallet-43"></i></button>-->
+<!--                                    </div>-->
+<!--                                    <div class="col left-position"><p style="color: white">История операций</p></div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
             </div>
         </div>
     </div>
@@ -118,7 +155,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+        </div>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>
 <script type="text/javascript" th:src="@{/js/user-edit.js}"></script>
 <script th:src="@{/js/validator.min.js}"></script>

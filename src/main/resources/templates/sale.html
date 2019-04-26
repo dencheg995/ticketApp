@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/bulb-lit.png"/>
@@ -29,75 +30,96 @@
 <body class="">
 <div class="wrapper">
     <div class="main-panel">
+        <div class="row">
+            <div class="col center-position">
+                <div sec:authorize="isAuthenticated()">
+                    <a onclick="openLKPage()" style="color: #fff; font-weight: bold;">В личный кабинет</a>
+                </div>
+            </div>
+        </div>
         <div class="content" style="padding-left: 40px;">
             <div th:each = "event : ${event}" th:value="${event.ticketList}">
                 <div th:each="ticket : ${event.getTicketList()}">
                     <div th:if="${ticket.getTicketCount()} > 0">
-                        <div class="row" style="width: 758px; height: 130px;">
-                            <div class="col-md-12">
-                                <div class="card" style="margin-top: 5px">
+                        <div class="row">
+                            <div class="col center-position">
+                                <div class="card" style="width: 758px; height: 130px;margin-top: 5px">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-3" style="padding-left: 0;">
-                                                <h4 class="title" style="font-weight: bold" th:text = "${ticket.getTicketType()}"></h4>
+                                                <h4 class="title qet" style="font-weight: bold" th:text = "${ticket.getTicketType()}" th:id="${ticket.getId()}"></h4>
                                                 <p style="font-weight: bold">Входной билет</p>
                                             </div>
                                             <div class="col-md-4">
 
                                             </div>
                                             <div class="col-md-2">
-                                                <h4 style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()} + ' руб.'"></h4>
+                                                <h4 class = "money" style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()}"></h4>
+                                                <h4 class = "money" style="font-weight: bold; margin-top: 16px" text = 'руб'></h4>
+
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="margin-top: 6px">
 <!--                                                <span class="minus bg-dark">-</span>-->
 <!--                                                <input style="color: white; text-align: center" type="number" class="count" name="qty" value="1"/>-->
 <!--                                                <span class="plus bg-dark">+</span>-->
 
                                                 <div class="js-spinner">
-                                                    <button class="btn-yahoo badge " th:id="'down' + ${ticket.id}" th:field = "off" type="button" name="down" spinner-button="down" th:onclick="'subtraction(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ', ' + ${ticket.getTicketCount()} +')'" disabled="disabled">-</button>
-                                                    <input th:id="'currentCount' + ${ticket.id}" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon"/>
+                                                    <button class="btn-yahoo badge " th:id="'down' + ${ticket.id}" th:field = "off" type="button" name="down" spinner-button="down" th:onclick="'subtraction(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'" disabled="disabled">-</button>
+                                                    <input th:id="'currentCount' + ${ticket.id}" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon count"/>
                                                     <button class="btn-yahoo badge" th:id="'up' + ${ticket.id}" th:field = "off" type="button" name="up" spinner-button="up" th:onclick="'addition(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ', ' + ${ticket.getTicketCount()} +')'">+</button>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="modal fade" id="ticketModal" th:id="'ticketModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="fixed-top">
                                     <div class="modalstyle">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="title" id="ticketModalLabel">Детали заказа</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true" style="color: #0a0c0d; font-size: 14px">Назад</span>
+                                            <div class="modal-header modalDarkStyle">
+                                                <h4 class="title" style="color: #fff;" id="ticketModalLabel">Детали заказа</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearModal()">
+                                                    <span aria-hidden="true" style="color: #fff;font-size: 14px">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body modalDarkStyle">
                                                 <div class="card card-plain">
-                                                    <div class="card-body">
+                                                    <div class="card-header">
                                                         <div class="row">
-                                                            <div class="col-md-4">
-                                                                <p>2 билета</p>
-                                                                <p>Vip</p>
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Тип билета: </p>
                                                             </div>
-                                                            <div class="col-md-5"></div>
-                                                            <div class="col-md-3">
-                                                                1200 руб.
+                                                            <div class="col right-position">
+                                                                <p style="color: #fff;font-weight: bold">Кол-во: </p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        Цена билетов:
+                                                    <div class="card-body">
+                                                        <div class="firstModal">
+
+                                                        </div>
+                                                        <!--<div>-->
+                                                            <!--<div class="row">-->
+                                                                <!--<div class="col left-position">-->
+                                                                    <!--<p id="ticketType" style="color: #fff;">Vip</p>-->
+                                                                <!--</div>-->
+
+                                                                <!--<div class="col right-position">-->
+                                                                    <!--<p id ="ticketPrice" style="color: #fff;">100</p>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
                                                     </div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-3">1200 руб.</div>
+                                                    <div class="card-footer">
+                                                        <div class="row">
+                                                            <div class="col left-position" style="font-weight: bold; font-size: 18px;">Сумма:</div>
+                                                            <div class="col right-position firstPrice" style="font-weight: bold; font-size: 18px;"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 <!--                                            <div class="modal-footer">-->
@@ -110,7 +132,7 @@
 <!--                                                <span>Кол-во билетов</span>-->
 <!--                                                <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>-->
 <!--                                            </div>-->
-                                            <div class="modal-footer">
+                                            <div class="modal-footer modalDarkStyle">
                                                 <button class="btn btn-primary btn-lg" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.id}">Далее</button>
                                             </div>
                                         </div>
@@ -118,67 +140,66 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal fade" id="dataModal" th:id="'dataModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="dataModalLavel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="fixed-top">
                                     <div class="modalstyle">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="title" id="dataModalLabel">Данные покупателя</h5>
+                                            <div class="modal-header modalDarkStyle">
+                                                <h4 class="title" style="color: #fff;" id="dataModalLabel">Данные покупателя</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true" style="color: #0a0c0d; font-size: 14px">Назад</span>
+                                                    <span aria-hidden="true" style="color: #fff; font-size: 14px">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body modalDarkStyle">
                                                 <div class="form-group">
-                                                    <label for="first-name-for-buy-ticket">Имя: </label>
-                                                    <input id="first-name-for-buy-ticket" class="form-control" style="color: #000" name="firstname" type="text" placeholder="Иван"
+                                                    <label for="first-name-for-buy-ticket" style="color: #fff">Имя</label>
+                                                    <input id="first-name-for-buy-ticket" class="form-control" style="color: #fff" name="firstname" type="text" placeholder="Иван"
                                                            data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="last-name-for-buy-ticket">Фамилия: </label>
-                                                    <input id="last-name-for-buy-ticket" class="form-control" style="color: #000" name="lastname" type="text" placeholder="Иванов"
+                                                    <label for="last-name-for-buy-ticket" style="color: #fff">Фамилия</label>
+                                                    <input id="last-name-for-buy-ticket" class="form-control" style="color: #fff" name="lastname" type="text" placeholder="Иванов"
                                                            data-error="Фамилия должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="add-user-email">Email</label>
+                                                    <label for="add-user-email" style="color: #fff">Email</label>
                                                     <input type="email"
                                                            class="form-control"
                                                            data-error="Неверный формат Email"
-                                                           style="color: #000"
+                                                           style="color: #fff"
+                                                           placeholder="info@gmail.com"
                                                            required="required"
                                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]*(\.[A-Za-z]{2,})$"
                                                            id="add-user-email"/>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="add-user-phone-number">Номер телефона</label>
+                                                    <label for="add-user-phone-number" style="color: #fff">Номер телефона</label>
                                                     <input type="tel"
                                                            class="form-control"
                                                            data-error='Введите телефон в допустимом формате (только цифры)'
                                                            required="required"
-                                                           style="color: #000"
+                                                           style="color: #fff"
                                                            pattern="[0-9]*$"
                                                            id="add-user-phone-number" placeholder="89000000000"/>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="promo-for-buy-ticket">Промокод: </label>
+                                                    <label for="promo-for-buy-ticket" style="color: #fff">Промокод</label>
                                                     <input id="promo-for-buy-ticket" class="form-control" name="promo" type="text" placeholder="ABCDF"
                                                            data-error="Имя должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
                                                            required="required"
-                                                           style="color: #000"
+                                                           style="color: #fff"
                                                            pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"/>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-toggle="modal" href="#saleModal" role="button" th:href="'#saleModal'+${ticket.id}">Подтвердить бронирование</button>
-
+                                            <div class="modal-footer modalDarkStyle">
+                                                <button class="btn btn-primary" th:onclick="'buyTicket(' + ${event.id} + ')'">Подтвердить бронирование</button>
                                             </div>
                                         </div>
                                     </div>
@@ -186,73 +207,136 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" id="saleModal" th:id="'saleModal'+${ticket.id}" tabindex="-1" role="dialog" aria-labelledby="saleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="saleModal" tabindex="-1" role="dialog" aria-labelledby="saleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="fixed-top">
                                     <div class="modalstyle">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="title" id="saleModalLabel">Подтверждение заказа</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true" style="color: #0a0c0d; font-size: 14px">Назад</span>
+                                            <div class="modal-header modalDarkStyle">
+                                                <h4 class="title" style="color: #fff;" id="saleModalLabel">Подтверждение заказа</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearModal2()">
+                                                    <span aria-hidden="true" style="color: #fff; font-size: 14px">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body modalDarkStyle">
+
                                                 <div class="card card-plain">
-                                                    <div class="card-body">
-                                                        <h5>Билеты в заказе</h5>
+                                                    <p>Tickets</p>
+                                                    <div class="card-header">
                                                         <div class="row">
-                                                            <div class="col-md-4">
-                                                                <p>2 билета</p>
-                                                                <p>Vip</p>
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Тип билета:</p>
                                                             </div>
-                                                            <div class="col-md-5"></div>
-                                                            <div class="col-md-3">
-                                                                1200 руб.
+                                                            <div class="col center-position">
+                                                                <p style="color: #fff;font-weight: bold">Кол-во:</p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p style="color: #fff;font-weight: bold">Цена:</p>
                                                             </div>
                                                         </div>
-                                                        <br/>
-                                                        <br/>
-                                                        <br/>
-                                                        <h5>Покупатель</h5>
-                                                        <div>Имя фамилия</div>
-                                                        <div>Номер</div>
-                                                        <div>Email</div>
+                                                    </div>
+                                                    <div class="card-body fillBody">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p id="ticketType2" style="color: #fff;"></p>
+                                                            </div>
+                                                            <div class="col center-position">
+                                                                <p id ="ticketCount2" style="color: #fff;"></p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p id ="ticketPrice2" style="color: #fff;"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card card-plain">
+                                                    <div class="card-header">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Имя:</p>
+                                                            </div>
+                                                            <div class="col center-position">
+                                                                <p style="color: #fff;font-weight: bold">Фамилия:</p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p style="color: #fff;font-weight: bold">Номер телефона:</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p id="consumerFName" style="color: #fff;"></p>
+                                                            </div>
+                                                            <div class="col center-position">
+                                                                <p id="consumerLName" style="color: #fff;"></p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p id ="consumerTelephone" style="color: #fff;"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Email:</p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p id ="consumerEmail" style="color: #fff;"></p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--                                            <div class="modal-footer">-->
-                                            <!--                                                <span>Тип билета: </span>-->
-                                            <!--                                                <span th:text="${ticket.getTicketType()}"></span>-->
-                                            <!--                                                <p></p>-->
-                                            <!--                                                <span>Цена: </span>-->
-                                            <!--                                                <span th:text="${ticket.getTicketPrice()}"></span>-->
-                                            <!--                                                <p></p>-->
-                                            <!--                                                <span>Кол-во билетов</span>-->
-                                            <!--                                                <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>-->
-                                            <!--                                            </div>-->
-                                            <div class="modal-footer">
-                                                <div id = "ticketBuy">
-                                                    <h1 id = "wer" th:with="someVariable = 2" th:value="opio">
-                                                        <p th:with="someVariable=${ticket.ticketPrice + someVariable}">
-                                                            <span th:text="${someVariable}"></span>
-                                                        <form id="yandexForm" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-                                                            <input type="hidden" id = "receiver" name="receiver" th:value="${event.getPocket()}" />
-                                                            <input type="hidden" id = "label" name="label" th:value="'# ' + ${ticket.id}" />
-                                                            <input type="hidden" name="quickpay-form" value="donate">
-                                                            <input type="hidden" id = "targets" name="targets" th:value="'# ' + ${ticket.id}"/>
-                                                            <input type="hidden" id = "sum" name="sum" data-type="number" th:value = "${someVariable}" />
-                                                            <input type="hidden" name="successURL" th:value="'http://localhost:8080/send/ticket?numSale=' + ${ticket.ticketCount}"/>
-                                                            <input type="hidden" name="need-fio" value="false"/>
-                                                            <input type="hidden" name="need-email" value="false"/>
-                                                            <input type="hidden" name="need-phone" value="false"/>
-                                                            <input type="hidden" name="need-address" value="false"/>
-                                                            <input type="hidden" name="paymentType" value="AC"/>
-                                                            <button class="btn btn-primary" th:onclick="'buyTicket('+ ${ticket.id} + ',' + ${ticket.ticketPrice} + ',' + ${event.id} + ')'">Перейти к оплате</button>
-                                                            </input>
-                                                        </form>
-                                                        </p>
-                                                    </h1>
+                                            <div class="modal-footer modalDarkStyle">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Сумма:</p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p id = "lastSum" style="color: #fff;"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold">Сервисный сбор:</p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p id = "service" style="color: #fff;"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="row">
+                                                            <div class="col left-position">
+                                                                <p style="color: #fff;font-weight: bold; font-size: 18px;">К оплате:</p>
+                                                            </div>
+                                                            <div class="col right-position">
+                                                                <p id = "forPay" style="color: #fff;font-weight: bold; font-size: 18px;"></p>
+                                                                <div id = "ticketBuy">
+                                                                    <h1 id = "wer" th:with="someVariable = 2" th:value="opio">
+                                                                       <form id="yandexForm" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                                                                            <input type="hidden" id = "receiver" name="receiver" th:value="${event.getPocket()}" />
+                                                                            <input type="hidden" id = "label" name="label" th:value="'# ' + ${ticket.id}" />
+                                                                            <input type="hidden" name="quickpay-form" value="donate"/>
+                                                                            <input type="hidden" id = "targets" name="targets" th:value="'# ' + ${ticket.id}"/>
+                                                                            <input type="hidden" id = "sum" name="sum" data-type="number" th:value = "${someVariable}" />
+                                                                            <input type="hidden" name="successURL" th:value="'http://localhost:8080/send/ticket?numSale=' + ${ticket.ticketCount}"/>
+                                                                            <input type="hidden" name="need-fio" value="false"/>
+                                                                            <input type="hidden" name="need-email" value="false"/>
+                                                                            <input type="hidden" name="need-phone" value="false"/>
+                                                                            <input type="hidden" name="need-address" value="false"/>
+                                                                            <input type="hidden" name="paymentType" value="AC"/>
+                                                                        </form>
+                                                                    </h1>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary" th:onclick="'buyTicket('+ ${ticket.id} + ',' + ${ticket.ticketPrice} + ',' + ${event.id} + ')'">Перейти к оплате</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,32 +354,14 @@
                             <input id="sumResult" style="color: #fff; width: 30px" disabled="disabled"/><span>  руб.</span>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-primary" data-toggle="modal"  role="button" >Купить</button>
+                            <button class="btn btn-primary" id="saleButton" data-toggle="modal" href="#ticketModal" disabled="disabled">Купить</button>
                         </div>
-                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--                                            <th:block th:if="${}>0">-->
-<!--                                                <script>-->
-
-<!--                                                </script>-->
-<!--                                            </th:block>-->
-<!--                                            <div class="col-md-1" style="margin-top: 18px">-->
-<!--                                                <div class="down"><i class="tim-icons tim-icons-20 icon-simple-delete" style="color: white"></i></div>-->
-<!--                                            </div>-->
-<!--                                            <div class="col-md-1" style="margin-top: 15px">-->
-<!--                                                <span style="font-weight: bold; color:white; font-size: 20px" th:autofocus="autofocus" type="number" th:min="0" th:max="100" th:step="1" th:value="0" class="stepper__input"></span>-->
-<!--                                            </div>-->
-<!--                                            <div class="col-md-1" style="margin-top: 18px">-->
-<!--                                                <div class="up"><i class="tim-icons tim-icons-20 icon-simple-add" style="color: white"></i></div>-->
-<!--                                            </div>-->
-<script>
-
-</script>
 <script src="/assets/demo/stepper.js"></script>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
