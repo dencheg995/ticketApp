@@ -3,8 +3,10 @@
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/bulb-lit.png"/>
-    <link rel="icon" type="image/png" href="/assets/img/ticket.png"/>
+    <link rel="icon" type="image/png" href="/img/ticket.png"/>
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -15,17 +17,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <title>
         Покупка билетов
     </title>
-    <!-- Fonts and icons -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
     <!-- Nucleo Icons -->
-    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link href="/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="/assets/demo/demo.css" rel="stylesheet" />
-    <link href="/css/bootstrap-social.css" rel="stylesheet" />
-
+    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
 </head>
 <body class="">
 <div class="wrapper">
@@ -33,7 +28,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         <div class="row">
             <div class="col center-position">
                 <div sec:authorize="isAuthenticated()">
-                    <a onclick="openLKPage()" style="color: #fff; font-weight: bold;">В личный кабинет</a>
+                    <a onclick="openLKPage()" style="color: #fff; font-weight: bold;"><h4>В личный кабинет</h4></a>
                 </div>
             </div>
         </div>
@@ -50,19 +45,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                 <h4 class="title qet" style="font-weight: bold" th:text = "${ticket.getTicketType()}" th:id="${ticket.getId()}"></h4>
                                                 <p style="font-weight: bold">Входной билет</p>
                                             </div>
-                                            <div class="col-md-4">
-
-                                            </div>
+                                            <div class="col-md-4"></div>
                                             <div class="col-md-2">
                                                 <h4 class = "money" style="font-weight: bold; margin-top: 16px" th:text = "${ticket.getTicketPrice()}"></h4>
                                                 <h4 class = "money" style="font-weight: bold; margin-top: 16px" text = 'руб'></h4>
-
                                             </div>
                                             <div class="col-md-3" style="margin-top: 6px">
-<!--                                                <span class="minus bg-dark">-</span>-->
-<!--                                                <input style="color: white; text-align: center" type="number" class="count" name="qty" value="1"/>-->
-<!--                                                <span class="plus bg-dark">+</span>-->
-
                                                 <div class="js-spinner">
                                                     <button class="btn-yahoo badge " th:id="'down' + ${ticket.id}" th:field = "off" type="button" name="down" spinner-button="down" th:onclick="'subtraction(' + ${ticket.id} + ', ' + ${ticket.getTicketPrice()} + ')'" disabled="disabled">-</button>
                                                     <input th:id="'currentCount' + ${ticket.id}" autofocus="autofocus" type="number" min="0" th:max="${ticket.getTicketCount()}" step="1" value="0" class="input-group-addon count"/>
@@ -74,7 +62,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="fixed-top">
@@ -99,20 +86,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                         </div>
                                                     </div>
                                                     <div class="card-body">
-                                                        <div class="firstModal">
-
-                                                        </div>
-                                                        <!--<div>-->
-                                                            <!--<div class="row">-->
-                                                                <!--<div class="col left-position">-->
-                                                                    <!--<p id="ticketType" style="color: #fff;">Vip</p>-->
-                                                                <!--</div>-->
-
-                                                                <!--<div class="col right-position">-->
-                                                                    <!--<p id ="ticketPrice" style="color: #fff;">100</p>-->
-                                                                <!--</div>-->
-                                                            <!--</div>-->
-                                                        <!--</div>-->
+                                                        <div class="firstModal"></div>
                                                     </div>
                                                     <div class="card-footer">
                                                         <div class="row">
@@ -122,18 +96,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                     </div>
                                                 </div>
                                             </div>
-<!--                                            <div class="modal-footer">-->
-<!--                                                <span>Тип билета: </span>-->
-<!--                                                <span th:text="${ticket.getTicketType()}"></span>-->
-<!--                                                <p></p>-->
-<!--                                                <span>Цена: </span>-->
-<!--                                                <span th:text="${ticket.getTicketPrice()}"></span>-->
-<!--                                                <p></p>-->
-<!--                                                <span>Кол-во билетов</span>-->
-<!--                                                <input style="margin-top: 10px" id="ticketCount" class="form-control" name="ticketCount" type="number" value="1" th:min="1" th:max="${ticket.getTicketCount()}"/>-->
-<!--                                            </div>-->
                                             <div class="modal-footer modalDarkStyle">
-                                                <button class="btn btn-primary btn-lg" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.id}">Далее</button>
+                                                <div class="row">
+                                                    <a class="btn btn-warning btn-lg" role="button" th:href="${event.vkPostUrl}">Скидка за репост</a>
+                                                    <button class="btn btn-primary btn-lg" data-toggle="modal" href="#dataModal" role="button" th:href="'#dataModal'+${ticket.id}">Далее</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -206,7 +173,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal fade" id="saleModal" tabindex="-1" role="dialog" aria-labelledby="saleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="fixed-top">
@@ -219,7 +185,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                 </button>
                                             </div>
                                             <div class="modal-body modalDarkStyle">
-
                                                 <div class="card card-plain">
                                                     <p>Tickets</p>
                                                     <div class="card-header">
@@ -331,7 +296,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                                                                             <input type="hidden" name="paymentType" value="AC"/>
                                                                         </form>
                                                                     </h1>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -362,7 +326,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         </div>
     </div>
 </div>
-<script src="/assets/demo/stepper.js"></script>
+<script th:src="@{/js/stepper.js}"></script>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
 <script type="text/javascript" th:src="@{/js/sale.js}"></script>
@@ -371,11 +335,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <!--   Core JS Files   -->
-<script th:src="@{/assets/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+<script th:src="@{/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <!-- Chart JS -->
-<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script th:src="@{/js/plugins/chartjs.min.js}"></script>
 <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="/assets/js/black-dashboard.min.js?v=1.0.0"></script>
+<script th:src="@{/js/black-dashboard.min.js}"></script>
 </body>
 </html>
