@@ -43,7 +43,7 @@
                         </div>
                         <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4 pr-md-1">
+                            <div class="col-md-6 pr-md-1">
                                 <div class="form-group">
                                     <label for="discountValue" style="font-weight: bold">Скидка для промокодов</label>
                                     <input id="discountValue" class="form-control" name="discount" type="text" placeholder="0"
@@ -52,13 +52,24 @@
                                            required="required" min="1"/>
                                 </div>
                             </div>
-                            <div class="col-md-4 px-md-1">
+                            <div class="col-md-6 pr-md-1">
+                                <div class="form-group">
+                                    <label for="discountValue" style="font-weight: bold">Кол-во использований</label>
+                                    <input id="count" class="form-control" name="count" type="text" placeholder="0"
+                                           data-error='Введите скидку в допустимом формате (только цифры)'
+                                           pattern="[0-9]{,3}"
+                                           required="required" min="1"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 px-md-1">
                                 <div class="form-group">
                                     <label for="promoStartDate" style="font-weight: bold">Начало действия</label>
                                     <input id="promoStartDate" type="text" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
                                 </div>
                             </div>
-                            <div class="col-md-4 pl-md-1">
+                            <div class="col-md-6 pl-md-1">
                                 <div class="form-group">
                                     <label for="promoEndDate" style="font-weight: bold">Конец действия</label>
                                     <input id="promoEndDate" type="text" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
