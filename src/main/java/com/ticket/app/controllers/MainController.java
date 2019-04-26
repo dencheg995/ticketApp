@@ -97,7 +97,7 @@ public class MainController {
 					+ "<br> You do not have permission to access this page!";
 			model.addAttribute("message", message);
 		}
-		return "403Page";
+		return "403";
 	}
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
