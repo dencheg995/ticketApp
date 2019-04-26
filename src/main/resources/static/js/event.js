@@ -368,6 +368,7 @@ $(document).ready(function () {
 function addPromo(ticketId) {
     let promocodes = $('#promocodes').val();
     let discountValue = $('#discountValue').val();
+    let count = $('#count').val();
     let promoStartDate = $('#promoStartDate').val();
     let promoEndDate = $('#promoEndDate').val();
 
@@ -375,6 +376,7 @@ function addPromo(ticketId) {
         idTicket : ticketId,
         promocodes : promocodes,
         discountValue : discountValue,
+        count : count,
         promoStartDate : promoStartDate,
         promoEndDate : promoEndDate
     };
@@ -405,7 +407,7 @@ $(document).ready(function () {
                 $("#edit-promo-sale").val(promo.sale);
                 $("#edit-promo-date-start").val(promo.dateStart);
                 $("#edit-promo-date-end").val(promo.dateEnd);
-                $("#edit-promo-date-count").val(promo.count);
+                $("#edit-promo-count").val(promo.count);
                 $("#edit-promo").each(function() {
                     $(this).val(promo.promocode
                         .join("\n"));
@@ -421,14 +423,14 @@ function editPromo(ticketId) {
         $("#edit-promo-sale").removeAttr('disabled');
         $("#edit-promo-date-start").removeAttr('disabled');
         $("#edit-promo-date-end").removeAttr('disabled');
-        $("#edit-promo-date-count").removeAttr('disabled');
+        $("#edit-promo-count").removeAttr('disabled');
         $("#edit-promo").removeAttr('disabled');
         $("#editPromo").html('Сохранить');
     } else if ($("#editPromo").text() === "Сохранить") {
         let discountValue = $("#edit-promo-sale").val();
         let promoStartDate = $("#edit-promo-date-start").val();
         let promoEndDate = $("#edit-promo-date-end").val();
-        let count = $("#edit-promo-date-count").val();
+        let count = $("#edit-promo-count").val();
         let promocodes = $("#edit-promo").val();
         let wrap = {
             idTicket: ticketId,

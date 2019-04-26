@@ -32,6 +32,7 @@ public class Promocode implements Serializable {
     @Column(name = "sale")
     private String sale;
 
+    @Column(name = "count")
     private Integer count;
 
     @OneToOne
