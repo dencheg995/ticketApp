@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $().ready(function() {
+$(document).ready(function () {
+    $().ready(function () {
         $sidebar = $('.sidebar');
         $navbar = $('.navbar');
         $main_panel = $('.main-panel');
@@ -15,8 +15,7 @@ $(document).ready(function() {
         fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
 
-
-        $('.fixed-plugin a').click(function(event) {
+        $('.fixed-plugin a').click(function (event) {
             if ($(this).hasClass('switch-trigger')) {
                 if (event.stopPropagation) {
                     event.stopPropagation();
@@ -26,7 +25,7 @@ $(document).ready(function() {
             }
         });
 
-        $('.fixed-plugin .background-color span').click(function() {
+        $('.fixed-plugin .background-color span').click(function () {
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
 
@@ -49,7 +48,7 @@ $(document).ready(function() {
             }
         });
 
-        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
+        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
             var $btn = $(this);
 
             if (sidebar_mini_active == true) {
@@ -63,23 +62,23 @@ $(document).ready(function() {
             }
 
             // we simulate the window Resize so the charts will get updated in realtime.
-            var simulateWindowResize = setInterval(function() {
+            var simulateWindowResize = setInterval(function () {
                 window.dispatchEvent(new Event('resize'));
             }, 180);
 
             // we stop the simulation of Window Resize after the animations are completed
-            setTimeout(function() {
+            setTimeout(function () {
                 clearInterval(simulateWindowResize);
             }, 1000);
         });
 
-        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
+        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
             var $btn = $(this);
 
             if (white_color == true) {
 
                 $('body').addClass('change-background');
-                setTimeout(function() {
+                setTimeout(function () {
                     $('body').removeClass('change-background');
                     $('body').removeClass('white-content');
                 }, 900);
@@ -87,7 +86,7 @@ $(document).ready(function() {
             } else {
 
                 $('body').addClass('change-background');
-                setTimeout(function() {
+                setTimeout(function () {
                     $('body').removeClass('change-background');
                     $('body').addClass('white-content');
                 }, 900);
@@ -98,18 +97,19 @@ $(document).ready(function() {
 
         });
 
-        $('.light-badge').click(function() {
+        $('.light-badge').click(function () {
             $('body').addClass('white-content');
         });
 
-        $('.dark-badge').click(function() {
+        $('.dark-badge').click(function () {
             $('body').removeClass('white-content');
         });
     });
 });
+
 function textAreaAdjust(o) {
     o.style.height = "1px";
-    o.style.height = (25+o.scrollHeight)+"px";
+    o.style.height = (25 + o.scrollHeight) + "px";
     o.style.width = "285px";
 
 }

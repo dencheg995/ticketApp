@@ -18,6 +18,6 @@ public class EventRestController {
 
     @GetMapping("/get/event")
     public ResponseEntity<Event> getEvent(@RequestParam Long eventId) {
-        return ResponseEntity.ok( eventService.getEvent(eventId));
+        return ResponseEntity.ok(eventService.getEvent(eventId));
     }
 }

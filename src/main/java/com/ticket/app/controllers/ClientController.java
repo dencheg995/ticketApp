@@ -37,7 +37,8 @@ public class ClientController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @PostMapping(value = "/edit/user/update")
-    public @ResponseBody ResponseEntity edit(@RequestBody POJOUser user) {
+    public @ResponseBody
+    ResponseEntity edit(@RequestBody POJOUser user) {
         clientService.edit(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }

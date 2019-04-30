@@ -35,14 +35,15 @@ public class PromocodeController {
     public ModelAndView newPromo(@RequestParam Long ticketId,
                                  @RequestParam Long eventId) {
         ModelAndView modelAndView = new ModelAndView("addPromocodes");
-        modelAndView.addObject("ticket",ticketService.getTicket(ticketId));
-        modelAndView.addObject("event",eventService.getEvent(eventId));
+        modelAndView.addObject("ticket", ticketService.getTicket(ticketId));
+        modelAndView.addObject("event", eventService.getEvent(eventId));
         return modelAndView;
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping(value = "/add-promo", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity addPromo(@RequestBody PromoPOJO promoPOJO) {
+    public @ResponseBody
+    ResponseEntity addPromo(@RequestBody PromoPOJO promoPOJO) {
         Ticket ticket = ticketService.getTicket(promoPOJO.getIdTicket());
         Promocode promocode = new Promocode();
         List<String> promocodes = Arrays.asList(promoPOJO.getPromocodes().split("\n"));
@@ -61,9 +62,9 @@ public class PromocodeController {
     public ModelAndView editPromo(@RequestParam Long ticketId,
                                   @RequestParam Long eventId) {
         ModelAndView modelAndView = new ModelAndView("listPromo");
-        modelAndView.addObject("ticketEdit",ticketService.getTicket(ticketId).getPromocodeSet());
-        modelAndView.addObject("ticket",ticketService.getTicket(ticketId));
-        modelAndView.addObject("event",eventService.getEvent(eventId));
+        modelAndView.addObject("ticketEdit", ticketService.getTicket(ticketId).getPromocodeSet());
+        modelAndView.addObject("ticket", ticketService.getTicket(ticketId));
+        modelAndView.addObject("event", eventService.getEvent(eventId));
         return modelAndView;
     }
 

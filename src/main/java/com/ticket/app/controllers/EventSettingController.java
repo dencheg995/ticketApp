@@ -83,7 +83,7 @@ public class EventSettingController {
 
     @RequestMapping("/add/event")
     public ResponseEntity registEvent(@Valid @RequestBody Event event,
-                                      @AuthenticationPrincipal AppUser clientSession){
+                                      @AuthenticationPrincipal AppUser clientSession) {
         Optional<List<Event>> events = eventService.getEventByClientId(clientSession.getId());
         events.get().add(event);
         clientSession.setEvents(events.get());

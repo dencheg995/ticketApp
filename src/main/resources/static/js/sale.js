@@ -5,6 +5,7 @@ var prevId = 0;
 localStorage.setItem("currentCount", currentCount);
 localStorage.setItem("count", count);
 localStorage.setItem("sum", sum);
+
 function addition(ticketId, ticketPrice, ticketCountMax) {
     var cId = "currentCount" + ticketId;
     $("#down" + ticketId).attr("disabled", false);
@@ -13,7 +14,7 @@ function addition(ticketId, ticketPrice, ticketCountMax) {
     if (ticketCountMax != parseInt(document.getElementById(cId).value)) {
         currentCount = parseInt(localStorage.getItem("currentCount"));
         count = parseInt(localStorage.getItem("count"));
-        currentCount =+ parseInt(document.getElementById(cId).value);
+        currentCount = +parseInt(document.getElementById(cId).value);
         count = count + (currentCount - (currentCount - 1))
         localStorage.setItem("currentCount", currentCount);
         localStorage.setItem("count", count);
@@ -67,41 +68,40 @@ function subtraction(ticketId, ticketPrice) {
         localStorage.setItem("sum", sum);
         localStorage.setItem("prevId", ticketId);
         $("#sumResult").val(sum);
-    }
-         else {
-            if ($("#down" + ticketId).attr("field") != "on") {
-                currentCount = parseInt(localStorage.getItem("currentCount"));
-                currentCount = +parseInt(document.getElementById(cId).value);
-                localStorage.setItem("currentCount", currentCount);
-                if (parseInt(currentCount) == 0) {
-                    $("#sumResult").val(sum);
-                }
-                sum = parseInt(localStorage.getItem("sum"));
-
-                sum -= ticketPrice;
-                localStorage.setItem("sum", sum);
-                if (sum == 0){
-                    $("#saleButton").attr("disabled", true);
-                }
-                if (parseInt(localStorage.getItem("prevId")) != parseInt(ticketId))
-                    localStorage.setItem("prevId", ticketId);
+    } else {
+        if ($("#down" + ticketId).attr("field") != "on") {
+            currentCount = parseInt(localStorage.getItem("currentCount"));
+            currentCount = +parseInt(document.getElementById(cId).value);
+            localStorage.setItem("currentCount", currentCount);
+            if (parseInt(currentCount) == 0) {
                 $("#sumResult").val(sum);
             }
-            $("#down" + ticketId).attr("disabled", true);
-            $("#down" + ticketId).attr("field", "on")
+            sum = parseInt(localStorage.getItem("sum"));
+
+            sum -= ticketPrice;
+            localStorage.setItem("sum", sum);
+            if (sum == 0) {
+                $("#saleButton").attr("disabled", true);
+            }
+            if (parseInt(localStorage.getItem("prevId")) != parseInt(ticketId))
+                localStorage.setItem("prevId", ticketId);
+            $("#sumResult").val(sum);
+        }
+        $("#down" + ticketId).attr("disabled", true);
+        $("#down" + ticketId).attr("field", "on")
 
     }
 }
 
 $(document).ready(function () {
     $("#sumResult").val(sum);
-    $('#saleButton').click(function() {
+    $('#saleButton').click(function () {
         var obj = {};
         var count = 0;
         var k = 0;
         $(".firstPrice").text(localStorage.getItem("sum"))
-        $(".qet").each(function(i, index) {
-            $(".count").each(function(idx, c) {
+        $(".qet").each(function (i, index) {
+            $(".count").each(function (idx, c) {
                 if ($(this).val() > 0 && (k == idx)) {
                     count = $(this).val();
                     $(".firstModal").append("<div class='row'> \
@@ -137,5 +137,7 @@ function clearModal() {
 }
 
 function clearModal2() {
+    $(".yandex-from").empty();
     $(".fillBody").empty();
+    location.reload();
 }

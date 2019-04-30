@@ -1,4 +1,3 @@
-
 function addTicket() {
     var formData = {
         ticketCount: $("#ticketCount").val(),
@@ -25,7 +24,7 @@ function putTicket(eventId) {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         url: "/put/new/ticket",
-        data : {eventId : eventId},
+        data: {eventId: eventId},
         success: function (html) {
             location.reload();
         }
@@ -65,7 +64,7 @@ function removeTicket(ticketId) {
         type: "GET",
         contentType: "application/json",
         url: "/remove/ticket",
-        data: {ticketId : ticketId} ,
+        data: {ticketId: ticketId},
         success: function () {
             location.reload()
         }
@@ -85,27 +84,30 @@ function buyTicket(eventId) {
         var count = 0;
         var k = 0;
         var obj = {};
-        $(".qet").each(function(i, index) {
-            $(".count").each(function(idx, c) {
+        var j = 1;
+        $(".qet").each(function (i, index) {
+            $(".count").each(function (idx, c) {
                 if ($(this).val() > 0 && (k == idx)) {
-                 count = $(this).val();
-                 obj[$(index)[0].id] = count;
-                 return false;
+                    count = $(this).val();
+                    obj[$(index)[0].id] = count;
+                    return false;
                 }
             });
             k++;
             return;
         });
 
+       var urlParametrs = "";
+
         let wrap = {
             firstName: $("#first-name-for-buy-ticket").val(),
             lastName: $("#last-name-for-buy-ticket").val(),
             phoneNumber: $('#add-user-phone-number').val(),
-            email: $('#add-user-email').val() ,
+            email: $('#add-user-email').val(),
             ticketId: obj,
             ticketPrice: $("#sumResult").val(),
-            countTicket:localStorage.getItem("count"),
-            date : date,
+            countTicket: localStorage.getItem("count"),
+            date: date,
             promo: $("#promo-for-buy-ticket").val()
         };
         $.ajax({
@@ -116,33 +118,52 @@ function buyTicket(eventId) {
             success: function (result) {
                 for (var i = 1; i < result.length; i++) {
                     if (i <= result[0] & i % 2 != 0) {
-                        // $("#ticketType2").text(result[i].ticketType)
-                        // $("#ticketCount2").text(result[i+1])
-                        // $("#ticketPrice2").text(result[i].ticketPrice * result[i+1])
                         $(".fillBody").append("<div class='row'> \
                             <div class='col left-position'> \
                              <p style='color: #fff;'>" + result[i].ticketType + "</p>  \
                             </div> \
                             <div class='col center-position'> \
-                            <p id ='ticketCount2' style='color: #fff;'>" + result[i+1] + "</p> \
+                            <p id ='ticketCount2' style='color: #fff;'>" + result[i + 1] + "</p> \
                             </div> \
                             <div class='col right-position'> \
-                            <p id ='ticketPrice2' style='color: #fff;'>" + result[i].ticketPrice * result[i+1] + "</p> \
+                            <p id ='ticketPrice2' style='color: #fff;'>" + result[i].ticketPrice * result[i + 1] + "</p> \
                             </div> \
                             </div>");
+                            urlParametrs += "indexTicket[]=" + result[i].id + "&"
 
-                    } else if (i > result[0] & i < result.length-1) {
+                    } else if (i > result[0] & i < result.length - 1) {
                         $("#consumerFName").text(result[i].firstName);
                         $("#consumerLName").text(result[i].lastName);
                         $("#consumerEmail").text(result[i].email);
                         $("#consumerTelephone").text(result[i].phoneNumber)
-                    } else if (i < result.length-1) {
-                        $("#lastSum").text((result[result.length-1] / 1.1).toFixed(0));
-                        $("#service").text((result[result.length-1] - result[result.length-1] / 1.1).toFixed(2));
-                        $("#forPay").text((result[result.length-1]).toFixed(1))
+                    } else if (i < result.length - 1) {
+                        $("#lastSum").text((result[result.length - 1][0] / 1.1).toFixed(0));
+                        $("#service").text((result[result.length - 1][0] - result[result.length - 1][0] / 1.1).toFixed(2));
+                        $("#forPay").text((result[result.length - 1][0]).toFixed(1))
+                        if (j == 1) {
+                            $(".yandex-from").append("<form id='yandexForm' method='POST' action='https://money.yandex.ru/quickpay/confirm.xml'> \
+                    <input type='hidden' id = 'receiver' name='receiver' value=" + result[result.length - 1][2] + " /> \
+                    <input type='hidden' id = 'label' name='label' value=" + '#' + result[result.length - 1][1] + " /> \
+                    <input type='hidden' name='quickpay-form' value='donate'/> \
+                    <input type='hidden' id = 'targets' name='targets' value=" + '#' + result[result.length - 1][1] + " /> \
+                    <input type='hidden' id = 'sum' name='sum' data-type='number' value =" + result[result.length - 1][0].toFixed(1) + " /> \
+                    <input type='hidden' name='successURL' value=" + 'http://localhost:8080/send/ticket?' +  urlParametrs + "/> \
+                    <input type='hidden' name='need-fio' value='false'/> \
+                    <input type='hidden' name='need-email' value='false'/> \
+                    <input type='hidden' name='need-phone' value='false'/> \
+                    <input type='hidden' name='need-address' value='false'/> \
+                    <input type='hidden' name='paymentType' value='AC'/> \
+                    <input class='btn btn-primary' type='submit' name='paymentType' value='Перейти к оплате'/> \
+                    </form>")
+                            j++;
+                        }
                     }
                 }
+                $(".count").each(function (idx, c) {
+                    $(this).val(0);
+                });
                 $('#saleModal').modal('show');
+
             }
         });
     }
@@ -193,7 +214,7 @@ function removeEvent(eventId) {
         type: "GET",
         contentType: "application/json",
         url: "/remove/event",
-        data: {eventId : eventId} ,
+        data: {eventId: eventId},
         success: function () {
             window.open("/lk", '_self')
         }
@@ -221,7 +242,7 @@ function addEvent() {
         data: JSON.stringify(formData),
         dataType: 'json',
         success: function () {
-            window.open("/lk",  '_self');
+            window.open("/lk", '_self');
             console.log("Success");
         },
         error: function (e) {
@@ -368,17 +389,15 @@ $(document).ready(function () {
 function addPromo(ticketId) {
     let promocodes = $('#promocodes').val();
     let discountValue = $('#discountValue').val();
-    let count = $('#count').val();
     let promoStartDate = $('#promoStartDate').val();
     let promoEndDate = $('#promoEndDate').val();
 
     let wrap = {
-        idTicket : ticketId,
-        promocodes : promocodes,
-        discountValue : discountValue,
-        count : count,
-        promoStartDate : promoStartDate,
-        promoEndDate : promoEndDate
+        idTicket: ticketId,
+        promocodes: promocodes,
+        discountValue: discountValue,
+        promoStartDate: promoStartDate,
+        promoEndDate: promoEndDate
     };
 
     $.ajax({
@@ -393,7 +412,7 @@ function addPromo(ticketId) {
 }
 
 $(document).ready(function () {
-    $('#promoTable').delegate('.promo-modal', 'click', function() {
+    $('#promoTable').delegate('.promo-modal', 'click', function () {
         $('#editPromoModal').modal('show');
         var idPromo = $(this).closest('tr').children('td:first').text();
         $.ajax({
@@ -407,8 +426,8 @@ $(document).ready(function () {
                 $("#edit-promo-sale").val(promo.sale);
                 $("#edit-promo-date-start").val(promo.dateStart);
                 $("#edit-promo-date-end").val(promo.dateEnd);
-                $("#edit-promo-count").val(promo.count);
-                $("#edit-promo").each(function() {
+                $("#edit-promo-date-count").val(promo.count);
+                $("#edit-promo").each(function () {
                     $(this).val(promo.promocode
                         .join("\n"));
                 });
@@ -423,14 +442,14 @@ function editPromo(ticketId) {
         $("#edit-promo-sale").removeAttr('disabled');
         $("#edit-promo-date-start").removeAttr('disabled');
         $("#edit-promo-date-end").removeAttr('disabled');
-        $("#edit-promo-count").removeAttr('disabled');
+        $("#edit-promo-date-count").removeAttr('disabled');
         $("#edit-promo").removeAttr('disabled');
         $("#editPromo").html('Сохранить');
     } else if ($("#editPromo").text() === "Сохранить") {
         let discountValue = $("#edit-promo-sale").val();
         let promoStartDate = $("#edit-promo-date-start").val();
         let promoEndDate = $("#edit-promo-date-end").val();
-        let count = $("#edit-promo-count").val();
+        let count = $("#edit-promo-date-count").val();
         let promocodes = $("#edit-promo").val();
         let wrap = {
             idTicket: ticketId,

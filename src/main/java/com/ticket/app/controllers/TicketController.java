@@ -65,7 +65,7 @@ public class TicketController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping(value = "/remove/ticket")
-    public ResponseEntity removeTicket (@RequestParam Long ticketId) {
+    public ResponseEntity removeTicket(@RequestParam Long ticketId) {
         ticketService.removeTicket(ticketId);
         return ResponseEntity.ok(HttpStatus.OK);
     }

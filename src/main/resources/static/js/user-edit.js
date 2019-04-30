@@ -20,7 +20,7 @@ function changeUser(userId) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(wrap),
         success: function (result) {
-           location.reload()
+            location.reload()
         },
         error: function (e) {
             setErrorMessage(e.responseJSON.message);
@@ -43,9 +43,9 @@ $(document).on('click', '#editUser', function editUserBtn() {
 });
 
 
-$("#showPassword").click(function(){
+$("#showPassword").click(function () {
     var foo = $(this).prev().attr("type");
-    if(foo == "password"){
+    if (foo == "password") {
         $(this).prev().attr("type", "text");
     } else {
         $(this).prev().attr("type", "password");

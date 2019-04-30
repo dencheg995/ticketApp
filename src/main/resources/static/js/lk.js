@@ -1,5 +1,3 @@
-
-
 // function createTickets(eventId) {
 //
 //     var url = '/tickets/new/' + eventId + "/"

@@ -52,7 +52,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void sendTicket(Purchase purchase) {
-        String host = "http://localhost:8080/verify/ticket?";
+        String host = "http://www.vibecore.org/verify/ticket?";
         String url = host.concat("id=").concat(String.valueOf(purchase.getId())).concat("&uniq=").concat(purchase.getUniqId()).concat("&count=")
                 .concat(String.valueOf(purchase.getCostBuyTicket()));
         try {

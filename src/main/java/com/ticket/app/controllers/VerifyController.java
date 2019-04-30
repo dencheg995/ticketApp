@@ -25,8 +25,8 @@ public class VerifyController {
                                @RequestParam("id") Long purchaseId) {
         Purchase purchase = purchaseService.getPurchaseById(purchaseId);
         ModelAndView modelAndView = new ModelAndView();
-     //   if (purchase.getUniqId().equalsIgnoreCase(uniq) && purchase.getCountBuyTicket() == count) {
-            modelAndView.setViewName("green");
+        //   if (purchase.getUniqId().equalsIgnoreCase(uniq) && purchase.getCountBuyTicket() == count) {
+        modelAndView.setViewName("green");
 //        } else {
 //            modelAndView.setViewName("red");
 //        }
@@ -36,7 +36,7 @@ public class VerifyController {
     @RequestMapping("/send/ticket")
     public ResponseEntity<String> sendTicket(@RequestParam int numSale) {
         Purchase purchase = purchaseService.getPurchaseByNumSale(numSale);
-       // purchase.getTicket().getEvent().getClient().setBalance(purchase.getTicket().getTicketPrice()*0.8);
+        // purchase.getTicket().getEvent().getClient().setBalance(purchase.getTicket().getTicketPrice()*0.8);
         purchase.setCheck(true);
         purchaseService.update(purchase);
         purchaseService.sendTicket(purchase);

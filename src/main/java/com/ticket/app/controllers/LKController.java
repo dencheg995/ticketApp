@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class LKController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @RequestMapping("/add/ticket")
     public ResponseEntity addTicket(@Valid @RequestBody List<Ticket> tickets,
-                                    @RequestParam Long eventId){
+                                    @RequestParam Long eventId) {
         Event event = eventService.getEvent(eventId);
         event.setTicketList(tickets);
         eventService.updateEvent(event);

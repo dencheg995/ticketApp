@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -43,12 +44,15 @@ public class EventController {
 
 
     @RequestMapping(value = "/purchase/tickets")
-    public @ResponseBody ResponseEntity buyTicket(@RequestBody POJOTicket pojoTicket) throws JsonProcessingException {
+    public @ResponseBody
+    ResponseEntity buyTicket(@RequestBody POJOTicket pojoTicket) throws JsonProcessingException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm МСК");
-        Map<Ticket,Integer> tickets = new HashMap<>();
-        Map<Ticket,Double> costs = new HashMap<>();
+        Map<Ticket, Integer> tickets = new HashMap<>();
+        Map<Ticket, Double> costs = new HashMap<>();
         List infa = new ArrayList<>();
+        List dopInfa = new ArrayList();
         Ticket ticket;
+        BigInteger wallet = BigInteger.valueOf(0);
         Promocode promocode;
         Double sum = 0D;
         Consumer consumer = new Consumer(pojoTicket.getFirstName(), pojoTicket.getLastName(), pojoTicket.getEmail(), pojoTicket.getPhoneNumber());
@@ -61,6 +65,7 @@ public class EventController {
         infa.add(pojoTicket.getTicketId().entrySet().size() * 2);
         for (Map.Entry<Long, Integer> entry : pojoTicket.getTicketId().entrySet()) {
             ticket = ticketService.getTicket(entry.getKey());
+            wallet = ticket.getEvent().getPocket();
             if (promocodeService.getPromoByTicketId(entry.getKey()).isPresent()) {
                 promocode = promocodeService.getPromoByTicketId(entry.getKey()).get();
                 LocalDateTime destinationDate = LocalDateTime.parse(promocode.getDateEnd(), dateTimeFormatter);
@@ -85,11 +90,12 @@ public class EventController {
             ticketService.updateTicket(ticket);
         }
         infa.add(consumer);
-        infa.add(sum);
+        dopInfa.add(sum);
         purchase.setTicket(tickets);
         purchase.setConsumer(consumer);
-        purchaseService.update(purchase);
-
+        dopInfa.add(purchaseService.update(purchase).getId());
+        dopInfa.add(wallet);
+        infa.add(dopInfa);
         return ResponseEntity.ok(infa);
     }
 }
