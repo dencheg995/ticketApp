@@ -141,3 +141,8 @@ function clearModal2() {
     $(".fillBody").empty();
     location.reload();
 }
+
+function closeModal1() {
+    $('#ticketModal').modal('toggle');
+
+}
