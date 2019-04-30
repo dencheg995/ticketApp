@@ -97,7 +97,7 @@ function buyTicket(eventId) {
             return;
         });
 
-       var urlParametrs = "";
+        var urlParametrs = "";
 
         let wrap = {
             firstName: $("#first-name-for-buy-ticket").val(),
@@ -129,7 +129,7 @@ function buyTicket(eventId) {
                             <p id ='ticketPrice2' style='color: #fff;'>" + result[i].ticketPrice * result[i + 1] + "</p> \
                             </div> \
                             </div>");
-                            urlParametrs += "indexTicket[]=" + result[i].id + "&"
+                        urlParametrs += "indexTicket[]=" + result[i].id + "&"
 
                     } else if (i > result[0] & i < result.length - 1) {
                         $("#consumerFName").text(result[i].firstName);
@@ -141,20 +141,20 @@ function buyTicket(eventId) {
                         $("#service").text((result[result.length - 1][0] - result[result.length - 1][0] / 1.1).toFixed(2));
                         $("#forPay").text((result[result.length - 1][0]).toFixed(1))
                         if (j == 1) {
-                            $(".yandex-from").append("<form id='yandexForm' method='POST' action='https://money.yandex.ru/quickpay/confirm.xml'> \
+                            $(".yandex-form").append("<form id='yandexForm' method='POST' action='https://money.yandex.ru/quickpay/confirm.xml'> \
                     <input type='hidden' id = 'receiver' name='receiver' value=" + result[result.length - 1][2] + " /> \
                     <input type='hidden' id = 'label' name='label' value=" + '#' + result[result.length - 1][1] + " /> \
                     <input type='hidden' name='quickpay-form' value='donate'/> \
                     <input type='hidden' id = 'targets' name='targets' value=" + '#' + result[result.length - 1][1] + " /> \
                     <input type='hidden' id = 'sum' name='sum' data-type='number' value =" + result[result.length - 1][0].toFixed(1) + " /> \
-                    <input type='hidden' name='successURL' value=" + 'http://localhost:8080/send/ticket?' +  urlParametrs + "/> \
+                    <input type='hidden' name='successURL' value=" + 'http://localhost:8080/send/ticket?' + urlParametrs + "/> \
                     <input type='hidden' name='need-fio' value='false'/> \
                     <input type='hidden' name='need-email' value='false'/> \
                     <input type='hidden' name='need-phone' value='false'/> \
                     <input type='hidden' name='need-address' value='false'/> \
                     <input type='hidden' name='paymentType' value='AC'/> \
-                    <input class='btn btn-primary' type='submit' name='paymentType' value='Перейти к оплате'/> \
-                    </form>")
+                    <input class='btn btn-primary center-position' style='width: 200px;' type='submit' name='paymentType' value='Перейти к оплате'/> \
+                    </form>");
                             j++;
                         }
                     }

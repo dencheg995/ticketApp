@@ -21,31 +21,30 @@ import java.util.List;
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private AppUserDAO appUserDAO;
+    @Autowired
+    private AppUserDAO appUserDAO;
 
-	@Autowired
-	private AppRoleDAO appRoleDAO;
+    @Autowired
+    private AppRoleDAO appRoleDAO;
 
 
-	private final ClientService clientService;
+    private final ClientService clientService;
 
-	public UserDetailsServiceImpl(ClientService clientService) {
-		this.clientService = clientService;
-	}
+    public UserDetailsServiceImpl(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
-	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		System.out.println("UserDetailsServiceImpl.loadUserByUsername=" + userName);
-		AppUser appUser = clientService.getByEmailOrPhoneOrVkId(userName, userName, userName).get();
-		if (appUser == null) {
-			System.out.println("User not found! " + userName);
-			throw new UsernameNotFoundException("User " + userName + " was not found in the database");
-		}
-		System.out.println("Found User: " + appUser);
-		return appUser;
-	}
-
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        System.out.println("UserDetailsServiceImpl.loadUserByUsername=" + userName);
+        AppUser appUser = clientService.getByEmailOrPhoneOrVkId(userName, userName, userName).get();
+        if (appUser == null) {
+            System.out.println("User not found! " + userName);
+            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
+        }
+        System.out.println("Found User: " + appUser);
+        return appUser;
+    }
 
 
 }

@@ -37,7 +37,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             clearAuthenticationAttributes(request);
         } else {
             String targetUrl = savedRequest.getRedirectUrl();
-            redirectStrategy.sendRedirect(request,response,targetUrl);
+            redirectStrategy.sendRedirect(request, response, targetUrl);
             clearAuthenticationAttributes(request);
         }
     }
@@ -61,6 +61,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             throw new IllegalStateException();
         }
     }
+
     protected void clearAuthenticationAttributes(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {

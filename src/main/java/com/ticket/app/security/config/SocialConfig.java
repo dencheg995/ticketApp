@@ -31,14 +31,14 @@ import javax.sql.DataSource;
 @PropertySource(value = "file:./social-cfg.properties")
 public class SocialConfig implements SocialConfigurer {
 
-	@Autowired
+    @Autowired
     private DataSource dataSource;
-	@Autowired
+    @Autowired
     private AppUserDAO appUserDAO;
-	
-	private boolean autoSignUp = false;  
-    
-	@Override
+
+    private boolean autoSignUp = false;
+
+    @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
         try {
             this.autoSignUp = Boolean.parseBoolean(env.getRequiredProperty("social.auto-signup"));
@@ -53,19 +53,18 @@ public class SocialConfig implements SocialConfigurer {
 
         cfConfig.addConnectionFactory(vKontakteConnectionFactory);
 
- 
- 
-	}
-	
-	@Override
-	public UserIdSource getUserIdSource() {
-		return new AuthenticationNameUserIdSource();
-	}
-	
-	@Override
+
+    }
+
+    @Override
+    public UserIdSource getUserIdSource() {
+        return new AuthenticationNameUserIdSource();
+    }
+
+    @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
-        JdbcUsersConnectionRepository usersConnectionRepository = new JdbcUsersConnectionRepository(dataSource,connectionFactoryLocator, Encryptors.noOpText());
-  
+        JdbcUsersConnectionRepository usersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
+
         if (autoSignUp) {
             ConnectionSignUp connectionSignUp = new ConnectionSignUpImpl(appUserDAO);
             usersConnectionRepository.setConnectionSignUp(connectionSignUp);
@@ -74,10 +73,10 @@ public class SocialConfig implements SocialConfigurer {
         }
         return usersConnectionRepository;
     }
-	
+
     @Bean
-    public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator,  ConnectionRepository connectionRepository) {
+    public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
         return new ConnectController(connectionFactoryLocator, connectionRepository);
     }
-	
+
 }

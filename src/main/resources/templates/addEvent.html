@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="icon" type="image/png" href="/img/ticket.png"/>
     <!-- Fonts and icons -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"/>
@@ -18,9 +19,9 @@
         Добавление мероприятия
     </title>
     <!-- Nucleo Icons -->
-    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-icons.css" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet"/>
 </head>
 <body class="">
 <div class="wrapper">
@@ -32,127 +33,135 @@
                 <div class="card-header">
                     <h4 class="title">Создание нового мероприятия</h4>
                 </div>
-                 <div class="card-body">
-                     <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
-                     <input id = "token" type="hidden"
-                                                         th:name="${_csrf.parameterName}"
-                                      th:value="${_csrf.token}" />
-                           <div class="row">
-                               <div class="col-md-4 pr-md-1">
-                                   <div class="form-group">
-                                        <label for="name" style="font-weight: bold">Название мероприятия</label>
-                                        <input id="name" class="form-control"  type="text"
-                                         data-error="Название должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
-                                         pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
-                                         required="required"/>
-                                        <div class="help-block with-errors"></div>
-                                   </div>
-                               </div>
-                               <div class="col-md-4 px-md-1">
-                                   <div class="form-group" style="font-weight: bold">
-                                        <label for="date">Дата проведения</label>
-                                        <input id="date" type="text" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
-                                   </div>
-                               </div>
-                               <div class="col-md-4 pl-md-1">
-                                    <div class="form-group">
-                                        <label for="age-limit" style="font-weight: bold">Возрастное ограничение</label>
-                                        <input id="age-limit" class="form-control" type="text"
-                                             pattern="[0-9]{1,}"
-                                             required="required"/>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                               </div>
-                           </div>
-                           <div class="row">
-                               <div class="col-md-4 pr-md-1">
-                                   <div class="form-group">
-                                       <label for="clubName" style="font-weight: bold">Название заведения</label>
-                                       <input id="clubName" class="form-control" type="text"/>
-                                   </div>
-                               </div>
-                               <div class="col-md-8 pl-md-1">
-                                   <div class="form-group">
-                                       <label for="address" style="font-weight: bold">Адрес заведения</label>
-                                       <input id="address" class="form-control" type="text" placeholder="Санкт-Петербург, Невский проспект, 1"/>
-                                   </div>
-                               </div>
-                           </div>
-                           <div class="row">
-                               <div class="col-md-3 pr-md-1">
-                                   <div class="form-group">
-                                       <label for="postVk" style="font-weight: bold">Ссылка на пост</label>
-                                       <input id="postVk" class="form-control" type="text"/>
-                                   </div>
-                               </div>
-                               <div class="col-md-3 pl-md-1">
-                                   <div class="form-group">
-                                       <label for="timePostVk" style="font-weight: bold">Закрытие репостов</label>
-                                       <input type="text" id = "timePostVk" class="form-control" aria-label="Date" aria-describedby="date-addon" name="messageSendingTime" />
-                                   </div>
-                               </div>
-                               <div class="col-md-3 pr-md-1">
-                                   <div class="form-group">
-                                       <label for="salePostVk" style="font-weight: bold">Скидка за репост</label>
-                                       <input id="salePostVk" class="form-control" type="number"/>
-                                   </div>
-                               </div>
-                               <div class="col-md-3 pr-md-1">
-                                   <div class="form-group">
-                                        <label for="pocket" style="font-weight: bold">Yandex-кошелек</label>
-                                        <input id="pocket" class="form-control" name="pocket" type="text" placeholder="4100175017397"
-                                             data-error='Введите номер кошелька в допустимом формате (только цифры)'
-                                             pattern="[0-9]{11,}"
-                                             required="required" min="11"/>
-                                        <div class="help-block with-errors"></div>
-                                   </div>
-                               </div>
-                           </div>
-                           <div class="row">
-                               <div class="form-group" style="margin-left: 17px">
-                                    <button type="submit" class="btn btn-primary" id="saveChanges" onclick="addEvent()">
-                                        Сохранить
-                                    </button>
-                               </div>
-                           </div>
-                     </form>
-                 </div>
+                <div class="card-body">
+                    <form id="user-form" data-toggle="validator" role="form" onsubmit="return false;">
+                        <input id="token" type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}"/>
+                        <div class="row">
+                            <div class="col-md-4 pr-md-1">
+                                <div class="form-group">
+                                    <label for="name" style="font-weight: bold">Название мероприятия</label>
+                                    <input id="name" class="form-control" type="text"
+                                           data-error="Название должно начинаться с заглавной буквы, минимум из 2-х символов и только буквы."
+                                           pattern="^[A-ZА-ЯЁ][a-zа-яё]+$"
+                                           required="required"/>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 px-md-1">
+                                <div class="form-group" style="font-weight: bold">
+                                    <label for="date">Дата проведения</label>
+                                    <input id="date" type="text" class="form-control" aria-label="Date"
+                                           aria-describedby="date-addon" name="messageSendingTime"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label for="age-limit" style="font-weight: bold">Возрастное ограничение</label>
+                                    <input id="age-limit" class="form-control" type="text"
+                                           pattern="[0-9]{1,}"
+                                           required="required"/>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 pr-md-1">
+                                <div class="form-group">
+                                    <label for="clubName" style="font-weight: bold">Название заведения</label>
+                                    <input id="clubName" class="form-control" type="text"/>
+                                </div>
+                            </div>
+                            <div class="col-md-8 pl-md-1">
+                                <div class="form-group">
+                                    <label for="address" style="font-weight: bold">Адрес заведения</label>
+                                    <input id="address" class="form-control" type="text"
+                                           placeholder="Санкт-Петербург, Невский проспект, 1"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 pr-md-1">
+                                <div class="form-group">
+                                    <label for="postVk" style="font-weight: bold">Ссылка на пост</label>
+                                    <input id="postVk" class="form-control" type="text"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pl-md-1">
+                                <div class="form-group">
+                                    <label for="timePostVk" style="font-weight: bold">Закрытие репостов</label>
+                                    <input type="text" id="timePostVk" class="form-control" aria-label="Date"
+                                           aria-describedby="date-addon" name="messageSendingTime"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pr-md-1">
+                                <div class="form-group">
+                                    <label for="salePostVk" style="font-weight: bold">Скидка за репост</label>
+                                    <input id="salePostVk" class="form-control" type="number"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pr-md-1">
+                                <div class="form-group">
+                                    <label for="pocket" style="font-weight: bold">Yandex-кошелек</label>
+                                    <input id="pocket" class="form-control" name="pocket" type="text"
+                                           placeholder="4100175017397"
+                                           data-error='Введите номер кошелька в допустимом формате (только цифры)'
+                                           pattern="[0-9]{11,}"
+                                           required="required" min="11"/>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 17px">
+                                <button type="submit" class="btn btn-primary" id="saveChanges" onclick="addEvent()">
+                                    Сохранить
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="fixed-plugin">
-        <div class="dropdown show-dropdown">
-            <a href="#" data-toggle="dropdown">
-                <i class="fa fa-cog fa-2x"> </i>
-            </a>
-            <ul class="dropdown-menu">
-                <li class="header-title"> Sidebar Background</li>
-                <li class="adjustments-line">
-                    <a href="javascript:void(0)" class="switch-trigger background-color">
-                        <div class="badge-colors text-center">
-                            <span class="badge filter badge-primary active" data-color="primary"></span>
-                            <span class="badge filter badge-info" data-color="blue"></span>
-                            <span class="badge filter badge-success" data-color="green"></span>
-                        </div>
-                        <div class="clearfix"></div>
-                    </a>
-                </li>
-                <li class="adjustments-line text-center color-change">
-                    <span class="color-label">LIGHT MODE</span>
-                    <span class="badge light-badge mr-2"></span>
-                    <span class="badge dark-badge ml-2"></span>
-                    <span class="color-label">DARK MODE</span>
-                </li>
-            </ul>
-        </div>
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header-title"> Sidebar Background</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                        <span class="badge filter badge-primary active" data-color="primary"></span>
+                        <span class="badge filter badge-info" data-color="blue"></span>
+                        <span class="badge filter badge-success" data-color="green"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+            <li class="adjustments-line text-center color-change">
+                <span class="color-label">LIGHT MODE</span>
+                <span class="badge light-badge mr-2"></span>
+                <span class="badge dark-badge ml-2"></span>
+                <span class="color-label">DARK MODE</span>
+            </li>
+        </ul>
     </div>
+</div>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
 <script th:src="@{/js/validator.min.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <!--   Core JS Files   -->
 <!-- Place this tag in your head or just before your close body tag. -->

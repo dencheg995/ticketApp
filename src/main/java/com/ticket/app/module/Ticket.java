@@ -67,7 +67,6 @@ public class Ticket {
 //    }
 
 
-
     public Promocode getPromocodeSet() {
         return promocodeSet;
     }

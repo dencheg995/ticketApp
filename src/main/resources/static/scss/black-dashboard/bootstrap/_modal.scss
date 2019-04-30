@@ -31,6 +31,7 @@
   // gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342
   // See also https://github.com/twbs/bootstrap/issues/17695
 }
+
 .modal.left .modal-dialog,
 .modal.right .modal-dialog {
   position: fixed;
@@ -53,6 +54,7 @@
 .modal.right .modal-body {
   padding: 15px 15px 80px;
 }
+
 .modal.right.fade .modal-dialog {
   right: -320px;
   -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
@@ -64,6 +66,7 @@
 .modal.right.fade.in .modal-dialog {
   right: 0;
 }
+
 // Shell div to position the modal with bottom padding
 .modal-dialog {
   position: relative;
@@ -77,6 +80,7 @@
     @include transition($modal-transition);
     transform: translate(0, -25%);
   }
+
   .modal.show & {
     transform: translate(0, 0);
   }
@@ -124,8 +128,13 @@
   background-color: $modal-backdrop-bg;
 
   // Fade for backdrop
-  &.fade { opacity: 0; }
-  &.show { opacity: $modal-backdrop-opacity; }
+  &.fade {
+    opacity: 0;
+  }
+
+  &.show {
+    opacity: $modal-backdrop-opacity;
+  }
 }
 
 // Modal header
@@ -170,8 +179,13 @@
   border-top: $modal-footer-border-width solid $modal-footer-border-color;
 
   // Easily place margin between footer elements
-  > :not(:first-child) { margin-left: .25rem; }
-  > :not(:last-child) { margin-right: .25rem; }
+  > :not(:first-child) {
+    margin-left: .25rem;
+  }
+
+  > :not(:last-child) {
+    margin-right: .25rem;
+  }
 }
 
 // Measure scrollbar width for padding body during modal show/hide
@@ -204,10 +218,14 @@
     @include box-shadow($modal-content-box-shadow-sm-up);
   }
 
-  .modal-sm { max-width: $modal-sm; }
+  .modal-sm {
+    max-width: $modal-sm;
+  }
 
 }
 
 @include media-breakpoint-up(lg) {
-  .modal-lg { max-width: $modal-lg; }
+  .modal-lg {
+    max-width: $modal-lg;
+  }
 }

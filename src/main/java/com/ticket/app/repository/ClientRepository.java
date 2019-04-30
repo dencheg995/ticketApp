@@ -1,7 +1,6 @@
 package com.ticket.app.repository;
 
 
-
 import com.ticket.app.module.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

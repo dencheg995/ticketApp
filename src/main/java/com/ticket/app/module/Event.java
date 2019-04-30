@@ -97,7 +97,6 @@ public class Event {
     }
 
 
-
     public Integer getSaleForVkPost() {
         return saleForVkPost;
     }

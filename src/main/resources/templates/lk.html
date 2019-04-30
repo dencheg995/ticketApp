@@ -1,67 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="icon" type="image/png" href="/img/ticket.png"/>
     <!-- Fonts and icons -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
     <title>
         Личный кабинет
     </title>
     <!-- Nucleo Icons -->
-    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-icons.css" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body class="">
-    <div class="wrapper">
-        <div th:replace="fragments/sidebar::sidebar"></div>
-        <div class="main-panel">
-            <div th:replace="fragments/navbar::navbar"></div>
-            <div class="content">
-                <div class="col">
-                    <div class="col-md-12">
-                        <div class="card ">
-                            <div class="card-header">
-                                <h4 class="title">Список мероприятий</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table tablesorter">
-                                        <thead class="text-primary">
-                                            <tr>
-                                                <th >Название</th>
-                                                <th>Адрес</th>
-                                                <th></th>
-                                                <th>Дата</th>
-                                                <th class="text-center"></th>
-                                                <th class="text-center"></th>
-                                                <th class="text-center"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <div th:each="event : ${clientEvents}">
-                                                <tr>
-                                                    <tr>
-                                                        <td rowspan="2" th:text="${event.name}"></td>
-                                                        <td th:text="${event.clubName}"></td>
-                                                        <td rowspan="2"></td>
-                                                        <td rowspan="2" th:text="${event.date}"></td>
-                                                        <td rowspan="2"><a th:onclick="'openTicketPage('+ ${event.id} +')'" title="Добавление билетов для мероприятия"><i class="tim-icons tim-icons-32 icon-notes"></i></a></td>
-                                                        <td rowspan="2"><a th:onclick="'openSalePage('+ ${event.id} +')'" title="Переход на страницу покупки"><i class="tim-icons tim-icons-32 icon-cart"></i></a></td>
-                                                        <td rowspan="2"><a th:onclick="'openEventPage('+ ${event.id} +')'" title="Настройка мероприятия"><i class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td th:text="${event.address}"></td>
-                                                    </tr>
-                                                </tr>
-                                            </div>
-                                        </tbody>
-                                    </table>
-                                </div>
+<div class="wrapper">
+    <div th:replace="fragments/sidebar::sidebar"></div>
+    <div class="main-panel">
+        <div th:replace="fragments/navbar::navbar"></div>
+        <div class="content">
+            <div class="col">
+                <div class="col-md-12">
+                    <div class="card ">
+                        <div class="card-header">
+                            <h4 class="title">Список мероприятий</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table tablesorter">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Адрес</th>
+                                        <th></th>
+                                        <th>Дата</th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <div th:each="event : ${clientEvents}">
+                                        <tr>
+                                        <tr>
+                                            <td rowspan="2" th:text="${event.name}"></td>
+                                            <td th:text="${event.clubName}"></td>
+                                            <td rowspan="2"></td>
+                                            <td rowspan="2" th:text="${event.date}"></td>
+                                            <td rowspan="2"><a th:onclick="'openTicketPage('+ ${event.id} +')'"
+                                                               title="Добавление билетов для мероприятия"><i
+                                                    class="tim-icons tim-icons-32 icon-notes"></i></a></td>
+                                            <td rowspan="2"><a th:onclick="'openSalePage('+ ${event.id} +')'"
+                                                               title="Переход на страницу покупки"><i
+                                                    class="tim-icons tim-icons-32 icon-cart"></i></a></td>
+                                            <td rowspan="2"><a th:onclick="'openEventPage('+ ${event.id} +')'"
+                                                               title="Настройка мероприятия"><i
+                                                    class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${event.address}"></td>
+                                        </tr>
+                                        </tr>
+                                    </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -69,37 +74,44 @@
             </div>
         </div>
     </div>
-    <div class="fixed-plugin">
-        <div class="dropdown show-dropdown">
-            <a href="#" data-toggle="dropdown">
-                <i class="fa fa-cog fa-2x"> </i>
-            </a>
-            <ul class="dropdown-menu">
-                <li class="header-title"> Sidebar Background</li>
-                <li class="adjustments-line">
-                    <a href="javascript:void(0)" class="switch-trigger background-color">
-                        <div class="badge-colors text-center">
-                            <span class="badge filter badge-primary active" data-color="primary"></span>
-                            <span class="badge filter badge-info" data-color="blue"></span>
-                            <span class="badge filter badge-success" data-color="green"></span>
-                        </div>
-                    </a>
-                </li>
-                <li class="adjustments-line text-center color-change">
-                    <span class="color-label">LIGHT MODE</span>
-                    <span class="badge light-badge mr-2"></span>
-                    <span class="badge dark-badge ml-2"></span>
-                    <span class="color-label">DARK MODE</span>
-                </li>
-            </ul>
-        </div>
+</div>
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header-title"> Sidebar Background</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+                        <span class="badge filter badge-primary active" data-color="primary"></span>
+                        <span class="badge filter badge-info" data-color="blue"></span>
+                        <span class="badge filter badge-success" data-color="green"></span>
+                    </div>
+                </a>
+            </li>
+            <li class="adjustments-line text-center color-change">
+                <span class="color-label">LIGHT MODE</span>
+                <span class="badge light-badge mr-2"></span>
+                <span class="badge dark-badge ml-2"></span>
+                <span class="color-label">DARK MODE</span>
+            </li>
+        </ul>
     </div>
+</div>
 <script type="text/javascript" th:src="@{/js/animation.js}"></script>
 <script type="text/javascript" th:src="@{/js/lk.js}"></script>
 <script th:src="@{/js/validator.min.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
 <!--   Core JS Files   -->
 <!-- Chart JS -->
 <script th:src="@{/js/plugins/chartjs.min.js}"></script>

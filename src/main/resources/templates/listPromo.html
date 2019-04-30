@@ -4,10 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="icon" type="image/png" href="/img/ticket.png"/>
     <!-- Fonts and icons -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet"/>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"/>
@@ -16,9 +17,9 @@
         Список промокодов
     </title>
     <!-- Nucleo Icons -->
-    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-icons.css" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet"/>
 </head>
 <body class="">
 <div class="wrapper">
@@ -34,32 +35,36 @@
                                 <div class="col">
                                     <h4 class="title" style="margin-left: 86px;">Список промокодов</h4>
                                 </div>
-                                <a class="right-position" style="margin-bottom: 10px; padding-right: 20px;" th:onclick="'openTicketPage('+ ${event.id} +')'">К билетам</a>
+                                <a class="right-position" style="margin-bottom: 10px; padding-right: 20px;"
+                                   th:onclick="'openTicketPage('+ ${event.id} +')'">К билетам</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table tablesorter" id="promoTable">
                                     <thead class="text-primary">
-                                        <tr>
-                                            <th>Промокод</th>
-                                            <th>Скидка</th>
-                                            <th>Кол-во использований</th>
-                                            <th>Начало действия</th>
-                                            <th>Конец действия</th>
-                                            <th class="text-center"></th>
-                                        </tr>
+                                    <tr>
+                                        <th>Промокод</th>
+                                        <th>Скидка</th>
+                                        <th>Кол-во использований</th>
+                                        <th>Начало действия</th>
+                                        <th>Конец действия</th>
+                                        <th class="text-center"></th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <div th:each="promo : ${ticketEdit}">
-                                           <tr><td th:text="${promo.id}"></td>
-                                               <td th:text="${promo.sale}"></td>
-                                               <td th:text="${promo.count}"></td>
-                                               <td th:text="${promo.dateStart}"></td>
-                                               <td th:text="${promo.dateEnd}"></td>
-                                               <td><a id="editButton" data-toggle="modal" href="#editPromoModal" title="Редактирование промокода"><i class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
-                                           </tr>
-                                        </div>
+                                    <div th:each="promo : ${ticketEdit}">
+                                        <tr>
+                                            <td th:text="${promo.id}"></td>
+                                            <td th:text="${promo.sale}"></td>
+                                            <td th:text="${promo.count}"></td>
+                                            <td th:text="${promo.dateStart}"></td>
+                                            <td th:text="${promo.dateEnd}"></td>
+                                            <td><a id="editButton" data-toggle="modal" href="#editPromoModal"
+                                                   title="Редактирование промокода"><i
+                                                    class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
+                                        </tr>
+                                    </div>
                                     </tbody>
                                 </table>
                             </div>
@@ -67,20 +72,23 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade"  id="editPromoModal" tabindex="-1" role="dialog" aria-labelledby="promoModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editPromoModal" tabindex="-1" role="dialog" aria-labelledby="promoModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modalstyle">
                         <div class="modal-content">
                             <div class="modal-header modalDarkStyle">
                                 <div class="col">
-                                    <h4 class="title" style="color: #fff;" id="promoModalLabel">Редактирование промокода</h4>
+                                    <h4 class="title" style="color: #fff;" id="promoModalLabel">Редактирование
+                                        промокода</h4>
                                 </div>
-                                <button type="button" class="close right-position" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close right-position" data-dismiss="modal"
+                                        aria-label="Close">
                                     <span aria-hidden="true" style="font-size: 18px;margin-top: 6px;">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body promo-setting modalDarkStyle">
-                                <div class="row" >
+                                <div class="row">
                                     <div class="col center-position">
                                         <div class="form-group">
                                             <div class="buttonInside">
@@ -102,13 +110,13 @@
                                     <div class="col center-position">
                                         <div class="form-group">
                                             <label for="edit-promo-date-start">Начало действия</label>
-                                            <input class="form-control" disabled="disabled" id="edit-promo-date-start"  />
+                                            <input class="form-control" disabled="disabled" id="edit-promo-date-start"/>
                                         </div>
                                     </div>
                                     <div class="col center-position">
                                         <div class="form-group">
                                             <label for="edit-promo-date-end">Конец действия</label>
-                                            <input class="form-control" disabled="disabled" id="edit-promo-date-end"  />
+                                            <input class="form-control" disabled="disabled" id="edit-promo-date-end"/>
                                         </div>
                                     </div>
                                 </div>
@@ -116,19 +124,22 @@
                                     <div class="col center-position">
                                         <div class="form-group">
                                             <label for="edit-promo">Промокод</label>
-                                            <input class="form-control" disabled="disabled" id="edit-promo" />
+                                            <input class="form-control" disabled="disabled" id="edit-promo"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col center-position">
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary " id="editPromo" th:onclick="'editPromo(' + ${ticket.id} + ')'">Редактировать</button>
+                                            <button type="button" class="btn btn-primary " id="editPromo"
+                                                    th:onclick="'editPromo(' + ${ticket.id} + ')'">Редактировать
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                                <p><span id = "message"></span></p>
-                                <input type="checkbox" checked="checked" class="form-control" style="display:none" id="edit-user-isVerified"/>
+                                <p><span id="message"></span></p>
+                                <input type="checkbox" checked="checked" class="form-control" style="display:none"
+                                       id="edit-user-isVerified"/>
                             </div>
                         </div>
                     </div>
@@ -168,8 +179,12 @@
 <script type="text/javascript" th:src="@{/js/event.js}"></script>
 <script type="text/javascript" th:src="@{/js/lk.js}"></script>
 <script th:src="@{/js/validator.min.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <!--   Core JS Files   -->
 <!-- Place this tag in your head or just before your close body tag. -->

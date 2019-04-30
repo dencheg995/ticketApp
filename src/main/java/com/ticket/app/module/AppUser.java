@@ -49,7 +49,7 @@ public class AppUser implements SocialUserDetails {
     private boolean isEnabled = true;
 
     @NotNull
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class , cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "permissions",
             joinColumns = {@JoinColumn(name = "client_id", foreignKey = @ForeignKey(name = "FK_CLIENT"))},

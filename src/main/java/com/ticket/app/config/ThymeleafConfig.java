@@ -15,44 +15,44 @@ import java.util.Set;
 @Configuration
 public class ThymeleafConfig {
 
-	private final static String PREFIX = "MessageTemplateText:";
+    private final static String PREFIX = "MessageTemplateText:";
 
-	@Bean
-	public TemplateResolver springThymeleafTemplateResolver() {
-		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-		resolver.setCacheable(false);
-		resolver.setPrefix("classpath:/templates/");
-		resolver.setSuffix(".html");
-		resolver.setCharacterEncoding("UTF-8");
-		resolver.setTemplateMode("HTML5");
-		resolver.setCacheable(false);
-		return resolver;
-	}
+    @Bean
+    public TemplateResolver springThymeleafTemplateResolver() {
+        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+        resolver.setCacheable(false);
+        resolver.setPrefix("classpath:/templates/");
+        resolver.setSuffix(".html");
+        resolver.setCharacterEncoding("UTF-8");
+        resolver.setTemplateMode("HTML5");
+        resolver.setCacheable(false);
+        return resolver;
+    }
 
-	@Bean
-	public StringTemplateResolver stringTemplateResolver() {
-		StringTemplateResolver resolver = new StringTemplateResolver(PREFIX);
-		resolver.setCharacterEncoding("UTF-8");
-		return resolver;
-	}
+    @Bean
+    public StringTemplateResolver stringTemplateResolver() {
+        StringTemplateResolver resolver = new StringTemplateResolver(PREFIX);
+        resolver.setCharacterEncoding("UTF-8");
+        return resolver;
+    }
 
-	@Bean
-	public SpringTemplateEngine thymeleafTemplateEngine() {
-		SpringTemplateEngine engine = new SpringTemplateEngine();
-		engine.addDialect(new SpringSecurityDialect());
-		engine.addDialect(new Java8TimeDialect());
-		Set<TemplateResolver> templateResolverSet = new HashSet<>();
-		templateResolverSet.add(springThymeleafTemplateResolver());
-		templateResolverSet.add(stringTemplateResolver());
-		engine.setTemplateResolvers(templateResolverSet);
-		return engine;
-	}
+    @Bean
+    public SpringTemplateEngine thymeleafTemplateEngine() {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.addDialect(new SpringSecurityDialect());
+        engine.addDialect(new Java8TimeDialect());
+        Set<TemplateResolver> templateResolverSet = new HashSet<>();
+        templateResolverSet.add(springThymeleafTemplateResolver());
+        templateResolverSet.add(stringTemplateResolver());
+        engine.setTemplateResolvers(templateResolverSet);
+        return engine;
+    }
 
-	@Bean
-	public ThymeleafViewResolver thymeleafViewResolver() {
-		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-		resolver.setTemplateEngine(thymeleafTemplateEngine());
-		resolver.setCharacterEncoding("UTF-8");
-		return resolver;
-	}
+    @Bean
+    public ThymeleafViewResolver thymeleafViewResolver() {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(thymeleafTemplateEngine());
+        resolver.setCharacterEncoding("UTF-8");
+        return resolver;
+    }
 }

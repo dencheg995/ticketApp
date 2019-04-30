@@ -24,7 +24,7 @@ public class Purchase {
 
     @ElementCollection
     @Column(name = "cost_purchase_ticket")
-    private Map<Ticket,Double> costBuyTicket;
+    private Map<Ticket, Double> costBuyTicket;
 
     @Column(name = "check_purchase")
     private boolean check;

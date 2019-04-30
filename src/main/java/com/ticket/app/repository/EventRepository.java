@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface EventRepository extends JpaRepository<Event, Long>{
+public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query("SELECT event FROM Event event JOIN event.ticketList ticket WHERE ticket.id = :ticketId")
     Event getEventByTicketListId(@Param("ticketId") Long ticketId);

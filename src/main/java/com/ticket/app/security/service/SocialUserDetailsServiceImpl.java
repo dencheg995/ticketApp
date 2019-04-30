@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class SocialUserDetailsServiceImpl implements SocialUserDetailsService {
 
-	@Autowired
-	private UserDetailsService userDetailService;
+    @Autowired
+    private UserDetailsService userDetailService;
 
-	@Override
-	public SocialUserDetails loadUserByUserId(String userName) throws UsernameNotFoundException, DataAccessException {
-		System.out.println("SocialUserDetailsServiceImpl.loadUserByUserId=" + userName);
-		SocialUserDetails userDetails = (SocialUserDetails) userDetailService.loadUserByUsername(userName);
-		return userDetails;
-	}
+    @Override
+    public SocialUserDetails loadUserByUserId(String userName) throws UsernameNotFoundException, DataAccessException {
+        System.out.println("SocialUserDetailsServiceImpl.loadUserByUserId=" + userName);
+        SocialUserDetails userDetails = (SocialUserDetails) userDetailService.loadUserByUsername(userName);
+        return userDetails;
+    }
 
 }

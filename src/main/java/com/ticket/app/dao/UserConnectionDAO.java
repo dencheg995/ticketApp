@@ -15,23 +15,23 @@ import java.util.List;
 @Transactional
 public class UserConnectionDAO {
 
-	@Autowired
-	private EntityManager entityManager;
+    @Autowired
+    private EntityManager entityManager;
 
-	public UserConnection findUserConnectionByUserProviderId(String userProviderId) {
-		try {
-			String sql = "Select e from " + UserConnection.class.getName() + " e " //
-					+ " Where e.userProviderId = :userProviderId ";
+    public UserConnection findUserConnectionByUserProviderId(String userProviderId) {
+        try {
+            String sql = "Select e from " + UserConnection.class.getName() + " e " //
+                    + " Where e.userProviderId = :userProviderId ";
 
-			Query query = entityManager.createQuery(sql, UserConnection.class);
-			query.setParameter("userProviderId", userProviderId);
+            Query query = entityManager.createQuery(sql, UserConnection.class);
+            query.setParameter("userProviderId", userProviderId);
 
-			@SuppressWarnings("unchecked")
-			List<UserConnection> list = query.getResultList();
+            @SuppressWarnings("unchecked")
+            List<UserConnection> list = query.getResultList();
 
-			return list.isEmpty() ? null : list.get(0);
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
+            return list.isEmpty() ? null : list.get(0);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

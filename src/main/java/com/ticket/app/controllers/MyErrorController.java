@@ -9,7 +9,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class MyErrorController implements ErrorController  {
+public class MyErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
@@ -18,25 +18,19 @@ public class MyErrorController implements ErrorController  {
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
 
-            if(statusCode == HttpStatus.NOT_FOUND.value()) {
+            if (statusCode == HttpStatus.NOT_FOUND.value()) {
                 return "404";
-            }
-            else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 return "404";
-            }
-            else if(statusCode == HttpStatus.FORBIDDEN.value()){
+            } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
                 return "404";
-            }
-            else if(statusCode == HttpStatus.BAD_REQUEST.value()){
+            } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
                 return "404";
-            }
-            else if(statusCode == HttpStatus.UNAUTHORIZED.value()){
+            } else if (statusCode == HttpStatus.UNAUTHORIZED.value()) {
                 return "404";
-            }
-            else if(statusCode == HttpStatus.NOT_ACCEPTABLE.value()){
+            } else if (statusCode == HttpStatus.NOT_ACCEPTABLE.value()) {
                 return "404";
-            }
-            else if(statusCode == HttpStatus.REQUEST_TIMEOUT.value()){
+            } else if (statusCode == HttpStatus.REQUEST_TIMEOUT.value()) {
                 return "404";
             }
         }

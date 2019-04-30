@@ -35,128 +35,127 @@ import java.security.Principal;
 @Transactional
 public class MainController {
 
-	private final ClientService clientService;
+    private final ClientService clientService;
 
-	private final RoleRepositories roleRepositories;
+    private final RoleRepositories roleRepositories;
 
-	@Autowired
-	private ConnectionFactoryLocator connectionFactoryLocator;
+    @Autowired
+    private ConnectionFactoryLocator connectionFactoryLocator;
 
-	@Autowired
-	private UsersConnectionRepository connectionRepository;
+    @Autowired
+    private UsersConnectionRepository connectionRepository;
 
-	private final EventService eventService;
+    private final EventService eventService;
 
-	public MainController(ClientService clientService, RoleRepositories roleRepositories, EventService eventService) {
-		this.clientService = clientService;
-		this.roleRepositories = roleRepositories;
-		this.eventService = eventService;
-	}
+    public MainController(ClientService clientService, RoleRepositories roleRepositories, EventService eventService) {
+        this.clientService = clientService;
+        this.roleRepositories = roleRepositories;
+        this.eventService = eventService;
+    }
 
-	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
-	public String welcomePage() {
-		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-			return "login";
-		} else {
-			return "redirect:/lk";
-		}
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String welcomePage() {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+            return "login";
+        } else {
+            return "redirect:/lk";
+        }
 
-	}
+    }
 
-	@GetMapping("/role/add/for/our/app")
-	public ResponseEntity addRole() {
-		Role roleForAdmin = new Role();
-		roleForAdmin.setRoleName("ADMIN");
-		roleRepositories.saveAndFlush(roleForAdmin);
-		Role roleForUser = new Role();
-		roleForUser.setRoleName("USER");
-		roleRepositories.saveAndFlush(roleForUser);
-		return ResponseEntity.ok(HttpStatus.OK);
-	}
+    @GetMapping("/role/add/for/our/app")
+    public ResponseEntity addRole() {
+        Role roleForAdmin = new Role();
+        roleForAdmin.setRoleName("ADMIN");
+        roleRepositories.saveAndFlush(roleForAdmin);
+        Role roleForUser = new Role();
+        roleForUser.setRoleName("USER");
+        roleRepositories.saveAndFlush(roleForUser);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
-	@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-	@RequestMapping(value = "/lk", method = RequestMethod.GET)
-	public String userInfo(Model model, Principal principal) {
-		String userName = principal.getName();
-		System.out.println("User Name: " + userName);
-		UserDetails loginedUser = (UserDetails) ((Authentication) principal).getPrincipal();
-		String userInfo = WebUtils.toString(loginedUser);
-		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("clientEvents", eventService.getAll());
-		return "lk";
-	}
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @RequestMapping(value = "/lk", method = RequestMethod.GET)
+    public String userInfo(Model model, Principal principal) {
+        String userName = principal.getName();
+        System.out.println("User Name: " + userName);
+        UserDetails loginedUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        String userInfo = WebUtils.toString(loginedUser);
+        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("clientEvents", eventService.getAll());
+        return "lk";
+    }
 
-	@RequestMapping(value = "/403", method = RequestMethod.GET)
-	public String accessDenied(Model model, Principal principal) {
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public String accessDenied(Model model, Principal principal) {
 
-		if (principal != null) {
-			UserDetails loginedUser = (UserDetails) ((Authentication) principal).getPrincipal();
-			String userInfo = WebUtils.toString(loginedUser);
-			model.addAttribute("userInfo", userInfo);
-			String message = "Hi " + principal.getName() //
-					+ "<br> You do not have permission to access this page!";
-			model.addAttribute("message", message);
-		}
-		return "403";
-	}
+        if (principal != null) {
+            UserDetails loginedUser = (UserDetails) ((Authentication) principal).getPrincipal();
+            String userInfo = WebUtils.toString(loginedUser);
+            model.addAttribute("userInfo", userInfo);
+            String message = "Hi " + principal.getName() //
+                    + "<br> You do not have permission to access this page!";
+            model.addAttribute("message", message);
+        }
+        return "403";
+    }
 
-	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
 
-	@RequestMapping(value = { "/signin" }, method = RequestMethod.GET)
-	public String signInPage() {
-		return "redirect:/login";
-	}
+    @RequestMapping(value = {"/signin"}, method = RequestMethod.GET)
+    public String signInPage() {
+        return "redirect:/login";
+    }
 
-	@RequestMapping(value = { "/signup" }, method = RequestMethod.GET)
-	public String signupPage(WebRequest request, Model model) {
-		ProviderSignInUtils providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator,
-				connectionRepository);
-		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-		AppUserForm myForm;
-		if (connection != null) {
-			myForm = new AppUserForm(connection);
-		} else {
-			myForm = new AppUserForm();
-		}
-		model.addAttribute("myForm", myForm);
-		return "user-registration";
-	}
+    @RequestMapping(value = {"/signup"}, method = RequestMethod.GET)
+    public String signupPage(WebRequest request, Model model) {
+        ProviderSignInUtils providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator,
+                connectionRepository);
+        Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
+        AppUserForm myForm;
+        if (connection != null) {
+            myForm = new AppUserForm(connection);
+        } else {
+            myForm = new AppUserForm();
+        }
+        model.addAttribute("myForm", myForm);
+        return "user-registration";
+    }
 
-	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
-	public String signupSave(WebRequest request,
-							 Model model,
-							 @ModelAttribute("myForm") @Validated AppUserForm appUserForm,
-							 BindingResult result) {
-		if (appUserForm.getPassword().equals(appUserForm.getPasswordRep())) {
-			if (result.hasErrors()) {
-				return "user-registration";
-			}
-			AppUser registered;
-			try {
-				if (clientService.getClientByEmail(appUserForm.getEmail()) != null & clientService.getByVkId(appUserForm.getUserName()) != null) {
-					model.addAttribute("errorMessage", "Error ".concat(new UserExistsException().getMessage()));
-					return "user-registration";
-				} else {
-					registered = clientService.addClient(appUserForm);
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				model.addAttribute("errorMessage", "Error " + ex.getMessage());
-				return "user-registration";
-			}
-			if (appUserForm.getSignInProvider() != null) {
-				ProviderSignInUtils providerSignInUtils //
-						= new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
-				providerSignInUtils.doPostSignUp(registered.getVkId(), request);
-			}
-			return "redirect:/";
-		}
-		else {
-			model.addAttribute("errorMessage", "Error ".concat(new PassworNoEquals().getMessage()));
-			return "user-registration";
-		}
-	}
+    @RequestMapping(value = {"/signup"}, method = RequestMethod.POST)
+    public String signupSave(WebRequest request,
+                             Model model,
+                             @ModelAttribute("myForm") @Validated AppUserForm appUserForm,
+                             BindingResult result) {
+        if (appUserForm.getPassword().equals(appUserForm.getPasswordRep())) {
+            if (result.hasErrors()) {
+                return "user-registration";
+            }
+            AppUser registered;
+            try {
+                if (clientService.getClientByEmail(appUserForm.getEmail()) != null & clientService.getByVkId(appUserForm.getUserName()) != null) {
+                    model.addAttribute("errorMessage", "Error ".concat(new UserExistsException().getMessage()));
+                    return "user-registration";
+                } else {
+                    registered = clientService.addClient(appUserForm);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                model.addAttribute("errorMessage", "Error " + ex.getMessage());
+                return "user-registration";
+            }
+            if (appUserForm.getSignInProvider() != null) {
+                ProviderSignInUtils providerSignInUtils //
+                        = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
+                providerSignInUtils.doPostSignUp(registered.getVkId(), request);
+            }
+            return "redirect:/";
+        } else {
+            model.addAttribute("errorMessage", "Error ".concat(new PassworNoEquals().getMessage()));
+            return "user-registration";
+        }
+    }
 }

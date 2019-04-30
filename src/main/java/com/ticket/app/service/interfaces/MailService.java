@@ -4,5 +4,5 @@ import com.ticket.app.module.Purchase;
 
 public interface MailService {
 
-   boolean sendingMailingsEmails(Purchase purchase);
+    boolean sendingMailingsEmails(Purchase purchase);
 }
