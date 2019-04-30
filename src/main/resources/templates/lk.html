@@ -50,9 +50,9 @@
                                                         <td th:text="${event.clubName}"></td>
                                                         <td rowspan="2"></td>
                                                         <td rowspan="2" th:text="${event.date}"></td>
-                                                        <td rowspan="2"><a th:onclick="'openTicketPage('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-notes"></i></a></td>
-                                                        <td rowspan="2"><a th:onclick="'openSalePage('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-cart"></i></a></td>
-                                                        <td rowspan="2"><a th:onclick="'openEventPage('+ ${event.id} +')'"><i class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
+                                                        <td rowspan="2"><a th:onclick="'openTicketPage('+ ${event.id} +')'" title="Добавление билетов для мероприятия"><i class="tim-icons tim-icons-32 icon-notes"></i></a></td>
+                                                        <td rowspan="2"><a th:onclick="'openSalePage('+ ${event.id} +')'" title="Переход на страницу покупки"><i class="tim-icons tim-icons-32 icon-cart"></i></a></td>
+                                                        <td rowspan="2"><a th:onclick="'openEventPage('+ ${event.id} +')'" title="Настройка мероприятия"><i class="tim-icons tim-icons-32 icon-settings-gear-63"></i></a></td>
                                                     </tr>
                                                     <tr>
                                                         <td th:text="${event.address}"></td>

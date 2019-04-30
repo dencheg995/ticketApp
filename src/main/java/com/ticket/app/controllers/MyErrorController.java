@@ -22,7 +22,22 @@ public class MyErrorController implements ErrorController  {
                 return "404";
             }
             else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                return "error-500";
+                return "404";
+            }
+            else if(statusCode == HttpStatus.FORBIDDEN.value()){
+                return "404";
+            }
+            else if(statusCode == HttpStatus.BAD_REQUEST.value()){
+                return "404";
+            }
+            else if(statusCode == HttpStatus.UNAUTHORIZED.value()){
+                return "404";
+            }
+            else if(statusCode == HttpStatus.NOT_ACCEPTABLE.value()){
+                return "404";
+            }
+            else if(statusCode == HttpStatus.REQUEST_TIMEOUT.value()){
+                return "404";
             }
         }
         return "error";
