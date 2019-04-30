@@ -50,9 +50,7 @@
                                             <div class="col-md-4"></div>
                                             <div class="col-md-2">
                                                 <h4 class="money" style="font-weight: bold; margin-top: 16px"
-                                                    th:text="${ticket.getTicketPrice()}"></h4>
-                                                <h4 class="money" style="font-weight: bold; margin-top: 16px"
-                                                    text='руб'></h4>
+                                                    th:text="${ticket.getTicketPrice()} + ' руб.'"></h4>
                                             </div>
                                             <div class="col-md-3" style="margin-top: 6px">
                                                 <div class="js-spinner">
@@ -123,8 +121,11 @@
                                                 <div class="row">
                                                     <a class="btn btn-warning btn-lg" role="button"
                                                        th:href="${event.vkPostUrl}" target="_blank">Скидка за репост</a>
+                                                </div>
+                                                <div class="row">
                                                     <button class="btn btn-primary btn-lg" data-toggle="modal"
                                                             href="#dataModal" role="button"
+                                                            style="width: 213px;"
                                                             th:href="'#dataModal'+${ticket.id}">Далее
                                                     </button>
                                                 </div>
