@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/event/app/{id}")
 public class EventController {

@@ -21,6 +21,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @Controller
 @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
 public class EventSettingController {

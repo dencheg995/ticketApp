@@ -31,6 +31,7 @@ import org.springframework.web.context.request.WebRequest;
 import javax.transaction.Transactional;
 import java.security.Principal;
 
+@CrossOrigin
 @Controller
 @Transactional
 public class MainController {
